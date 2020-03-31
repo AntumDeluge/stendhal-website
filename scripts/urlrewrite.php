@@ -49,7 +49,7 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteRule ^/images/outfit/(.*)\.png$ /createoutfit.php?outfit=$1&rewritten=true [L]
                 RewriteRule ^/images/screenshot/(.*)$ /index.php?id=content/game/screenshot&file=$1&rewritten=true [L]
                 RewriteRule ^/images/thumbnail/(.*)$ /thumbnail.php?img=$1&rewritten=true [L]
-	            RewriteRule ^/images/profile/(.*)\.png$ /index.php?id=content/scripts/profileimage?charname=$1&rewritten=true [L]
+	            RewriteRule ^/images/profile/(.*)\.png$ /index.php?id=content/scripts/profileimage&charname=$1&rewritten=true [L]
 
                 # account
                 RewriteRule ^/account/approve-password.html$ /index.php?id=content/account/approve&rewritten=true [L]
@@ -280,7 +280,7 @@ function rewriteURL($url, $force = false) {
 		} else if (preg_match('|^/images/image/(.*)$|', $url)) {
 		    return preg_replace('|^/images/image/(.*)$|', $folder.'/image.php?img=$1', $url);
     	} else if (preg_match('|^/images/profile/(.*)$|', $url)) {
-	       return preg_replace('|^/images/profile/(.*)\.png$|', $folder.'/?id=content/scripts/profileimage?charname=$1', $url);
+	       return preg_replace('|^/images/profile/(.*)\.png$|', $folder.'/?id=content/scripts/profileimage&charname=$1', $url);
 	   }
 	https://stendhalgame.org/character/thenextone.html
 
