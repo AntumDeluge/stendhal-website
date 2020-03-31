@@ -1003,49 +1003,75 @@ class AccountLink {
 		return $res;
 	}
 
+	private function pickNewUsernameWithSuffix($proposedUsernames, $suffix) {
+	    $first = true;
+	    $in = '';
+	    foreach ($proposedUsernames As $name ) {
+	        if (!isset($name) || ($name == '')) {
+	            continue;
+	        }
+	        if ($first) {
+	            $first = false;
+	        } else {
+	            $in .= ', ';
+	        }
+	        $in .= "'".mysql_real_escape_string($name.$suffix)."'";
+	    }
+	    
+	    $sql = "SELECT username FROM account WHERE username in (".$in.") FOR UPDATE "
+	        . "UNION SELECT charname FROM characters WHERE charname in (".$in.") FOR UPDATE;";
+	        
+        // check database
+        $existingUsernames = array();
+        $rows = DB::game()->query($sql);
+        foreach($rows as $row) {
+            $existingUsernames[] = $row['username'];
+        }
+        
+        // pick username
+        foreach($proposedUsernames As $name ) {
+            if ($name && trim($name) != '') {
+                if (!in_array($name.$suffix, $existingUsernames)) {
+                    return $name.$suffix;
+                }
+            }
+        }
+	}
+	
+	private function numberToCharacterString($number) {
+	    $res = '';
+	    $i = $number;
+	    do {
+	        $res = $res . chr($i % 26 + 97);
+	        $i = intdiv($i, 26);
+	    } while ($i > 0);
+	    return $res;
+	}
+
+	private function pickNewUsername($proposedUsernames) {
+	    $suffix = '';
+	    $i = 0;
+	    do {
+	       $username = $this->pickNewUsernameWithSuffix($proposedUsernames, $suffix);
+	       $suffix = $this->numberToCharacterString($i);
+	       $i++;
+	    } while (!$username);
+	    return $username;
+	}
+
 	public function createAccount() {
 		// suggest usernames
 		$proposedUsernames = $this->proposeUsernames();
 
 		// create sql statement to check which suggestions exist
 		DB::game()->beginTransaction();
-		$first = true;
-		$in = '';
-		foreach($proposedUsernames As $name ) {
-			if (!isset($name) || ($name == '')) {
-				continue;
-			}
-			if ($first) {
-				$first = false;
-			} else {
-				$in .= ', ';
-			}
-			$in .= "'".mysql_real_escape_string($name)."'";
-		}
 
-		$sql = "SELECT username FROM account WHERE username in (".$in.") FOR UPDATE "
-			. "UNION SELECT charname FROM characters WHERE charname in (".$in.") FOR UPDATE;";
-
-		// check database
-		$existingUsernames = array();
-		$rows = DB::game()->query($sql);
-		foreach($rows as $row) {
-			$existingUsernames[] = $row['username'];
-		}
-
-		// pick username
-		foreach($proposedUsernames As $name ) {
-			if ($name && trim($name) != '') {
-				if (!in_array($name, $existingUsernames)) {
-					$username = $name;
-					break;
-				}
-			}
-		}
+		$username = $this->pickNewUsername($proposedUsernames);
 
 		// trust google email addresses
 		$trusted = (strpos($this->username, 'https://www.google.com/') === 0) && (strpos($this->email, '@') !== false);
-		// insert
+
+		// insert new account
 		$account = new Account(-1, $username, null, $this->email, $trusted, date("Y-m-d").' '.date("H:i:s"), 'active');
 		$account->insert();
 		$this->playerId = $account->id;
