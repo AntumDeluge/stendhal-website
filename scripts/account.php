@@ -625,6 +625,8 @@ class Account {
 			$res = 2;
 		} else if ($this->status == "inactive") {
 			$res = 3;
+		} else if ($this->status == "deleted") {
+		    $res = 3;
 		} else if ($this->status == "merged") {
 			$res = 5;
 		}
@@ -638,7 +640,14 @@ class Account {
 	 * @return string valid username or <code>null</code>.
 	 */
 	public static function convertToValidUsername($username) {
+
+	    // only allow letters
 		$temp = preg_replace('/[^a-z]/', '', strtolower($username));
+
+		// limit length
+		$temp = substr($temp, 0, 19);
+
+		// ensure minimum length
 		if (strlen($temp) > 0) {
 			$org = $temp;
 			while (strlen($temp) < 6) {
@@ -958,13 +967,29 @@ class AccountLink {
 			}
 		}
 		if ($this->type == 'facebook') {
-			for ($i = 97; $i <= 122; $i++) {
-				$res[] = Account::convertToValidUsername(substr($this->nickname, 0, 19).chr($i));
-			}
+            $res[] = Account::convertToValidUsername(substr($this->nickname, 0, 19));
 		}
 		if (strpos($this->username, 'http') === 0) {
-			// apply openid url magic
+		    $this->username = str_replace('http://', 'https://', $this->username);
 			$lastSlash = strrpos($this->username, '/');
+
+			// Special handling for Steam
+			if (strpos($this->username, 'https://steamcommunity.com/openid/id/') === 0) {
+			    $curl = curl_init();
+			    curl_setopt($curl, CURLOPT_URL, 
+			        'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='
+			        .STENDHAL_STEAM_API_KEY.'&steamids='
+			        .urlencode(substr($this->username, $lastSlash + 1)));
+			    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+			    $response = curl_exec($curl);
+			    $response = json_decode($response, true);
+			    $this->nickname = $response['response']['players'][0]['personaname']; 
+			    $res[] = Account::convertToValidUsername($this->nickname);
+			    $res[] = Account::convertToValidUsername($this->nickname.'steam');
+			    return $res;
+			}
+		    
+			// apply openid url magic
 			if ($lastSlash < strlen($this->username) - 1) {
 				$res[] = Account::convertToValidUsername(substr($this->username, $lastSlash + 1));
 			} else {
