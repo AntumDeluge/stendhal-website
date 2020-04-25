@@ -231,10 +231,10 @@ class OutfitDrawer {
 	 */
 	function loadOrCreate($completeOutfit, $offset) {
 		$tmp_dir = getenv("TEMP");
-		if (is_null($tmp_dir)) {
+		if (is_null($tmp_dir) || $tmp_dir == '') {
 			$tmp_dir = getenv("TMP");
 		}
-		if (is_null($tmp_dir)) {
+		if (is_null($tmp_dir) || $tmp_dir == '') {
 			$tmp_dir = "/tmp";
 		}
 
