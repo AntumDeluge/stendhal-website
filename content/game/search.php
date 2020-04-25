@@ -76,7 +76,10 @@ class SearchsPage extends Page {
 		foreach ($rows As $row) {
 
 			// filter duplicated entries
-			$key = $row['entitytype'].$row['entityname'].$row['path'];
+			$key = $row['entitytype'].$row['entityname'];
+			if (isset($row['path'])) {
+			    $key = $key.$row['path'];
+			}
 			if (isset($known[$key])) {
 				continue;
 			}

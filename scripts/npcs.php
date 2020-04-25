@@ -66,7 +66,10 @@ class NPC {
 	 */
 	static function getNPC($name) {
 		$npcs = NPC::_getNPCs('select * from npcs where name="'.mysql_real_escape_string($name).'" limit 1');
-		return $npcs[0];
+		if (count($npcs) > 0) {
+			return $npcs[0];
+		}
+		return null;
 	}
 
 

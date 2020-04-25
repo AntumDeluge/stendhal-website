@@ -161,7 +161,10 @@ function getPlayers($where='', $sortby='name', $cond='limit 2') {
 
 function getPlayer($name) {
 	$player=_getPlayers('select character_stats.* from character_stats where name="'.mysql_real_escape_string($name).'" limit 1');
-    return $player[0];
+	if (count($player) > 0) {
+		return $player[0];
+	}
+	return null;
 }
 
 function getBestPlayer($tableSuffix, $where='') {

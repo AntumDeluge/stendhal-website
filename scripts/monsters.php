@@ -2,7 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2016 The Arianne Project
+ Copyright (C) 2008-2020 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -235,7 +235,8 @@ function getBestKillerMonster($monsters) {
  */
 function getMonsters() {
 	global $cache;
-	if(sizeof(Monster::$monsters) == 0) {
+	if (!isset(Monster::$monsters) || sizeof(Monster::$monsters) == 0
+	    || !isset(Monster::$classes) || sizeof(Monster::$classes) == 0) {
 		Monster::$monsters = $cache->fetchAsArray('stendhal_creatures');
 		Monster::$classes = $cache->fetchAsArray('stendhal_creatures_classes');
 	}

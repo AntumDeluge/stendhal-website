@@ -2,6 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
+ Copyright (C) 2008-2020 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -54,6 +55,11 @@ class Item {
 	}
 
 	static function getClasses() {
+	    // Note: The cache may expire individually on both variables. So we need to make sure that both variable
+	    if (!isset(Item::$items) || sizeof(Item::$items) == 0
+	        || !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
+    	    Item::getItems();
+        }
 		return Item::$classes;
 	}
 
@@ -108,11 +114,12 @@ function getItem($name) {
  */
 function getItems() {
 	global $cache;
-	if(sizeof(Item::$items) == 0) {
-		Item::$items = $cache->fetchAsArray('stendhal_items');
+	if (!isset(Item::$items) || sizeof(Item::$items) == 0
+	    || !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
+	    Item::$items = $cache->fetchAsArray('stendhal_items');
 		Item::$classes = $cache->fetchAsArray('stendhal_items_classes');
 	}
-	if((Item::$items !== false) && (sizeof(Item::$items) != 0)) {
+	if ((Item::$items !== false) && (sizeof(Item::$items) != 0)) {
 		return Item::$items;
 	}
 	Item::$classes = array();

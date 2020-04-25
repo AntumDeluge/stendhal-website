@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2011 Hendrik Brummermann
+ Copyright (C) 2011-2020 Hendrik Brummermann
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -44,10 +44,10 @@ class Zone {
 
 	public static function getZones() {
 		global $cache;
-		if(sizeof(Zone::$zones) == 0) {
+		if (!isset(Zone::$zones) || sizeof(Zone::$zones) == 0) {
 			Zone::$zones = $cache->fetchAsArray('stendhal_zones');
 		}
-		if((Zone::$zones !== false) && (sizeof(Zone::$zones) != 0)) {
+		if ((Zone::$zones !== false) && (sizeof(Zone::$zones) != 0)) {
 			return Zone::$zones;
 		}
 
@@ -246,10 +246,10 @@ class PointofInterest {
 
 	public static function getPOIs() {
 		global $cache;
-		if(sizeof(PointofInterest::$pois) == 0) {
+		if (!isset(PointofInterest::$pois) || sizeof(PointofInterest::$pois) == 0) {
 			PointofInterest::$pois = $cache->fetchAsArray('stendhal_pois');
 		}
-		if((PointofInterest::$pois !== false) && (sizeof(PointofInterest::$pois) != 0)) {
+		if ((PointofInterest::$pois !== false) && (sizeof(PointofInterest::$pois) != 0)) {
 			return PointofInterest::$pois;
 		}
 

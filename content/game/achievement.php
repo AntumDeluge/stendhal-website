@@ -13,7 +13,9 @@ class AchievementPage extends Page {
 	}
 
 	public function writeHttpHeader() {
-		if (isset($_REQUEST['name']) && $_REQUEST['name'] != 'special' && count($this->achievements)==0) {
+	    if (isset($_REQUEST['name']) && $_REQUEST['name'] != 'special' 
+	        && isset($this->achievements) && count($this->achievements)==0) {
+
 			header('HTTP/1.0 404 Not Found');
 			return true;
 		}
@@ -21,7 +23,7 @@ class AchievementPage extends Page {
 	}
 
 	public function writeHtmlHeader() {
-		if (count($this->achievements) == 1) {
+	    if (isset($this->achievements) && count($this->achievements) == 1) {
 			echo '<title>Achievement '.$this->achievements->title.STENDHAL_TITLE.'</title>';
 
 			echo '<meta property="og:type" content="game.achievement">';
@@ -42,7 +44,7 @@ class AchievementPage extends Page {
 			$this->categoryAchievementList("special", "Special achievements are awarded for success in specific events. " .
 					                                  "As each one is different and cannot be earned by all players, they do not contribute to hall of fame scoring.");
 		} else if (isset($_REQUEST['name'])) {
-			if (count($this->achievements)==0) {
+		    if (!isset($this->achievements) || count($this->achievements) == 0) {
 				startBox('Achievement');
 				echo 'Achievement not found.';
 				endBox();
