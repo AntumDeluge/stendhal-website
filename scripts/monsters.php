@@ -242,7 +242,7 @@ function getMonsters() {
 	}
 
 	if ((is_array(Monster::$monsters) && (sizeof(Monster::$monsters) != 0))
-	    || (is_array(Monster::$classes) && (sizeof(Monster::$classes) != 0))) {
+	    && (is_array(Monster::$classes) && (sizeof(Monster::$classes) != 0))) {
  		return Monster::$monsters;
 	}
 	Monster::$classes = array();
