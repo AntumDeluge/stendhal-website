@@ -95,7 +95,7 @@ class AchievementPage extends Page {
 
 		startBox("<h2>Most Recently</h2>");
 		$list = Achievement::getAwardedToRecently($this->achievements->id);
-		if (count($list) == 0) {
+		if (!is_array($list) || count($list) == 0) {
 			echo 'No character has earned this achievement, yet. Be the first!';
 		} else {
 			echo '<div class="tableCell cards">';
