@@ -119,7 +119,8 @@ function getItems() {
 	    Item::$items = $cache->fetchAsArray('stendhal_items');
 		Item::$classes = $cache->fetchAsArray('stendhal_items_classes');
 	}
-	if ((Item::$items !== false) && (sizeof(Item::$items) != 0)) {
+	if ((is_array(Item::$items) && (sizeof(Item::$items) != 0))
+	    || (is_array(Item::$classes) && (sizeof(Item::$classes) != 0))) {
 		return Item::$items;
 	}
 	Item::$classes = array();

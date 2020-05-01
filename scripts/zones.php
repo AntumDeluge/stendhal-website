@@ -47,7 +47,7 @@ class Zone {
 		if (!isset(Zone::$zones) || sizeof(Zone::$zones) == 0) {
 			Zone::$zones = $cache->fetchAsArray('stendhal_zones');
 		}
-		if ((Zone::$zones !== false) && (sizeof(Zone::$zones) != 0)) {
+		if (is_array(Zone::$zones) && (sizeof(Zone::$zones) != 0)) {
 			return Zone::$zones;
 		}
 
@@ -249,7 +249,7 @@ class PointofInterest {
 		if (!isset(PointofInterest::$pois) || sizeof(PointofInterest::$pois) == 0) {
 			PointofInterest::$pois = $cache->fetchAsArray('stendhal_pois');
 		}
-		if ((PointofInterest::$pois !== false) && (sizeof(PointofInterest::$pois) != 0)) {
+		if (is_array(PointofInterest::$pois) && (sizeof(PointofInterest::$pois) != 0)) {
 			return PointofInterest::$pois;
 		}
 

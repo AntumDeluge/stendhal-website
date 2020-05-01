@@ -67,7 +67,7 @@ class EventsPage extends Page {
 				$suffix = $_SESSION['account']->id;
 			}
 			$events = $cache->fetchAsArray('stendhal_events_'.$this->filter.'_'.$suffix);
-			if (!isset($events) || isset($_REQUEST['test'])) {
+			if (!isset($events) || !is_array($events) || isset($_REQUEST['test'])) {
 				$events=array_merge(getKillEvents($this->filter),
 					getQuestEvents($this->filter),
 					getLevelEvents($this->filter),

@@ -241,7 +241,8 @@ function getMonsters() {
 		Monster::$classes = $cache->fetchAsArray('stendhal_creatures_classes');
 	}
 
-	if ((Monster::$monsters !== false) && (sizeof(Monster::$monsters) != 0)) {
+	if ((is_array(Monster::$monsters) && (sizeof(Monster::$monsters) != 0))
+	    || (is_array(Monster::$classes) && (sizeof(Monster::$classes) != 0))) {
  		return Monster::$monsters;
 	}
 	Monster::$classes = array();

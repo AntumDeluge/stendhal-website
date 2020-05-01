@@ -95,7 +95,7 @@ function createRandomString() {
 function queryWithCache($query, $ttl, $db) {
 	global $cache;
 	$list = $cache->fetchAsArray('stendhal_query_'.$query);
-	if (!isset($list)) {
+	if (!isset($list) || !is_array($list)) {
 		$list=array();
 		$rows = $db->query($query);
 		foreach($rows as $row) {
