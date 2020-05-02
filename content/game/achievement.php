@@ -14,7 +14,7 @@ class AchievementPage extends Page {
 
 	public function writeHttpHeader() {
 	    if (isset($_REQUEST['name']) && $_REQUEST['name'] != 'special' 
-	        && isset($this->achievements) && count($this->achievements)==0) {
+	        && !isset($this->achievements)) {
 
 			header('HTTP/1.0 404 Not Found');
 			return true;
@@ -23,7 +23,7 @@ class AchievementPage extends Page {
 	}
 
 	public function writeHtmlHeader() {
-	    if (isset($this->achievements) && count($this->achievements) == 1) {
+	    if (isset($this->achievements) && !is_array($this->achievements)) {
 			echo '<title>Achievement '.$this->achievements->title.STENDHAL_TITLE.'</title>';
 
 			echo '<meta property="og:type" content="game.achievement">';
@@ -44,7 +44,7 @@ class AchievementPage extends Page {
 			$this->categoryAchievementList("special", "Special achievements are awarded for success in specific events. " .
 					                                  "As each one is different and cannot be earned by all players, they do not contribute to hall of fame scoring.");
 		} else if (isset($_REQUEST['name'])) {
-		    if (!isset($this->achievements) || count($this->achievements) == 0) {
+		    if (!isset($this->achievements)) {
 				startBox('Achievement');
 				echo 'Achievement not found.';
 				endBox();
@@ -95,13 +95,11 @@ class AchievementPage extends Page {
 
 		startBox("<h2>Most Recently</h2>");
 		$list = Achievement::getAwardedToRecently($this->achievements->id);
-		if (!is_array($list) || count($list) == 0) {
+		echo '<div class="tableCell cards">';
+		if (!$this->renderPlayers($list)) {
 			echo 'No character has earned this achievement, yet. Be the first!';
-		} else {
-			echo '<div class="tableCell cards">';
-			$this->renderPlayers($list);
-			echo '</div>';
 		}
+		echo '</div>';
 		endBox();
 		echo "\r\n";
 	}
@@ -143,6 +141,7 @@ class AchievementPage extends Page {
 	}
 
 	function renderPlayers($list) {
+	    $nonEmpty = false;
 		foreach ($list as $entry) {
 			$style = '';
 			if (isset($entry['description']) && isset($entry['title'])) {
@@ -165,7 +164,9 @@ class AchievementPage extends Page {
 			echo '  <img '.$style.' src="'.rewriteURL('/images/outfit/'.$outfit.'.png').'" alt="" title="'.$title.'">';
 			echo '  <span class="block onlinename">'.htmlspecialchars($entry['name']).'</span></a>';
 			echo '</div>';
+			$nonEmpty = true;
 		}
+		return $nonEmpty;
 	}
 
 	public function getBreadCrumbs() {
@@ -174,7 +175,7 @@ class AchievementPage extends Page {
 			$array[] = 'Special';
 			$array[] = '/achievement/special.html';
 		} else if (isset($_REQUEST['name'])) {
-			if (count($this->achievements)==0) {
+		    if (!is_array($this->achievements) || count($this->achievements)==0) {
 				return null;
 			} else {
 				$array[] = ucfirst($this->achievements->title);
