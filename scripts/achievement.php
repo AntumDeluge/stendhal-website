@@ -87,17 +87,14 @@ class Achievement {
 	public static function getAchievementForCharacter($charname) {
 		$query = 'SELECT achievement.id, achievement.identifier, achievement.title, '
 			. 'achievement.category, achievement.base_score, achievement.description, '
-			. 'count(allReached.achievement_id) As cnt, left(reached_achievement.timedate, 10) As reachedOn '
+			. 'achievement.reached As cnt, left(reached_achievement.timedate, 10) As reachedOn '
 			. 'FROM achievement '
 			. 'LEFT JOIN reached_achievement ON achievement.id = reached_achievement.achievement_id '
-			. 'AND reached_achievement.charname = \''.mysql_real_escape_string($charname).'\' '
-			. 'LEFT JOIN reached_achievement As allReached ON allReached.achievement_id=achievement.id ';
+			. 'AND reached_achievement.charname = \''.mysql_real_escape_string($charname).'\' ';
 		if (!isset($_REQUEST['test']) || $_REQUEST['test'] != 'inactive') {
 			$query = $query .' WHERE achievement.active = 1 ';
 		}
 		$query = $query
-			. 'GROUP BY achievement.id, achievement.identifier, achievement.title, '
-			. 'achievement.category, achievement.base_score, achievement.description, reachedOn '
 			. 'ORDER BY achievement.category, achievement.identifier';
 		return Achievement::_getAchievements($query);
 	}
@@ -109,17 +106,12 @@ class Achievement {
 	public static function getAchievements($where='', $sortby='name', $cond='') {
 		$query = 'SELECT achievement.id, achievement.identifier, achievement.title, '
 			. 'achievement.category, achievement.base_score, achievement.description, '
-			. 'count(character_stats.admin) As cnt '
-			. 'FROM achievement '
-			. 'LEFT JOIN reached_achievement ON achievement.id = reached_achievement.achievement_id '
-			. 'LEFT JOIN character_stats ON reached_achievement.charname = character_stats.name AND character_stats.admin <= 600 '.$where;
+			. 'achievement.reached As cnt '
+			. 'FROM achievement '.$where;
 		if (!isset($_REQUEST['test']) || $_REQUEST['test'] != 'inactive') {
 			$query = $query .' AND achievement.active = 1 ';
 		}
-		$query = $query
-			. 'GROUP BY achievement.id, achievement.identifier, achievement.title, '
-			. 'achievement.category, achievement.base_score, achievement.description '
-			. 'ORDER BY achievement.category, achievement.identifier';
+		$query = $query. 'ORDER BY achievement.category, achievement.identifier';
 		return Achievement::_getAchievements($query);
 	}
 
