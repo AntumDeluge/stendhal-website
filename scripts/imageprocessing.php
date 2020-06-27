@@ -114,6 +114,14 @@ class OutfitDrawer {
 		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '-safe.png';
 		if (!file_exists($location)) {
     		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '.png';
+
+    		// there are some heads with non existing numbers (e. g. 984)
+    		if (!file_exists($location)) {
+    		    $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . 000 . '-safe.png';
+    		    if (!file_exists($location)) {
+    		        $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . 000 . '.png';
+    		    }
+    		}
 		}
 		    
 		// A workaround for imagick crashing when the file does not
