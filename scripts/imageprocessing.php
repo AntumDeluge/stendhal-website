@@ -117,9 +117,9 @@ class OutfitDrawer {
 
     		// there are some heads with non existing numbers (e. g. 984)
     		if (!file_exists($location)) {
-    		    $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . 000 . '-safe.png';
+    		    $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_000-safe.png';
     		    if (!file_exists($location)) {
-    		        $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . 000 . '.png';
+    		        $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_000.png';
     		    }
     		}
 		}
