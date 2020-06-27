@@ -110,8 +110,12 @@ class OutfitDrawer {
 	 */
 	function load_part($part_name, $index, $offset) {
 		global $OUTFITS_BASE;
-		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '.png';
 
+		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '-safe.png';
+		if (!file_exists($location)) {
+    		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '.png';
+		}
+		    
 		// A workaround for imagick crashing when the file does not
 		// exist.
 		if (file_exists($location)) {
