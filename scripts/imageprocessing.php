@@ -226,6 +226,12 @@ class OutfitDrawer {
 
         foreach ($layers as $layer) {
             $l = explode('-', $layer);
+            if (count($l) > 3 && $l[1] === '') {
+                // head--1-fff5dbc8 means that the head is -1, but "explode" gets confused about the extra "-".
+                // Therefore we need this special code to detect -1 in order to skip the layer without drowing the
+                // sprites at index 0
+                continue;
+            }
             $image = $this->load_part($l[0], $this->formatNumber3($l[1]), $offset);
 	        $color = hexdec($l[2]);
     	    $this->composite_with_color($outfit, $image, $color);
