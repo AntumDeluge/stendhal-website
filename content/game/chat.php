@@ -21,16 +21,20 @@ class ChatPage extends Page {
 	function writeIntroduction() {
 		startBox("<h1>Chat to other users and developers</h1>");
 		?>
-You can get an IRC client and connect to:
 
-<p><b>irc.freenode.net</b> (see <a href="http://freenode.net">http://freenode.net</a> for more information) then</p>
+We have both a Discord server and channels on the Freenode IRC network. Both services are mirrored, so people on either side can chat which each other.
 
-<p>Alternatively, you can simply use freenode's webchat service, below. Feel free to change the nick to for example, your player name.</p>
 <ul>
-<li><a href="https://webchat.freenode.net/?channels=arianne">#arianne</a> (for ideas, contributions and support)</li>
-<li><a href="https://webchat.freenode.net/?channels=arianne-chat">#arianne-chat</a> (for off topic chat not related to Arianne/Stendhal)</li>
+<li> <a href="https://discord.gg/vBEtQzZ"><b>Stendhal Discord</b></a>
+<li> <b>irc.freenode.net</b> (see <a href="http://freenode.net">http://freenode.net</a> for more information) then
+    <ul>
+    <li><a href="https://webchat.freenode.net/?channels=arianne">#arianne</a> (for ideas, contributions and support)</li>
+    <li><a href="https://webchat.freenode.net/?channels=arianne-chat">#arianne-chat</a> (for off topic chat not related to Arianne/Stendhal)</li>
+    </ul>
 </ul>
-If you are new to IRC it is well worth reading this <a href="http://www.irchelp.org/irchelp/new2irc.html">short guide</a> before you join. In particular the section on talking, and entering commands, and the section 'Some advice' may be helpful.
+
+
+<p>If you are new to IRC it is well worth reading this <a href="http://www.irchelp.org/irchelp/new2irc.html">short guide</a> before you join. In particular the section on talking, and entering commands, and the section 'Some advice' may be helpful.
 		<?php
 		endBox();
 	}
