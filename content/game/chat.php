@@ -26,8 +26,8 @@ We have a Discord server and channels on the Freenode IRC network. Both services
 
 <ul>
 <li>
-	<a href="https://discord.gg/vBEtQzZ"><img src="/images/buttons/discord_button.png" style="height:1.5em; vertical-align: text-top;"></a>
-	<a href="https://discord.gg/vBEtQzZ"><b>Stendhal Discord</b></a>
+	<a href="https://discord.gg/sw7kKgu"><img src="/images/buttons/discord_button.png" style="height:1.5em; vertical-align: text-top;"></a>
+	<a href="https://discord.gg/sw7kKgu"><b>Stendhal Discord</b></a>
 <li> <b><span style="font-size: 120%; font-weight: bolder; padding:0 .4em 0 .4em">#</span>irc.freenode.net</b>
     <ul>
     <li><a href="https://webchat.freenode.net/?channels=arianne">#arianne</a> (for ideas, contributions and support)</li>
