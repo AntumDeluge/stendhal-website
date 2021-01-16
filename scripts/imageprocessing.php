@@ -228,7 +228,7 @@ class OutfitDrawer {
             $l = explode('-', $layer);
             if (count($l) > 3 && $l[1] === '') {
                 // head--1-fff5dbc8 means that the head is -1, but "explode" gets confused about the extra "-".
-                // Therefore we need this special code to detect -1 in order to skip the layer without drowing the
+                // Therefore we need this special code to detect -1 in order to skip the layer without drawing the
                 // sprites at index 0
                 continue;
             }
