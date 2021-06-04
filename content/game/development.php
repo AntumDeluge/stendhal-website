@@ -26,7 +26,7 @@ There are loads of tutorials on our wiki including how to set up the Eclipse dev
 	<li><a href="/wiki/StendhalRefactoringAtlas"><img src="/images/buttons/atlas_button.png" alt="">Maps</a> - for map areas which need improvement</li>
 	<li><a href="/wiki/HowToAddCreaturesStendhal"><img src="/images/buttons/creatures_button.png" alt="">Creatures</a> - mostly for your information</li>
 </ul>
-If you plan to help with Stendhal development it is a very good idea to talk about it with the developers and contributors at the <a href="<?php echo rewriteURL('/development/chat.html');?>">irc channel #arianne on freenode.</a>.
+If you plan to help with Stendhal development it is a very good idea to talk about it with the developers and contributors at the <a href="<?php echo rewriteURL('/development/chat.html');?>">irc channel #arianne on Libera.</a>.
 <?php endBox(); ?>
 <?php startBox("<h1>Video</h1>"); ?>
 <iframe width="560" height="315" src="https://www.youtube.com/embed/x4OpqCWAYaU" name="videoframe" frameborder="0" allowfullscreen></iframe>

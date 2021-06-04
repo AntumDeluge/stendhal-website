@@ -22,16 +22,16 @@ class ChatPage extends Page {
 		startBox("<h1>Chat to other users and developers</h1>");
 		?>
 
-We have a Discord server and channels on the Freenode IRC network. Both services are mirrored, so people on either side can chat which each other.
+We have a Discord server and channels on the Libera IRC network. Both services are mirrored, so people on either side can chat which each other.
 
 <ul>
 <li>
 	<a href="https://discord.gg/sw7kKgu"><img src="/images/buttons/discord_button.png" style="height:1.5em; vertical-align: text-top;"></a>
 	<a href="https://discord.gg/sw7kKgu"><b>Stendhal Discord</b></a>
-<li> <b><span style="font-size: 120%; font-weight: bolder; padding:0 .4em 0 .4em">#</span>irc.freenode.net</b>
+<li> <b><span style="font-size: 120%; font-weight: bolder; padding:0 .4em 0 .4em">#</span>irc.libera.chat</b>
     <ul>
-    <li><a href="https://webchat.freenode.net/?channels=arianne">#arianne</a> (for ideas, contributions and support)</li>
-    <li><a href="https://webchat.freenode.net/?channels=arianne-chat">#arianne-chat</a> (for off topic chat not related to Arianne/Stendhal)</li>
+    <li><a href="https://web.libera.chat/#arianne,#arianne-chat">#arianne</a> (for ideas, contributions and support)</li>
+    <li><a href="https://web.libera.chat/#arianne,#arianne-chat">#arianne-chat</a> (for off topic chat not related to Arianne/Stendhal)</li>
     </ul>
 </ul>
 

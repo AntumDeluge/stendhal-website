@@ -33,7 +33,7 @@ class OnlinePage extends Page {
 		startBox("<h1>Server is offline</h1>");
 		echo '<p>We are sorry! The server is offline right now.</p>';
 		echo '<p>This may be the desired behaviour, in case of an update, or it may be the result of some kind of problem.</p>';
-		echo '<p>Please join our IRC channel <a href="https://webchat.freenode.net/?channels='.substr(MAIN_CHANNEL, 1).'">'.MAIN_CHANNEL.'</a> ';
+		echo '<p>Please join our IRC channel <a href="https://web.libera.chat/#arianne,#arianne-chat">'.MAIN_CHANNEL.'</a> ';
 		echo 'for updates on the situation.</p>';
 		endBox();
 	}

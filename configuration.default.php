@@ -90,9 +90,9 @@
 @define('STENDHAL_MAP_TILE_URL_BASE', 'https://stendhalgame.org/map/');
 
 ## for displaying support logs
-@define('SUPPORT_SERVER','irc.freenode.net');
+@define('SUPPORT_SERVER','irc.libera.chat');
 @define('SUPPORT_CHANNEL','#channelname');
-@define('MAIN_SERVER','irc.freenode.net');
+@define('MAIN_SERVER','irc.libera.chat');
 @define('MAIN_CHANNEL','#channelname');
 @define('IRC_BOT','ircbot');
 @define('SUPPORT_LOG_DIRECTORY','/path-to-logs/');
