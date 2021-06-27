@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008-2020 The Arianne Project
+ Copyright (C) 2008-2021 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -60,13 +60,13 @@ echo ' class="layout"';
 <div id="container">
 	<div id="header">
 		<?php
-		echo '<a href="/" class="stendhallogo"><img style="border: 0;" src="/images/logo.gif" alt="Stendhal"></a>';
+		echo '<a href="/" class="stendhallogo"><img style="border: 0;" src="/images/logo.gif" alt="Stendhal Logo" width="282" height="64" ></a>';
 		echo '<form id="headersearchform" action="'.rewriteURL('/search').'" method="GET">';
 		if (!STENDHAL_MODE_REWRITE) {
 			echo '<input type="hidden" name="id" value="content/game/search">';
 		}
 		echo '<div>';
-		echo '<input id="headersearchforminput" name="q" id="q" type="search" placeholder="Search"><button><img src="https://stendhalgame.org/w/skins/Vector/images/search-ltr.png?303" alt=""></button>';
+		echo '<input id="headersearchforminput" name="q" id="q" type="search" placeholder="Search"><button><img src="https://stendhalgame.org/w/skins/Vector/images/search-ltr.png?303" alt="" width="12" height="13"></button>';
 		echo '</div>';
 
 		echo '<a href="'.STENDHAL_LOGIN_TARGET.'/account/mycharacters.html"><span class="block" id="playArea"></span></a>';
@@ -90,7 +90,7 @@ echo ' class="layout"';
 	</div>
 
 	<div id="footerArea">
-		<span class="copyright">&copy; 1999-2020 <a href="https://arianne-project.org">Arianne Project</a></span>
+		<span class="copyright">&copy; 1999-2021 <a href="https://arianne-project.org">Arianne Project</a></span>
 	</div>
 
 	<div class="time">
