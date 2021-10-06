@@ -36,10 +36,10 @@ PING 83.83.205.120 (83.83.205.120) 56(84) bytes of data.
 
 	public function traceroute($ip, $fast, $count) {
 		if ($fast) {
-			$cmd = 'traceroute -q '.intval($count).' -w 1 -n '.escapeshellcmd($ip);
+			$cmd = 'traceroute -I -q '.intval($count).' -w 1 -n '.escapeshellcmd($ip);
 			$res = shell_exec($cmd);
 		} else {
-			$cmd = 'traceroute -q '.intval($count).' -w 1 -A '.escapeshellcmd($ip);
+			$cmd = 'traceroute -I -q '.intval($count).' -w 1 -A '.escapeshellcmd($ip);
 			$res = shell_exec($cmd);
 		}
 		echo $this->parseTraceroute($res, $count);
