@@ -3,36 +3,6 @@
 
 class Netstats {
 
-	public function ping($targets) {
-		$pingCmd = 'ping -c 5 -w 1 -n -i 0.2 ';
-		foreach ($targets As $targer) {
-			$cmd = $cmd.$pingCmd.escapeshellcmd($target).';';
-		}
-		echo $cmd;
-
-		/*
- --- 82.83.205.169 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 804ms
-rtt min/avg/max/mdev = 21.603/21.727/21.835/0.074 ms
-hendrik@stendhalgame:/srv/faiumoni-documents$ ping -U -c 5 -w 1 -n -i 0.2 82.83.205.120
-PING 82.83.205.120 (82.83.205.120) 56(84) bytes of data.
-64 bytes from 82.83.205.120: icmp_seq=1 ttl=56 time=28.8 ms
-64 bytes from 82.83.205.120: icmp_seq=2 ttl=56 time=28.9 ms
-64 bytes from 82.83.205.120: icmp_seq=3 ttl=56 time=28.7 ms
-64 bytes from 82.83.205.120: icmp_seq=4 ttl=56 time=28.9 ms
-64 bytes from 82.83.205.120: icmp_seq=5 ttl=56 time=29.0 ms
-
---- 82.83.205.120 ping statistics ---
-5 packets transmitted, 5 received, 0% packet loss, time 804ms
-rtt min/avg/max/mdev = 28.768/28.921/29.008/0.174 ms
-hendrik@stendhalgame:/srv/faiumoni-documents$ ping -U -c 5 -w 1 -n -i 0.2 83.83.205.120
-PING 83.83.205.120 (83.83.205.120) 56(84) bytes of data.
-
---- 83.83.205.120 ping statistics ---
-5 packets transmitted, 0 received, 100% packet loss, time 828ms
-
-		 */
-	}
 
 	public function traceroute($ip, $fast, $count) {
 		if ($fast) {
