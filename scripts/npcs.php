@@ -88,7 +88,8 @@ class NPC {
 			'Ben', 'Goran', 'Mary', 'Zak',
 			'Easter Bunny', 'Rose Leigh', 'Santa',
 			'Amber', 'Skye',
-			'Red Crystal', 'Purple Crystal', 'Yellow Crystal', 'Pink Crystal', 'Blue Crystal');
+			'Red Crystal', 'Purple Crystal', 'Yellow Crystal', 'Pink Crystal', 'Blue Crystal',
+			'Rengard', 'Mizuno');
 
 		$result = DB::game()->query($query);
 		$list = array();
