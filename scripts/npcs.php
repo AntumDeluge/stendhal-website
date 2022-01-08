@@ -95,33 +95,33 @@ class NPC {
 		$list = array();
 
 		foreach($result as $row) {
-		    // don't diplay clones
-		    if (!array_key_exists("cloned", $row)) {
-    			$zone = $row['zone'];
-    			$pos = 'at ' . $row['x'] . ', ' . $row['y'];
-    			if (in_array($row['name'], $NO_ZONE)) {
-    				$zone = 'unknown';
-    				$pos = '';
-    			}
-    			$outfit = $row['outfit'];
-    			if (isset($row['outfit_layers'])) {
-    			    $outfit = $row['outfit_layers'];
-    			}
-    			$list[]=new NPC($row['name'],
-    				$row['title'],
-    				$row['class'],
-    				$outfit,
-    				$row['level'],
-    				$row['hp'],
-    				$row['base_hp'],
-    				$zone,
-    				$pos,
-    				$row['x'],
-    				$row['y'],
-    				$row['description'],
-    				$row['job'],
-    				$row['image']);
-		    }
+			if (isset($row["cloned"])) {
+				continue;
+			}
+			$zone = $row['zone'];
+			$pos = 'at ' . $row['x'] . ', ' . $row['y'];
+			if (in_array($row['name'], $NO_ZONE)) {
+				$zone = 'unknown';
+				$pos = '';
+			}
+			$outfit = $row['outfit'];
+			if (isset($row['outfit_layers'])) {
+			    $outfit = $row['outfit_layers'];
+			}
+			$list[]=new NPC($row['name'],
+				$row['title'],
+				$row['class'],
+				$outfit,
+				$row['level'],
+				$row['hp'],
+				$row['base_hp'],
+				$zone,
+				$pos,
+				$row['x'],
+				$row['y'],
+				$row['description'],
+				$row['job'],
+				$row['image']);
 		}
 		return $list;
 	}
