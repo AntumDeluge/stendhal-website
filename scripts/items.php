@@ -170,15 +170,21 @@ function getItems() {
 				$attributes=array();
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
-						if (isset($val['0 attr']['condition']) && $val['0 attr']['condition'] === 'stendhal.testserver') {
-						continue;
-						}
-
-						if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
-							$attributes[$attr]=$val['0 attr']['value'];
+						foreach($val as $temp) {
+							if (!is_array($temp) {
+								continue;
+							}
+							if (isset($temp['condition']) && $temp['condition'][0] !== '!') {
+								continue;
+							}
+							
+							if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
+								$attributes[$attr]=$temp['value'];
+							}
 						}
 					}
 				}
+
 				if (isset($items[$i]['damage']['0 attr']['type'])) {
 					$attributes['atk'] = $attributes['atk'].' ('.$items[$i]['damage']['0 attr']['type'].')';
 				}
