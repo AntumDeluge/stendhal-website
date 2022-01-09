@@ -171,7 +171,7 @@ function getItems() {
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
 						foreach($val as $temp) {
-							if (!is_array($temp) {
+							if (!is_array($temp)) {
 								continue;
 							}
 							if (isset($temp['condition']) && $temp['condition'][0] !== '!') {
