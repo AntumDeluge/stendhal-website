@@ -170,6 +170,10 @@ function getItems() {
 				$attributes=array();
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
+						if (isset($val['0 attr']['condition']) && $val['0 attr']['condition'] === 'stendhal.testserver') {
+						continue;
+						}
+
 						if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
 							$attributes[$attr]=$val['0 attr']['value'];
 						}
