@@ -173,7 +173,8 @@ $page->writeAfterJS();
 			echo '<li><a id="menuContribHelp" href="https://sourceforge.net/p/arianne/patches/new/">Submit Patch</a>';
 			echo '<li><a id="menuContribQuests" href="https://stendhalgame.org/wiki/Stendhal_Quest_Contribution">Quests</a>';
 			echo '<li><a id="menuContribTesting" href="https://stendhalgame.org/wiki/Stendhal_Testing">Testing</a>';
-			echo '<li><a id="menuContribHistory" href="/development/sourcelog.html">Changes</a></ul>';
+			echo '<li><a id="menuContribHistory" href="/development/sourcelog.html">Changes</a>';
+			echo '<li><a id="menuAPI" href="/reference/">API Reference</a></ul>';
 
 		$adminLevel = getAdminLevel();
 		if ($adminLevel >= 100) {
