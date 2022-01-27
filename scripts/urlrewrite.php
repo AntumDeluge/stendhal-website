@@ -187,8 +187,6 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteCond %{QUERY_STRING} id=content/game/sourcelog
                 RewriteRule ^/.* /development/sourcelog\.html? [R=301,L]
                 RewriteRule ^/development/cvslog(.*) /development/sourcelog$1? [R=301,L]
-                RewriteCond %{QUERY_STRING} id=reference
-                RewriteRule ^/.* /reference/? [R=301,L]
 
                 # items
                 RewriteCond %{QUERY_STRING} id=content/game/items$
