@@ -111,15 +111,15 @@ class OutfitDrawer {
 	function load_part($part_name, $index, $offset) {
 		global $OUTFITS_BASE;
 
-		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '-safe.png';
+		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '-safe.png';
 		if (!file_exists($location)) {
-    		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_' . $index . '.png';
+    		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '.png';
 
     		// there are some heads with non existing numbers (e. g. 984)
     		if (!file_exists($location)) {
-    		    $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_000-safe.png';
+    		    $location = $OUTFITS_BASE . '/' . $part_name . '/000-safe.png';
     		    if (!file_exists($location)) {
-    		        $location = $OUTFITS_BASE . '/' . $part_name . '/' . $part_name . '_000.png';
+    		        $location = $OUTFITS_BASE . '/' . $part_name . '/000.png';
     		    }
     		}
 		}
