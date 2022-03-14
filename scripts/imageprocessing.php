@@ -106,24 +106,32 @@ class OutfitDrawer {
 	}
 
 	/**
-	 * Load a part of an outfit
+	 * Load a part of an outfit.
+	 *
+	 * @param part_name
+	 *     Basename of part, "body", "head", "dress", etc.
+	 * @param index
+	 *     File index.
+	 * @param offset
+	 * @param suffix
+	 *     Optional special case suffix to append to filename (default="").
 	 */
-	function load_part($part_name, $index, $offset) {
+	function load_part($part_name, $index, $offset, $suffix='') {
 		global $OUTFITS_BASE;
 
-		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '-safe.png';
+		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . $suffix . '.png';
 		if (!file_exists($location)) {
     		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '.png';
 
     		// there are some heads with non existing numbers (e. g. 984)
     		if (!file_exists($location)) {
-    		    $location = $OUTFITS_BASE . '/' . $part_name . '/000-safe.png';
+    		    $location = $OUTFITS_BASE . '/' . $part_name . '/000' . $suffix . '.png';
     		    if (!file_exists($location)) {
     		        $location = $OUTFITS_BASE . '/' . $part_name . '/000.png';
     		    }
     		}
 		}
-		    
+
 		// A workaround for imagick crashing when the file does not
 		// exist.
 		if (file_exists($location)) {
@@ -165,14 +173,18 @@ class OutfitDrawer {
 	    }
 
 	    // body:
+	    $safe_suffix = '-nonude';
 	    $index = $code % 100;
 	    $bodyIndex = $index;
-	    $outfit = $this->load_part('body', $this->formatNumber3($index), $offset);
+	    $outfit = $this->load_part('body', $this->formatNumber3($index), $offset, $safe_suffix);
 	    if (!$outfit) {
 	        // ensure we have something to draw on
 	        $outfit = new Imagick();
 	        $outfit->newImage(48, 64, 'transparent', 'png');
 	    }
+
+	    // all layers other than "body" can use the standard "-safe" suffix
+	    $safe_suffix = '-safe';
 
 	    // dress
 	    $code /= 100;
@@ -181,7 +193,7 @@ class OutfitDrawer {
 	        $index = 91;
 	    }
 	    if ($index) {
-	        $tmp = $this->load_part('dress', $this->formatNumber3($index), $offset);
+	        $tmp = $this->load_part('dress', $this->formatNumber3($index), $offset, $safe_suffix);
 	    } else {
 	        $tmp = 0;
 	    }
@@ -190,7 +202,7 @@ class OutfitDrawer {
 	    // head
 	    $code /= 100;
 	    $index = $code % 100;
-	    $tmp = $this->load_part('head', $this->formatNumber3($index), $offset);
+	    $tmp = $this->load_part('head', $this->formatNumber3($index), $offset, $safe_suffix);
 	    if ($tmp) {
 	        $outfit->compositeImage($tmp, imagick::COMPOSITE_OVER, 0, 0);
 	    }
@@ -199,7 +211,7 @@ class OutfitDrawer {
 	    $code /= 100;
 	    $index = $code % 100;
 	    if ($index) {
-	        $tmp = $this->load_part('hair', $this->formatNumber3($index), $offset);
+	        $tmp = $this->load_part('hair', $this->formatNumber3($index), $offset, $safe_suffix);
 	    } else {
 	        $tmp = 0;
 	    }
@@ -209,7 +221,7 @@ class OutfitDrawer {
 	    $code /= 100;
 	    $index = $code % 100;
 	    if ($index) {
-	        $tmp = $this->load_part('detail', $this->formatNumber3($index), $offset);
+	        $tmp = $this->load_part('detail', $this->formatNumber3($index), $offset, $safe_suffix);
 	    } else {
 	        $tmp = 0;
 	    }
@@ -232,8 +244,15 @@ class OutfitDrawer {
                 // sprites at index 0
                 continue;
             }
-            $image = $this->load_part($l[0], $this->formatNumber3($l[1]), $offset);
-	        $color = hexdec($l[2]);
+
+            $part_name = $1[0];
+            $safe_suffix = '-safe';
+            if ($part_name == 'body') {
+            	$safe_suffix = '-nonude';
+            }
+
+    	    $image = $this->load_part($part_name, $this->formatNumber3($l[1]), $offset, $safe_suffix);
+    	    $color = hexdec($l[2]);
     	    $this->composite_with_color($outfit, $image, $color);
         }
 
