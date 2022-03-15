@@ -976,19 +976,19 @@ class AccountLink {
 			// Special handling for Steam
 			if (strpos($this->username, 'https://steamcommunity.com/openid/id/') === 0) {
 			    $curl = curl_init();
-			    curl_setopt($curl, CURLOPT_URL, 
+			    curl_setopt($curl, CURLOPT_URL,
 			        'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='
 			        .STENDHAL_STEAM_API_KEY.'&steamids='
 			        .urlencode(substr($this->username, $lastSlash + 1)));
-			    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1); 
+			    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
 			    $response = curl_exec($curl);
 			    $response = json_decode($response, true);
-			    $this->nickname = $response['response']['players'][0]['personaname']; 
+			    $this->nickname = $response['response']['players'][0]['personaname'];
 			    $res[] = Account::convertToValidUsername($this->nickname);
 			    $res[] = Account::convertToValidUsername($this->nickname.'steam');
 			    return $res;
 			}
-		    
+
 			// apply openid url magic
 			if ($lastSlash < strlen($this->username) - 1) {
 				$res[] = Account::convertToValidUsername(substr($this->username, $lastSlash + 1));
@@ -1017,17 +1017,17 @@ class AccountLink {
 	        }
 	        $in .= "'".mysql_real_escape_string($name.$suffix)."'";
 	    }
-	    
+
 	    $sql = "SELECT username FROM account WHERE username in (".$in.") FOR UPDATE "
 	        . "UNION SELECT charname FROM characters WHERE charname in (".$in.") FOR UPDATE;";
-	        
+
         // check database
         $existingUsernames = array();
         $rows = DB::game()->query($sql);
         foreach($rows as $row) {
             $existingUsernames[] = $row['username'];
         }
-        
+
         // pick username
         foreach($proposedUsernames As $name ) {
             if ($name && trim($name) != '') {
@@ -1037,7 +1037,7 @@ class AccountLink {
             }
         }
 	}
-	
+
 	private function numberToCharacterString($number) {
 	    $res = '';
 	    $i = $number;

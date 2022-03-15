@@ -177,7 +177,7 @@ function getItems() {
 							if (isset($temp['condition']) && $temp['condition'][0] !== '!') {
 								continue;
 							}
-							
+
 							if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
 								$attributes[$attr]=$temp['value'];
 							}

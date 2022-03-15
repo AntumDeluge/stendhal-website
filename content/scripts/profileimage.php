@@ -22,9 +22,9 @@ class ProfileImagePage extends Page {
         header("Content-Type: text/javascript", true);
 
         $player = getPlayer($_REQUEST['charname']);
-        
+
         // use a redirect in order for the image file to be cached without
-        // having to care about player changing their outfits 
+        // having to care about player changing their outfits
         header('Location: https://stendhalgame.org/images/outfit/'.$player->outfit.'.png');
 
         // do not send and body, this is a redirect

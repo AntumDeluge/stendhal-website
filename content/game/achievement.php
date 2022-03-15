@@ -13,7 +13,7 @@ class AchievementPage extends Page {
 	}
 
 	public function writeHttpHeader() {
-	    if (isset($_REQUEST['name']) && $_REQUEST['name'] != 'special' 
+	    if (isset($_REQUEST['name']) && $_REQUEST['name'] != 'special'
 	        && !isset($this->achievements)) {
 
 			header('HTTP/1.0 404 Not Found');
