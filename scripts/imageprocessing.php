@@ -246,7 +246,7 @@ class OutfitDrawer {
 				continue;
 			}
 
-			$part_name = $1[0];
+			$part_name = $l[0];
 			$safe_suffix = '-safe';
 			if ($part_name == 'body') {
 				$safe_suffix = '-nonude';
