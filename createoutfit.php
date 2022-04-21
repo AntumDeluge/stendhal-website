@@ -35,7 +35,7 @@ if (!$outfitDrawer->validateInput($completeOutfit)) {
 	exit('Invalid outfit.');
 }
 
-$etag = STENDHAL_VERSION.'-'.urlencode($completeOutfit).'-'.$offset;
+$etag = STENDHAL_VERSION.'-3-'.urlencode($completeOutfit).'-'.$offset;
 if (isset($_SERVER['HTTP_IF_NONE_MATCH'])) {
 	$requestedEtag = $_SERVER['HTTP_IF_NONE_MATCH'];
 }
