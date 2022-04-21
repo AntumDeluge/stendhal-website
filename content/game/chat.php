@@ -89,7 +89,7 @@ We have a Discord server and channels on the Libera IRC network. Both services a
 				$line = htmlspecialchars($line);
 				$line = preg_replace('/@/', '&lt;(a)&gt;', $line);
 				$line = preg_replace(
-						'!(http|https)://(|www\.)(faiumoni.de|stendhalgame.org|arianne.sf.net|arianne-project.org|arianne.sourceforge.net|sourceforge.net|sf.net|download.oracle.com|libregamewiki.org|freesound.org|opengameart.org|openclipart.org|github.io|github.com|arianne.github.io|postsai.github.io)(/[^ ]*)?!',
+						'!(http|https)://(|www\.)(faiumoni.de|stendhalgame.org|arianne.sf.net|arianne-project.org|arianne.sourceforge.net|sourceforge.net|sf.net|download.oracle.com|libregamewiki.org|freesound.org|opengameart.org|openclipart.org|github.io|github.com|arianne.github.io|postsai.github.io|media.discordapp.net/attachments/735075745545846874)(/[^ ]*)?!',
 						'<a href="$1://$2$3$4$5">$1://$2$3$4$5</a>', $line);
 
 				if ($line != '') {
