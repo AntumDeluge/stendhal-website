@@ -85,6 +85,11 @@ We have a Discord server and channels on the Libera IRC network. Both services a
 					$nick = $matches[3];
 				}
 				$line = $matches[4];
+				if ($nick == "`_" && $line[0] == "<") {
+					$pos = strpos($line, ">");
+					$nick = substr($line, 1, $pos - 1);
+					$line = trim(substr($line, $pos + 1));
+				}
 
 				$line = htmlspecialchars($line);
 				$line = preg_replace('/@/', '&lt;(a)&gt;', $line);
