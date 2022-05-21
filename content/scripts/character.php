@@ -1,6 +1,6 @@
 <?php
 function printAge($minutes) {
-	return round($minutes/60,2);
+	return round($minutes/60, 2);
 }
 
 class CharacterPage extends Page {

@@ -1,7 +1,7 @@
 <?php
 
 function printRespawn($turns) {
-  return round($turns *0.3/60,2);
+  return round($turns *0.3/60, 2);
 }
 
 function renderAmount($amount) {
