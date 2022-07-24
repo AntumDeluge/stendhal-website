@@ -254,7 +254,7 @@ class LoginPage extends Page {
 		<br>
 		<?php
 		endBox();
-
+/*
 			echo '<br>';
 			startBox("<h2>External Account</h2>");
 			?>
@@ -297,6 +297,7 @@ class LoginPage extends Page {
 		<?php
 
 		endBox();
+*/
 	}
 }
 $page = new LoginPage();

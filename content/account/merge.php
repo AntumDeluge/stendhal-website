@@ -205,7 +205,7 @@ class AccountMerge extends Page {
 		</form>
 
 		<?php endBox();
-
+/*
 			startBox("<h2>External Account</h2>");
 			?>
 				<form id="openid_form" action="<?php echo STENDHAL_FOLDER;?>/?id=content/account/merge" method="post">
@@ -244,6 +244,7 @@ class AccountMerge extends Page {
 		}
 
 		endBox();
+*/
 	}
 
 }
