@@ -88,9 +88,6 @@ class News {
 		if (isset($this->typeImage) && strlen($this->typeImage) > 0) {
 			echo '<div class="newsIcons">';
 			echo '<div class="newsIcon newsIcon'.$this->typeId.'"></div>';
-			echo '<div class="socialmedia" data-id="'.htmlspecialchars($this->id)
-				.'" data-title="'.htmlspecialchars($this->title).'"></div>';
-			echo '</div>';
 		}
 
 		// render one line description

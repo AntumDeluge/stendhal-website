@@ -1405,83 +1405,6 @@ easingOut:"swing",showCloseButton:true,showNavArrows:true,enableEscapeButton:tru
 	}
 
 
-	//----------------------------------------------------------------------------
-	//                                    social popups
-	//----------------------------------------------------------------------------
-
-
-	// http://yensdesign.com/2008/09/how-to-create-a-stunning-and-smooth-popup-using-jquery/
-
-	var popupStatus = 0;
-
-	function loadPopup(e) {
-		if (popupStatus == 0) {
-			var popupHeight = $("#popup").height();
-			var popupWidth = $("#popup").width();
-			$("#popup").css({
-				"position": "absolute",
-				"top": e.offset().top - popupHeight / 2,
-				"left": e.offset().left - popupWidth / 2
-			});
-			$("#backgroundPopup").css({
-				"height": document.documentElement.clientHeight
-			});
-
-			$("#backgroundPopup").css({"opacity": "0.7"});
-			$("#backgroundPopup").fadeIn("slow");
-			$("#popup").fadeIn("slow");
-			popupStatus = 1;
-		}
-	}
-
-	function disablePopup() {
-		if (popupStatus == 1) {
-			$("#backgroundPopup").fadeOut("slow");
-			$("#popup").fadeOut("slow");
-			popupStatus = 0;
-		}
-	}
-
-	function popupHandler(e) {
-		var socialLink = "http://stendhalgame.org/-" + e.attr("data-id");
-		var message = e.attr("data-title");
-
-		var html = '<div class="socialbutton"><iframe id="facebook" src="https://www.facebook.com/plugins/like.php?href='+socialLink+'&amp;send=false&amp;layout=standard&amp;width=400&amp;show_faces=false&amp;action=like&amp;colorscheme=light&amp;font&amp;height=24" scrolling="no" frameborder="0" style="border:none; overflow:visible; width:400px; height:35px;" allowTransparency="true">Loading Facebook</iframe></div>'
-			+ '<div class="socialbutton"><div class="g-plusone" data-size="medium" data-href="'+socialLink+'">Loading Google+</div></div>'
-			+ '<div class="socialbutton"><a href="https://twitter.com/share" class="twitter-share-button" data-url="' + socialLink + '" data-text="' + message + '" data-via="stendhalgame">Loading Twitter</a></div>'
-			+ '<div><a href="https://stendhalgame.org/wiki/Two_clicks_for_more_privacy" target="_blank">Two clicks for more privacy.</a></div>'
-			+ '<script async type="text/javascript" src="https://apis.google.com/js/plusone.js"></script>'
-			+ '<script async type="text/javascript" src="https://platform.twitter.com/widgets.js" id="twitter-wjs"></script>';
-	    $('#popupContent').html(html);
-
-		$("iframe").load(function () {
-			$(this).css("background-image", "none");
-		});
-	}
-
-	function initSocialMediaPopup() {
-		$(".socialmedia").click(function () {
-			popupHandler($(this));
-			loadPopup($(this));
-		});
-		$("#popupClose").click(function () {
-			disablePopup();
-		});
-		$("#backgroundPopup").click(function () {
-			disablePopup();
-		});
-		$(document).keypress(function (e) {
-			if(e.keyCode==27 && popupStatus==1) {
-				disablePopup();
-			}
-		});
-	}
-
-	function initSourceforgeLogo() {
-		window.setTimeout(function() {
-			$("#footerSourceforge").css("background", "url(" + window.location.protocol + "//sflogo.sourceforge.net/sflogo.php?group_id=1111&type=15) center left no-repeat");
-		}, 1000);
-	}
 
 	//----------------------------------------------------------------------------
 	//                                       push
@@ -1739,8 +1662,6 @@ easingOut:"swing",showCloseButton:true,showNavArrows:true,enableEscapeButton:tru
 		}
 		initTracepath();
 		initEditor();
-		initSocialMediaPopup();
-		initSourceforgeLogo();
 	});
 
 	$(".box").mouseenter(function() {
