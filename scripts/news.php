@@ -88,6 +88,7 @@ class News {
 		if (isset($this->typeImage) && strlen($this->typeImage) > 0) {
 			echo '<div class="newsIcons">';
 			echo '<div class="newsIcon newsIcon'.$this->typeId.'"></div>';
+			echo '</div>';
 		}
 
 		// render one line description
@@ -123,57 +124,6 @@ class News {
 		$res = preg_replace('/[ _,;.:<>|!?\'"()\/*] /', ' ', $res);
 		$res = preg_replace('/[ _,;.:<>|!?\'"()\/*]/', '-', $res);
 		return urlencode($res.'.html');
-	}
-
-	/**
-	 * Creates a button for posting tweets about this message
-	 *
-	 * @return string the html code for a fitting tweet button
-	 */
-	function renderTweetButton() {
-		//prepare status parts
-		$url = urlencode('http://').STENDHAL_SERVER_NAME.urlencode('/-'.$this->id);
-		$tag = urlencode(' @stendhalgame');
-		//calculate length for parts
-		$urlLength = strlen($url);
-		$titleLength = strlen($this->title);
-		$tagLength = strlen($tag);
-
-		$message = '';
-		if($urlLength < 141) {
-			$message = $message.$url;
-		}
-
-		if(strlen($message) + $titleLength < 141) {
-		    $message = $message.' '.urlencode($this->title);
-		}
-
-		if(strlen($message) + $tagLength < 141) {
-			$message = $message.' '.$tag;
-		}
-
-		$res = '<a href="http://twitter.com/home?status=';
-		$res = $res.$message;
-		$res = $res.'" target="_blank" title="Twitter">';
-		$res = $res.'<img src="images/buttons/twitter_button.png" width="24" height="24" border="0" hspace="0" alt="Twitter">';
-		$res = $res.'</a>';
-		return $res;
-	}
-
-	/**
-	 * Creates a button for sharing this news on facebook
-	 *
-	 * @return string the html code for a fitting share button
-	 */
-	function renderFacebookButton() {
-		$res = '<a href="http://facebook.com/sharer.php?u=';
-		$res = $res.urlencode('http://'.STENDHAL_SERVER_NAME);
-		$res = $res.urlencode('/-'.$this->id);
-		$res = $res.'&t='.urlencode($this->title);
-		$res = $res.'" target="_blank" title="Facebook">';
-		$res = $res.'<img src="images/buttons/facebook_button.png" width="24" height="24" border="0" hspace="0" alt="Facebook">';
-		$res = $res.'</a>';
-		return $res;
 	}
 
 };
