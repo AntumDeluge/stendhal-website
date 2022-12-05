@@ -1216,7 +1216,7 @@ easingOut:"swing",showCloseButton:true,showNavArrows:true,enableEscapeButton:tru
 
 	var createCharacterFaceOffset = 2;
 	var createCharacterMinOutfits   = [      0,       1,      0,       0,      0,      0,     0,      0,        0 ];
-	var createCharacterCountOutfits = [      3,      64,      4,       5,     26,      0,    49,      0,        0 ];
+	var createCharacterCountOutfits = [      3,      65,      4,       5,     28,      0,    57,      0,        0 ];
 	var createCharacterOutfitNames  = [ "body", "dress", "head", "mouth", "eyes", "mask", "hair", "hat", "detail" ];
 	var currentOutfit =               [      0,       1,      0,       0,      0,      0,     0,      0,        0 ];
 
