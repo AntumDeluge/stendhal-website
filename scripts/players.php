@@ -173,7 +173,7 @@ function getBestPlayer($tableSuffix, $where='') {
 	. $where
 	. " and day = CURRENT_DATE() and fametype = 'R'"
 	. " group by halloffame_archive.points, halloffame_archive.charname, character_stats.age, character_stats.level, character_stats.xp, character_stats.outfit, character_stats.outfit_colors, character_stats.outfit_layers, character_stats.sentence, halloffame_archive.rank"
-	. " order by rank limit 1";
+	. " order by halloffame_archive.rank limit 1";
 	$list = queryWithCache($query, 60*60, DB::game());
 	if (count($list) > 0) {
 		return $list[0];
