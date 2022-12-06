@@ -190,7 +190,7 @@ function getBestPlayer($tableSuffix, $where='') {
 function getHOFPlayers($tableSuffix, $where='', $fametype = '', $cond='limit 2') {
 	$query = "SELECT distinct halloffame_archive_".$tableSuffix.".charname, halloffame_archive_".$tableSuffix.".rank, halloffame_archive_".$tableSuffix.".points, character_stats.outfit, character_stats.outfit_colors, character_stats.outfit_layers
 			FROM halloffame_archive_".$tableSuffix." join character_stats on (charname=name) "
-			.$where.' and day = CURRENT_DATE() and fametype = "'.mysql_real_escape_string($fametype).'" order by rank '
+			.$where.' and day = CURRENT_DATE() and fametype = "'.mysql_real_escape_string($fametype).'" order by halloffame_archive_'.$tableSuffix.'.rank '
 			.$cond;
 	$stmt = DB::game()->prepare($query);
 	$stmt->execute(array(':fametype', $fametype));
