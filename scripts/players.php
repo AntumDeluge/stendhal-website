@@ -263,13 +263,13 @@ function _getPlayers($query) {
  * @param String $charname
  */
 function getCharacterRanks($charname) {
-	$sql = "SELECT fametype, rank FROM halloffame_archive_recent WHERE charname='".mysql_real_escape_string($charname)."' AND day=CURRENT_DATE()";
+	$sql = "SELECT fametype, halloffame_archive_recent.rank FROM halloffame_archive_recent WHERE charname='".mysql_real_escape_string($charname)."' AND day=CURRENT_DATE()";
 	$rows = DB::game()->query($sql);
 	// if the player has not played recently, we fetch the all times data
 	// this way it is not obvious that the account was abandoned
 	$res = [];
 	if ($rows->rowCount() == 0) {
-		$sql = "SELECT fametype, rank FROM halloffame_archive_alltimes WHERE charname='".mysql_real_escape_string($charname)."' AND day=CURRENT_DATE()";
+		$sql = "SELECT fametype, halloffame_archive_alltimes.rank FROM halloffame_archive_alltimes WHERE charname='".mysql_real_escape_string($charname)."' AND day=CURRENT_DATE()";
 		$rows = DB::game()->query($sql);
 		$res['__'] = 'alltimes';
 	}
