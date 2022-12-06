@@ -45,7 +45,6 @@ games.stendhal.common.constants
 games.stendhal.common.filter
 games.stendhal.common.grammar
 games.stendhal.common.math
-games.stendhal.common.memory
 games.stendhal.common.messages
 games.stendhal.common.parser
 games.stendhal.common.tiled
@@ -126,6 +125,7 @@ games.stendhal.server.entity.npc.behaviour.journal
 games.stendhal.server.entity.npc.condition
 games.stendhal.server.entity.npc.fsm
 games.stendhal.server.entity.npc.interaction
+games.stendhal.server.entity.npc.quest
 games.stendhal.server.entity.player
 games.stendhal.server.entity.slot
 games.stendhal.server.entity.spell
