@@ -42,10 +42,10 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteRule ^/wiki/*$ /w/index.php [L,QSA]
 
                 # images
-                RewriteRule ^/images/creature/(.*)\.png$ /monsterimage.php?url=data/sprites/entity/$1.png&rewritten=true [L]
+                RewriteRule ^/images/creature/(.*)\.png$ /monsterimage.php?url=data/sprites/monsters/$1.png&rewritten=true [L]
                 RewriteRule ^/images/image/(.*)$ /image.php?img=$1&rewritten=true [L]
                 RewriteRule ^/images/item/(.*)\.png$ /itemimage.php?url=data/sprites/items/$1.png&rewritten=true [L]
-                RewriteRule ^/images/npc/(.*)\.png$ /monsterimage.php?url=data/sprites/entity/$1.png&rewritten=true [L]
+                RewriteRule ^/images/npc/(.*)\.png$ /monsterimage.php?url=data/sprites/npc/$1.png&rewritten=true [L]
                 RewriteRule ^/images/outfit/(.*)\.png$ /createoutfit.php?outfit=$1&rewritten=true [L]
                 RewriteRule ^/images/screenshot/(.*)$ /index.php?id=content/game/screenshot&file=$1&rewritten=true [L]
                 RewriteRule ^/images/thumbnail/(.*)$ /thumbnail.php?img=$1&rewritten=true [L]
@@ -144,11 +144,11 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteRule .* - [L]
 
                 # images
-                RewriteCond %{QUERY_STRING} url=data/sprites/entity/(.*)\.png
+                RewriteCond %{QUERY_STRING} url=data/sprites/monsters/(.*)\.png
                 RewriteRule ^/monsterimage.php /images/creature/%1.png? [R=301,L]
                 RewriteCond %{QUERY_STRING} url=data/sprites/items/(.*).png
                 RewriteRule ^/itemimage.php /images/item/%1.png? [R=301,L]
-                RewriteCond %{QUERY_STRING} url=data/sprites/entity/(.*).png
+                RewriteCond %{QUERY_STRING} url=data/sprites/npc/(.*).png
                 RewriteRule ^/monsterimage.php /images/npc/%1.png? [R=301,L]
                 RewriteCond %{QUERY_STRING} outfit=(.*)
                 RewriteRule ^/createoutfit.php /images/outfit/%1.png? [R=301,L]
@@ -266,11 +266,11 @@ function rewriteURL($url, $force = false) {
 	// images
 	if (preg_match('|^/images/.*|', $url)) {
 		if (preg_match('|^/images/creature/(.*)\.png$|', $url)) {
-			return preg_replace('|^/images/creature/(.*)\.png$|', $folder.'/monsterimage.php?url=data/sprites/entity/$1.png', $url);
+			return preg_replace('|^/images/creature/(.*)\.png$|', $folder.'/monsterimage.php?url=data/sprites/monsters/$1.png', $url);
 		} else if (preg_match('|^/images/item/(.*)\.png$|', $url)) {
 			return preg_replace('|^/images/item/(.*)\.png$|', $folder.'/itemimage.php?url=data/sprites/items/$1.png', $url);
 		} else if (preg_match('|^/images/npc/(.*)\.png$|', $url)) {
-			return preg_replace('|^/images/npc/(.*)\.png$|', $folder.'/monsterimage.php?url=data/sprites/entity/$1.png', $url);
+			return preg_replace('|^/images/npc/(.*)\.png$|', $folder.'/monsterimage.php?url=data/sprites/npc/$1.png', $url);
 		} else if (preg_match('|^/images/outfit/(.*)\.png$|', $url)) {
 			return preg_replace('|^/images/outfit/(.*)\.png$|', $folder.'/createoutfit.php?outfit=$1', $url);
 		} else if (preg_match('|^/images/screenshot/(.*)$|', $url)) {
