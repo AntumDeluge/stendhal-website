@@ -42,6 +42,9 @@ class NPC {
 		$this->class=$class;
 		$this->outfit=$outfit;
 		$imagefile = '/images/npc/'.surlencode($class).'.png';
+		if (str_contains($imagefile, '/npc/../monsters/')) {
+		  $imagefile = str_replace('/npc/../monsters/', '/creature/', $imagefile);
+		}
 		if (isset($outfit) && $outfit != '') {
 			$imagefile = '/images/outfit/'.surlencode($outfit).'.png';
 		}
