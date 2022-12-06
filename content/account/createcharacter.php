@@ -104,11 +104,21 @@ class CreateCharacterPage extends Page {
 
 <table style="float: left; margin-right: 2em">
 <tr>
+	<td>Hat</td>
+	<td><input class="outfitprev" type="button" data-offset="7" value="&lt;"></td>
+	<td rowspan="7"><canvas id="canvas" style="background-position: center;
+  background-size: cover; margin: 0 16px" height="98px" width="68px"></canvas></td>
+	<td><input class="outfitnext" type="button" data-offset="7" value="&gt;"></td>
+</tr>
+<tr>
 	<td>Hair</td>
 	<td><input class="outfitprev" type="button" data-offset="6" value="&lt;"></td>
-	<td rowspan="5"><canvas id="canvas" style="background-position: center;
-  background-size: cover; margin: 0 16px" height="98px" width="68px"></canvas></td>
 	<td><input class="outfitnext" type="button" data-offset="6" value="&gt;"></td>
+</tr>
+<tr>
+	<td>Mask</td>
+	<td><input class="outfitprev" type="button" data-offset="5" value="&lt;"></td>
+	<td><input class="outfitnext" type="button" data-offset="5" value="&gt;"></td>
 </tr>
 <tr>
 	<td>Eyes</td>
