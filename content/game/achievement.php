@@ -32,7 +32,9 @@ class AchievementPage extends Page {
 			echo '<meta property="og:description" content="'.htmlspecialchars($this->achievements->description).'">';
 			echo '<meta property="og:image" content="https://stendhalgame.org/data/sprites/achievements/'.htmlspecialchars(strtolower($this->achievements->category)).'.png">';
 			echo '<meta property="game:points" content="10">';
-			echo '<meta property="fb:app_id" content="'.FACEBOOK_APP_ID.'">';
+			if (defined("FACEBOOK_APP_ID") && constant("FACEBOOK_APP_ID")) {
+				echo '<meta property="fb:app_id" content="'.FACEBOOK_APP_ID.'">';
+			}
 
 		} else {
 			echo '<title>Achievements'.STENDHAL_TITLE.'</title>';
