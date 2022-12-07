@@ -171,6 +171,7 @@ if (isset($_REQUEST['outfitcode'])) {
     echo htmlspecialchars($_REQUEST['outfitcode']);
 }
 ?>">
+<div style="margin-top:2em;">*You can change outfit colors in-game.</div>
 <input id="sessionUsername" type="hidden" value="<?php echo htmlspecialchars($_SESSION['account']->username);?>">
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
 </div>
