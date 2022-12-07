@@ -195,18 +195,21 @@ class Wiki {
 	}
 
 	public function findPage() {
-		$sql = "SELECT page_id, page_title As title, p2.pp_value As displaytitle FROM a1111_wiki.page, a1111_wiki.page_props as p1, a1111_wiki.page_props as p2 "
-		." WHERE p1.pp_propname='externalcanonical' AND p1.pp_value = :url"
-		." AND page.page_namespace=0 AND page.page_id=p1.pp_page"
-		." AND p2.pp_propname='externaltitle' AND page.page_id=p2.pp_page";
+		if (defined("STENDHAL_WIKI_CONNECTION") && constant("STENDHAL_WIKI_CONNECTION")) {
+			$sql = "SELECT page_id, page_title As title, p2.pp_value As displaytitle FROM a1111_wiki.page, a1111_wiki.page_props as p1, a1111_wiki.page_props as p2 "
+			." WHERE p1.pp_propname='externalcanonical' AND p1.pp_value = :url"
+			." AND page.page_namespace=0 AND page.page_id=p1.pp_page"
+			." AND p2.pp_propname='externaltitle' AND page.page_id=p2.pp_page";
 
-		$stmt = DB::game()->prepare($sql);
-		$stmt->execute(array(':url' => $this->url));
-		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
-		if (count($res) > 0) {
-			$this->page = $res[0];
-			return $res[0];
+			$stmt = DB::game()->prepare($sql);
+			$stmt->execute(array(':url' => $this->url));
+			$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			if (count($res) > 0) {
+				$this->page = $res[0];
+				return $res[0];
+			}
 		}
+
 		return null;
 	}
 
@@ -243,16 +246,19 @@ class Wiki {
 	}
 
 	private function rewriteLinks($pageId, $content) {
-		$sql = "SELECT page_title, pp_value FROM a1111_wiki.page_props, a1111_wiki.page, a1111_wiki.pagelinks"
-			." WHERE pp_propname='externalcanonical' AND page.page_namespace=0 AND page.page_id=page_props.pp_page"
-			." AND pl_namespace=0 AND page_title=pl_title AND pl_from=".intval($pageId);
-		$rows = DB::game()->query($sql);
+		if (defined("STENDHAL_WIKI_CONNECTION") && constant("STENDHAL_WIKI_CONNECTION")) {
+			$sql = "SELECT page_title, pp_value FROM a1111_wiki.page_props, a1111_wiki.page, a1111_wiki.pagelinks"
+				." WHERE pp_propname='externalcanonical' AND page.page_namespace=0 AND page.page_id=page_props.pp_page"
+				." AND pl_namespace=0 AND page_title=pl_title AND pl_from=".intval($pageId);
+			$rows = DB::game()->query($sql);
 
-		$prefix = '<a href="';
-		foreach ($rows as $row) {
-			$content = str_replace($prefix.'/wiki/'.$this->wikiUrlEncode($row['page_title']).'"',
-				$prefix.$this->wikiUrlEncode($row['pp_value']).'"', $content);
+			$prefix = '<a href="';
+			foreach ($rows as $row) {
+				$content = str_replace($prefix.'/wiki/'.$this->wikiUrlEncode($row['page_title']).'"',
+					$prefix.$this->wikiUrlEncode($row['pp_value']).'"', $content);
+			}
 		}
+
 		return $content;
 	}
 
@@ -286,12 +292,15 @@ class Wiki {
 	}
 
 	function getCategories() {
-		$sql =  "SELECT cl_to FROM a1111_wiki.categorylinks WHERE cl_from=" . intval($this->page['page_id']);
-		$rows = DB::game()->query($sql);
 		$res = array();
-		foreach($rows as $row) {
-			$res[] = $row['cl_to'];
+		if (defined("STENDHAL_WIKI_CONNECTION") && constant("STENDHAL_WIKI_CONNECTION")) {
+			$sql =  "SELECT cl_to FROM a1111_wiki.categorylinks WHERE cl_from=" . intval($this->page['page_id']);
+			$rows = DB::game()->query($sql);
+			foreach($rows as $row) {
+				$res[] = $row['cl_to'];
+			}
 		}
+
 		return $res;
 	}
 
@@ -302,20 +311,24 @@ class Wiki {
 	 * @param string $category name of page category
 	 */
 	public static function findRelatedPages($propName, $category) {
-		$sql = "SELECT stendhal_category_search.entitytype, pp_title.pp_value As title, stendhal_category_search.category As category, pp_url.pp_value As path
-				FROM a1111_wiki.categorylinks, a1111_wiki.stendhal_category_search,
-				     a1111_wiki.page_props As pp_url, a1111_wiki.page_props As pp_title, a1111_wiki.page_props As pp_keyword
-				WHERE pp_url.pp_propname='externalcanonical'
-				AND pp_keyword.pp_page=pp_title.pp_page AND pp_title.pp_propname='externaltitle'
-				AND pp_url.pp_page=pp_keyword.pp_page AND pp_keyword.pp_propname=:pp_propname
-				AND categorylinks.cl_from=pp_keyword.pp_page AND stendhal_category_search.category=categorylinks.cl_to
-				AND categorylinks.cl_to = :cl_to
-				LIMIT 100";
-		$stmt = DB::game()->prepare($sql);
-		$stmt->execute(array(
-			':pp_propname' => $propName,
-			':cl_to' => $category
-		));
-		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		if (defined("STENDHAL_WIKI_CONNECTION") && constant("STENDHAL_WIKI_CONNECTION")) {
+			$sql = "SELECT stendhal_category_search.entitytype, pp_title.pp_value As title, stendhal_category_search.category As category, pp_url.pp_value As path
+					FROM a1111_wiki.categorylinks, a1111_wiki.stendhal_category_search,
+							 a1111_wiki.page_props As pp_url, a1111_wiki.page_props As pp_title, a1111_wiki.page_props As pp_keyword
+					WHERE pp_url.pp_propname='externalcanonical'
+					AND pp_keyword.pp_page=pp_title.pp_page AND pp_title.pp_propname='externaltitle'
+					AND pp_url.pp_page=pp_keyword.pp_page AND pp_keyword.pp_propname=:pp_propname
+					AND categorylinks.cl_from=pp_keyword.pp_page AND stendhal_category_search.category=categorylinks.cl_to
+					AND categorylinks.cl_to = :cl_to
+					LIMIT 100";
+			$stmt = DB::game()->prepare($sql);
+			$stmt->execute(array(
+				':pp_propname' => $propName,
+				':cl_to' => $category
+			));
+			return $stmt->fetchAll(PDO::FETCH_ASSOC);
+		}
+
+		return array();
 	}
 }
