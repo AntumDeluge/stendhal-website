@@ -147,7 +147,7 @@ class APIPage extends Page {
 		$data = DB::wiki()->query($sql)->fetchAll(PDO::FETCH_ASSOC);
 		for ($i = 0; $i < count($data); $i++) {
 			$hash = md5($data[$i]['href']);
-			$data[$i]['href'] = '/wiki/images/' . $hash{0} . '/' . substr( $hash, 0, 2 ) . '/' . urlencode($data[$i]['href']);
+			$data[$i]['href'] = '/wiki/images/' . $hash[0] . '/' . substr( $hash, 0, 2 ) . '/' . urlencode($data[$i]['href']);
 		}
 		echo json_encode($data);
 	}
