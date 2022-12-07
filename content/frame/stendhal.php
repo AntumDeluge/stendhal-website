@@ -90,7 +90,7 @@ echo ' class="layout"';
 	</div>
 
 	<div id="footerArea">
-		<span class="copyright">&copy; 1999-2021 <a href="https://arianne-project.org">Arianne Project</a></span>
+		<span class="copyright">&copy; 1999-2022 <a href="https://arianne-project.org">Arianne Project</a></span>
 	</div>
 
 	<div class="time">
