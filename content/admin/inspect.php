@@ -1,5 +1,7 @@
 <?php
 
+// FIXME: not compatible with webclient output
+
 class InspectPage extends Page {
 	private static $KEYED_SLOTS = array("!quests", "!features", "!tutorial", "skills", "!kills", "!visited");
 	private static $CHARACTER_SLOTS = array("head", "rhand", "armor", "lhand", "finger", "armor", "cloak", "legs", "feet");
