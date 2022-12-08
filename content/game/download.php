@@ -36,12 +36,14 @@ class DownloadPage extends Page {
 		echo '<div style="margin-left: 3em">';
 
 		$dir = opendir('download');
-		while (false !== ($file = readdir($dir))) {
-			if (strpos($file, '.') !== 0) {
-				echo '<li><a href="/download/'.htmlspecialchars($file).'">'.htmlspecialchars($file).'</a></li>';
+		if (!is_bool($dir)) {
+			while (false !== ($file = readdir($dir))) {
+				if (strpos($file, '.') !== 0) {
+					echo '<li><a href="/download/'.htmlspecialchars($file).'">'.htmlspecialchars($file).'</a></li>';
+				}
 			}
+			closedir($dir);
 		}
-		closedir($dir);
 		echo '</div>';
 		endBox();
 	}
