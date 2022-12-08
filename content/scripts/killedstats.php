@@ -47,18 +47,22 @@ $classes=Monster::getClasses();
 startBox('<h2>Most killed (recently)</h2>');
 $result=$this->getMostKilledMonsterXml($xmlStats, $monsters);
 if($result==null) {
-	$result=array($monsters[0],0);
+	$result=array(null, null);
 }
 
 
 
 list($m, $amount)=$result;
 echo '<div style="text-align: center;">';
-echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
-echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
-echo '  <span class="block creature_name">'.$m->name.'</span>';
-echo ' </a>';
-echo '  <div class="creature_killed">It was killed '.$amount.' times</div>';
+if (!is_null($m)) {
+  echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
+  echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
+  echo '  <span class="block creature_name">'.$m->name.'</span>';
+  echo ' </a>';
+  echo '  <div class="creature_killed">It was killed '.$amount.' times</div>';
+} else {
+  echo '  <span class="block">No monsters have been killed</span>';
+}
 echo '</div>';
 endBox();
 ?></div>
@@ -67,16 +71,20 @@ endBox();
 startBox('<h2>Best Player killer (recently)</h2>');
 $result=getBestKillerMonster($monsters);
 if($result==null) {
-	$result=array($monsters[0],0);
+	$result=array(null, null);
 }
 
 list($m, $amount)=$result;
 echo '<div style="text-align: center;">';
-echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
-echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
-echo '  <span class="block creature_name">'.$m->name.'</span>';
-echo ' </a>';
-echo '  <div class="creature_killed">It has killed '.$amount.' players</div>';
+if (!is_null($m)) {
+  echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
+  echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
+  echo '  <span class="block creature_name">'.$m->name.'</span>';
+  echo ' </a>';
+  echo '  <div class="creature_killed">It has killed '.$amount.' players</div>';
+} else {
+  echo '  <span class="block">No players have been killed</span>';
+}
 echo '</div>';
 endBox();
 ?></div>
