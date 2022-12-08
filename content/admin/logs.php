@@ -55,16 +55,18 @@ for ($i = 0; $i < count($lines); $i++) {
     }
     else {
 	$filearray = array();
-	$dir = opendir($directory);
-	if (!is_bool($dir)) {
-	  while (false !== ($file = readdir($dir))) {
-	      if (strpos($file, ".log") == 10) {
-		  $filearray[] = $file;
-	      }
-	  }
-	  closedir($dir);
+	if (is_dir($directory)) {
+	  $dir = opendir($directory);
+	  if (!is_bool($dir)) {
+	    while (false !== ($file = readdir($dir))) {
+		if (strpos($file, ".log") == 10) {
+		    $filearray[] = $file;
+		}
+	    }
+	    closedir($dir);
 
-	  rsort($filearray);
+	    rsort($filearray);
+	  }
 	}
 ?>
     <ul>
