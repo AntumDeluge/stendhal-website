@@ -148,7 +148,7 @@ $page->writeAfterJS();
 			echo '<li><a id="menuItems" href="/item/">Items</a></ul>';
 
 		echo '<li><a '.$noclick.'href="/player-guide.html">Player\'s Guide</a><ul>';
-			echo '<li><a id="menuHelpManual" href="https://stendhalgame.org/wiki/Stendhal_Manual">Manual</a>';
+			echo '<li><a id="menuHelpManual" href="/wiki/Stendhal_Manual">Manual</a>';
 			echo '<li><a id="menuHelpFAQ" href="/player-guide/faq.html">FAQ</a>';
 			echo '<li><a id="menuHelpBeginner" href="/player-guide/beginner-guide.html">Beginner\'s Guide</a>';
 			echo '<li><a id="menuHelpAsk" href="/player-guide/ask-for-help.html">Ask For Help</a>';
@@ -167,12 +167,12 @@ $page->writeAfterJS();
 		echo '<li><a '.$noclick.'href="/development.html">Development</a><ul>';
 			echo '<li><a id="menuContribDevelopment" href="/development/introduction.html">Introduction</a>';
 			echo '<li><a id="menuContribChat" href="/chat/">Chat</a>';
-			echo '<li><a id="menuContribWiki" href="https://stendhalgame.org/wiki/Stendhal">Wiki</a>';
+			echo '<li><a id="menuContribWiki" href="/wiki/Stendhal">Wiki</a>';
 			echo '<li><a id="menuContribBugs" href="/development/bug.html">Report Bug</a>';
 			echo '<li><a id="menuContribRequests" href="https://sourceforge.net/p/arianne/feature-requests/new/">Suggest Feature</a>';
 			echo '<li><a id="menuContribHelp" href="https://sourceforge.net/p/arianne/patches/new/">Submit Patch</a>';
-			echo '<li><a id="menuContribQuests" href="https://stendhalgame.org/wiki/Stendhal_Quest_Contribution">Quests</a>';
-			echo '<li><a id="menuContribTesting" href="https://stendhalgame.org/wiki/Stendhal_Testing">Testing</a>';
+			echo '<li><a id="menuContribQuests" href="/wiki/Stendhal_Quest_Contribution">Quests</a>';
+			echo '<li><a id="menuContribTesting" href="/wiki/Stendhal_Testing">Testing</a>';
 			echo '<li><a id="menuContribHistory" href="/development/sourcelog.html">Changes</a>';
 			echo '<li><a id="menuAPI" href="/reference/">API Reference</a></ul>';
 
