@@ -49,18 +49,18 @@ class PlayerHistoryEntry {
 	  * Returns a list of history entries for players that meet the given condition.
 	  * Note: Parameters must be sql escaped. the condition might not work at all because of the union. But this function is not used anyway.
 	  */
-	function getPlayerHistoryEntriesForPlayers($where='', $sortby='id', $cond='') {
+	static function getPlayerHistoryEntriesForPlayers($where='', $sortby='id', $cond='') {
 	    return _getPlayers('select * from character_stats '.$where.' order by '.$sortby.' '.$cond);
 		$query = "(SELECT * FROM gameEvents_2009_08_17 WHERE event in ('adminlevel', 'adminnote', 'alter', 'ban', 'gag', 'ghostmode', 'invisible', 'jail', 'removed', 'summon', 'summonat', 'script', 'support', 'supportanswer', 'teleclickmode', 'teleport', 'teleportto', 'tellall', 'wrap') ".$where." ORDER BY ".$sortby." ".$cond.") UNION (SELECT * FROM gameEvents  WHERE event in ('adminlevel', 'adminnote', 'alter', 'ban', 'gag', 'ghostmode', 'invisible', 'jail', 'removed', 'summon', 'summonat', 'script', 'support', 'supportanswer', 'teleclickmode', 'teleport', 'teleportto', 'tellall', 'wrap') ".$where." ORDER BY ".$sortby." ".$cond.")";
 	    return PlayerHistoryEntry::_getPlayerHistoryEntries($query);
 	}
 
-	function getPlayerHistoryEntriesForPlayer($name) {
+	static function getPlayerHistoryEntriesForPlayer($name) {
 		$query = "(SELECT * FROM gameEvents_2009_08_17 WHERE event in ('adminlevel', 'adminnote', 'alter', 'ban', 'gag', 'ghostmode', 'invisible', 'jail', 'removed', 'summon', 'summonat', 'script', 'support', 'supportanswer', 'teleclickmode', 'teleport', 'teleportto', 'tellall', 'wrap') AND (param1 = '".mysql_real_escape_string($name)."' OR source = '".mysql_real_escape_string($name)."' )) UNION (SELECT * FROM gameEvents WHERE event in ('adminlevel', 'adminnote', 'alter', 'ban', 'gag', 'ghostmode', 'invisible', 'jail', 'removed', 'summon', 'summonat', 'script', 'support', 'supportanswer', 'teleclickmode', 'teleport', 'teleportto', 'tellall', 'wrap') AND (param1 = '".mysql_real_escape_string($name)."' OR source = '".mysql_real_escape_string($name)."' )) ORDER by timedate";
 	    return PlayerHistoryEntry::_getPlayerHistoryEntries($query);
 	}
 
-	function _getPlayerHistoryEntries($query) {
+	static function _getPlayerHistoryEntries($query) {
 	    $rows = DB::game()->query($query);
 	    $list = array();
 	    foreach($rows as $row) {
