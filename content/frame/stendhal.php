@@ -135,12 +135,12 @@ $page->writeAfterJS();
 			echo '<li><a id="menuNewsArchive" href="/news.html">News</a>';
 			echo '<li><a id="menuMediaScreenshot" href="/media/screenshots.html">Screenshots</a>';
 			echo '<li><a id="menuMediaVideo" href="/media/videos.html">Videos</a>';
-			echo '<li><a id="menuContribDownload" href="https://stendhalgame.org/download.html">Downloads</a></ul>';
+			echo '<li><a id="menuContribDownload" href="/download.html">Downloads</a></ul>';
 
 		echo '<li><a '.$noclick.'href="/world.html">World Guide</a><ul>';
 			echo '<li><a id="menuAtlas" href="/world/atlas.html">Map</a>';
-			echo '<li><a id="menuRegion" href="https://stendhalgame.org/region.html">Regions</a>';
-			echo '<li><a id="menuDungeons" href="https://stendhalgame.org/dungeon.html">Dungeons</a>';
+			echo '<li><a id="menuRegion" href="/region.html">Regions</a>';
+			echo '<li><a id="menuDungeons" href="/dungeon.html">Dungeons</a>';
 			echo '<li><a id="menuNPCs" href="/npc/">NPCs</a>';
 			echo '<li><a id="menuQuests" href="/quest.html">Quests</a>';
 			echo '<li><a id="menuAchievements" href="/achievement.html">Achievements</a>';
@@ -149,12 +149,12 @@ $page->writeAfterJS();
 
 		echo '<li><a '.$noclick.'href="/player-guide.html">Player\'s Guide</a><ul>';
 			echo '<li><a id="menuHelpManual" href="https://stendhalgame.org/wiki/Stendhal_Manual">Manual</a>';
-			echo '<li><a id="menuHelpFAQ" href="https://stendhalgame.org/player-guide/faq.html">FAQ</a>';
-			echo '<li><a id="menuHelpBeginner" href="https://stendhalgame.org/player-guide/beginner-guide.html">Beginner\'s Guide</a>';
-			echo '<li><a id="menuHelpAsk" href="https://stendhalgame.org/player-guide/ask-for-help.html">Ask For Help</a>';
+			echo '<li><a id="menuHelpFAQ" href="/player-guide/faq.html">FAQ</a>';
+			echo '<li><a id="menuHelpBeginner" href="/player-guide/beginner-guide.html">Beginner\'s Guide</a>';
+			echo '<li><a id="menuHelpAsk" href="/player-guide/ask-for-help.html">Ask For Help</a>';
 			// echo '<li><a id="menuHelpSupport" href="https://sourceforge.net/p/arianne/support-requests/new/">Support Ticket</a>';
 			// echo '<li><a id="menuHelpForum" href="https://sourceforge.net/p/arianne/discussion/">Forum</a>';
-			echo '<li><a id="menuHelpRules" href="https://stendhalgame.org/player-guide/rules.html">Rules</a></ul>';
+			echo '<li><a id="menuHelpRules" href="/player-guide/rules.html">Rules</a></ul>';
 
 		echo '<li><a '.$noclick.'href="/community.html">Community</a><ul>';
 			echo '<li><a id="menuHelpChat" href="/chat/">Chat</a>';
