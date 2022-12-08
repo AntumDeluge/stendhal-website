@@ -59,7 +59,10 @@ We have a Discord server and channels on the Libera IRC network. Both services a
 			$filename = $directory.substr($date, 0, 4).'/'.$date.'.log';
 		}
 
-		$lines = explode("\n", file_get_contents($filename));
+		$lines = array();
+		if (is_file($filename)) {
+			$lines = explode("\n", file_get_contents($filename));
+		}
 		echo '<div class="chattable">';
 		for ($i = 0; $i < count($lines); $i++) {
 			$line = $lines[$i];
