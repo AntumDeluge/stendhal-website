@@ -208,8 +208,12 @@ function getMostKilledMonster($monsters) {
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 
-	$monster = array(getMonster($row['killed']), $row['amount']);
-	return $monster;
+	if (!is_bool($row)) {
+		$monster = array(getMonster($row['killed']), $row['amount']);
+		return $monster;
+	}
+
+	return null;
 }
 
 function getBestKillerMonster($monsters) {
@@ -225,8 +229,12 @@ function getBestKillerMonster($monsters) {
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 
-	$monster = array(getMonster($row['killer']), $row['amount']);
-	return $monster;
+	if (!is_bool($row)) {
+		$monster = array(getMonster($row['killer']), $row['amount']);
+		return $monster;
+	}
+
+	return null;
 }
 
 
