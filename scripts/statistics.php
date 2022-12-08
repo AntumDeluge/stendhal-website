@@ -28,7 +28,7 @@ class ServerStatistics {
 		return false;
 	}
 
-	public static function readOnlineStatS() {
+	public static function readOnlineStats() {
 		$res = array();
 		$sql = 'SELECT name, val FROM statistics_archive WHERE day = CURRENT_DATE()';
 		$rows = DB::game()->query($sql);
