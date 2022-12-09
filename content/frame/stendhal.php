@@ -168,9 +168,10 @@ $page->writeAfterJS();
 			echo '<li><a id="menuContribDevelopment" href="/development/introduction.html">Introduction</a>';
 			echo '<li><a id="menuContribChat" href="/chat/">Chat</a>';
 			echo '<li><a id="menuContribWiki" href="/wiki/Stendhal">Wiki</a>';
+			// TODO: move these to wiki pages
 			echo '<li><a id="menuContribBugs" href="/development/bug.html">Report Bug</a>';
-			echo '<li><a id="menuContribRequests" href="https://sourceforge.net/p/arianne/feature-requests/new/">Suggest Feature</a>';
-			echo '<li><a id="menuContribHelp" href="https://sourceforge.net/p/arianne/patches/new/">Submit Patch</a>';
+			echo '<li><a id="menuContribRequests" href="/development/feature.html">Suggest Feature</a>';
+			echo '<li><a id="menuContribHelp" href="/development/patch.html">Submit Patch</a>';
 			echo '<li><a id="menuContribQuests" href="/wiki/Stendhal_Quest_Contribution">Quests</a>';
 			echo '<li><a id="menuContribTesting" href="/wiki/Stendhal_Testing">Testing</a>';
 			echo '<li><a id="menuContribHistory" href="/development/sourcelog.html">Changes</a>';

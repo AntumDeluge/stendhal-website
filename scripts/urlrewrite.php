@@ -92,6 +92,8 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteRule ^/development/download\.html$ /index.php?id=content/game/download&rewritten=true [L]
                 RewriteRule ^/development/?$ /development.html [R=301,L]
                 RewriteRule ^/development/introduction.html$ /index.php?id=content/game/development&rewritten=true [L]
+                RewriteRule ^/development/feature\.html$ /index.php?id=content/game/feature&rewritten=true [L]
+                RewriteRule ^/development/patch\.html$ /index.php?id=content/game/patch&rewritten=true [L]
 
                 # items
                 RewriteRule ^/item/?$ /index.php?id=content/game/items&rewritten=true [L]
@@ -187,6 +189,10 @@ Then edit your sites-enabled virtual host configuration file and add these comma
                 RewriteCond %{QUERY_STRING} id=content/game/sourcelog
                 RewriteRule ^/.* /development/sourcelog\.html? [R=301,L]
                 RewriteRule ^/development/cvslog(.*) /development/sourcelog$1? [R=301,L]
+                RewriteCond %{QUERY_STRING} id=content/game/feature
+                RewriteRule ^/.* /development/feature\.html? [R=301,L]
+                RewriteCond %{QUERY_STRING} id=content/game/patch
+                RewriteRule ^/.* /development/patch\.html? [R=301,L]
 
                 # items
                 RewriteCond %{QUERY_STRING} id=content/game/items$
@@ -369,6 +375,10 @@ function rewriteURL($url, $force = false) {
 			return preg_replace('|^/development/sourcelog/(.*)\.html$|', $folder.'/?id=content/game/sourcelog&amp;month=$1', $url);
 		} else if (preg_match('|^/development/download\.html$|', $url)) {
 			return preg_replace('|^/development/download\.html$|', $folder.'/?id=content/game/download', $url);
+		} else if (preg_match('|^/development/feature\.html$|', $url)) {
+			return preg_replace('|^/development/feature\.html$|', $folder.'/?id=content/game/feature', $url);
+		} else if (preg_match('|^/development/patch\.html$|', $url)) {
+			return preg_replace('|^/development/patch\.html$|', $folder.'/?id=content/game/patch', $url);
 		}
 	} else if (preg_match('|^/download\.html$|', $url)) {
 		return preg_replace('|^/download\.html$|', $folder.'/?id=content/game/download', $url);
