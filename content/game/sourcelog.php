@@ -18,9 +18,20 @@ class SourceLogPage extends Page {
 
 	function writeContent() {
 startBox("<h1>Source Code</h1>"); ?>
-<p>The Arianne project is hosted on <a href="http://sourceforge.net/projects/arianne">Sourceforge</a> and uses CVS (Concurrent Versions System) and Git to manage changes to our source code. </p>
+<p>The Arianne project is hosted on
+<a href="https://github.com/arianne/">GitHub</a> and
+<a href="https://sourceforge.net/projects/arianne/">Sourceforge</a> and
+uses Git to manage changes to our source code.</p>
 
-<p>You can use a Git client to <a href="https://sourceforge.net/p/arianne/stendhal/ci/master/tree/">download our Stendhal source code</a> or <a href="https://sourceforge.net/p/arianne/marauroa/ci/master/tree/">our Marauroa source code</a>.</p>
+<p>You can use a Git client to download our Stendhal or Marauroa source
+code.</p>
+
+<ul>
+	<li><a href="https://github.com/arianne/stendhal/">Stendhal source on GitHub</a></li>
+	<li><a href="https://sourceforge.net/p/arianne/stendhal/ci/master/tree/">Stendhal source on SourceForge</a></li>
+	<li><a href="https://github.com/arianne/marauroa/">Marauroa source on GitHub</a></li>
+	<li><a href="https://sourceforge.net/p/arianne/marauroa/ci/master/tree/">Marauroa source on SourceForge</a></li>
+</ul>
 
 <p>For more information check out the <a href="/wiki/Arianne_Source_Code_Repositories">Source Code Repositories wiki page</a>.</p>
 
