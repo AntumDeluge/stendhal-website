@@ -90,15 +90,18 @@ for ($day = 1; $day <= 31; $day++) {
 <?php
 	} else {
 		startBox('<h2>Recent changes</h2>');
-		$dir = opendir($directory);
-		if ($dir !== false) {
-			while (false !== ($file = readdir($dir))) {
-				if (strpos($file, ".log") == 10) {
-					$filearray[] = $file;
+		$filearray = array();
+		if (is_dir($directory)) {
+			$dir = opendir($directory);
+			if ($dir !== false) {
+				while (false !== ($file = readdir($dir))) {
+					if (strpos($file, ".log") == 10) {
+						$filearray[] = $file;
+					}
 				}
+				closedir($dir);
+				rsort($filearray);
 			}
-			closedir($dir);
-			rsort($filearray);
 		}
 
 		echo '<ul>';
