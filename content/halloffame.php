@@ -204,7 +204,7 @@ class HallOfFamePage extends Page {
 
 		<div style="float: left; width: 34%">
 			<?php startBox("<h2>Best players</h2>"); ?>
-			<div class="bubble">XP, achievements, karma, maze, and deathmatch</div>
+			<div class="bubble">XP, achievements, maze, and deathmatch</div>
 			<?php
 			$players = getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'R', 'limit '.TOTAL_HOF_PLAYERS);
 			$this->renderListOfPlayers($players, " points");
