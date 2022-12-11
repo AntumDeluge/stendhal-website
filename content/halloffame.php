@@ -10,6 +10,7 @@ $categories = array(
 	'D' => array('title' => 'Deathmatch heroes', 'desc' => 'Deathmatch score', 'postfix' => ' points'),
 	'T' => array('title' => 'Best attackers', 'desc' => 'Based on atk*(1+0.03*level)', 'postfix' => ' total atk'),
 	'F' => array('title' => 'Best defenders', 'desc' => 'Based on def*(1+0.03*level)', 'postfix' => ' total def'),
+	'MT' => array('title' => 'Maze runners', 'desc' => 'Maze time', 'postfix' => '!time'),
 );
 
 
@@ -21,6 +22,27 @@ function printAge($minutes) {
 	$h=$minutes;
 	$m=$minutes%60;
 	return round($h).':'.round($m);
+}
+
+function printTime($ms) {
+	$s = $ms / 1000;
+	$m = floor($s / 60);
+	$s = floor($s % 60);
+
+	$ret = '';
+	$ret = $ret.$s.' second';
+	if ($s != 1) {
+		$ret = $ret.'s';
+	}
+	if ($m > 0) {
+		if ($m > 1) {
+			$ret = ' minutes '.$ret;
+		} else {
+			$ret = ' minute '.$ret;
+		}
+		$ret = $m.$ret;
+	}
+	return $ret;
 }
 
 
@@ -140,7 +162,13 @@ class HallOfFamePage extends Page {
 
 	function renderListOfPlayers($list, $postfix='') {
 		$i=1;
+		$showTime = $postfix == '!time';
 		foreach($list as $entry) {
+			$points = $entry['points'];
+			if ($showTime) {
+				$postfix = '';
+				$points = printTime(intval($points));
+			}
 		?>
 			<div class="row">
 				<div class="position"><?php echo $i; ?></div>
@@ -156,7 +184,7 @@ class HallOfFamePage extends Page {
 					?>
 					<img class="small_image" src="<?php echo rewriteURL('/images/outfit/'.$outfit.'.png')?>" alt="" />
 					<span class="block label"><?php echo htmlspecialchars($entry['charname']); ?></span>
-					<span class="block data"><?php echo $entry['points'].$postfix; ?></span>
+					<span class="block data"><?php echo $points.$postfix; ?></span>
 				</a>
 				<div style="clear: left;"></div>
 			</div>
