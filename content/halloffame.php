@@ -262,6 +262,18 @@ class HallOfFamePage extends Page {
 			endBox();
 			?>
 		</div>
+
+		<!-- FIXME: would be better to display time instead of score -->
+		<div style="float: left; width: 33%">
+		<?php startBox("<h2>Maze runners</h2>"); ?>
+		<div class="bubble">Maze score</div>
+		<?php
+			$players=getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'M', 'limit '.TOTAL_HOF_PLAYERS);
+			$this->renderListOfPlayers($players, ' points');
+			endBox();
+		endBox();
+		?>
+		</div>
 <?php
 	}
 }
