@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 define('TOTAL_HOF_PLAYERS', 10);
 
@@ -22,7 +22,7 @@ class HallOfFamePage extends Page {
 	private $detail;
 
 	private $loginRequired = false;
-	
+
 	public function __construct() {
 		$this->setupFilter();
 		$this->setupDetail();
@@ -60,7 +60,7 @@ class HallOfFamePage extends Page {
 
 	// ------------------------------------------------------------------------
 	// ------------------------------------------------------------------------
-	
+
 	function setupFilter() {
 		$this->filter = 'active';
 		if (isset($_REQUEST['filter'])) {
@@ -117,7 +117,7 @@ class HallOfFamePage extends Page {
 
 
 	function closeTabs() {
-		?></td></tr></table><?php 
+		?></td></tr></table><?php
 	}
 
 	function getTabClass($tab) {
@@ -150,7 +150,7 @@ class HallOfFamePage extends Page {
 				</a>
 				<div style="clear: left;"></div>
 			</div>
-	
+
 			<?php
 			$i++;
 		}
@@ -174,7 +174,7 @@ class HallOfFamePage extends Page {
 		if ($choosen !== false) {
 			startBox("<h1>Best player</h1>");
 			?>
-			<div class="bubble">The best player is decided based on the relation between XP, age, and achievement score. The best players are those who spend time earning XP and achievements.</div>    
+			<div class="bubble">The best player is decided based on the relation between XP, age, and achievement score. The best players are those who spend time earning XP and achievements.</div>
 			<div class="best">
 				<a href="<?php echo rewriteURL('/character/'.surlencode($choosen['charname']).'.html'); ?>">
 					<span class="block statslabel">Name:</span><span class="block data"><?php echo htmlspecialchars($choosen['charname']); ?></span>
@@ -185,7 +185,7 @@ class HallOfFamePage extends Page {
 				</a>
 			</div>
 			<a href="<?php echo rewriteURL('/character/'.surlencode($choosen['charname']).'.html'); ?>">
-			<?php 
+			<?php
 			$outfit = $choosen['outfit'];
 			if (isset($choosen['outfit_colors']) && strlen($choosen['outfit_colors']) > 0) {
 			    $outfit = $outfit.'_'.$choosen['outfit_colors'];
