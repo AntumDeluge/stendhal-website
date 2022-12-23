@@ -1,6 +1,6 @@
 <?php
 
-define('TOTAL_HOF_PLAYERS', 10);
+define('TOTAL_HOF_PLAYERS', 5);
 define('EXT_HOF_PLAYERS', 100);
 
 $categories = array(
