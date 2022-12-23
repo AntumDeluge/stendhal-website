@@ -222,80 +222,26 @@ class HallOfFamePage extends Page {
 				echo '<div class="sentence">'.htmlspecialchars($choosen['sentence']).'</div>';
 			}
 			endBox();
-		}?>
+		}
 
-		<div style="float: left; width: 34%">
-		<?php
-			$cat = $categories['R'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players = getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'R', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_R.html')).'">more</a></small>';
-			endBox();
-			?>
-		</div>
 
-		<div style="float: left; width: 33%">
-		<?php
-			$cat = $categories['W'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'W', 'limit '.TOTAL_HOF_PLAYERS);
+		$idx = 0;
+		foreach (array_keys($categories) as $key) {
+			$width = '33';
+			if ($idx % 3 == 0) {
+				$width = '34';
+			}
+			$cat = $categories[$key];
+			echo '<div style="float: left; width: '.$width.'%">';
+			startBox('<h2>'.$cat['title'].'</h2>');
+			echo '<div class="bubble">'.$cat['desc'].'</div>';
+			$players = getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, $key, 'limit '.TOTAL_HOF_PLAYERS);
 			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_W.html')).'">more</a></small>';
+			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_'.$key.'.html')).'">more</a></small>';
 			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-		<?php
-			$cat = $categories['A'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere,'A', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_A.html')).'">more</a></small>';
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-		<?php
-			$cat = $categories['D'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players=getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'D', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_D.html')).'">more</a></small>';
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-		<?php
-			$cat = $categories['T'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'T', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_T.html')).'">more</a></small>';
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-		<?php
-			$cat = $categories['F'];
-			startBox("<h2>".$cat['title']."</h2>");
-			echo '		<div class="bubble">'.$cat['desc'].'</div>';
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'F', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, $cat['postfix']);
-			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_F.html')).'">more</a></small>';
-			endBox();
-			?>
-		</div>
-<?php
+			echo '</div>';
+			$idx = $idx + 1;
+		}
 	}
 }
 
