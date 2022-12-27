@@ -61,7 +61,6 @@ games.stendhal.server.actions.query
 games.stendhal.server.actions.spell
 games.stendhal.server.actions.validator
 games.stendhal.server.constants
-games.stendhal.server.core
 games.stendhal.server.core.account
 games.stendhal.server.core.config
 games.stendhal.server.core.config.annotations
@@ -70,6 +69,7 @@ games.stendhal.server.core.config.zone
 games.stendhal.server.core.engine
 games.stendhal.server.core.engine.db
 games.stendhal.server.core.engine.dbcommand
+games.stendhal.server.core.engine.generateini
 games.stendhal.server.core.engine.listener
 games.stendhal.server.core.engine.transformer
 games.stendhal.server.core.events
@@ -136,7 +136,6 @@ games.stendhal.server.entity.trade
 games.stendhal.server.events
 games.stendhal.server.extension
 games.stendhal.server.maps
-games.stendhal.server.maps.ados
 games.stendhal.server.maps.ados.abandonedkeep
 games.stendhal.server.maps.ados.animal_sanctuary
 games.stendhal.server.maps.ados.bakery
@@ -181,8 +180,8 @@ games.stendhal.server.maps.athor.ship
 games.stendhal.server.maps.atlantis.cityinside
 games.stendhal.server.maps.atlantis.cityoutside
 games.stendhal.server.maps.deathmatch
-games.stendhal.server.maps.deniran
 games.stendhal.server.maps.deniran.cityinterior.bakery
+games.stendhal.server.maps.deniran.cityinterior.brelandhouse
 games.stendhal.server.maps.deniran.cityinterior.castle
 games.stendhal.server.maps.deniran.cityinterior.dressshop
 games.stendhal.server.maps.deniran.cityinterior.library
@@ -249,6 +248,7 @@ games.stendhal.server.maps.orril.dwarfmine
 games.stendhal.server.maps.orril.magician_house
 games.stendhal.server.maps.orril.river
 games.stendhal.server.maps.quests
+games.stendhal.server.maps.quests.a_grandfathers_wish
 games.stendhal.server.maps.quests.allotment
 games.stendhal.server.maps.quests.antivenom_ring
 games.stendhal.server.maps.quests.captureflag
@@ -323,7 +323,6 @@ games.stendhal.tools.statistics
 games.stendhal.tools.test
 games.stendhal.tools.updateprop
 games.stendhal.tools.xml
-marauroa
 marauroa.client
 marauroa.client.net
 marauroa.common
@@ -352,3 +351,5 @@ marauroa.server.net.validator
 marauroa.server.net.web
 marauroa.tools
 marauroa.tools.protocolanalyser
+utilities
+utilities.RPClass
