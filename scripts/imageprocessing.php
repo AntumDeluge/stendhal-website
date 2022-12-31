@@ -21,6 +21,9 @@
 
 $OUTFITS_BASE="data/sprites/outfit";
 
+// hair should not be drawn with hat indexes in this list
+$hats_no_hair = array(3, 4, 13, 16, 992, 993, 994, 996, 997);
+
 class OutfitDrawer {
 
 	// Imagick takes 'mixed' for colors, but ints didn't work. This seems to.
@@ -230,10 +233,24 @@ class OutfitDrawer {
 		return $outfit;
 	}
 
+	private function parseHatIndex($layers) {
+		foreach ($layers as $layer) {
+			if (strpos($layer, 'hat') === 0) {
+				$l = explode('-', $layer);
+				return intval($l[1]);
+			}
+		}
+
+		return 0;
+	}
+
 	/**
 	 * Create an outfit image.
 	 */
 	function create_outfit($layers, $offset) {
+		global $hats_no_hair;
+		$hatIdx = $this->parseHatIndex($layers);
+
 		$outfit = new Imagick();
 		$outfit->newImage(48, 64, 'transparent', 'png');
 
@@ -250,6 +267,11 @@ class OutfitDrawer {
 			$safe_suffix = '-safe';
 			if ($part_name == 'body') {
 				$safe_suffix = '-nonude';
+			}
+
+			// don't draw hair under certain hats
+			if ($part_name == 'hair' && in_array($hatIdx, $hats_no_hair)) {
+				continue;
 			}
 
 			$image = $this->load_part($part_name, $this->formatNumber3($l[1]), $offset, $safe_suffix);

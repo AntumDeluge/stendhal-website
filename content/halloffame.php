@@ -1,6 +1,16 @@
-<?php 
+<?php
 
-define('TOTAL_HOF_PLAYERS', 10);
+define('TOTAL_HOF_PLAYERS', 5);
+define('EXT_HOF_PLAYERS', 100);
+
+$categories = array(
+	'R' => array('title' => 'Best players', 'desc' => 'XP, Achievements per Age', 'postfix' => ' points'),
+	'W' => array('title' => 'Richest players', 'desc' => 'Amount of money', 'postfix' => ' coins'),
+	'A' => array('title' => 'Eldest players', 'desc' => 'Age in hours', 'postfix' => ' hours'),
+	'D' => array('title' => 'Deathmatch heroes', 'desc' => 'Deathmatch score', 'postfix' => ' points'),
+	'T' => array('title' => 'Best attackers', 'desc' => 'Based on atk*(1+0.03*level)', 'postfix' => ' total atk'),
+	'F' => array('title' => 'Best defenders', 'desc' => 'Based on def*(1+0.03*level)', 'postfix' => ' total def'),
+);
 
 
 function getAchievementScore($player) {
@@ -22,7 +32,7 @@ class HallOfFamePage extends Page {
 	private $detail;
 
 	private $loginRequired = false;
-	
+
 	public function __construct() {
 		$this->setupFilter();
 		$this->setupDetail();
@@ -52,7 +62,7 @@ class HallOfFamePage extends Page {
 		if ($this->detail == "overview") {
 			$this->renderOverview();
 		} else {
-			$this->renderDetails($detail);
+			$this->renderDetails();
 		}
 		$this->closeTabs();
 	}
@@ -60,7 +70,7 @@ class HallOfFamePage extends Page {
 
 	// ------------------------------------------------------------------------
 	// ------------------------------------------------------------------------
-	
+
 	function setupFilter() {
 		$this->filter = 'active';
 		if (isset($_REQUEST['filter'])) {
@@ -89,7 +99,7 @@ class HallOfFamePage extends Page {
 	function setupDetail() {
 		$this->detail = 'overview';
 		if (isset($_REQUEST['detail'])) {
-			$this->detail == urlencode($_REQUEST['detail']);
+			$this->detail = urlencode($_REQUEST['detail']);
 		}
 		// TODO: 404 on invalid detail variable
 	}
@@ -117,7 +127,7 @@ class HallOfFamePage extends Page {
 
 
 	function closeTabs() {
-		?></td></tr></table><?php 
+		?></td></tr></table><?php
 	}
 
 	function getTabClass($tab) {
@@ -150,31 +160,43 @@ class HallOfFamePage extends Page {
 				</a>
 				<div style="clear: left;"></div>
 			</div>
-	
+
 			<?php
 			$i++;
 		}
 	}
 
 
-	function renderDetails($detail) {
-		//TODO: add more
-		startBox("<h2>Strongest players</h2>");
-		?>
-		<div class="bubble">XP, Achievements and Age</div>
-		<?php
-		$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.' AND character_stats.level>=10 '.$this->filterWhere, 'R');
-		$this->renderListOfPlayers($players, " xp");
+	function renderDetails() {
+		global $categories;
+
+		if (!isset($categories[$this->detail])) {
+			startBox('<h2>Unknown detail: '.$this->detail.'</h2>');
+			endBox();
+			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_overview.html')).'">overview</a></small>';
+			return;
+		}
+
+		$cat = $categories[$this->detail];
+		startBox('<h2>'.$cat['title'].'</h2>');
+		echo '<div class="bubble">'.$cat['desc'].'</div>';
+		$players = getHOFPlayers($this->tableSuffix,
+				$this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere,
+				$this->detail, 'limit '.EXT_HOF_PLAYERS);
+		$this->renderListOfPlayers($players, $cat['postfix']);
+		echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_overview.html')).'">overview</a></small>';
 		endBox();
 	}
 
 
 	function renderOverview() {
+		global $categories;
+
 		$choosen = getBestPlayer($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere);
 		if ($choosen !== false) {
 			startBox("<h1>Best player</h1>");
 			?>
-			<div class="bubble">The best player is decided based on the relation between XP, age, and achievement score. The best players are those who spend time earning XP and achievements.</div>    
+			<div class="bubble">The best player is decided based on the relation between XP, age, and achievement score. The best players are those who spend time earning XP and achievements.</div>
 			<div class="best">
 				<a href="<?php echo rewriteURL('/character/'.surlencode($choosen['charname']).'.html'); ?>">
 					<span class="block statslabel">Name:</span><span class="block data"><?php echo htmlspecialchars($choosen['charname']); ?></span>
@@ -185,7 +207,7 @@ class HallOfFamePage extends Page {
 				</a>
 			</div>
 			<a href="<?php echo rewriteURL('/character/'.surlencode($choosen['charname']).'.html'); ?>">
-			<?php 
+			<?php
 			$outfit = $choosen['outfit'];
 			if (isset($choosen['outfit_colors']) && strlen($choosen['outfit_colors']) > 0) {
 			    $outfit = $outfit.'_'.$choosen['outfit_colors'];
@@ -200,69 +222,26 @@ class HallOfFamePage extends Page {
 				echo '<div class="sentence">'.htmlspecialchars($choosen['sentence']).'</div>';
 			}
 			endBox();
-		}?>
+		}
 
-		<div style="float: left; width: 34%">
-			<?php startBox("<h2>Best players</h2>"); ?>
-			<div class="bubble">XP, Achievements per Age</div>
-			<?php
-			$players = getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'R', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, " points");
-			##echo '<a href="'.rewriteURL('/world/hall-of-fame-strongest.html').'">More</a>';
-			endBox();
-			?>
-		</div>
 
-		<div style="float: left; width: 33%">
-			<?php startBox("<h2>Richest players</h2>"); ?>
-			<div class="bubble">Amount of money</div>
-			<?php
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'W', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, ' coins');
+		$idx = 0;
+		foreach (array_keys($categories) as $key) {
+			$width = '33';
+			if ($idx % 3 == 0) {
+				$width = '34';
+			}
+			$cat = $categories[$key];
+			echo '<div style="float: left; width: '.$width.'%">';
+			startBox('<h2>'.$cat['title'].'</h2>');
+			echo '<div class="bubble">'.$cat['desc'].'</div>';
+			$players = getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, $key, 'limit '.TOTAL_HOF_PLAYERS);
+			$this->renderListOfPlayers($players, $cat['postfix']);
+			echo '<small><a href="'.htmlspecialchars(rewriteURL('/world/hall-of-fame/'.$this->filter.'_'.$key.'.html')).'">more</a></small>';
 			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-			<?php startBox("<h2>Eldest players</h2>"); ?>
-			<div class="bubble">Age in hours</div>
-			<?php
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere,'A', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, ' hours');
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-			<?php startBox("<h2>Deathmatch heroes</h2>"); ?>
-			<div class="bubble">Deathmatch score</div>
-			<?php
-			$players=getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'D', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, ' points');
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-			<?php startBox("<h2>Best attackers</h2>"); ?>
-			<div class="bubble">Based on atk*(1+0.03*level)</div>
-			<?php
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'T', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, " total atk");
-			endBox();
-			?>
-		</div>
-
-		<div style="float: left; width: 33%">
-			<?php startBox("<h2>Best defenders</h2>"); ?>
-			<div class="bubble">Based on def*(1+0.03*level)</div>
-			<?php
-			$players= getHOFPlayers($this->tableSuffix, $this->filterFrom.REMOVE_ADMINS_AND_POSTMAN.$this->filterWhere, 'F', 'limit '.TOTAL_HOF_PLAYERS);
-			$this->renderListOfPlayers($players, " total def");
-			endBox();
-			?>
-		</div>
-<?php
+			echo '</div>';
+			$idx = $idx + 1;
+		}
 	}
 }
 

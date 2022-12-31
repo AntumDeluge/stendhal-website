@@ -61,12 +61,16 @@ class OnlinePage extends Page {
 
 	function writeRecent() {
 		$stats = ServerStatistics::readOnlineStats();
+		$acc7 = isset($stats['accounts_7']) ? $stats['accounts_7'] : '0';
+		$acc30 = isset($stats['accounts_30']) ? $stats['accounts_30'] : '0';
+		$char7 = isset($stats['characters_7']) ? $stats['characters_7'] : '0';
+		$char30 = isset($stats['characters_30']) ? $stats['characters_30'] : '0';
 		startBox('<h2>Recently online</h2>');
 		echo '<p>This table shows the number of different accounts and characters which have been online recently.</p>';
 		echo '<table class="prettytable">';
 		echo '<tr><th>&nbsp;</th><th>Accounts</th><th>Characters</th></tr>';
-		echo '<tr><td>Week</td><td>'.htmlspecialchars($stats['accounts_7']).'</td><td>'.htmlspecialchars($stats['characters_7']).'</td></tr>';
-		echo '<tr><td>Month</td><td>'.htmlspecialchars($stats['accounts_30']).'</td><td>'.htmlspecialchars($stats['characters_30']).'</td></tr>';
+		echo '<tr><td>Week</td><td>'.htmlspecialchars($acc7).'</td><td>'.htmlspecialchars($char7).'</td></tr>';
+		echo '<tr><td>Month</td><td>'.htmlspecialchars($acc30).'</td><td>'.htmlspecialchars($char30).'</td></tr>';
 		echo '</table>';
 		endBox();
 	}
