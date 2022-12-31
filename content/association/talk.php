@@ -156,22 +156,6 @@ class TalkPage extends Page {
 			echo '<div><audio controls="controls" autoplay="autoplay">
 					<source src="/talk-files/'.$this->path.'/'.urlencode($_REQUEST['no']).'.ogg" type="audio/ogg" />
 					<source src="/talk-files/'.$this->path.'/'.urlencode($_REQUEST['no']).'.mp3" type="audio/mp3" />
-
-					<div id="audioPlayer" style="margin:0px"></div>
-					<script type="text/javascript" src="/lib/flashaudioplayer/swfobject.js"></script>
-					<script type="text/javascript">
-						var flashvars = {};
-						flashvars.audio = "/talk-files/'.$this->path.'/'.urlencode($_REQUEST['no']).'.mp3";
-						flashvars.autoplay = "true";
-						flashvars.loop = "false";
-						var params = {};
-							params.scale = "noscale";
-							params.allowfullscreen = "true";
-							params.salign = "tl";
-						var attributes = {};
-							attributes.align = "left";
-						swfobject.embedSWF("/lib/flashaudioplayer/flashaudioplayer.swf", "audioPlayer", "200", "35", "9.0.28", "expressInstall.swf", flashvars, params, attributes);
-					</script>
 				</audio></div>';
 		}
 	}
