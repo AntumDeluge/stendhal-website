@@ -1,6 +1,6 @@
 <?php
 /*
- Copyright (C) 2011-2018 Faiumoni e. V.
+ Copyright (C) 2011-2023 Faiumoni e. V.
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -100,7 +100,7 @@ class DefaultFrame extends PageFrame {
 	</div>
 
 	<div id="footerArea">
-		<span class="copyright">&copy; 1999-2022 <a href="https://arianne-project.org">Arianne Project</a></span>
+		<span class="copyright">&copy; 1999-2023 <a href="https://arianne-project.org">Arianne Project</a></span>
 		<span><a id="footerSourceforge" href="http://sourceforge.net/projects/arianne">&nbsp;</a></span>
 	</div>
 

@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008-2021 The Arianne Project
+ Copyright (C) 2008-2023 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -90,7 +90,7 @@ echo ' class="layout"';
 	</div>
 
 	<div id="footerArea">
-		<span class="copyright">&copy; 1999-2022 <a href="https://arianne-project.org">Arianne Project</a></span>
+		<span class="copyright">&copy; 1999-2023 <a href="https://arianne-project.org">Arianne Project</a></span>
 	</div>
 
 	<div class="time">
