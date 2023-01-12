@@ -506,6 +506,7 @@ class Account {
 		$stmt = DB::game()->query($sql);
 		$row = $stmt->fetch(PDO::FETCH_ASSOC);
 		$stmt->closeCursor();
+		$res = NULL;
 		if ($row) {
 			$res = new Account($row['id'], $row['username'], $row['password'], $row['email'], false, $row['timedate'], $row['status']);
 			$res->usedAccountLink = $row['usedAccountLink'];
@@ -957,6 +958,17 @@ class AccountLink {
 		return $links;
 	}
 
+	private function proposeSteamUsernames($steamid) {
+		$url = 'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='
+			.STENDHAL_STEAM_API_KEY.'&steamids='
+			.urlencode($steamid);
+		$response = requestJson($url);
+		$this->nickname = $response['response']['players'][0]['personaname'];
+		$res[] = Account::convertToValidUsername($this->nickname);
+		$res[] = Account::convertToValidUsername($this->nickname.'steam');
+		return $res;
+	}
+
 	public function proposeUsernames() {
 		$res = array();
 		$res[] = Account::convertToValidUsername($this->nickname);
@@ -967,26 +979,18 @@ class AccountLink {
 			}
 		}
 		if ($this->type == 'facebook') {
-            $res[] = Account::convertToValidUsername(substr($this->nickname, 0, 19));
+			$res[] = Account::convertToValidUsername(substr($this->nickname, 0, 19));
+		}
+		if ($this->type == 'steam') {
+			return $this->proposeSteamUsernames($this->username);
 		}
 		if (strpos($this->username, 'http') === 0) {
-		    $this->username = str_replace('http://', 'https://', $this->username);
+			$this->username = str_replace('http://', 'https://', $this->username);
 			$lastSlash = strrpos($this->username, '/');
 
 			// Special handling for Steam
 			if (strpos($this->username, 'https://steamcommunity.com/openid/id/') === 0) {
-			    $curl = curl_init();
-			    curl_setopt($curl, CURLOPT_URL,
-			        'https://api.steampowered.com/ISteamUser/GetPlayerSummaries/v0002/?key='
-			        .STENDHAL_STEAM_API_KEY.'&steamids='
-			        .urlencode(substr($this->username, $lastSlash + 1)));
-			    curl_setopt($curl, CURLOPT_RETURNTRANSFER, 1);
-			    $response = curl_exec($curl);
-			    $response = json_decode($response, true);
-			    $this->nickname = $response['response']['players'][0]['personaname'];
-			    $res[] = Account::convertToValidUsername($this->nickname);
-			    $res[] = Account::convertToValidUsername($this->nickname.'steam');
-			    return $res;
+				return $this->proposeSteamUsernames(substr($this->username, $lastSlash + 1));
 			}
 
 			// apply openid url magic
@@ -1018,7 +1022,7 @@ class AccountLink {
 	        $in .= "'".mysql_real_escape_string($name.$suffix)."'";
 	    }
 
-	    $sql = "SELECT username FROM account WHERE username in (".$in.") FOR UPDATE "
+	    $sql = "SELECT username FROM account WHERE username in (".$in.") "
 	        . "UNION SELECT charname FROM characters WHERE charname in (".$in.") FOR UPDATE;";
 
         // check database
@@ -1069,7 +1073,7 @@ class AccountLink {
 		$username = $this->pickNewUsername($proposedUsernames);
 
 		// trust google email addresses
-		$trusted = (strpos($this->username, 'https://www.google.com/') === 0) && (strpos($this->email, '@') !== false);
+		$trusted = ($this->type==='openid' && strpos($this->username, 'https://www.google.com/') === 0) && (strpos($this->email, '@') !== false);
 
 		// insert new account
 		$account = new Account(-1, $username, null, $this->email, $trusted, date("Y-m-d").' '.date("H:i:s"), 'active');
@@ -1083,7 +1087,7 @@ class AccountLink {
 	}
 
 	/**
-	 * inserst a record in the accountLink table.
+	 * inserts a record in the accountLink table.
 	 */
 	public function insert() {
 		$sql = "INSERT INTO accountLink(player_id, type, username";

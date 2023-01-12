@@ -64,6 +64,10 @@ class LoginPage extends Page {
 			return false;
 		}
 
+		if ($this->verifyLoginBySteamAuthTicket()) {
+			return false;
+		}
+
 		if ($this->verifyFacebook()) {
 			return false;
 		}
@@ -113,6 +117,27 @@ class LoginPage extends Page {
 			$this->openid->error = 'OpenID-Authentication failed.';
 			return false;
 		}
+		Account::loginOrCreateByAccountLink($accountLink);
+		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
+		return true;
+	}
+
+	public function verifyLoginBySteamAuthTicket() {
+		if (!isset($_GET['steam_auth_ticket'])) {
+			return false;
+		}
+
+		$url = 'https://partner.steam-api.com/ISteamUserAuth/AuthenticateUserTicket/v1/'
+			.'?appid='.STENDHAL_STEAM_APP_ID
+			.'&key='.STENDHAL_STEAM_PARTNER_KEY
+			.'&ticket='.urlencode($_GET['steam_auth_ticket']);
+		$response = requestJson($url);
+		if ($response['response']['params']['result'] !== 'OK') {
+			var_dump($response);
+			return false;
+		}
+		
+		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null);
 		Account::loginOrCreateByAccountLink($accountLink);
 		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
 		return true;
