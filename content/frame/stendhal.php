@@ -52,12 +52,14 @@ class StendhalFrame extends PageFrame {
 	 */
 	function renderFrame() {
 		global $page, $protocol, $adminLevel;
+		$showFrame = !isset($_SERVER['HTTP_USER_AGENT']) || strpos($_SERVER['HTTP_USER_AGENT'], 'stendhal') === false;
+		echo $showFrame;
+
+		echo '<body lang="en" '. $page->getBodyTagAttributes() . ' class="layout">';
+		
 ?>
-<body lang="en" <?php
-echo $page->getBodyTagAttributes();
-echo ' class="layout"';
-?>>
 <div id="container">
+<?php if ($showFrame) { ?>
 	<div id="header">
 		<?php
 		echo '<a href="/" class="stendhallogo"><img style="border: 0;" src="/images/logo.gif" alt="Stendhal Logo" width="282" height="64" ></a>';
@@ -81,6 +83,7 @@ echo ' class="layout"';
 		$this->breadcrubs($page);
 	?>
 	</div>
+<?php } ?>
 
 	<div id="contentArea">
 		<?php
@@ -88,6 +91,8 @@ echo ' class="layout"';
 			$page->writeContent();
 		?>
 	</div>
+
+<?php if ($showFrame) { ?>
 
 	<div id="footerArea">
 		<span class="copyright">&copy; 1999-2023 <a href="https://arianne-project.org">Arianne Project</a></span>
@@ -99,6 +104,10 @@ echo ' class="layout"';
 		echo 'Server time: '.date('G:i');
 		?>
 	</div>
+
+<?php } ?>
+
+
 </div>
 
 <div id="popup">
