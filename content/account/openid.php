@@ -99,7 +99,7 @@ class OpenID {
 	 */
 	public function merge($accountLink) {
 		$oldAccount = $_SESSION['account'];
-		$newAccount = Account::readAccountByLink('openid', $accountLink->username, null);
+		$newAccount = Account::readAccountByLink($accountLink->type, $accountLink->username, null);
 
 		if (!$newAccount || is_string($newAccount)) {
 			$accountLink->playerId = $oldAccount->id;
