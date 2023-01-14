@@ -28,7 +28,6 @@ class OpenID {
 			if (isset($requestedIdentifier)) {
 				$this->isAuth = true;
 				$openid = new LightOpenID($_SERVER['HTTP_HOST']);
-				// $openid->oauth[] = 'https://www.googleapis.com/auth/plus.me';
 				$openid->identity = $requestedIdentifier;
 				$openid->required = array('contact/email', 'namePerson/friendly');
 				$openid->realm     = (!empty($_SERVER['HTTPS']) ? 'https' : 'http') . '://' . $_SERVER['HTTP_HOST'];
@@ -68,8 +67,12 @@ class OpenID {
 		if (isset($attributes['contact/email'])) {
 			$email = $attributes['contact/email'];
 		}
-
-		$accountLink = new AccountLink(null, null, 'openid', $openid->identity, $friendly, $email, null);
+		$steamPrefix = 'https://steamcommunity.com/openid/id/';
+		if (strpos($openid->identity, $steamPrefix) === 0) {
+			$accountLink = new AccountLink(null, null, 'steam', substr($openid->identity, strlen($steamPrefix)), $friendly, $email, null);
+		} else {
+			$accountLink = new AccountLink(null, null, 'openid', $openid->identity, $friendly, $email, null);
+		}
 		return $accountLink;
 	}
 
