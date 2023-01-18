@@ -149,6 +149,9 @@ function getItems() {
 			$content = file($itemsXMLConfigurationBase.$file['uri']);
 			$temp = implode('',$content);
 			$items =  XML_unserialize($temp);
+			if (!isset($items['items'][0]['item'])) {
+				continue;
+			}
 			$items = $items['items'][0]['item'];
 
 			for ($i=0;$i<sizeof($items)/2;$i++) {
