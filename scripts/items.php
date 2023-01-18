@@ -186,6 +186,9 @@ function getItems() {
 					'max_quantity', 'menu', 'quantity', 'slot_name',
 					'undroppableondeath', 'use_sound'
 				];
+				$poison_items = [
+					'fierywater', 'poison', 'venom'
+				];
 
 				$damage_type = array();
 				$attributes=array();
@@ -209,13 +212,18 @@ function getItems() {
 								continue;
 							}
 							if ($attr === 'statusattack') {
-								if (is_int(strpos($value, "poison"))) {
-									$damage_type[] = "poison";
-								} else {
-									$value = strtolower($value);
-									$si = strpos($value, 'status');
+								foreach (explode(";", $value) as $v) {
+									$v = strtolower($v);
+									$si = strpos($v, 'status');
 									if (is_int($si)) {
-										$damage_type[] = substr($value, 0, $si);
+										$damage_type[] = substr($v, 0, $si);
+									} else {
+										foreach ($poison_items as $pi) {
+											if (is_int(strpos($v, $pi))) {
+												$damage_type[] = "poison";
+												break;
+											}
+										}
 									}
 								}
 								continue;
