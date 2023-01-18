@@ -129,7 +129,7 @@ foreach($this->items as $m) {
 			}
 		}
 		foreach($m->attributes as $label=>$data) {
-			if ($label == "min_level") {
+			if ($label === 'min_level') {
 				continue;
 			}
 						?>

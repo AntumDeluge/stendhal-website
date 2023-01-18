@@ -184,7 +184,7 @@ function getItems() {
 						foreach($val as $temp) {
 							// 1.43: deprecated "item->attributes->unattainable" in favor of "item->unattainable"
 							if ($attr == 'unattainable') {
-								$attributes[$attr] = $temp == 'true';
+								$attributes[$attr] = $temp === 'true';
 							}
 							if (!is_array($temp)) {
 								continue;
@@ -194,7 +194,7 @@ function getItems() {
 							}
 
 							$value = $temp['value'];
-							if ($attr == "statusresist" && isset($temp['type'])) {
+							if ($attr === 'statusresist' && isset($temp['type'])) {
 								$value = $value.' ('.$temp['type'].')';
 							}
 
