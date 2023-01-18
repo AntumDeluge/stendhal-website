@@ -38,8 +38,11 @@ class Item {
 	public $susceptibilities;
 	/** Where the item can be wore as an array slot=>item */
 	public $equipableat;
+	/** Whether item can be obtained by players */
+	public $unattainable;
 
-	function __construct($name, $description, $class, $gfx, $attributes, $susceptibilities, $equipableat) {
+	function __construct($name, $description, $class, $gfx, $attributes, $susceptibilities, $equipableat,
+			$unattainable=false) {
 		$this->name=$name;
 		$this->description=$description;
 		$this->class=$class;
@@ -48,6 +51,7 @@ class Item {
 		$this->attributes=$attributes;
 		$this->equipableat=$equipableat;
 		$this->susceptibilities=$susceptibilities;
+		$this->unattainable=$unattainable;
 	}
 
 	function showImage() {
@@ -84,13 +88,17 @@ class Item {
 		$popup .= '</span>';
 
 		$popup .= '<br />';
-		$popup .= 'Class: ' . htmlspecialchars(ucfirst($this->class)) . '<br />';
-		foreach($this->attributes as $label=>$data) {
-			$popup .= htmlspecialchars(ucfirst($label)) . ': ' . htmlspecialchars($data) . '<br />';
-		}
+		if ($this->unattainable) {
+			$popup .= 'This item is not available.';
+		} else {
+			$popup .= 'Class: ' . htmlspecialchars(ucfirst($this->class)) . '<br />';
+			foreach($this->attributes as $label=>$data) {
+				$popup .= htmlspecialchars(ucfirst($label)) . ': ' . htmlspecialchars($data) . '<br />';
+			}
 
-		if (isset($this->description) && ($this->description != '')) {
-			$popup .= '<br />' . $this->description . '<br />';
+			if (isset($this->description) && ($this->description != '')) {
+				$popup .= '<br />' . $this->description . '<br />';
+			}
 		}
 		$popup .= '</div>';
 
@@ -149,11 +157,7 @@ function getItems() {
 				}
 				$name=$items[$i.' attr']['name'];
 
-				$unattainable = $items[$i]['unattainable'];
-				if (isset($unattainable) && $unattainable[0] == 'true') {
-					// don't show items that players cannot obtain
-					continue;
-				}
+				$unattainable = isset($items[$i]['unattainable']) && $items[$i]['unattainable'][0] === 'true';
 
 				if (isset($items[$i]['description'])) {
 					$description=$items[$i]['description']['0'];
@@ -213,9 +217,8 @@ function getItems() {
 					$attributes['atk'] = $attributes['atk'].' ('.$items[$i]['damage']['0 attr']['type'].')';
 				}
 
-				if (!isset($attributes['unattainable']) || $attributes['unattainable'] === false) {
-					$list[]=new Item($name, $description, $class, $gfx, $attributes, $susceptibilities, null);
-				}
+				$list[] = new Item($name, $description, $class, $gfx, $attributes,
+						$susceptibilities, null, $unattainable);
 			}
 		}
 	}

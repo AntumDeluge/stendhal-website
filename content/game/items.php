@@ -76,6 +76,9 @@ $class=$_GET['class'];
 startBox('<h1>'.ucfirst($class).' Items</h1>');
 echo '<div class="cards">';
   foreach($items as $item) {
+	if ($item->unattainable) {
+	  continue;
+	}
 	if($item->class==$class) {
 	  ?>
   	  <div class="item">

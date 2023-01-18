@@ -97,6 +97,16 @@ foreach($this->items as $m) {
 		<div class="item">
 			<div class="type">This item is of <?php echo $m->class ?> class</div>
 			<img class="item" src="<?php echo $m->gfx; ?>" alt="">
+			<?php
+			if ($m->unattainable) {
+				echo '<br>This item is not available.';
+			?>
+
+		</div>
+			<?php
+				continue;
+			}
+			?>
 			<div class="description">
 				<?php
 					if(trim($m->description)=="") {
@@ -105,6 +115,7 @@ foreach($this->items as $m) {
 						echo $m->description;
 					}
 				?>
+
 			</div>
 
 			<div class="table">

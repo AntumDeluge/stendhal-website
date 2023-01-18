@@ -178,6 +178,9 @@ class SearchsPage extends Page {
 
 	function renderItem($name) {
 		$entry = getItem($name);
+		if ($entry->unattainable) {
+			return;
+		}
 		$this->renderEntry($name,
 				'Item – '.ucfirst($entry->class),
 				'/item/'.surlencode($entry->class).'/',
