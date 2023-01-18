@@ -173,6 +173,11 @@ function getItems() {
 					}
 				}
 
+				$attr_excludes = [
+					'max_quantity', 'menu', 'quantity', 'slot_name',
+					'undroppableondeath'
+				];
+
 				$attributes=array();
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
@@ -193,7 +198,7 @@ function getItems() {
 								$value = $value.' ('.$temp['type'].')';
 							}
 
-							if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
+							if (!in_array($attr, $attr_excludes, true)) {
 								$attributes[$attr] = $value;
 							}
 						}
