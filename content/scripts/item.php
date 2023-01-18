@@ -2,20 +2,20 @@
 
 
 function renderAmount($amount) {
-  if (!is_numeric($amount)) {
-	  $amount=str_replace("[","",$amount);
-	  $amount=str_replace("]","",$amount);
-	  list($min,$max)=explode(",",$amount);
-  } else {
-	  $min = $amount;
-	  $max = $amount;
-  }
+	if (!is_numeric($amount)) {
+		$amount=str_replace("[","",$amount);
+		$amount=str_replace("]","",$amount);
+		list($min,$max)=explode(",",$amount);
+	} else {
+		$min = $amount;
+		$max = $amount;
+	}
 
-  if($min!=$max) {
-    return 'between ' . formatNumber($min) . ' and ' . formatNumber($max) . '.';
-  }
+	if($min!=$max) {
+		return 'between ' . formatNumber($min) . ' and ' . formatNumber($max) . '.';
+	}
 
-  return 'exactly ' . formatNumber($min) . '.';
+	return 'exactly ' . formatNumber($min) . '.';
 }
 
 
@@ -88,28 +88,28 @@ if ($this->isExact && !$this->found) {
 }
 
 foreach($this->items as $m) {
-  /*
-   * If name of the creature match or contains part of the name.
-   */
-  if (($m->name==$this->name || (!$this->isExact && strpos($m->name, $this->name) !== FALSE)) && (($m->class == $this->class) || ($this->class == 'all'))) {
-    startBox('<h1>'.htmlspecialchars(ucfirst($m->name)).'</h1>');
-    ?>
-    <div class="item">
-      <div class="type">This item is of <?php echo $m->class ?> class</div>
-      <img class="item" src="<?php echo $m->gfx; ?>" alt="">
-      <div class="description">
-        <?php
-          if(trim($m->description)=="") {
-            echo 'No description. Would you like to <a href="https://sourceforge.net/p/arianne/patches/new/?summary=Item%20Description%20'.urlencode($m->name).'&description=%3C%3CPlease%20enter%20description%20here%3E%3E#top_nav">write one</a>?';
-          } else {
-            echo $m->description;
-          }
-        ?>
-      </div>
+	/*
+	 * If name of the creature match or contains part of the name.
+	 */
+	if (($m->name==$this->name || (!$this->isExact && strpos($m->name, $this->name) !== FALSE)) && (($m->class == $this->class) || ($this->class == 'all'))) {
+		startBox('<h1>'.htmlspecialchars(ucfirst($m->name)).'</h1>');
+		?>
+		<div class="item">
+			<div class="type">This item is of <?php echo $m->class ?> class</div>
+			<img class="item" src="<?php echo $m->gfx; ?>" alt="">
+			<div class="description">
+				<?php
+					if(trim($m->description)=="") {
+						echo 'No description. Would you like to <a href="https://sourceforge.net/p/arianne/patches/new/?summary=Item%20Description%20'.urlencode($m->name).'&description=%3C%3CPlease%20enter%20description%20here%3E%3E#top_nav">write one</a>?';
+					} else {
+						echo $m->description;
+					}
+				?>
+			</div>
 
-      <div class="table">
-        <div class="title">Attributes</div>
-  	      <?php
+			<div class="table">
+				<div class="title">Attributes</div>
+					<?php
 
 	// set initial values
 		$minlevel=0;
@@ -131,18 +131,18 @@ foreach($this->items as $m) {
 			}
 		}
 		foreach($m->attributes as $label=>$data) {
-            ?>
-            <div class="row">
-              <div class="label"><?php echo strtoupper($label); ?></div>
-              <div class="data"><?php echo $data; ?></div>
-            </div>
-            <?php
+						?>
+						<div class="row">
+							<div class="label"><?php echo strtoupper($label); ?></div>
+							<div class="data"><?php echo $data; ?></div>
+						</div>
+						<?php
 				if($label=="rate") {
 					if($factor!=1) {
 		 				$rate = ceil($data*$factor);
 				?>
 				<div class="label">EFFECTIVE RATE for player level <?php echo htmlspecialchars($level); ?> </div>
-		    	<div class="data"><?php echo $rate; ?></div>
+					<div class="data"><?php echo $rate; ?></div>
 			<?php }
 			}
 			if($label=="def") {
@@ -183,33 +183,33 @@ foreach($this->items as $m) {
 	</div>
 	<?php }?>
 
-      <div class="table">
-        <div class="title">Dropped by</div>
-          <div style="float: left; width: 100%;">
-            <?php
-          $monsters=getMonsters();
-          foreach($monsters as $monster) {
-            foreach($monster->drops as $k) {
-              if($k["name"]==$m->name) {
-              ?>
-              <div class="row">
-                <?php $monster->showImageWithPopup() ?>
-                <span class="block label"><?php echo $monster->name; ?></span>
-                <div class="data">Drops <?php echo renderAmount($k["quantity"]); ?></div>
-                <div class="data">Probability: <?php echo formatNumber($k["probability"]); ?>%</div>
-                <div style="clear: left;"></div>
-              </div>
-              <?php
-              }
-            }
-          }
-          ?>
-          </div>
-          <div style="clear: left;"></div>
-        </div>
+			<div class="table">
+				<div class="title">Dropped by</div>
+					<div style="float: left; width: 100%;">
+						<?php
+					$monsters=getMonsters();
+					foreach($monsters as $monster) {
+						foreach($monster->drops as $k) {
+							if($k["name"]==$m->name) {
+							?>
+							<div class="row">
+								<?php $monster->showImageWithPopup() ?>
+								<span class="block label"><?php echo $monster->name; ?></span>
+								<div class="data">Drops <?php echo renderAmount($k["quantity"]); ?></div>
+								<div class="data">Probability: <?php echo formatNumber($k["probability"]); ?>%</div>
+								<div style="clear: left;"></div>
+							</div>
+							<?php
+							}
+						}
+					}
+					?>
+					</div>
+					<div style="clear: left;"></div>
+				</div>
 	</div>
-    <?php
-    endBox();
+		<?php
+		endBox();
 		$this->writeRelatedPages('I.'.strtolower($m->name), 'Stendhal_Quest', 'Quests');
 		$this->includeJs();
 	}
