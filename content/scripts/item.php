@@ -111,26 +111,27 @@ foreach($this->items as $m) {
 				<div class="title">Attributes</div>
 					<?php
 
-	// set initial values
-		$minlevel=0;
-		$level=0;
+		// set initial values
+		$min_level = 0;
+		$level = 0;
 		$factor = 1;
 
-	// get the min level if it has one
-		foreach($m->attributes as $label=>$data) {
-			if($label=="min_level") {
-				$minlevel=$data;
-				// did player fill in his level yet?
-				if(!empty($_POST['level'])) {
-					$level = $_POST['level'];
-					if ($level<$minlevel) {
-						// scale factor for rate and def
-						$factor= 1 - log(($level + 1) / ($minlevel + 1));
-					}
+		// get the min level if it has one
+		if (isset($m->attributes['min_level'])) {
+			$min_level = $m->attributes['min_level'];
+			// player filled in level
+			if (!empty($_POST['level'])) {
+				$level = $_POST['level'];
+				if ($level < $min_level) {
+					// scale factor for rate and def
+					$factor = 1 - log(($level + 1) / ($min_level + 1));
 				}
 			}
 		}
 		foreach($m->attributes as $label=>$data) {
+			if ($label == "min_level") {
+				continue;
+			}
 						?>
 						<div class="row">
 							<div class="label"><?php echo strtoupper($label); ?></div>
@@ -153,18 +154,25 @@ foreach($this->items as $m) {
 				<div class="data"><?php echo $def; ?></div>
 			<?php }
 			}
-			if($label=="min_level") {
-				?>
-					<br>
-					My level ...
-					<form method="post" action="/item/<?php echo surlencode($m->class).'/'.surlencode($m->name); ?>.html">
-						<input type="text" name="level" size="3" maxlength="3">
-					<input type="submit" value="Check stats">
-					</form>
-				<?php
-			}
 		}
-	?>
+
+		?>
+						<div class="row">
+							<div class="label">MIN_LEVEL</div>
+							<div class="data"><?php echo $min_level; ?></div>
+						</div>
+		<?php
+		if ($min_level > 0) {
+		?>
+						<br>
+						My level ...
+						<form method="post" action="/item/<?php echo surlencode($m->class).'/'.surlencode($m->name); ?>.html">
+							<input type="text" name="level" size="3" maxlength="3">
+						<input type="submit" value="Check stats">
+						</form>
+		<?php
+		}
+		?>
 	</div>
 
 	<?php if (count($m->susceptibilities) > 0) {?>
