@@ -188,8 +188,13 @@ function getItems() {
 								continue;
 							}
 
+							$value = $temp['value'];
+							if ($attr == "statusresist" && isset($temp['type'])) {
+								$value = $value.' ('.$temp['type'].')';
+							}
+
 							if (($attr != 'max_quantity') && ($attr != 'quantity') && ($attr != 'undroppableondeath') && ($attr != 'slot_name')) {
-								$attributes[$attr]=$temp['value'];
+								$attributes[$attr] = $value;
 							}
 						}
 					}
