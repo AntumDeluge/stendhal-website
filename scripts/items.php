@@ -182,6 +182,7 @@ function getItems() {
 					'undroppableondeath', 'use_sound'
 				];
 
+				$damage_type = array();
 				$attributes=array();
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
@@ -194,6 +195,22 @@ function getItems() {
 							}
 
 							$value = $temp['value'];
+							if ($attr === 'damagetype') {
+								array_splice($damage_type, 0, 0, $value);
+								continue;
+							}
+							if ($attr === 'statusattack') {
+								if (is_int(strpos($value, "poison"))) {
+									$damage_type[] = "poison";
+								} else {
+									$value = strtolower($value);
+									$si = strpos($value, 'status');
+									if (is_int($si)) {
+										$damage_type[] = substr($value, 0, $si);
+									}
+								}
+								continue;
+							}
 							if ($attr === 'statusresist' && isset($temp['type'])) {
 								$susceptibilities[$temp['type']] = ($value * 100).'% (chance of resisting)';
 								continue;
@@ -204,6 +221,10 @@ function getItems() {
 							}
 						}
 					}
+				}
+
+				if ($damage_type) {
+					$attributes['atk'] = $attributes['atk'].' ('.implode(', ', $damage_type).')';
 				}
 
 				if (isset($attributes['damagetype'])) {
