@@ -112,7 +112,7 @@ foreach($this->items as $m) {
 					<?php
 
 		// set initial values
-		$min_level = 0;
+		$min_level = -1;
 		$level = 0;
 		$factor = 1;
 
@@ -156,12 +156,14 @@ foreach($this->items as $m) {
 			}
 		}
 
+		if ($min_level > -1) {
 		?>
 						<div class="row">
 							<div class="label">MIN_LEVEL</div>
 							<div class="data"><?php echo $min_level; ?></div>
 						</div>
 		<?php
+		}
 		if ($min_level > 0) {
 		?>
 						<br>
