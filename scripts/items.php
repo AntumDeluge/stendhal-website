@@ -172,7 +172,7 @@ function getItems() {
 				if (isset($items[$i]['susceptibility'])) {
 					foreach($items[$i]['susceptibility'] as $susceptibility) {
 						if (isset($susceptibility['type'])) {
-							$susceptibilities[$susceptibility['type']]=round(100 / $susceptibility['value']);
+							$susceptibilities[$susceptibility['type']] = round(100 / $susceptibility['value']).'% (effectiveness)';
 						}
 					}
 				}
@@ -195,7 +195,8 @@ function getItems() {
 
 							$value = $temp['value'];
 							if ($attr === 'statusresist' && isset($temp['type'])) {
-								$value = $value.' ('.$temp['type'].')';
+								$susceptibilities[$temp['type']] = ($value * 100).'% (chance of resisting)';
+								continue;
 							}
 
 							if (!in_array($attr, $attr_excludes, true)) {

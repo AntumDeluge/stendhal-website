@@ -205,7 +205,7 @@ foreach($this->items as $m) {
 		?>
 			<div class="row">
 				<div class="label"><?php echo strtoupper($label); ?></div>
-				<div class="data"><?php echo $data; ?>%</div>
+				<div class="data"><?php echo $data; ?></div>
 			</div>
 		<?php
 		}
