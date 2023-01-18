@@ -46,7 +46,9 @@ class Item {
 		$this->name=$name;
 		$this->description=$description;
 		$this->class=$class;
-		self::$classes[$class]=0;
+		if (!$unattainable) {
+			self::$classes[$class]=0;
+		}
 		$this->gfx=$gfx;
 		$this->attributes=$attributes;
 		$this->equipableat=$equipableat;

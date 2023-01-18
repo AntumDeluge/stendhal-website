@@ -48,7 +48,7 @@ if(!isset($_GET['class'])) {
   <?php
   foreach($classes as $class=>$zero) {
     foreach($items as $item) {
-   	  if($item->class==$class) {
+   	  if($item->class == $class && !$item->unattainable) {
    	    $choosen=$item;
    	  }
     }
