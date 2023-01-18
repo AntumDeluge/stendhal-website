@@ -175,7 +175,7 @@ function getItems() {
 
 				$attr_excludes = [
 					'max_quantity', 'menu', 'quantity', 'slot_name',
-					'undroppableondeath'
+					'undroppableondeath', 'use_sound'
 				];
 
 				$attributes=array();
