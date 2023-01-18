@@ -149,6 +149,12 @@ function getItems() {
 				}
 				$name=$items[$i.' attr']['name'];
 
+				$unattainable = $items[$i]['unattainable'];
+				if (isset($unattainable) && $unattainable[0] == 'true') {
+					// don't show items that players cannot obtain
+					continue;
+				}
+
 				if (isset($items[$i]['description'])) {
 					$description=$items[$i]['description']['0'];
 				} else {
@@ -171,6 +177,7 @@ function getItems() {
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
 						foreach($val as $temp) {
+							// 1.43: "item->attributes->unattainable" is deprecated, should use "item->unattainable"
 							if ($attr == 'unattainable') {
 								$attributes[$attr] = $temp == 'true';
 							}
