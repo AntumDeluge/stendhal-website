@@ -187,6 +187,10 @@ function getItems() {
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
 						foreach($val as $temp) {
+							// 1.43: deprecated "item->attributes->unattainable" in favor of "item->unattainable"
+							if ($attr == 'unattainable') {
+								$attributes[$attr] = $temp === 'true';
+							}
 							if (!is_array($temp)) {
 								continue;
 							}
@@ -235,8 +239,10 @@ function getItems() {
 					$attributes['atk'] = $attributes['atk'].' ('.$items[$i]['damage']['0 attr']['type'].')';
 				}
 
-				$list[] = new Item($name, $description, $class, $gfx, $attributes,
-						$susceptibilities, null, $unattainable);
+				if (!isset($attributes['unattainable']) || $attributes['unattainable'] === false) {
+					$list[] = new Item($name, $description, $class, $gfx, $attributes,
+							$susceptibilities, null, $unattainable);
+				}
 			}
 		}
 	}
