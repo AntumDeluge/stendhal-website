@@ -186,10 +186,6 @@ function getItems() {
 				if (is_array($items[$i]['attributes'][0])) {
 					foreach($items[$i]['attributes'][0] as $attr=>$val) {
 						foreach($val as $temp) {
-							// 1.43: deprecated "item->attributes->unattainable" in favor of "item->unattainable"
-							if ($attr == 'unattainable') {
-								$attributes[$attr] = $temp === 'true';
-							}
 							if (!is_array($temp)) {
 								continue;
 							}
