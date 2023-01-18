@@ -111,6 +111,12 @@ foreach($this->items as $m) {
 				<div class="title">Attributes</div>
 					<?php
 
+		$attr_altnames = [
+			'lifesteal' => 'life steal',
+			'statusattack' => 'status attack',
+			'statusresist' => 'status resistances'
+		];
+
 		// set initial values
 		$min_level = -1;
 		$level = 0;
@@ -132,9 +138,12 @@ foreach($this->items as $m) {
 			if ($label === 'min_level') {
 				continue;
 			}
+			if (isset($attr_altnames[$label])) {
+				$label = $attr_altnames[$label];
+			}
 						?>
 						<div class="row">
-							<div class="label"><?php echo strtoupper($label); ?></div>
+							<div class="label"><?php echo strtoupper(str_replace("_", " ", $label)); ?></div>
 							<div class="data"><?php echo $data; ?></div>
 						</div>
 						<?php
@@ -159,7 +168,7 @@ foreach($this->items as $m) {
 		if ($min_level > -1) {
 		?>
 						<div class="row">
-							<div class="label">MIN_LEVEL</div>
+							<div class="label">MIN LEVEL</div>
 							<div class="data"><?php echo $min_level; ?></div>
 						</div>
 		<?php
