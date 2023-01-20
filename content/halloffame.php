@@ -143,7 +143,7 @@ class HallOfFamePage extends Page {
 		foreach($list as $entry) {
 		?>
 			<div class="row">
-				<div class="position"><?php echo $entry['rank']; ?></div>
+				<div class="position"><?php echo $i; ?></div>
 				<a href="<?php echo rewriteURL('/character/'.surlencode($entry['charname']).'.html'); ?>">
 					<?php
 					$outfit = $entry['outfit'];
