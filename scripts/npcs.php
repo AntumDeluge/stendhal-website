@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2009   Hendrik Brummermann
+ Copyright (C) 2009-2023 Hendrik Brummermann
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -16,9 +16,10 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
 /**
-  * A class that represents an NPC, with details on the name, stats, location and what it looks like.
-  */
+ * A class that represents an NPC, with details on the name, stats, location and what it looks like.
+ */
 class NPC {
 	public $name;
 	public $title;
@@ -77,9 +78,9 @@ class NPC {
 
 
 	/**
-	  * Returns a list of npcs that meet the given condition.
-	  * Note: Parmaters must be sql escaped.
-	  */
+	 * Returns a list of npcs that meet the given condition.
+	 * Note: Parmaters must be sql escaped.
+	 */
 	static function getNPCs($where='', $sortby='name', $cond='') {
 		return NPC::_getNPCs('select * from npcs '.$where.' order by '.$sortby.' '.$cond);
 	}
@@ -109,7 +110,7 @@ class NPC {
 			}
 			$outfit = $row['outfit'];
 			if (isset($row['outfit_layers'])) {
-			    $outfit = $row['outfit_layers'];
+				$outfit = $row['outfit_layers'];
 			}
 			$list[]=new NPC($row['name'],
 				$row['title'],
