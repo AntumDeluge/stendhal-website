@@ -136,7 +136,7 @@ class NPCPage extends Page {
 		<?php
 		$idx = 0;
 		foreach($slist as $iname=>$iprice) {
-			$item = getItem($iname);
+			$item = getItem($iname); // FIXME: doesn't work for seeds & bulbs
 			if ($idx > 0) {
 				echo "		";
 			}
