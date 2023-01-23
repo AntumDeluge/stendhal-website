@@ -1,22 +1,24 @@
 <?php
 /*
- Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2020 The Arianne Project
-
- This program is free software: you can redistribute it and/or modify
- it under the terms of the GNU Affero General Public License as published by
- the Free Software Foundation, either version 3 of the License, or
- (at your option) any later version.
-
- This program is distributed in the hope that it will be useful,
- but WITHOUT ANY WARRANTY; without even the implied warranty of
- MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- GNU Affero General Public License for more details.
-
- You should have received a copy of the GNU Affero General Public License
- along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * Stendhal website - a website to manage and ease playing of Stendhal game
+ * Copyright (C) 2008  Miguel Angel Blanch Lardin
+ * Copyright (C) 2008-2023 The Arianne Project
+ *
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU Affero General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ *
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ * GNU Affero General Public License for more details.
+ *
+ * You should have received a copy of the GNU Affero General Public License
+ * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
+
+
 /*
  * A class representing an item.
  */
@@ -270,4 +272,30 @@ function getItems() {
 	$cache->store('stendhal_items', new ArrayObject($list));
 	$cache->store('stendhal_items_classes', new ArrayObject(Item::$classes));
 	return $list;
+}
+
+/**
+ * Retrieves a list of NPC sellers & buyers.
+ *
+ * @param itemname
+ *     Name of item to search for in shops.
+ * @return
+ *     Array of NPC names.
+ */
+function getItemMerchants($itemname) {
+	// FIXME: this should get cached
+	$npclist = [
+		"sellers" => [],
+		"buyers" => []
+	];
+
+	foreach (getShops() as $npcname=>$shopinfo) {
+		if (isset($shopinfo["sell"]) && isset($shopinfo["sell"][$itemname])) {
+			$npclist["sellers"][] = $npcname;
+		}
+		if (isset($shopinfo["buy"]) && isset($shopinfo["buy"][$itemname])) {
+			$npclist["buyers"][] = $npcname;
+		}
+	}
+	return $npclist;
 }

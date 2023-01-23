@@ -258,14 +258,49 @@ class ItemPage extends Page {
 				?>
 					</div>
 					<div style="clear: left;"></div>
-				</div>
-	</div>
+				</div> <!-- Dropped by -->
+	</div> <!-- table -->
+
 				<?php
+				// NPC buyers & sellers
+				$merchants = getItemMerchants($m->name);
+				if (isset($merchants["sellers"]) && sizeof($merchants["sellers"]) > 0) {
+					?>
+
+			<div class="table">
+				<div class="title">Sold by</div>
+					<?php
+					$this->buildMerchantList($merchants["sellers"]);
+					?>
+
+				<div style="float: left; width: 100%;">
+				</div>
+			</div>
+
+					<?php
+				}
+				if (isset($merchants["buyers"]) && sizeof($merchants["buyers"]) > 0) {
+					?>
+
+			<div class="table">
+				<div class="title">Bought by</div>
+					<?php
+					$this->buildMerchantList($merchants["buyers"]);
+					?>
+
+				<div style="float: left; width: 100%;">
+				</div>
+			</div>
+
+					<?php
+				}
+
 				endBox();
 				$this->writeRelatedPages('I.'.strtolower($m->name), 'Stendhal_Quest', 'Quests');
 				$this->includeJs();
 			}
-		}
+		} /* foreach (item) */
+
 	} /* writeContent() */
 
 	public function getBreadCrumbs() {
@@ -278,6 +313,15 @@ class ItemPage extends Page {
 			ucfirst($_GET['class']), '/item/'.$_GET['class'].'.html',
 			ucfirst($this->name), '/item/'.$this->class.'/'.$this->name.'.html'
 			);
+	}
+
+	private function buildMerchantList($merchants) {
+		foreach ($merchants as $merchant) {
+			echo "<div class=\"row\">";
+			echo "<span class=\"block label\">";
+			echo "<a href=\"".rewriteURL("/npc/".surlencode($merchant).".html")."\">";
+			echo $merchant."</a></span></div>";
+		}
 	}
 }
 
