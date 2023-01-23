@@ -136,10 +136,14 @@ class NPCPage extends Page {
 		<?php
 		$idx = 0;
 		foreach($slist as $iname=>$iprice) {
+			$item = getItem($iname);
 			if ($idx > 0) {
 				echo "		";
 			}
 			echo "		<tr>\n					";
+			if ($item != null) {
+				echo "<td>".$item->generateImageWithPopup()."</td>";
+			}
 			echo "<td>".$iname."</td><td>".$iprice."</td>";
 			echo "\n				</tr>\n";
 			$idx++;
