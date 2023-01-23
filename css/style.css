@@ -1558,6 +1558,15 @@ div.chatrow {
 	display: table-row;
 }
 
+div.shops {
+	display: flex;
+}
+
+div.shoplist {
+	float: left;
+	width: 50%;
+}
+
 .c1 {
 	width: 3em;
 }

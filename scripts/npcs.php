@@ -21,6 +21,8 @@
  * A class that represents an NPC, with details on the name, stats, location and what it looks like.
  */
 class NPC {
+	public static $shops;
+
 	public $name;
 	public $title;
 	public $class;
@@ -128,5 +130,104 @@ class NPC {
 				$row['image']);
 		}
 		return $list;
+	}
+}
+
+
+/**
+ * Retrieves shops registered for NPCs.
+ */
+function getShops() {
+	global $cache;
+
+	// FIXME: caching not working
+	if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
+		NPC::$shops = $cache->fetchAsArray("stendhal_shops");
+	}
+
+	if (is_array(NPC::$shops) && sizeof(NPC::$shops) > 0) {
+		return NPC::$shops;
+	}
+
+	$shops = [];
+
+	$content = file("data/conf/shops.xml");
+	$tmp = implode("", $content);
+	$root = XML_unserialize($tmp);
+
+	if (!isset($root["shops"][0]["shop"])) {
+		NPC::$shops = $shops;
+		$cache->store("stendhal_shops", new ArrayObject($shops));
+		return $shops;
+	}
+
+	$shopslist = $root["shops"][0]["shop"];
+	if (sizeof($shopslist) < 2) {
+		NPC::$shops = $shops;
+		$cache->store("stendhal_shops", new ArrayObject($shops));
+		return $shops;
+	}
+
+	for ($idx = 0; $idx < sizeof($shopslist) / 2; $idx++) {
+		if (!isset($shopslist[$idx." attr"])) {
+			continue;
+		}
+		if (!isset($shopslist[$idx]["item"])) {
+			continue;
+		}
+
+		$attr = $shopslist[$idx." attr"];
+		if (!isset($attr["name"]) || !isset($attr["type"]) || !isset($attr["npcs"])) {
+			continue;
+		}
+
+		$contents = $shopslist[$idx]["item"];
+		$itemlist = [];
+		for ($i = 0; $i < sizeof($contents) / 2; $i++) {
+			$item = $contents[$i." attr"];
+			if (isset($item["name"]) && isset($item["price"])) {
+				$itemlist[$item["name"]] = $item["price"];
+			}
+		}
+
+		$sname = $attr["name"];
+		$stype = $attr["type"];
+		$snpcs = $attr["npcs"];
+
+		$npcnames = [];
+		while (strlen($snpcs) > 0) {
+			$delim = strpos($snpcs, ",");
+			if ($delim == null) {
+				$npcnames[] = trim($snpcs);
+				$snpcs = "";
+			} else {
+				$npcnames[] = trim(substr($snpcs, 0, $delim));
+				$snpcs = substr($snpcs, $delim+1);
+			}
+		}
+
+		foreach ($npcnames as $npcname) {
+			$shops[$npcname][$stype] = $itemlist;
+		}
+	}
+
+	NPC::$shops = $shops;
+	$cache->store("stendhal_shops", new ArrayObject($shops));
+	return $shops;
+}
+
+/**
+ * Retrieves shop lists for an NPC.
+ *
+ * @param npcname
+ *     Name of NPC for which shop is associated.
+ * @return
+ *     "sell" &/or "buy" shop lists or <code>null</code> if the NPC
+ *     does not have a shop.
+ */
+function getShop($npcname) {
+	$shops = getShops();
+	if (isset($shops[$npcname])) {
+		return $shops[$npcname];
 	}
 }
