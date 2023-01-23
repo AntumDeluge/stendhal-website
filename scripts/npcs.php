@@ -161,7 +161,11 @@ function parseShops($shopdata) {
 		for ($i = 0; $i < sizeof($contents) / 2; $i++) {
 			$item = $contents[$i." attr"];
 			if (isset($item["name"]) && isset($item["price"])) {
-				$itemlist[$item["name"]] = $item["price"];
+				$price = $item["price"];
+				if (isset($item["pricemax"])) {
+					$price .= "-".$item["pricemax"];
+				}
+				$itemlist[$item["name"]] = $price;
 			}
 		}
 
