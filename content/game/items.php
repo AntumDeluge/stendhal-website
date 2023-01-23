@@ -33,40 +33,40 @@ $classes=Item::getClasses();
 
 
 if(!isset($_GET['class'])) {
-  startBox('<h1>Items</h1>');
-  ?>
-  <form method="get" action="/" id="currentContentSearch">
-    <input type="hidden" name="id" value="content/scripts/item">
-    <input type="hidden" name="class" value="all">
-    <input type="text" name="name" maxlength="60">
-    <input type="submit" name="sublogin" value="Search">
-  </form>
-  <div style="margin-bottom: 10px;">
-    <?php echo sizeof($items); ?> items so far.
-  </div>
-  <div class="cards">
-  <?php
-  foreach($classes as $class=>$zero) {
-    foreach($items as $item) {
-   	  if($item->class == $class && !$item->unattainable) {
-   	    $choosen=$item;
-   	  }
-    }
+	startBox('<h1>Items</h1>');
 	?>
-    <div class="f3cols">
-      <?php
-        echo '<a href="'.rewriteURL('/item/'.surlencode($class).'.html').'">';
-        echo '<img src="'.$choosen->imageurl.'" alt=""><br>';
-        echo ucfirst($class). '</a>';?>
-    </div>
-    <?php
-  }
-  ?>
-  </div>
-  <div style="clear: left;"></div>
-  <?php
-  endBox();
-  return;
+	<form method="get" action="/" id="currentContentSearch">
+		<input type="hidden" name="id" value="content/scripts/item">
+		<input type="hidden" name="class" value="all">
+		<input type="text" name="name" maxlength="60">
+		<input type="submit" name="sublogin" value="Search">
+	</form>
+	<div style="margin-bottom: 10px;">
+		<?php echo sizeof($items); ?> items so far.
+	</div>
+	<div class="cards">
+	<?php
+	foreach($classes as $class=>$zero) {
+		foreach($items as $item) {
+			if($item->class == $class && !$item->unattainable) {
+				$choosen=$item;
+			}
+		}
+	?>
+		<div class="f3cols">
+			<?php
+				echo '<a href="'.rewriteURL('/item/'.surlencode($class).'.html').'">';
+				echo '<img src="'.$choosen->imageurl.'" alt=""><br>';
+				echo ucfirst($class). '</a>';?>
+		</div>
+		<?php
+	}
+	?>
+	</div>
+	<div style="clear: left;"></div>
+	<?php
+	endBox();
+	return;
 }
 
 ?>
@@ -75,21 +75,21 @@ if(!isset($_GET['class'])) {
 $class=$_GET['class'];
 startBox('<h1>'.ucfirst($class).' Items</h1>');
 echo '<div class="cards">';
-  foreach($items as $item) {
+	foreach($items as $item) {
 	if ($item->unattainable) {
-	  continue;
+		continue;
 	}
 	if($item->class==$class) {
-	  ?>
-  	  <div class="item">
-        <?php echo '<a class="item" href="'.rewriteURL('/item/'.surlencode($class).'/'. surlencode($item->name) . '.html').'">'; ?>
- 	      <img class="item_image" src="<?php echo $item->imageurl; ?>" alt="">
-	      <span class="block item_name"><?php echo $item->name; ?></span>
-	    </a>
-	  </div>
-	  <?php
+		?>
+			<div class="item">
+				<?php echo '<a class="item" href="'.rewriteURL('/item/'.surlencode($class).'/'. surlencode($item->name) . '.html').'">'; ?>
+				<img class="item_image" src="<?php echo $item->imageurl; ?>" alt="">
+				<span class="block item_name"><?php echo $item->name; ?></span>
+			</a>
+		</div>
+		<?php
 	}
-  }
+	}
 	echo '</div>';
 	echo '<div style="clear: left;"></div>';
 	endBox();

@@ -19,24 +19,24 @@
 
 
 function printRespawn($turns) {
-  return round($turns *0.3/60, 2);
+	return round($turns *0.3/60, 2);
 }
 
 function renderAmount($amount) {
-  if (!is_numeric($amount)) {
-	  $amount=str_replace("[","",$amount);
-	  $amount=str_replace("]","",$amount);
-	  list($min,$max)=explode(",",$amount);
-  } else {
-	  $min = $amount;
-	  $max = $amount;
-  }
+	if (!is_numeric($amount)) {
+		$amount=str_replace("[","",$amount);
+		$amount=str_replace("]","",$amount);
+		list($min,$max)=explode(",",$amount);
+	} else {
+		$min = $amount;
+		$max = $amount;
+	}
 
-  if($min!=$max) {
-    return "between $min and $max.";
-  } else {
-  	return "exactly $min.";
-  }
+	if($min!=$max) {
+		return "between $min and $max.";
+	} else {
+		return "exactly $min.";
+	}
 }
 
 class MonsterPage extends Page {
@@ -167,37 +167,37 @@ foreach($this->monsters as $m) {
 	endBox();
 
 
-    /*
-     * Obtain data from database
-     */
-    $m->fillKillKilledData();
+		/*
+		 * Obtain data from database
+		 */
+		$m->fillKillKilledData();
 
-    startBox(ucfirst($m->name)." killed by players, per day");
-      $data='';
-      foreach($m->kills as $day=>$amount) {
+		startBox(ucfirst($m->name)." killed by players, per day");
+			$data='';
+			foreach($m->kills as $day=>$amount) {
 	$date = date('M-d', time() - $day * 86400);
 	$data .= $date . '_' . $amount . ',';
-      }
-    ?>
-    <img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed creature" >
-    <?php
-    endBox();
+			}
+		?>
+		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed creature" >
+		<?php
+		endBox();
 
-    startBox("Players killed by ".$m->name.", per day");
-      $data='';
-      foreach($m->killed as $day=>$amount) {
-        $date = date('M-d', time() - $day * 86400);
+		startBox("Players killed by ".$m->name.", per day");
+			$data='';
+			foreach($m->killed as $day=>$amount) {
+				$date = date('M-d', time() - $day * 86400);
 	$data.= $date . '_' . $amount . ',';
-      }
-    ?>
-    <img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed Players" >
-    <?php
-    endBox();
+			}
+		?>
+		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed Players" >
+		<?php
+		endBox();
 		$this->writeRelatedPages('C.'.strtolower($m->name), 'Stendhal_Quest', 'Quests');
-    ?>
-    <div style="margin-bottom: 48px;"></div>
-    <?php
-  }
+		?>
+		<div style="margin-bottom: 48px;"></div>
+		<?php
+	}
 }
 		$this->includeJs();
 	}

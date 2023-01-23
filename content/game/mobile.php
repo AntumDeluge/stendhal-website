@@ -233,8 +233,8 @@ class MobilePage extends Page {
 					<h3><span class="tileset-itemicon itemicon-'.str_replace('/', '-', substr($item->imageurl, 13, -4)).'"></span>';
 
 				echo htmlspecialchars(ucfirst($item->name)).'</h3>';
- 				$this->writeItemDetails($item);
- 				echo '</div>';
+				$this->writeItemDetails($item);
+				echo '</div>';
 			}
 		}
 

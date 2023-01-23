@@ -34,12 +34,12 @@ $classes=Monster::getClasses();
 startBox('<h1>Creatures</h1>');
 ?>
 <form method="get" action="/" id="currentContentSearch">
-  <input type="hidden" name="id" value="content/scripts/monster">
-  <input type="text" name="name" maxlength="60">
-  <input type="submit" name="sublogin" value="Search">
+	<input type="hidden" name="id" value="content/scripts/monster">
+	<input type="text" name="name" maxlength="60">
+	<input type="submit" name="sublogin" value="Search">
 </form>
 <div>
-  <?php echo sizeof($monsters); ?> creatures so far.
+	<?php echo sizeof($monsters); ?> creatures so far.
 </div>
 
 <div class="cards">

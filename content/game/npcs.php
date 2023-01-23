@@ -33,13 +33,13 @@ $npcs=NPC::getNPCs();
 startBox('<h1>NPCs</h1>');
 ?>
 <form method="get" action="<?php echo '/'.STENDHAL_FOLDER;?>" id="currentContentSearch">
-  <input type="hidden" name="id" value="content/scripts/npc">
-  <input type="hidden" name="search" value="y">
-  <input type="text" name="name" maxlength="60">
-  <input type="submit" name="sublogin" value="Search">
+	<input type="hidden" name="id" value="content/scripts/npc">
+	<input type="hidden" name="search" value="y">
+	<input type="text" name="name" maxlength="60">
+	<input type="submit" name="sublogin" value="Search">
 </form>
 <div>
-  <?php echo sizeof($npcs); ?> NPCs so far.
+	<?php echo sizeof($npcs); ?> NPCs so far.
 </div>
 
 <div class="cards">
