@@ -61,7 +61,7 @@ class NPCPage extends Page {
 
 		echo '<div class="table">';
 		echo '<div class="title">Details</div>';
-		echo '<img class="bordered_image" src="'.htmlspecialchars($npc->imagefile).'" alt="">';
+		echo '<img class="bordered_image" src="'.htmlspecialchars($npc->imageurl).'" alt="">';
 		echo '<div class="statslabel">Name:</div><div class="data">'.htmlspecialchars($npc->name).'</div>';
 		echo '<div class="statslabel">Zone:</div><div class="data">';
 		if ($npc->pos != '') {

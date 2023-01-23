@@ -21,6 +21,9 @@
  * A class representing a monster.
  */
 
+require_once("scripts/entity.php");
+
+
 function sortByLevelAndName($a, $b) {
 	$res = ($a->level - $b->level);
 	if ($res != 0) {
@@ -36,18 +39,10 @@ function sortByLevelAndName($a, $b) {
 
 
 
-class Monster {
+class Monster extends Entity {
 	public static $classes=array();
 	public static $monsters=array();
 
-	/* Name of the monster */
-	public $name;
-	/* Description of the monster */
-	public $description;
-	/* Class of the monster */
-	public $class;
-	/* GFX URL of the monster. */
-	public $gfx;
 	/* Level of the monster */
 	public $level;
 	/* XP value of the monster */
@@ -68,28 +63,27 @@ class Monster {
 	public $locations;
 
 	function __construct($name, $description, $class, $gfx, $level, $xp, $respawn, $attributes, $susceptibilities, $drops) {
-		$this->name=$name;
-		$this->description=$description;
-		$this->class=$class;
+		parent::__construct($name, $description, $class);
 		self::$classes[$class]=0;
-		$this->gfx=$gfx;
 		$this->level=$level;
 		$this->xp=$xp;
 		$this->respawn=$respawn;
 		$this->attributes=$attributes;
 		$this->drops=$drops;
 		$this->susceptibilities=$susceptibilities;
+
+		$this->setImage($gfx);
 	}
 
 	function showImage() {
-		return $this->gfx;
+		return $this->imageurl;
 	}
 
 	function showImageWithPopup() {
 		$popup = '<div class="stendhalCreature"><span class="stendhalCreatureIconNameBanner">';
 
 		$popup .= '<span class="stendhalCreatureIcon">';
-		$popup .= '<img src="' . htmlspecialchars($this->gfx) . '" />';
+		$popup .= '<img src="' . htmlspecialchars($this->imageurl) . '" />';
 		$popup .= '</span>';
 
 		$popup .= '<a href="'.rewriteURL('/creature/'.surlencode($this->name).'.html').'">';

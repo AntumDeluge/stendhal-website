@@ -112,7 +112,7 @@ class ItemPage extends Page {
 				?>
 		<div class="item">
 			<div class="type">This item is of <?php echo $m->class ?> class</div>
-			<img class="item" src="<?php echo $m->gfx; ?>" alt="">
+			<img class="item" src="<?php echo $m->imageurl; ?>" alt="">
 				<?php
 				if ($m->unattainable) {
 					echo '<br>This item is not available.';

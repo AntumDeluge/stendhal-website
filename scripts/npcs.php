@@ -17,15 +17,16 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once("scripts/entity.php");
+
+
 /**
  * A class that represents an NPC, with details on the name, stats, location and what it looks like.
  */
-class NPC {
+class NPC extends Entity {
 	public static $shops;
 
-	public $name;
 	public $title;
-	public $class;
 	public $outfit;
 	public $imagefile;
 	public $level;
@@ -35,14 +36,12 @@ class NPC {
 	public $pos;
 	public $x;
 	public $y;
-	public $description;
 	public $job;
 	public $altimage;
 
 	function __construct($name, $title, $class, $outfit, $level, $hp, $base_hp, $zone, $pos, $x, $y, $description, $job, $altimage) {
-		$this->name=$name;
+		parent::__construct($name, $description, $class);
 		$this->title=$title;
-		$this->class=$class;
 		$this->outfit=$outfit;
 		$imagefile = '/images/npc/'.surlencode($class).'.png';
 		if (strpos($imagefile, '/npc/../monsters/') !== false) {
@@ -54,7 +53,6 @@ class NPC {
 		if (isset($altimage) && $altimage != '') {
 			$imagefile = '/images/npc/alternative/'.surlencode($altimage).'.png';
 		}
-		$this->imagefile=rewriteURL($imagefile);
 		$this->level=$level;
 		$this->hp=$hp;
 		$this->base_hp=$base_hp;
@@ -62,8 +60,9 @@ class NPC {
 		$this->pos=$pos;
 		$this->x=$x;
 		$this->y=$y;
-		$this->description=$description;
 		$this->job=$job;
+
+		$this->setImage(rewriteURL($imagefile));
 	}
 
 

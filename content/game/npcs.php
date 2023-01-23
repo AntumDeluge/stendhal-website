@@ -2,6 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
+ Copyright (C) 2008-2023 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -46,7 +47,7 @@ startBox('<h1>NPCs</h1>');
 
 foreach($npcs as $npc) {
 	echo '<div class="npc"><a class="npc" href="'.rewriteURL('/npc/'.surlencode($npc->name).'.html').'">';
-	echo '  <img class="npc" src="'.$npc->imagefile.'" alt="'.$npc->name.'">';
+	echo '  <img class="npc" src="'.$npc->imageurl.'" alt="'.$npc->name.'">';
 	echo '  <span class="block npc_name">'.$npc->name.'</span>';
 	echo ' </a>';
 	echo '</div>';

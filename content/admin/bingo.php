@@ -76,7 +76,7 @@ class BingoPage extends Page {
 			?>
 	<div class="monster">
 		<div class="name"><?php echo ucfirst($m->name); ?></div>
-		<img class="monster" src="<?php echo $m->gfx; ?>" alt="">
+		<img class="monster" src="<?php echo $m->imageurl; ?>" alt="">
 		<div class="level">Level <?php echo $m->level; ?></div>
 		<div class="description">
 		<?php

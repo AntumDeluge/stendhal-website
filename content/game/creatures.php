@@ -2,6 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
+ Copyright (C) 2008-2023 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -45,7 +46,7 @@ startBox('<h1>Creatures</h1>');
 <?php
 foreach($monsters as $m) {
 	echo '<div class="creature"><a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
-	echo '  <img class="creature" src="'.$m->gfx.'" alt="">';
+	echo '  <img class="creature" src="'.$m->imageurl.'" alt="">';
 	echo '  <span class="block creature_name">'.$m->name.'</span>';
 	echo ' </a>';
 	echo '  <div class="creature_level">Level '.$m->level.'</div>';

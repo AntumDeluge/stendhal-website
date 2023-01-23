@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2014-2018 Faiumoni e. V.
+ Copyright (C) 2014-2023 Faiumoni e. V.
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -172,7 +172,7 @@ class SearchsPage extends Page {
 		$this->renderEntry($name,
 			'Creature – Level: '.$entry->level,
 			'/creature/',
-			$entry->gfx,
+			$entry->imageurl,
 			$entry->description);
 	}
 
@@ -184,7 +184,7 @@ class SearchsPage extends Page {
 		$this->renderEntry($name,
 				'Item – '.ucfirst($entry->class),
 				'/item/'.surlencode($entry->class).'/',
-				$entry->gfx,
+				$entry->imageurl,
 				$entry->description);
 	}
 
@@ -198,7 +198,7 @@ class SearchsPage extends Page {
 		$this->renderEntry($name,
 			'NPC – '.$pos,
 			'/npc/',
-			$entry->imagefile,
+			$entry->imageurl,
 			$entry->description);
 	}
 

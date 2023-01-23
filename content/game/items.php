@@ -56,7 +56,7 @@ if(!isset($_GET['class'])) {
     <div class="f3cols">
       <?php
         echo '<a href="'.rewriteURL('/item/'.surlencode($class).'.html').'">';
-        echo '<img src="'.$choosen->gfx.'" alt=""><br>';
+        echo '<img src="'.$choosen->imageurl.'" alt=""><br>';
         echo ucfirst($class). '</a>';?>
     </div>
     <?php
@@ -83,7 +83,7 @@ echo '<div class="cards">';
 	  ?>
   	  <div class="item">
         <?php echo '<a class="item" href="'.rewriteURL('/item/'.surlencode($class).'/'. surlencode($item->name) . '.html').'">'; ?>
- 	      <img class="item_image" src="<?php echo $item->gfx; ?>" alt="">
+ 	      <img class="item_image" src="<?php echo $item->imageurl; ?>" alt="">
 	      <span class="block item_name"><?php echo $item->name; ?></span>
 	    </a>
 	  </div>

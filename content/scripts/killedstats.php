@@ -2,7 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2016 The Arianne Project
+ Copyright (C) 2008-2023 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -56,7 +56,7 @@ list($m, $amount)=$result;
 echo '<div style="text-align: center;">';
 if (!is_null($m)) {
   echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
-  echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
+  echo '  <img class="creature" src="'.$m->imageurl.'" alt="'.$m->name.'"/>';
   echo '  <span class="block creature_name">'.$m->name.'</span>';
   echo ' </a>';
   echo '  <div class="creature_killed">It was killed '.$amount.' times</div>';
@@ -78,7 +78,7 @@ list($m, $amount)=$result;
 echo '<div style="text-align: center;">';
 if (!is_null($m)) {
   echo '  <a class="creature" href="'.rewriteURL('/creature/'.surlencode($m->name).'.html').'">';
-  echo '  <img class="creature" src="'.$m->gfx.'" alt="'.$m->name.'"/>';
+  echo '  <img class="creature" src="'.$m->imageurl.'" alt="'.$m->name.'"/>';
   echo '  <span class="block creature_name">'.$m->name.'</span>';
   echo ' </a>';
   echo '  <div class="creature_killed">It has killed '.$amount.' players</div>';

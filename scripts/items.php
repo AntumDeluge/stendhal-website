@@ -18,22 +18,16 @@
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once("scripts/entity.php");
+
 
 /*
  * A class representing an item.
  */
-class Item {
+class Item extends Entity {
 	public static $classes=array();
 	public static $items=array();
 
-	/** Name of the item */
-	public $name;
-	/** Description of the item */
-	public $description;
-	/** Class of the item */
-	public $class;
-	/** GFX URL of the item. */
-	public $gfx;
 	/** Attributes of the item as an array attribute=>value */
 	public $attributes;
 	/** susceptibilities and resistances */
@@ -45,21 +39,20 @@ class Item {
 
 	function __construct($name, $description, $class, $gfx, $attributes, $susceptibilities, $equipableat,
 			$unattainable=false) {
-		$this->name=$name;
-		$this->description=$description;
-		$this->class=$class;
+		parent::__construct($name, $description, $class);
 		if (!$unattainable) {
 			self::$classes[$class]=0;
 		}
-		$this->gfx=$gfx;
 		$this->attributes=$attributes;
 		$this->equipableat=$equipableat;
 		$this->susceptibilities=$susceptibilities;
 		$this->unattainable=$unattainable;
+
+		$this->setImage($gfx);
 	}
 
 	function showImage() {
-		return $this->gfx;
+		return $this->imageurl;
 	}
 
 	static function getClasses() {
@@ -83,7 +76,7 @@ class Item {
 		}
 
 		$popup .= '<span class="stendhalItemIcon">';
-		$popup .= '<img src="' . htmlspecialchars($this->gfx) . '" />';
+		$popup .= '<img src="' . htmlspecialchars($this->imageurl) . '" />';
 		$popup .= '</span>';
 
 		$popup .= '<a href="'.rewriteURL('/item/'.surlencode($this->class).'/'.surlencode($this->name).'.html').'">';

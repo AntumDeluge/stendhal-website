@@ -93,7 +93,7 @@ class MobilePage extends Page {
 		foreach(MobilePage::$creatures as $creature) {
 			if($item->class==$class) {
 				echo '<div data-role="collapsible" data-collapsed="true">
-				<h3><span class="tileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->gfx, 17, -4)).'"></span>';
+				<h3><span class="tileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->imageurl, 17, -4)).'"></span>';
 
 				echo htmlspecialchars(ucfirst($creature->name)).'</h3>';
 				$this->writeCreatureDetails($creature);
@@ -116,7 +116,7 @@ class MobilePage extends Page {
 
 
 		foreach(MobilePage::$creatures as $creature) {
-			echo '<li class="Xtileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->gfx, 17, -4)).'">'
+			echo '<li class="Xtileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->imageurl, 17, -4)).'">'
 			.'<a href="#page-creature-'.htmlspecialchars($creature->name).'">'
 			.htmlspecialchars(ucfirst($creature->name)).'</a></li>';
 		}
@@ -132,7 +132,7 @@ class MobilePage extends Page {
 		</div>';
 
 		echo '<div data-role="content">
-			<h3><span class="tileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->gfx, 17, -4)).'"></span>';
+			<h3><span class="tileset-creatureicon creatureicon-'.str_replace('/', '-', substr($creature->imageurl, 17, -4)).'"></span>';
 		echo htmlspecialchars(ucfirst($creature->name)).'</h3>';
 		$this->writeCreatureDetails($creature);
 
@@ -199,7 +199,7 @@ class MobilePage extends Page {
 			$icon = false;
 			foreach(MobilePage::$items as $item) {
 				if($item->class==$class) {
-					$icon = $item->gfx;
+					$icon = $item->imageurl;
 					// no break, because we want the last and most powerful item icon
 				}
 			}
@@ -230,7 +230,7 @@ class MobilePage extends Page {
 		foreach(MobilePage::$items as $item) {
 			if($item->class==$class) {
 				echo '<div data-role="collapsible" data-collapsed="true">
-					<h3><span class="tileset-itemicon itemicon-'.str_replace('/', '-', substr($item->gfx, 13, -4)).'"></span>';
+					<h3><span class="tileset-itemicon itemicon-'.str_replace('/', '-', substr($item->imageurl, 13, -4)).'"></span>';
 
 				echo htmlspecialchars(ucfirst($item->name)).'</h3>';
  				$this->writeItemDetails($item);
