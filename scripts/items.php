@@ -284,10 +284,10 @@ function getItemMerchants($itemname) {
 
 	foreach (getShops() as $npcname=>$shopinfo) {
 		if (isset($shopinfo["sell"]) && isset($shopinfo["sell"][$itemname])) {
-			$npclist["sellers"][] = $npcname;
+			$npclist["sellers"][$npcname] = $shopinfo["sell"][$itemname];
 		}
 		if (isset($shopinfo["buy"]) && isset($shopinfo["buy"][$itemname])) {
-			$npclist["buyers"][] = $npcname;
+			$npclist["buyers"][$npcname] = $shopinfo["buy"][$itemname];
 		}
 	}
 	return $npclist;

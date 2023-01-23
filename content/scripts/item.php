@@ -321,7 +321,7 @@ class ItemPage extends Page {
 	}
 
 	private function buildMerchantList($merchants) {
-		foreach ($merchants as $merchant) {
+		foreach ($merchants as $merchant=>$price) {
 			echo "<div class=\"row\">";
 			$npc = NPC::getNPC($merchant);
 			if (isset($npc)) {
@@ -329,8 +329,9 @@ class ItemPage extends Page {
 				echo $npc->getBorderedImage();
 				echo "</a>";
 			}
-			echo "<span class=\"block label\">";
-			echo $merchant."</span><div style=\"clear:left;\"></div></div>";
+			echo "<span class=\"block label\">".$merchant."</span>";
+			echo "<div class=\"data\">".$price." money</div>";
+			echo "<div style=\"clear:left;\"></div></div>";
 		}
 	}
 }
