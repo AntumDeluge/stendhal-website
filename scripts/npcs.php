@@ -135,6 +135,60 @@ class NPC {
 
 
 /**
+ * Parses shop info from xml data.
+ */
+function parseShops($shopdata) {
+	$shops = [];
+	if (sizeof($shopdata) < 2) {
+		return $shops;
+	}
+
+	for ($idx = 0; $idx < sizeof($shopdata) / 2; $idx++) {
+		if (!isset($shopdata[$idx." attr"])) {
+			continue;
+		}
+		if (!isset($shopdata[$idx]["item"])) {
+			continue;
+		}
+
+		$attr = $shopdata[$idx." attr"];
+		if (!isset($attr["type"]) || !isset($attr["npcs"])) {
+			continue;
+		}
+
+		$contents = $shopdata[$idx]["item"];
+		$itemlist = [];
+		for ($i = 0; $i < sizeof($contents) / 2; $i++) {
+			$item = $contents[$i." attr"];
+			if (isset($item["name"]) && isset($item["price"])) {
+				$itemlist[$item["name"]] = $item["price"];
+			}
+		}
+
+		$stype = $attr["type"];
+		$snpcs = $attr["npcs"];
+
+		$npcnames = [];
+		while (strlen($snpcs) > 0) {
+			$delim = strpos($snpcs, ",");
+			if ($delim == null) {
+				$npcnames[] = trim($snpcs);
+				$snpcs = "";
+			} else {
+				$npcnames[] = trim(substr($snpcs, 0, $delim));
+				$snpcs = substr($snpcs, $delim+1);
+			}
+		}
+
+		foreach ($npcnames as $npcname) {
+			$shops[$npcname][$stype] = $itemlist;
+		}
+	}
+
+	return $shops;
+}
+
+/**
  * Retrieves shops registered for NPCs.
  */
 function getShops() {
@@ -161,54 +215,9 @@ function getShops() {
 		return $shops;
 	}
 
-	$shopslist = $root["shops"][0]["shop"];
-	if (sizeof($shopslist) < 2) {
-		NPC::$shops = $shops;
-		$cache->store("stendhal_shops", new ArrayObject($shops));
-		return $shops;
-	}
-
-	for ($idx = 0; $idx < sizeof($shopslist) / 2; $idx++) {
-		if (!isset($shopslist[$idx." attr"])) {
-			continue;
-		}
-		if (!isset($shopslist[$idx]["item"])) {
-			continue;
-		}
-
-		$attr = $shopslist[$idx." attr"];
-		if (!isset($attr["name"]) || !isset($attr["type"]) || !isset($attr["npcs"])) {
-			continue;
-		}
-
-		$contents = $shopslist[$idx]["item"];
-		$itemlist = [];
-		for ($i = 0; $i < sizeof($contents) / 2; $i++) {
-			$item = $contents[$i." attr"];
-			if (isset($item["name"]) && isset($item["price"])) {
-				$itemlist[$item["name"]] = $item["price"];
-			}
-		}
-
-		$sname = $attr["name"];
-		$stype = $attr["type"];
-		$snpcs = $attr["npcs"];
-
-		$npcnames = [];
-		while (strlen($snpcs) > 0) {
-			$delim = strpos($snpcs, ",");
-			if ($delim == null) {
-				$npcnames[] = trim($snpcs);
-				$snpcs = "";
-			} else {
-				$npcnames[] = trim(substr($snpcs, 0, $delim));
-				$snpcs = substr($snpcs, $delim+1);
-			}
-		}
-
-		foreach ($npcnames as $npcname) {
-			$shops[$npcname][$stype] = $itemlist;
-		}
+	$shops = parseShops($root["shops"][0]["shop"]);
+	if (isset($root["shops"][0]["shopref"])) {
+		$shops = array_merge($shops, parseShops($root["shops"][0]["shopref"]));
 	}
 
 	NPC::$shops = $shops;
