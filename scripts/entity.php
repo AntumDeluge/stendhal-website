@@ -39,4 +39,8 @@ abstract class Entity {
 	function getImage() {
 		return $this->imageurl;
 	}
+
+	function getBorderedImage() {
+		return "<img class=\"bordered_image\" src=\"".$this->imageurl."\" alt=\"\">";
+	}
 }

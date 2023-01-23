@@ -259,7 +259,6 @@ class ItemPage extends Page {
 					</div>
 					<div style="clear: left;"></div>
 				</div> <!-- Dropped by -->
-	</div> <!-- table -->
 
 				<?php
 				// NPC buyers & sellers
@@ -269,12 +268,13 @@ class ItemPage extends Page {
 
 			<div class="table">
 				<div class="title">Sold by</div>
+				<div style="float:left; width:100%;">
 					<?php
 					$this->buildMerchantList($merchants["sellers"]);
 					?>
 
-				<div style="float: left; width: 100%;">
 				</div>
+				<div style="clear:left;"></div>
 			</div>
 
 					<?php
@@ -284,17 +284,22 @@ class ItemPage extends Page {
 
 			<div class="table">
 				<div class="title">Bought by</div>
+				<div style="float:left; width:100%;">
 					<?php
 					$this->buildMerchantList($merchants["buyers"]);
 					?>
 
-				<div style="float: left; width: 100%;">
 				</div>
+				<div style="clear:left;"></div>
 			</div>
 
 					<?php
 				}
+				?>
 
+	</div> <!-- table -->
+
+				<?php
 				endBox();
 				$this->writeRelatedPages('I.'.strtolower($m->name), 'Stendhal_Quest', 'Quests');
 				$this->includeJs();
@@ -318,9 +323,14 @@ class ItemPage extends Page {
 	private function buildMerchantList($merchants) {
 		foreach ($merchants as $merchant) {
 			echo "<div class=\"row\">";
+			$npc = NPC::getNPC($merchant);
+			if (isset($npc)) {
+				echo "<a href=\"".rewriteURL("/npc/".surlencode($merchant).".html")."\">";
+				echo $npc->getBorderedImage();
+				echo "</a>";
+			}
 			echo "<span class=\"block label\">";
-			echo "<a href=\"".rewriteURL("/npc/".surlencode($merchant).".html")."\">";
-			echo $merchant."</a></span></div>";
+			echo $merchant."</span><div style=\"clear:left;\"></div></div>";
 		}
 	}
 }
