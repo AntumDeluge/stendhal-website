@@ -104,9 +104,21 @@ class Item extends Entity {
 	}
 }
 
+
+$item_aliases = [
+	"daisy seed" => "seed",
+	"lilia seed" => "seed",
+	"pansy seed" => "seed",
+	"zantedeschia bulb" => "bulb"
+];
+
 function getItem($name) {
-	$items=getItems();
-	foreach($items as $i) {
+	global $item_aliases;
+
+	if (isset($item_aliases[$name])) {
+		$name = $item_aliases[$name];
+	}
+	foreach (getItems() as $i) {
 		if($i->name == $name) {
 			return $i;
 		}

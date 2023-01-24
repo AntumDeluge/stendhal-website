@@ -141,7 +141,7 @@ class NPCPage extends Page {
 			?>
 			<div class="row">
 			<?php
-			$item = getItem($iname); // FIXME: doesn't work for seeds & bulbs
+			$item = getItem($iname);
 			if ($item != null) {
 				echo $item->generateImageWithPopup();
 			}
