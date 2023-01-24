@@ -193,7 +193,7 @@ class SearchsPage extends Page {
 		if ($entry->pos != '') {
 			$pos = $entry->zone.' '.$entry->pos;
 		} else {
-			$pos = $npc->zone;
+			$pos = $entry->zone;
 		}
 		$this->renderEntry($name,
 			'NPC – '.$pos,
