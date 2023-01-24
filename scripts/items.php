@@ -105,6 +105,30 @@ class Item extends Entity {
 }
 
 
+class DummyItem {
+	public $name;
+	public $description;
+	public $imageurl;
+
+	function __construct($name, $description, $imageurl) {
+		$this->name = $name;
+		$this->description = $description;
+		$this->imageurl = $imageurl;
+	}
+
+	function showImageWithPopup($title = null) {
+		echo $this->generateImageWithPopup($title);
+	}
+
+	function generateImageWithPopup($title = null) {
+		return "<img src=\"".htmlspecialchars($this->imageurl)."\" alt=\"\"></a>";
+	}
+}
+
+$dummy_items = [
+	"sheep" => ["desc" => "A sheep.", "image" => "/images/sheep32.png"]
+];
+
 $item_aliases = [
 	"daisy seed" => "seed",
 	"lilia seed" => "seed",
@@ -113,6 +137,7 @@ $item_aliases = [
 ];
 
 function getItem($name) {
+	global $dummy_items;
 	global $item_aliases;
 
 	if (isset($item_aliases[$name])) {
@@ -123,6 +148,12 @@ function getItem($name) {
 			return $i;
 		}
 	}
+
+	if (isset($dummy_items[$name])) {
+		//~ return createSpecialItem($name, $special_items[$name]["desc"], $special_items[$name]["image"]);
+		return new DummyItem($name, $dummy_items[$name]["desc"], $dummy_items[$name]["image"]);
+	}
+
 	return null;
 }
 
