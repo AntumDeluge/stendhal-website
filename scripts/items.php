@@ -130,7 +130,8 @@ class DummyItem {
 }
 
 $dummy_items = [
-	"sheep" => ["desc" => "A sheep.", "image" => "/images/sheep32.png"]
+	"cat" => ["desc" => "", "image" => "/images/game/cat.png"],
+	"sheep" => ["desc" => "A sheep.", "image" => "/images/game/sheep.png"]
 ];
 
 $item_aliases = [
