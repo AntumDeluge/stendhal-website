@@ -89,7 +89,7 @@ class NPCPage extends Page {
 		$this->writeRelatedPages('N.'.strtolower($npc->name), 'Stendhal_Quest', 'Quests');
 
 		// shop lists
-		$shop = getShop($npc->name);
+		$shop = $npc->getShop();
 		if (isset($shop)) {
 			echo "\n\n		";
 			startBox("Shops");

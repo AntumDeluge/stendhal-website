@@ -130,102 +130,176 @@ class NPC extends Entity {
 		}
 		return $list;
 	}
+
+	function getShop() {
+		return getNPCShop($this->name);
+	}
 }
 
+
+// shops lists
+$shops;
+$npcshops;
 
 /**
  * Parses shop info from xml data.
+ *
+ * @param shopsdata
+ *     XML data containing shops information.
  */
-function parseShops($shopdata) {
-	$shops = [];
-	if (sizeof($shopdata) < 2) {
-		return $shops;
+function parseShopsData($shopsdata) {
+	global $shops;
+	global $npcshops;
+
+	if (!isset($shops)) {
+		$shops = [];
+	}
+	if (!isset($npcshops)) {
+		$npcshops = [];
 	}
 
-	for ($idx = 0; $idx < sizeof($shopdata) / 2; $idx++) {
-		if (!isset($shopdata[$idx." attr"])) {
-			continue;
-		}
-		if (!isset($shopdata[$idx]["item"])) {
-			continue;
-		}
+	if (sizeof($shopsdata) < 2) {
+		return;
+	}
 
-		$attr = $shopdata[$idx." attr"];
-		if (!isset($attr["type"]) || !isset($attr["npcs"])) {
+	for ($idx = 0; $idx < sizeof($shopsdata) / 2; $idx++) {
+		if (!isset($shopsdata[$idx." attr"])) {
 			continue;
 		}
 
-		$contents = $shopdata[$idx]["item"];
-		$itemlist = [];
-		for ($i = 0; $i < sizeof($contents) / 2; $i++) {
-			$item = $contents[$i." attr"];
-			if (isset($item["name"]) && isset($item["price"])) {
-				$price = $item["price"];
-				if (isset($item["pricemax"])) {
-					$price .= "-".$item["pricemax"];
-				}
-				$itemlist[$item["name"]] = $price;
-			}
+		$attr = $shopsdata[$idx." attr"];
+		if (!isset($attr["type"])) {
+			continue;
 		}
-
-		$stype = $attr["type"];
-		$snpcs = $attr["npcs"];
 
 		$npcnames = [];
-		while (strlen($snpcs) > 0) {
-			$delim = strpos($snpcs, ",");
-			if ($delim == null) {
-				$npcnames[] = trim($snpcs);
-				$snpcs = "";
-			} else {
-				$npcnames[] = trim(substr($snpcs, 0, $delim));
-				$snpcs = substr($snpcs, $delim+1);
+		$shopid = null;
+		$shoptype = $attr["type"];
+		if (isset($attr["npcs"])) {
+			foreach (explode(",", $attr["npcs"]) as $npcname) {
+				$npcnames[] = trim($npcname);
+			}
+			$npcnames = sizeof($npcnames) > 0 ? $npcnames : null;
+		}
+		if (isset($attr["name"])) {
+			$shopid = $attr["name"];
+		}
+
+		$itemlist = [];
+		if (isset($shopsdata[$idx]["item"])) {
+			$contents = $shopsdata[$idx]["item"];
+			for ($i = 0; $i < sizeof($contents) / 2; $i++) {
+				$item = $contents[$i." attr"];
+				if (isset($item["name"]) && isset($item["price"])) {
+					$price = $item["price"];
+					if (isset($item["pricemax"])) {
+						$price .= "-".$item["pricemax"];
+					}
+					$itemlist[$item["name"]] = $price;
+				}
 			}
 		}
 
-		foreach ($npcnames as $npcname) {
-			$shops[$npcname][$stype] = $itemlist;
+		// names of shops whose contents are included in this one
+		$includes = [];
+		if (isset($attr["includes"])) {
+			foreach (explode(",", $attr["includes"]) as $incshop) {
+				$includes[] = trim($incshop);
+			}
+		}
+
+		if (isset($shopid)) {
+			// named shops
+			if (sizeof($itemlist) > 0) {
+				$shops[$shopid] = $itemlist;
+			}
+			if (sizeof($includes) > 0) {
+				// temporary storage for shops contents to be included
+				$shops[$shopid]["__includes__"] = $includes;
+			}
+			foreach ($npcnames as $npcname) {
+				// store shop name for reference
+				$npcshops[$npcname][$shoptype] = $shopid;
+			}
+		} else {
+			// unnamed shops
+			foreach ($npcnames as $npcname) {
+				$npcshops[$npcname][$shoptype] = $itemlist;
+				if (sizeof($includes) > 0) {
+					$npcshops[$npcname][$shoptype."_includes"] = $includes;
+				}
+			}
 		}
 	}
-
-	return $shops;
 }
 
 /**
- * Retrieves shops registered for NPCs.
+ * Loads registered shops from config.
  */
-function getShops() {
-	global $cache;
+function loadShops() {
+	//~ global $cache;
+	global $shops;
+	global $npcshops;
 
 	// FIXME: caching not working
-	if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
-		NPC::$shops = $cache->fetchAsArray("stendhal_shops");
-	}
+	//~ if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
+		//~ NPC::$shops = $cache->fetchAsArray("stendhal_shops");
+	//~ }
+	//~ if (is_array(NPC::$shops) && sizeof(NPC::$shops) > 0) {
+		//~ return;
+	//~ }
 
-	if (is_array(NPC::$shops) && sizeof(NPC::$shops) > 0) {
-		return NPC::$shops;
+	if (isset($shops) && isset($npcsshops)) {
+		return;
 	}
-
-	$shops = [];
 
 	$content = file("data/conf/shops.xml");
 	$tmp = implode("", $content);
 	$root = XML_unserialize($tmp);
 
-	if (!isset($root["shops"][0]["shop"])) {
-		NPC::$shops = $shops;
-		$cache->store("stendhal_shops", new ArrayObject($shops));
-		return $shops;
+	if (!isset($root["shops"][0]["shop"]) && !isset($root["shops"][0]["shopref"])) {
+		$shops = [];
+		$npcshops = [];
+		//~ NPC::$shops = $npcshops;
+		//~ $cache->store("stendhal_shops", new ArrayObject($npcshops));
+		return;
 	}
 
-	$shops = parseShops($root["shops"][0]["shop"]);
+	if (isset($root["shops"][0]["shop"])) {
+		parseShopsData($root["shops"][0]["shop"]);
+	}
 	if (isset($root["shops"][0]["shopref"])) {
-		$shops = array_merge($shops, parseShops($root["shops"][0]["shopref"]));
+		parseShopsData($root["shops"][0]["shopref"]);
 	}
 
-	NPC::$shops = $shops;
-	$cache->store("stendhal_shops", new ArrayObject($shops));
-	return $shops;
+	// add items included from other shops
+	foreach ($shops as $shopid=>$itemlist) {
+		if (isset($itemlist["__includes__"])) {
+			foreach ($itemlist["__includes__"] as $includeid) {
+				if (isset($shops[$includeid])) {
+					$shops[$shopid] = array_merge($shops[$shopid], $shops[$includeid]);
+				}
+			}
+			// this is called after in case the merged shop had an "__includes__" key as well
+			unset($shops[$shopid]["__includes__"]);
+		}
+	}
+	foreach ($npcshops as $npcname=>$shopdata) {
+		foreach (["sell", "buy"] as $shoptype) {
+			if (isset($shopdata[$shoptype]) && isset($shopdata[$shoptype."_includes"])) {
+				$includes = $shopdata[$shoptype."_includes"];
+				foreach ($includes as $includeid) {
+					if (isset($shops[$includeid])) {
+						$npcshops[$npcname][$shoptype] = array_merge($npcshops[$npcname][$shoptype], $shops[$includeid]);
+					}
+					unset($npcshops[$npcname][$shoptype."_includes"]);
+				}
+			}
+		}
+	}
+
+	//~ NPC::$shops = $npcshops;
+	//~ $cache->store("stendhal_shops", new ArrayObject($npcshops));
 }
 
 /**
@@ -237,9 +311,32 @@ function getShops() {
  *     "sell" &/or "buy" shop lists or <code>null</code> if the NPC
  *     does not have a shop.
  */
-function getShop($npcname) {
-	$shops = getShops();
-	if (isset($shops[$npcname])) {
-		return $shops[$npcname];
+function getNPCShop($npcname) {
+	global $shops;
+	global $npcshops;
+
+	loadShops();
+
+	if (!isset($npcshops[$npcname])) {
+		return;
 	}
+
+	$tmp = $npcshops[$npcname];
+	$sells = isset($tmp["sell"]) ? $tmp["sell"] : null;
+	$buys = isset($tmp["buy"]) ? $tmp["buy"] : null;
+	if (gettype($sells) === "string" && isset($shops[$sells])) {
+		$sells = $shops[$sells];
+	}
+	if (gettype($buys) === "string" && isset($shops[$buys])) {
+		$buys = $shops[$buys];
+	}
+
+	$npcshop = [];
+	if (is_array($sells)) {
+		$npcshop["sell"] = $sells;
+	}
+	if (is_array($buys)) {
+		$npcshop["buy"] = $buys;
+	}
+	return $npcshop;
 }
