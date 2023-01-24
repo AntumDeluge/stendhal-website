@@ -85,26 +85,30 @@ class NPCPage extends Page {
 		echo '</div>';
 		endBox();
 
-		// quests involving this NPC
-		$this->writeRelatedPages('N.'.strtolower($npc->name), 'Stendhal_Quest', 'Quests');
-
 		// shop lists
 		$shop = $npc->getShop();
 		if (isset($shop)) {
-			echo "\n\n		";
 			startBox("Shops");
-			// FIXME: global CSS not working here
-			echo "\n		<div class=\"table shops\" style=\"display:flex;\">";
+			?>
+			<div class="table shops">
+			<div style="display:flex;">
+			<?php
 			if (isset($shop["sell"])) {
 				$this->buildShop("Sells", $shop["sell"]);
 			}
 			if (isset($shop["buy"])) {
 				$this->buildShop("Buys", $shop["buy"]);
 			}
-			echo "</div> <!-- class:shops -->\n\t\t";
+			?>
+			</div>
+			</div>
+			<div style="clear:left;"></div>
+			<?php
 			endBox();
-			echo "\n\n";
 		}
+
+		// quests involving this NPC
+		$this->writeRelatedPages('N.'.strtolower($npc->name), 'Stendhal_Quest', 'Quests');
 	}
 
 	public function getBreadCrumbs() {
@@ -129,28 +133,27 @@ class NPCPage extends Page {
 	private function buildShop($stitle, $slist) {
 		?>
 
-		<!-- FIXME: why isn't global CSS working here? class="shoplist" -->
-		<div class="shoplist" style="float:left; width:50%;"><?php echo $stitle ?>
-
-			<table>
+		<div class="shoplist" style="float:left;width:50%;">
+		<div class="title"><?php echo $stitle; ?></div>
 		<?php
-		$idx = 0;
+
 		foreach($slist as $iname=>$iprice) {
+			?>
+			<div class="row">
+			<?php
 			$item = getItem($iname); // FIXME: doesn't work for seeds & bulbs
-			if ($idx > 0) {
-				echo "		";
-			}
-			echo "		<tr>\n					";
 			if ($item != null) {
-				echo "<td>".$item->generateImageWithPopup()."</td>";
+				echo $item->generateImageWithPopup();
 			}
-			echo "<td>".$iname."</td><td>".$iprice."</td>";
-			echo "\n				</tr>\n";
-			$idx++;
+			?>
+			<span class="block label"><?php echo $iname; ?></span>
+			<div class="data"><?php echo $iprice; ?> money</div>
+			</div>
+			<?php
 		}
 		?>
-			</table>
-		</div> <!-- class:shoplist -->
+
+		</div>
 		<?php
 	}
 }
