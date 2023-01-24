@@ -39,6 +39,9 @@ header('Etag: "'.$etag.'"');
 if (isset($requestedEtag) && (($requestedEtag == $etag) || ($requestedEtag == '"'.$etag.'"'))) {
 	header('HTTP/1.0 304 Not modified');
 } else {
-	$drawer = new NPCAndCreatureDrawer();
-	imagepng($drawer->createImageData($url));
+	// FIXME: how to show a failsafe image?
+	if (file_exists($url)) {
+		$drawer = new NPCAndCreatureDrawer();
+		imagepng($drawer->createImageData($url));
+	}
 }
