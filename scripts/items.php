@@ -56,11 +56,11 @@ class Item extends Entity {
 	}
 
 	static function getClasses() {
-	    // Note: The cache may expire individually on both variables. So we need to make sure that both variable
-	    if (!isset(Item::$items) || sizeof(Item::$items) == 0
-	        || !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
-    	    Item::getItems();
-        }
+		// Note: The cache may expire individually on both variables. So we need to make sure that both variable
+		if (!isset(Item::$items) || sizeof(Item::$items) == 0
+			|| !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
+			Item::getItems();
+		}
 		return Item::$classes;
 	}
 
@@ -120,12 +120,12 @@ function getItem($name) {
 function getItems() {
 	global $cache;
 	if (!isset(Item::$items) || sizeof(Item::$items) == 0
-	    || !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
-	    Item::$items = $cache->fetchAsArray('stendhal_items');
+		|| !isset(Item::$classes) || sizeof(Item::$classes) == 0) {
+		Item::$items = $cache->fetchAsArray('stendhal_items');
 		Item::$classes = $cache->fetchAsArray('stendhal_items_classes');
 	}
 	if ((is_array(Item::$items) && (sizeof(Item::$items) != 0))
-	    && (is_array(Item::$classes) && (sizeof(Item::$classes) != 0))) {
+		&& (is_array(Item::$classes) && (sizeof(Item::$classes) != 0))) {
 		return Item::$items;
 	}
 	Item::$classes = array();
