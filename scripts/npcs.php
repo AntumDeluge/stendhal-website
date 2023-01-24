@@ -201,11 +201,10 @@ function parseShopsData($shopsdata) {
 			}
 			$merchant = $tmp[$m." attr"];
 			if (isset($merchant["name"])) {
-				$merchants[] = $merchant["name"];
+				$merchants[$merchant["name"]] = isset($merchant["note"]) ? $merchant["note"] : null;
 			}
 		}
 
-		$shoptype = $attr["type"];
 		$itemlist = [];
 		if (isset($shopsdata[$idx]["item"])) {
 			$contents = $shopsdata[$idx]["item"];
@@ -214,25 +213,41 @@ function parseShopsData($shopsdata) {
 					continue;
 				}
 				$item = $contents[$i." attr"];
-				if (isset($item["name"]) && isset($item["price"])) {
+				$requirealso = null;
+				if (isset($item["name"])) {
 					if (isset($contents[$i]["require"])) {
 						$requirealso = parseAddRequire($contents[$i]["require"]);
 					}
 
-					$price = $item["price"];
-					if (isset($item["pricemax"])) {
+					$price = isset($item["price"]) ? $item["price"] : "";
+					if (strlen($price) > 0 && isset($item["pricemax"])) {
 						$price .= "-".$item["pricemax"];
 					}
-					$price .= " money";
+					$price = strlen($price) > 0 ? $price." money" : $price;
 					if (isset($requirealso)) {
-						$price .= " + ".$requirealso;
+						if (strlen($price) > 0) {
+							$price .= " + ";
+						}
+						$price .= $requirealso;
 					}
-					$itemlist[$item["name"]] = $price;
+					$itemname = $item["name"];
+					$itemlist[$itemname] = "Price: ".$price;
+					if (isset($item["note"])) {
+						$itemlist["__itemnotes__"][$itemname] = $item["note"];
+					}
 				}
 			}
 		}
 
-		foreach ($merchants as $npcname) {
+		$shoptype = $attr["type"];
+		foreach ($merchants as $npcname=>$shopnote) {
+			// allow merchants configured for multiple shops
+			if (isset($npcshops[$npcname][$shoptype])) {
+				$itemlist = array_merge($npcshops[$npcname][$shoptype], $itemlist);
+			}
+			if (isset($shopnote)) {
+				$itemlist["__shopnote__"] = $shopnote;
+			}
 			$npcshops[$npcname][$shoptype] = $itemlist;
 		}
 	}
@@ -268,6 +283,9 @@ function loadShops() {
 
 	if (isset($root["shops"][0]["shop"])) {
 		parseShopsData($root["shops"][0]["shop"]);
+	}
+	if (isset($root["shops"][0]["trade"])) {
+		parseShopsData($root["shops"][0]["trade"]);
 	}
 
 	//~ NPC::$shops = $npcshops;

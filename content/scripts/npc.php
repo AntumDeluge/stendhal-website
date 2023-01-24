@@ -131,10 +131,24 @@ class NPCPage extends Page {
 	 *     Key-value list of shop items.
 	 */
 	private function buildShop($stitle, $slist) {
+		$shopnote = null;
+		$itemnotes = [];
+		if (isset($slist["__shopnote__"])) {
+			$shopnote = $slist["__shopnote__"];
+			unset($slist["__shopnote__"]);
+		}
+		if (isset($slist["__itemnotes__"])) {
+			$itemnotes = $slist["__itemnotes__"];
+			unset($slist["__itemnotes__"]);
+		}
 		?>
 
 		<div class="shoplist" style="float:left;width:50%;">
-		<div class="title"><?php echo $stitle; ?></div>
+		<div class="title"><?php echo $stitle;
+		if (isset($shopnote)) {
+			echo " <em>(".$shopnote.")</em>";
+		}
+		?></div>
 		<?php
 
 		foreach($slist as $iname=>$iprice) {
@@ -146,7 +160,11 @@ class NPCPage extends Page {
 				echo $item->generateImageWithPopup();
 			}
 			?>
-			<span class="block label"><?php echo $iname; ?></span>
+			<span class="block label"><?php echo $iname;
+			if (isset($itemnotes[$iname])) {
+				echo " <span style=\"font-weight:normal;\"><em>(".$itemnotes[$iname].")</em></span>";
+			}
+			?></span>
 			<div class="data"><?php echo $iprice; ?></div>
 			</div>
 			<?php
