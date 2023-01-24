@@ -138,7 +138,6 @@ class NPC extends Entity {
 
 
 // shops lists
-$shops;
 $npcshops;
 
 /**
@@ -148,12 +147,8 @@ $npcshops;
  *     XML data containing shops information.
  */
 function parseShopsData($shopsdata) {
-	global $shops;
 	global $npcshops;
 
-	if (!isset($shops)) {
-		$shops = [];
-	}
 	if (!isset($npcshops)) {
 		$npcshops = [];
 	}
@@ -163,7 +158,7 @@ function parseShopsData($shopsdata) {
 	}
 
 	for ($idx = 0; $idx < sizeof($shopsdata) / 2; $idx++) {
-		if (!isset($shopsdata[$idx." attr"])) {
+		if (!isset($shopsdata[$idx." attr"]) || !isset($shopsdata[$idx]["merchant"])) {
 			continue;
 		}
 
@@ -172,23 +167,26 @@ function parseShopsData($shopsdata) {
 			continue;
 		}
 
-		$npcnames = [];
-		$shopid = null;
-		$shoptype = $attr["type"];
-		if (isset($attr["npcs"])) {
-			foreach (explode(",", $attr["npcs"]) as $npcname) {
-				$npcnames[] = trim($npcname);
+		$merchants = [];
+		$tmp = $shopsdata[$idx]["merchant"];
+		for ($m = 0; $m < sizeof($tmp) / 2; $m++) {
+			if (!isset($tmp[$m." attr"])) {
+				continue;
 			}
-			$npcnames = sizeof($npcnames) > 0 ? $npcnames : null;
-		}
-		if (isset($attr["name"])) {
-			$shopid = $attr["name"];
+			$merchant = $tmp[$m." attr"];
+			if (isset($merchant["name"])) {
+				$merchants[] = $merchant["name"];
+			}
 		}
 
+		$shoptype = $attr["type"];
 		$itemlist = [];
 		if (isset($shopsdata[$idx]["item"])) {
 			$contents = $shopsdata[$idx]["item"];
 			for ($i = 0; $i < sizeof($contents) / 2; $i++) {
+				if (!isset($contents[$i." attr"])) {
+					continue;
+				}
 				$item = $contents[$i." attr"];
 				if (isset($item["name"]) && isset($item["price"])) {
 					$price = $item["price"];
@@ -200,35 +198,8 @@ function parseShopsData($shopsdata) {
 			}
 		}
 
-		// names of shops whose contents are included in this one
-		$includes = [];
-		if (isset($attr["includes"])) {
-			foreach (explode(",", $attr["includes"]) as $incshop) {
-				$includes[] = trim($incshop);
-			}
-		}
-
-		if (isset($shopid)) {
-			// named shops
-			if (sizeof($itemlist) > 0) {
-				$shops[$shopid] = $itemlist;
-			}
-			if (sizeof($includes) > 0) {
-				// temporary storage for shops contents to be included
-				$shops[$shopid]["__includes__"] = $includes;
-			}
-			foreach ($npcnames as $npcname) {
-				// store shop name for reference
-				$npcshops[$npcname][$shoptype] = $shopid;
-			}
-		} else {
-			// unnamed shops
-			foreach ($npcnames as $npcname) {
-				$npcshops[$npcname][$shoptype] = $itemlist;
-				if (sizeof($includes) > 0) {
-					$npcshops[$npcname][$shoptype."_includes"] = $includes;
-				}
-			}
+		foreach ($merchants as $npcname) {
+			$npcshops[$npcname][$shoptype] = $itemlist;
 		}
 	}
 }
@@ -238,7 +209,6 @@ function parseShopsData($shopsdata) {
  */
 function loadShops() {
 	//~ global $cache;
-	global $shops;
 	global $npcshops;
 
 	// FIXME: caching not working
@@ -249,7 +219,7 @@ function loadShops() {
 		//~ return;
 	//~ }
 
-	if (isset($shops) && isset($npcsshops)) {
+	if (isset($npcsshops)) {
 		return;
 	}
 
@@ -257,45 +227,13 @@ function loadShops() {
 	$tmp = implode("", $content);
 	$root = XML_unserialize($tmp);
 
-	if (!isset($root["shops"][0]["shop"]) && !isset($root["shops"][0]["shopref"])) {
-		$shops = [];
+	if (!isset($root["shops"][0]["shop"])) {
 		$npcshops = [];
-		//~ NPC::$shops = $npcshops;
-		//~ $cache->store("stendhal_shops", new ArrayObject($npcshops));
 		return;
 	}
 
 	if (isset($root["shops"][0]["shop"])) {
 		parseShopsData($root["shops"][0]["shop"]);
-	}
-	if (isset($root["shops"][0]["shopref"])) {
-		parseShopsData($root["shops"][0]["shopref"]);
-	}
-
-	// add items included from other shops
-	foreach ($shops as $shopid=>$itemlist) {
-		if (isset($itemlist["__includes__"])) {
-			foreach ($itemlist["__includes__"] as $includeid) {
-				if (isset($shops[$includeid])) {
-					$shops[$shopid] = array_merge($shops[$shopid], $shops[$includeid]);
-				}
-			}
-			// this is called after in case the merged shop had an "__includes__" key as well
-			unset($shops[$shopid]["__includes__"]);
-		}
-	}
-	foreach ($npcshops as $npcname=>$shopdata) {
-		foreach (["sell", "buy"] as $shoptype) {
-			if (isset($shopdata[$shoptype]) && isset($shopdata[$shoptype."_includes"])) {
-				$includes = $shopdata[$shoptype."_includes"];
-				foreach ($includes as $includeid) {
-					if (isset($shops[$includeid])) {
-						$npcshops[$npcname][$shoptype] = array_merge($npcshops[$npcname][$shoptype], $shops[$includeid]);
-					}
-					unset($npcshops[$npcname][$shoptype."_includes"]);
-				}
-			}
-		}
 	}
 
 	//~ NPC::$shops = $npcshops;
@@ -312,33 +250,12 @@ function loadShops() {
  *     does not have a shop.
  */
 function getNPCShop($npcname) {
-	global $shops;
 	global $npcshops;
 
 	loadShops();
-
-	if (!isset($npcshops[$npcname])) {
-		return;
+	if (isset($npcshops[$npcname])) {
+		return $npcshops[$npcname];
 	}
-
-	$tmp = $npcshops[$npcname];
-	$sells = isset($tmp["sell"]) ? $tmp["sell"] : null;
-	$buys = isset($tmp["buy"]) ? $tmp["buy"] : null;
-	if (gettype($sells) === "string" && isset($shops[$sells])) {
-		$sells = $shops[$sells];
-	}
-	if (gettype($buys) === "string" && isset($shops[$buys])) {
-		$buys = $shops[$buys];
-	}
-
-	$npcshop = [];
-	if (is_array($sells)) {
-		$npcshop["sell"] = $sells;
-	}
-	if (is_array($buys)) {
-		$npcshop["buy"] = $buys;
-	}
-	return $npcshop;
 }
 
 /**
@@ -348,13 +265,5 @@ function getNPCShops() {
 	global $npcshops;
 
 	loadShops();
-
-	$allshops = [];
-	foreach (array_keys($npcshops) as $npcname) {
-		$npcshop = getNPCShop($npcname);
-		if (isset($npcshop) && sizeof($npcshop) > 0) {
-			$allshops[$npcname] = $npcshop;
-		}
-	}
-	return $allshops;
+	return $npcshops;
 }
