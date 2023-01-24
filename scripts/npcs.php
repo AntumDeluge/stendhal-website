@@ -137,6 +137,32 @@ class NPC extends Entity {
 }
 
 
+function parseAddRequire($reqdata) {
+	$required;
+	if (!is_array($reqdata)) {
+		return;
+	}
+	for ($idx = 0; $idx < sizeof($reqdata); $idx++) {
+		if (!isset($reqdata[$idx." attr"])) {
+			continue;
+		}
+		$tmp = $reqdata[$idx." attr"];
+		if (isset($tmp["name"]) && isset($tmp["count"])) {
+			$name = $tmp["name"];
+			$item = getItem($name);
+			if ($item != null) {
+				$name = $item->createNameLink();
+			}
+			if (!isset($required)) {
+				$required = $tmp["count"]." ".$name;
+			} else {
+				$required .= " + ".$tmp["count"]." ".$name;
+			}
+		}
+	}
+	return $required;
+}
+
 // shops lists
 $npcshops;
 
@@ -189,9 +215,17 @@ function parseShopsData($shopsdata) {
 				}
 				$item = $contents[$i." attr"];
 				if (isset($item["name"]) && isset($item["price"])) {
+					if (isset($contents[$i]["require"])) {
+						$requirealso = parseAddRequire($contents[$i]["require"]);
+					}
+
 					$price = $item["price"];
 					if (isset($item["pricemax"])) {
 						$price .= "-".$item["pricemax"];
+					}
+					$price .= " money";
+					if (isset($requirealso)) {
+						$price .= " + ".$requirealso;
 					}
 					$itemlist[$item["name"]] = $price;
 				}

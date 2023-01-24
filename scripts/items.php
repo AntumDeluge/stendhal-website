@@ -102,6 +102,10 @@ class Item extends Entity {
 		return '<a href="'.rewriteURL('/item/'.surlencode($this->class).'/'.surlencode($this->name).'.html').'" class="overliblink" title="'.htmlspecialchars($this->name).'" data-popup="'.htmlspecialchars($popup).'">'
 				. '<img src="'.htmlspecialchars($this->showImage()).'" alt=""></a>';
 	}
+
+	function createNameLink() {
+		return '<a class="stendhalItemLink" href="'.rewriteURL('/item/'.surlencode($this->class).'/'.surlencode($this->name).'.html').'">'.$this->name.'</a>';
+	}
 }
 
 

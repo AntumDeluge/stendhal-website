@@ -330,7 +330,7 @@ class ItemPage extends Page {
 				echo "</a>";
 			}
 			echo "<span class=\"block label\">".$merchant."</span>";
-			echo "<div class=\"data\">".$price." money</div>";
+			echo "<div class=\"data\">".$price."</div>";
 			echo "<div style=\"clear:left;\"></div></div>";
 		}
 	}

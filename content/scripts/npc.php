@@ -147,7 +147,7 @@ class NPCPage extends Page {
 			}
 			?>
 			<span class="block label"><?php echo $iname; ?></span>
-			<div class="data"><?php echo $iprice; ?> money</div>
+			<div class="data"><?php echo $iprice; ?></div>
 			</div>
 			<?php
 		}
