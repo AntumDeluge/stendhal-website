@@ -340,3 +340,21 @@ function getNPCShop($npcname) {
 	}
 	return $npcshop;
 }
+
+/**
+ * Retrieves all NPC shops.
+ */
+function getNPCShops() {
+	global $npcshops;
+
+	loadShops();
+
+	$allshops = [];
+	foreach (array_keys($npcshops) as $npcname) {
+		$npcshop = getNPCShop($npcname);
+		if (isset($npcshop) && sizeof($npcshop) > 0) {
+			$allshops[$npcname] = $npcshop;
+		}
+	}
+	return $allshops;
+}

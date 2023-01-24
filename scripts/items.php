@@ -282,7 +282,7 @@ function getItemMerchants($itemname) {
 		"buyers" => []
 	];
 
-	foreach (getShops() as $npcname=>$shopinfo) {
+	foreach (getNPCShops() as $npcname=>$shopinfo) {
 		if (isset($shopinfo["sell"]) && isset($shopinfo["sell"][$itemname])) {
 			$npclist["sellers"][$npcname] = $shopinfo["sell"][$itemname];
 		}
