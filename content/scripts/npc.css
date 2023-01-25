@@ -70,3 +70,21 @@
 	height: 32px;
 	border: 1px solid black;
 }
+
+div.shops {
+	display: flex;
+}
+
+div.shoplist {
+	float: left;
+	width: 50%;
+}
+
+span.shopnote span.itemnote {
+	font-weight: normal;
+	font-size: small;
+}
+
+span.itemnote {
+	font-style: italic;
+}

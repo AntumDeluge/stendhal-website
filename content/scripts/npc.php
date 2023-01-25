@@ -90,8 +90,8 @@ class NPCPage extends Page {
 		if (isset($shop)) {
 			startBox("Shops");
 			?>
-			<div class="table shops">
-			<div style="display:flex;">
+			<div class="table">
+			<div class="shops">
 			<?php
 			if (isset($shop["sell"])) {
 				$this->buildShop("Sells", $shop["sell"]);
@@ -143,10 +143,13 @@ class NPCPage extends Page {
 		}
 		?>
 
-		<div class="shoplist" style="float:left;width:50%;">
+		<div class="shoplist">
 		<div class="title"><?php echo $stitle;
 		if (isset($shopnote)) {
-			echo " <em>(".$shopnote.")</em>";
+			// global CSS not working here, being overridden by containing element?
+			?>
+			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo $shopnote; ?>)</span>
+			<?php
 		}
 		?></div>
 		<?php
@@ -162,7 +165,8 @@ class NPCPage extends Page {
 			?>
 			<span class="block label"><?php echo $iname;
 			if (isset($itemnotes[$iname])) {
-				echo " <span style=\"font-weight:normal;\"><em>(".$itemnotes[$iname].")</em></span>";
+				?>
+				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo $itemnotes[$iname]; ?>)</span><?php
 			}
 			?></span>
 			<div class="data"><?php echo $iprice; ?></div>
