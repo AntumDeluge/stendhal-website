@@ -163,6 +163,7 @@ foreach($this->monsters as $m) {
 					<?php } if (isset($k["note"])) { ?>
 					<div class="data"><?php echo $k["note"]; ?></div>
 					<?php } ?>
+					<div style="clear: left;"></div>
 				</div>
 			<?php
 			}
