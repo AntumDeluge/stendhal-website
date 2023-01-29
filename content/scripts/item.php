@@ -247,8 +247,15 @@ class ItemPage extends Page {
 							<div class="row">
 								<?php $monster->showImageWithPopup() ?>
 								<span class="block label"><?php echo $monster->name; ?></span>
+								<?php if (isset($k["quantity"])) { ?>
 								<div class="data">Drops <?php echo renderAmount($k["quantity"]); ?></div>
+								<?php } if (isset($k["probability"])) { ?>
 								<div class="data">Probability: <?php echo formatNumber($k["probability"]); ?>%</div>
+								<?php } if (isset($k["special"]) && $k["special"] === true) { ?>
+								<div class="data">Special drop.</div>
+								<?php } if (isset($k["note"])) { ?>
+								<div class="data"><?php echo $k["note"]; ?></div>
+								<?php } ?>
 								<div style="clear: left;"></div>
 							</div>
 							<?php
