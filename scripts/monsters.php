@@ -329,6 +329,17 @@ function getMonsters() {
 							}
 						}
 					}
+					if (isset($temp['special'])) {
+						foreach ($temp['special'] as $drop) {
+							if (is_array($drop)) {
+								$special_drop = array("name"=>$drop['value'], "special"=>true);
+								if (isset($drop['note'])) {
+									$special_drop['note'] = $drop['note'];
+								}
+								$drops[] = $special_drop;
+							}
+						}
+					}
 				}
 
 				$list[]=new Monster($name, $description, $class, $gfx, $level, $xp, $respawn, $attributes, $susceptibilities, $drops);
