@@ -171,8 +171,10 @@ $npcshops;
  *
  * @param shopsdata
  *     XML data containing shops information.
+ * @param shoptype
+ *     Shop type override.
  */
-function parseShopsData($shopsdata) {
+function parseShopsData($shopsdata, $shoptype=null) {
 	global $npcshops;
 
 	if (!isset($npcshops)) {
@@ -189,8 +191,11 @@ function parseShopsData($shopsdata) {
 		}
 
 		$attr = $shopsdata[$idx." attr"];
-		if (!isset($attr["type"])) {
-			continue;
+		if (!isset($shoptype)) {
+			if (!isset($attr["type"])) {
+				continue;
+			}
+			$shoptype = $attr["type"];
 		}
 
 		$merchants = [];
@@ -206,8 +211,17 @@ function parseShopsData($shopsdata) {
 		}
 
 		$itemlist = [];
-		if (isset($shopsdata[$idx]["item"])) {
-			$contents = $shopsdata[$idx]["item"];
+		$contents = null;
+		if ($shoptype === "outfit") {
+			if (isset($shopsdata[$idx]["outfit"])) {
+				$contents = $shopsdata[$idx]["outfit"];
+			}
+		} else {
+			if (isset($shopsdata[$idx]["item"])) {
+				$contents = $shopsdata[$idx]["item"];
+			}
+		}
+		if (isset($contents)) {
 			for ($i = 0; $i < sizeof($contents) / 2; $i++) {
 				if (!isset($contents[$i." attr"])) {
 					continue;
@@ -239,7 +253,6 @@ function parseShopsData($shopsdata) {
 			}
 		}
 
-		$shoptype = $attr["type"];
 		foreach ($merchants as $npcname=>$shopnote) {
 			// allow merchants configured for multiple shops
 			if (isset($npcshops[$npcname][$shoptype])) {
@@ -286,6 +299,9 @@ function loadShops() {
 	}
 	if (isset($root["shops"][0]["trade"])) {
 		parseShopsData($root["shops"][0]["trade"]);
+	}
+	if (isset($root["shops"][0]["outfitshop"])) {
+		parseShopsData($root["shops"][0]["outfitshop"], "outfit");
 	}
 
 	//~ NPC::$shops = $npcshops;

@@ -99,6 +99,9 @@ class NPCPage extends Page {
 			if (isset($shop["buy"])) {
 				$this->buildShop("Buys", $shop["buy"]);
 			}
+			if (isset($shop["outfit"])) {
+				$this->buildShop("Sells/Loans outfits", $shop["outfit"], false);
+			}
 			?>
 			</div>
 			</div>
@@ -125,12 +128,16 @@ class NPCPage extends Page {
 	/**
 	 * Creates a shop list.
 	 *
+	 * // TODO: draw outfits
+	 *
 	 * @param stitle
 	 *     Header to show type of shop (Sells or Buys).
 	 * @param slist
 	 *     Key-value list of shop items.
+	 * @param itemshop
+	 *     `true` for item shop, `false` for outfit shop.
 	 */
-	private function buildShop($stitle, $slist) {
+	private function buildShop($stitle, $slist, $itemshop=true) {
 		$shopnote = null;
 		$itemnotes = [];
 		if (isset($slist["__shopnote__"])) {
@@ -158,9 +165,11 @@ class NPCPage extends Page {
 			?>
 			<div class="row">
 			<?php
-			$item = getItem($iname);
-			if ($item != null) {
-				echo $item->generateImageWithPopup();
+			if ($itemshop) {
+				$item = getItem($iname);
+				if ($item != null) {
+					echo $item->generateImageWithPopup();
+				}
 			}
 			?>
 			<span class="block label"><?php echo $iname;
