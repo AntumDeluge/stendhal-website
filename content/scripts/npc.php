@@ -133,27 +133,21 @@ class NPCPage extends Page {
 	 * @param stitle
 	 *     Header to show type of shop (Sells or Buys).
 	 * @param slist
-	 *     Key-value list of shop items.
+	 *     Shop inventory information.
 	 * @param itemshop
 	 *     `true` for item shop, `false` for outfit shop.
 	 */
 	private function buildShop($stitle, $slist, $itemshop=true) {
 		$shopnote = null;
-		$itemnotes = [];
 		if (isset($slist["__shopnote__"])) {
 			$shopnote = $slist["__shopnote__"];
 			unset($slist["__shopnote__"]);
-		}
-		if (isset($slist["__itemnotes__"])) {
-			$itemnotes = $slist["__itemnotes__"];
-			unset($slist["__itemnotes__"]);
 		}
 		?>
 
 		<div class="shoplist">
 		<div class="title"><?php echo $stitle;
 		if (isset($shopnote)) {
-			// global CSS not working here, being overridden by containing element?
 			?>
 			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo $shopnote; ?>)</span>
 			<?php
@@ -161,7 +155,7 @@ class NPCPage extends Page {
 		?></div>
 		<?php
 
-		foreach($slist as $iname=>$iprice) {
+		foreach($slist as $iname=>$invitem) {
 			?>
 			<div class="row">
 			<?php
@@ -170,15 +164,23 @@ class NPCPage extends Page {
 				if ($item != null) {
 					echo $item->generateImageWithPopup();
 				}
+			} else {
+				// FIXME: "rear" detail layer not displayed
+				$outfitimage = "/images/outfit/".surlencode($invitem["layers"], 0).".png";
+				?>
+				<div style="clear:left;">
+				<img class="creature" src="<?php echo $outfitimage;?>">
+				</div>
+				<?php
 			}
 			?>
 			<span class="block label"><?php echo $iname;
-			if (isset($itemnotes[$iname])) {
+			if (isset($invitem["note"])) {
 				?>
-				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo $itemnotes[$iname]; ?>)</span><?php
+				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo $invitem["note"]; ?>)</span><?php
 			}
 			?></span>
-			<div class="data"><?php echo $iprice; ?></div>
+			<div class="data">Price: <?php echo $invitem["price"]; ?></div>
 			</div>
 			<?php
 		}

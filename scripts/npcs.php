@@ -136,6 +136,15 @@ class NPC extends Entity {
 	}
 }
 
+function formatOutfit($outfitstring) {
+	$outfit = explode(",", $outfitstring);
+	for ($idx = 0; $idx < sizeof($outfit); $idx++) {
+		$layer = str_replace("=", "-", $outfit[$idx])."-0";
+		$outfit[$idx] = $layer;
+	}
+	$outfitstring = implode("_", $outfit);
+	return $outfitstring;
+}
 
 function parseAddRequire($reqdata) {
 	$required;
@@ -226,6 +235,7 @@ function parseShopsData($shopsdata, $shoptype=null) {
 				if (!isset($contents[$i." attr"])) {
 					continue;
 				}
+
 				$item = $contents[$i." attr"];
 				$requirealso = null;
 				if (isset($item["name"])) {
@@ -245,9 +255,12 @@ function parseShopsData($shopsdata, $shoptype=null) {
 						$price .= $requirealso;
 					}
 					$itemname = $item["name"];
-					$itemlist[$itemname] = "Price: ".$price;
+					$itemlist[$itemname]["price"] = $price;
+					if ($shoptype === "outfit" && isset($item["layers"])) {
+						$itemlist[$itemname]["layers"] = formatOutfit($item["layers"]);
+					}
 					if (isset($item["note"])) {
-						$itemlist["__itemnotes__"][$itemname] = $item["note"];
+						$itemlist[$itemname]["note"] = $item["note"];
 					}
 				}
 			}
