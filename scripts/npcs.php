@@ -195,11 +195,14 @@ function parseShopsData($shopsdata, $shoptype=null) {
 	}
 
 	for ($idx = 0; $idx < sizeof($shopsdata) / 2; $idx++) {
-		if (!isset($shopsdata[$idx." attr"]) || !isset($shopsdata[$idx]["merchant"])) {
+		if (!isset($shopsdata[$idx]["merchant"])) {
 			continue;
 		}
 
-		$attr = $shopsdata[$idx." attr"];
+		$attr = [];
+		if (isset($shopsdata[$idx." attr"])) {
+			$attr = $shopsdata[$idx." attr"];
+		}
 		if (!isset($shoptype)) {
 			if (!isset($attr["type"])) {
 				continue;
