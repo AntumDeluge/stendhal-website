@@ -290,6 +290,9 @@ function loadShops() {
 	global $npcshops;
 
 	// FIXME: caching not working
+	$npcshops = [];
+	return;
+
 	//~ if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
 		//~ NPC::$shops = $cache->fetchAsArray("stendhal_shops");
 	//~ }
