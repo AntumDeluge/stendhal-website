@@ -146,10 +146,10 @@ class NPCPage extends Page {
 		?>
 
 		<div class="shoplist">
-		<div class="title"><?php echo $stitle;
+		<div class="title"><?php echo htmlspecialchars($stitle);
 		if (isset($shopnote)) {
 			?>
-			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo $shopnote; ?>)</span>
+			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo htmlspecialchars($shopnote); ?>)</span>
 			<?php
 		}
 		?></div>
@@ -174,13 +174,13 @@ class NPCPage extends Page {
 				<?php
 			}
 			?>
-			<span class="block label"><?php echo $iname;
+			<span class="block label"><?php echo htmlspecialchars($iname);
 			if (isset($invitem["note"])) {
 				?>
-				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo $invitem["note"]; ?>)</span><?php
+				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo htmlspecialchars($invitem["note"]); ?>)</span><?php
 			}
 			?></span>
-			<div class="data">Price: <?php echo $invitem["price"]; ?></div>
+			<div class="data">Price: <?php echo htmlspecialchars($invitem["price"]); ?></div>
 			</div>
 			<?php
 		}
