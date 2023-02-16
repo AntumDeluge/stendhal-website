@@ -111,7 +111,7 @@ class ItemPage extends Page {
 				startBox('<h1>'.htmlspecialchars(ucfirst($m->name)).'</h1>');
 				?>
 		<div class="item">
-			<div class="type">This item is of <?php echo $m->class ?> class</div>
+			<div class="type">This item is of <?php echo htmlspecialchars($m->class) ?> class</div>
 			<img class="item" src="<?php echo $m->imageurl; ?>" alt="">
 				<?php
 				if ($m->unattainable) {
@@ -170,8 +170,8 @@ class ItemPage extends Page {
 					}
 					?>
 						<div class="row">
-							<div class="label"><?php echo strtoupper(str_replace("_", " ", $label)); ?></div>
-							<div class="data"><?php echo $data; ?></div>
+							<div class="label"><?php echo htmlspecialchars(strtoupper(str_replace("_", " ", $label))); ?></div>
+							<div class="data"><?php echo htmlspecialchars($data); ?></div>
 						</div>
 					<?php
 					if($label=="rate") {
@@ -224,8 +224,8 @@ class ItemPage extends Page {
 					foreach($m->susceptibilities as $label=>$data) {
 						?>
 			<div class="row">
-				<div class="label"><?php echo strtoupper($label); ?></div>
-				<div class="data"><?php echo $data; ?></div>
+				<div class="label"><?php echo htmlspecialchars(strtoupper($label)); ?></div>
+				<div class="data"><?php echo htmlspecialchars($data); ?></div>
 			</div>
 						<?php
 					}
@@ -246,7 +246,7 @@ class ItemPage extends Page {
 							?>
 							<div class="row">
 								<?php $monster->showImageWithPopup() ?>
-								<span class="block label"><?php echo $monster->name; ?></span>
+								<span class="block label"><?php echo htmlspecialchars($monster->name); ?></span>
 								<?php if (isset($k["quantity"])) { ?>
 								<div class="data">Drops <?php echo renderAmount($k["quantity"]); ?></div>
 								<?php } if (isset($k["probability"])) { ?>
@@ -254,7 +254,7 @@ class ItemPage extends Page {
 								<?php } if (isset($k["special"]) && $k["special"] === true) { ?>
 								<div class="data">Special drop.</div>
 								<?php } if (isset($k["note"])) { ?>
-								<div class="data"><?php echo $k["note"]; ?></div>
+								<div class="data"><?php echo htmlspecialchars($k["note"]); ?></div>
 								<?php } ?>
 								<div style="clear: left;"></div>
 							</div>
@@ -336,8 +336,8 @@ class ItemPage extends Page {
 				echo $npc->getBorderedImage();
 				echo "</a>";
 			}
-			echo "<span class=\"block label\">".$merchant."</span>";
-			echo "<div class=\"data\">".$price."</div>";
+			echo "<span class=\"block label\">".htmlspecialchars($merchant)."</span>";
+			echo "<div class=\"data\">".htmlspecialchars($price)."</div>";
 			echo "<div style=\"clear:left;\"></div></div>";
 		}
 	}
