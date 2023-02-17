@@ -99,16 +99,16 @@ foreach($this->monsters as $m) {
 	startBox('<h1>'.htmlspecialchars(ucfirst($m->name)).'</h1>');
 	?>
 	<div class="monster">
-		<img class="monster" src="<?php echo $m->imageurl; ?>" alt="">
-		<div class="level">Level <?php echo $m->level; ?></div>
-		<div class="xp">Killing it will give you <?php echo $m->xp; ?> XP.</div>
-		<div class="respawn">Respawns on average in <?php echo printRespawn($m->respawn); ?> minutes.</div>
+		<img class="monster" src="<?php echo htmlspecialchars($m->imageurl); ?>" alt="">
+		<div class="level">Level <?php echo htmlspecialchars($m->level); ?></div>
+		<div class="xp">Killing it will give you <?php echo htmlspecialchars($m->xp); ?> XP.</div>
+		<div class="respawn">Respawns on average in <?php echo htmlspecialchars(printRespawn($m->respawn)); ?> minutes.</div>
 		<div class="description">
 		<?php
 		if(trim($m->description=="")) {
 			echo 'No description. Would you like to <a href="https://sourceforge.net/p/arianne/patches/new/?summary=Monster%20'.urlencode($m->name).'&description=%3C%3CPlease%20enter%20description%20here%3E%3E#top_nav">write one</a>?';
 		} else {
-			echo $m->description;
+			echo htmlspecialchars($m->description);
 		}
 		?>
 	</div>
@@ -119,8 +119,8 @@ foreach($this->monsters as $m) {
 		foreach($m->attributes as $label=>$data) {
 		?>
 			<div class="row">
-				<div class="label"><?php echo strtoupper($label); ?></div>
-				<div class="data"><?php echo $data; ?></div>
+				<div class="label"><?php echo htmlspecialchars(strtoupper($label)); ?></div>
+				<div class="data"><?php echo htmlspecialchars($data); ?></div>
 			</div>
 		<?php
 		}
@@ -134,8 +134,8 @@ foreach($this->monsters as $m) {
 		foreach($m->susceptibilities as $label=>$data) {
 		?>
 			<div class="row">
-				<div class="label"><?php echo strtoupper($label); ?></div>
-				<div class="data"><?php echo $data; ?>%</div>
+				<div class="label"><?php echo htmlspecialchars(strtoupper($label)); ?></div>
+				<div class="data"><?php echo htmlspecialchars($data); ?>%</div>
 			</div>
 		<?php
 		}
@@ -153,15 +153,15 @@ foreach($this->monsters as $m) {
 					$item = getItem($k["name"]);
 					$item->showImageWithPopup();
 					?>
-					<span class="block label"><?php echo ucfirst($k["name"]); ?></span>
+					<span class="block label"><?php echo htmlspecialchars(ucfirst($k["name"])); ?></span>
 					<?php if (isset($k["quantity"])) { ?>
-					<div class="data">Drops <?php echo renderAmount($k["quantity"]); ?></div>
+					<div class="data">Drops <?php echo htmlspecialchars(renderAmount($k["quantity"])); ?></div>
 					<?php } if (isset($k["probability"])) { ?>
-					<div class="data">Probability: <?php echo $k["probability"]; ?>%</div>
+					<div class="data">Probability: <?php echo htmlspecialchars($k["probability"]); ?>%</div>
 					<?php } if (isset($k["special"]) && $k["special"] === true) { ?>
 					<div class="data">This item is a special drop.</div>
 					<?php } if (isset($k["note"])) { ?>
-					<div class="data"><?php echo $k["note"]; ?></div>
+					<div class="data"><?php echo htmlspecialchars($k["note"]); ?></div>
 					<?php } ?>
 					<div style="clear: left;"></div>
 				</div>
@@ -187,7 +187,7 @@ foreach($this->monsters as $m) {
 	$data .= $date . '_' . $amount . ',';
 			}
 		?>
-		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed creature" >
+		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo htmlspecialchars($data); ?>" alt="<?php echo htmlspecialchars($data); ?>" title="Killed creature" >
 		<?php
 		endBox();
 
@@ -198,7 +198,7 @@ foreach($this->monsters as $m) {
 	$data.= $date . '_' . $amount . ',';
 			}
 		?>
-		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo $data; ?>" alt="<?php echo $data; ?>" title="Killed Players" >
+		<img style="padding: 4px; border: 1px solid black;" src="/bargraph.php?data=<?php echo htmlspecialchars($data); ?>" alt="<?php echo htmlspecialchars($data); ?>" title="Killed Players" >
 		<?php
 		endBox();
 		$this->writeRelatedPages('C.'.strtolower($m->name), 'Stendhal_Quest', 'Quests');
