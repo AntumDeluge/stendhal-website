@@ -180,10 +180,8 @@ $npcshops;
  *
  * @param shopsdata
  *     XML data containing shops information.
- * @param shoptype
- *     Shop type override.
  */
-function parseShopsData($shopsdata, $shoptype=null) {
+function parseShopsData($shopsdata) {
 	global $npcshops;
 
 	if (!isset($npcshops)) {
@@ -203,11 +201,12 @@ function parseShopsData($shopsdata, $shoptype=null) {
 		if (isset($shopsdata[$idx." attr"])) {
 			$attr = $shopsdata[$idx." attr"];
 		}
-		if (!isset($shoptype)) {
-			if (!isset($attr["type"])) {
-				continue;
-			}
-			$shoptype = $attr["type"];
+		if (!isset($attr["type"])) {
+			continue;
+		}
+		$shoptype = $attr["type"];
+		if ($shoptype === "trade") {
+			$shoptype = "sell";
 		}
 
 		$merchants = [];
@@ -242,8 +241,8 @@ function parseShopsData($shopsdata, $shoptype=null) {
 				$item = $contents[$i." attr"];
 				$requirealso = null;
 				if (isset($item["name"])) {
-					if (isset($contents[$i]["require"])) {
-						$requirealso = parseAddRequire($contents[$i]["require"]);
+					if (isset($contents[$i]["for"])) {
+						$requirealso = parseAddRequire($contents[$i]["for"]);
 					}
 
 					$price = isset($item["price"]) ? $item["price"] : "";
@@ -306,21 +305,27 @@ function loadShops() {
 
 	$content = file("data/conf/shops.xml");
 	$tmp = implode("", $content);
-	$root = XML_unserialize($tmp);
+	$groot = XML_unserialize($tmp);
 
-	if (!isset($root["shops"][0]["shop"])) {
-		$npcshops = [];
+	if (!isset($groot["groups"][0]["group"])) {
 		return;
 	}
 
-	if (isset($root["shops"][0]["shop"])) {
+	$tmp = $groot["groups"][0]["group"];
+	$groups = [];
+	for ($idx = 0; $idx < sizeof($tmp) / 2; $idx++) {
+		if (isset($tmp[$idx." attr"]) && isset($tmp[$idx." attr"]["uri"])) {
+			$groups[] = "data/conf/".$tmp[$idx." attr"]["uri"];
+		}
+	}
+	foreach ($groups as $group) {
+		$content = file($group);
+		$tmp = implode("", $content);
+		$root = XML_unserialize($tmp);
+		if (!isset($root["shops"][0]["shop"])) {
+			continue;
+		}
 		parseShopsData($root["shops"][0]["shop"]);
-	}
-	if (isset($root["shops"][0]["trade"])) {
-		parseShopsData($root["shops"][0]["trade"]);
-	}
-	if (isset($root["shops"][0]["outfitshop"])) {
-		parseShopsData($root["shops"][0]["outfitshop"], "outfit");
 	}
 
 	//~ NPC::$shops = $npcshops;
