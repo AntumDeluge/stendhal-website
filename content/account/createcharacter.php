@@ -184,6 +184,18 @@ if (isset($_REQUEST['outfitcode'])) {
     echo htmlspecialchars($_REQUEST['outfitcode']);
 }
 ?>">
+<br>
+<br>
+<br>
+<br>
+<?php 
+$players = getCharactersForUsername($_SESSION['account']->username);
+if(sizeof($players)==0) {
+?>
+<p>Already have an account? <b><a href="<?php echo rewriteURL('/account/merge.html')?>">Merge accounts...</a></b></p>
+<?php
+}
+?>
 <input id="sessionUsername" type="hidden" value="<?php echo htmlspecialchars($_SESSION['account']->username);?>">
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
 </div>
