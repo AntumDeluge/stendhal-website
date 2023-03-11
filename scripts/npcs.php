@@ -24,7 +24,6 @@ require_once("scripts/entity.php");
  * A class that represents an NPC, with details on the name, stats, location and what it looks like.
  */
 class NPC extends Entity {
-	public static $shops;
 
 	public $title;
 	public $outfit;
@@ -132,7 +131,8 @@ class NPC extends Entity {
 	}
 
 	function getShop() {
-		return getNPCShop($this->name);
+		$shops = new Shops();
+		return $shops->getNPCShop($this->name);
 	}
 }
 
