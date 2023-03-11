@@ -57,18 +57,18 @@ interface Cache {
 	function clear();
 }
 
-class APCCacheImpl implements Cache {
+class APCUCacheImpl implements Cache {
 	private $keysToPurge = array('stendhal_creatures', 'stendhal_items', 'stendhal_npcs',
 								'stendhal_item_classes', 'stendhal_creature_classes',
 								'stendhal_pois', 'stendhal_zones', 'stendhal_shops');
 	//TODO: stendhal_events_..., $stendhal_query_...
 
 	function store($key, $value, $ttl = 0) {
-		return apc_store($key, $value, $ttl);
+		return apcu_store($key, $value, $ttl);
 	}
 
 	function fetch($key, &$success = false) {
-		return apc_fetch($key, $success);
+		return apcu_fetch($key, $success);
 	}
 
 	function fetchAsArray($key, &$success = false) {
@@ -98,7 +98,7 @@ class APCCacheImpl implements Cache {
 
 	function clear() {
 		foreach($this->keysToPurge as $key) {
-			apc_delete($key);
+			apcu_delete($key);
 		}
 		$this->store('stendhal_version', STENDHAL_VERSION);
 	}
@@ -139,8 +139,8 @@ class NonPersistentCacheImpl implements Cache {
 	}
 }
 
-if (function_exists('apc_store')) {
-	$cache = new APCCacheImpl();
+if (function_exists('apcu_store')) {
+	$cache = new APCUCacheImpl();
 } else {
 	$cache = new NonPersistentCacheImpl();
 }
