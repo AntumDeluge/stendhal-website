@@ -43,6 +43,7 @@ require_once('scripts/npcs.php');
 require_once('scripts/playerhistory.php');
 require_once('scripts/players.php');
 require_once('scripts/search.php');
+require_once('scripts/shops.php');
 require_once('scripts/statistics.php');
 require_once('scripts/urlrewrite.php');
 require_once('scripts/xml.php');
