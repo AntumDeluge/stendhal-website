@@ -106,7 +106,7 @@ class CreateCharacterPage extends Page {
 <tr>
 	<td>Hat</td>
 	<td><input class="outfitprev" type="button" data-offset="7" value="&lt;"></td>
-	<td rowspan="7"><canvas id="canvas" style="background-position: center;
+	<td rowspan="5"><canvas id="canvas" style="background-position: center;
   background-size: cover; margin: 0 16px" height="98px" width="68px"></canvas></td>
 	<td><input class="outfitnext" type="button" data-offset="7" value="&gt;"></td>
 </tr>
@@ -115,21 +115,25 @@ class CreateCharacterPage extends Page {
 	<td><input class="outfitprev" type="button" data-offset="6" value="&lt;"></td>
 	<td><input class="outfitnext" type="button" data-offset="6" value="&gt;"></td>
 </tr>
+<!--
 <tr>
 	<td>Mask</td>
 	<td><input class="outfitprev" type="button" data-offset="5" value="&lt;"></td>
 	<td><input class="outfitnext" type="button" data-offset="5" value="&gt;"></td>
 </tr>
+-->
 <tr>
 	<td>Eyes</td>
 	<td><input class="outfitprev" type="button" data-offset="4" value="&lt;"></td>
 	<td><input class="outfitnext" type="button" data-offset="4" value="&gt;"></td>
 </tr>
+<!--
 <tr>
 	<td>Mouth</td>
 	<td><input class="outfitprev" type="button" data-offset="3" value="&lt;"></td>
 	<td><input class="outfitnext" type="button" data-offset="3" value="&gt;"></td>
 </tr>
+-->
 <tr>
 	<td>Head</td>
 	<td><input class="outfitprev" type="button" data-offset="2" value="&lt;"></td>
@@ -148,7 +152,16 @@ class CreateCharacterPage extends Page {
 <td>&nbsp;</td>
 </tr>
 
+<tr>
+<td colspan="4">&nbsp;</td>
+</tr>
+
+<tr>
+<td colspan="4">You can change outfit<br> and skin colors in-game.</td>
+</tr>
+
 </table>
+
 
 <div style="float:left; width: 50%; padding-top: 2em">
 <input id="outfitcode" name="outfitcode" type="hidden" value="01010101">
@@ -171,7 +184,6 @@ if (isset($_REQUEST['outfitcode'])) {
     echo htmlspecialchars($_REQUEST['outfitcode']);
 }
 ?>">
-<div style="margin-top:2em;">*You can change outfit colors in-game.</div>
 <input id="sessionUsername" type="hidden" value="<?php echo htmlspecialchars($_SESSION['account']->username);?>">
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
 </div>
