@@ -124,11 +124,13 @@ class CreateAccountPage extends Page {
 </table>
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
 
+<!-- DISABLED STEAM
 <div>
 <a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
 <img src="/images/thirdparty/steam.png">
 </a>
 </div>
+-->
 
 </form>
 <?php

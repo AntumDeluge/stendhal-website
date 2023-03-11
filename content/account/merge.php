@@ -202,12 +202,14 @@ class AccountMerge extends Page {
 				<label for="confirm">I really want to merge these accounts.</label></td></tr>
 				<tr><td colspan="2" align="right"><input type="submit" name="submerge" value="Merge"></td></tr>
 			</table>
-			<div>
 
+			<!-- DISABLED STEAM
+			<div>
 			<a href="/account/merge.html?openid_identifier=https://steamcommunity.com/openid/&merge=<?php echo urlencode($_SESSION['csrf'])?>">
 			<img src="/images/thirdparty/steam.png">
 			</a>
 			</div>
+			-->
 		</form>
 		<br class="clear">
 		<?php

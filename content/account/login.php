@@ -268,11 +268,13 @@ class LoginPage extends Page {
 				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
 			
+			<!-- DISABLED STEAM
 			<div>
 			<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
 			<img src="/images/thirdparty/steam.png">
 			</a>
 			</div>
+			-->
 
 			<?php
 			if (isset($_REQUEST['url'])) {
