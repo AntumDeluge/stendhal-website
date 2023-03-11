@@ -75,15 +75,6 @@ class MyCharactersPage extends Page {
 			echo '</div>';
 		}
 		endBox();
-
-		if(sizeof($players) > 0) {
-			startBox("<h2>Note</h2>");
-			?>
-			<p>Please click on your character to start the experimental webclient. At this time, the webclient is still unfinished and missing many features.
-			<p>Please download the Java client to get the full experience. The client requires a <a target="_blank" href="http://java.com">Java</a> installation.</p>
-			<?php
-			endBox();
-		}
 	}
 }
 $page = new MyCharactersPage();
