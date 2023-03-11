@@ -98,42 +98,50 @@
 </ul>
 </div>
 <h2 id="introduction">Introduction</h2>
-<p>Object for creating {@link games.stendhal.server.entity.npc.ChatCondition} instances.</p>
+<p>Object for creating <a href="../../../java/games/stendhal/server/entity/npc/ChatCondition.html">ChatCondition</a> instances.</p>
 <h2 id="methods">Methods</h2>
 <hr />
 <h3 id="conditionscreate">conditions:create</h3>
 <p><span style="color:green; font-weight:bold;">conditions:create</span>(function)</p>
 <ul>
-<li>Creates a custom {@link games.stendhal.server.entity.npc.ChatCondition}.</li>
-<li>Parameters:</li>
+<li>Creates a custom <a href="../../../java/games/stendhal/server/entity/npc/ChatCondition.html">ChatCondition</a>.</li>
+<li>Parameters:<ul>
 <li><strong><em>function:</em></strong> Lua function to be invoked when <code>ChatCondition.fire</code> is called.</li>
+</ul>
+</li>
 <li>Returns: New <code>ChatCondition</code> instance.</li>
 </ul>
 <hr />
 <h3 id="conditionsnotc">conditions:notC</h3>
 <p><span style="color:green; font-weight:bold;">conditions:notC</span>(condition)</p>
 <ul>
-<li>Creates a {@link games.stendhal.server.entity.npc.condition.NotCondition}.</li>
-<li>Parameters:</li>
+<li>Creates a <a href="../../../java/games/stendhal/server/entity/npc/condition/NotCondition.html">NotCondition</a>.</li>
+<li>Parameters:<ul>
 <li><strong><em>condition:</em></strong> Can be a <code>ChatCondition</code>, <code>LuaValue</code> containing a <code>ChatCondition</code> instance, a Lua table of <code>ChatCondition</code> instances, or a function.</li>
+</ul>
+</li>
 <li>Returns: New <code>NotCondition</code> instance.</li>
 </ul>
 <hr />
 <h3 id="conditionsandc">conditions:andC</h3>
 <p><span style="color:green; font-weight:bold;">conditions:andC</span>(conditionList)</p>
 <ul>
-<li>Creates an {@link games.stendhal.server.entity.npc.condition.AndCondition}.</li>
-<li>Parameters:</li>
+<li>Creates an <a href="../../../java/games/stendhal/server/entity/npc/condition/AndCondition.html">AndCondition</a>.</li>
+<li>Parameters:<ul>
 <li><strong><em>conditionList:</em></strong> Lua table containing <code>ChatCondition</code> instances.</li>
+</ul>
+</li>
 <li>Returns: New <code>AndCondition</code> instance.</li>
 </ul>
 <hr />
 <h3 id="conditionsorc">conditions:orC</h3>
 <p><span style="color:green; font-weight:bold;">conditions:orC</span>(conditionList)</p>
 <ul>
-<li>Creates an {@link games.stendhal.server.entity.npc.condition.OrCondition}.</li>
-<li>Parameters:</li>
+<li>Creates an <a href="../../../java/games/stendhal/server/entity/npc/condition/OrCondition.html">OrCondition</a>.</li>
+<li>Parameters:<ul>
 <li><strong><em>conditionList:</em></strong> Lua table containing <code>ChatCondition</code> instances.</li>
+</ul>
+</li>
 <li>Returns: New <code>OrCondition</code> instance.</li>
 </ul></div>
             </div>
@@ -141,7 +149,7 @@
 
         <footer class="col-md-12">
             <hr>
-                <p>Copyright © 2003-2022 Arianne</p>
+                <p>Copyright © 2003-2023 Stendhal</p>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>

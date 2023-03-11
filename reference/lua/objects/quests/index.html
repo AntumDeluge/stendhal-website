@@ -91,14 +91,6 @@
               <ul class="nav flex-column">
               </ul>
             </li>
-            <li class="nav-item" data-level="2"><a href="#questssimple" class="nav-link">quests.simple</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#simplequest-object" class="nav-link">SimpleQuest Object</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
               </ul>
             </li>
         </ul>
@@ -112,6 +104,8 @@
 <li><a href="#quests">quests</a><ul>
 <li><a href="#methods">Methods</a><ul>
 <li><a href="#questscreate">quests:create</a></li>
+<li><a href="#questscreatemanuscript">quests:createManuscript</a></li>
+<li><a href="#questscreatebuilder">quests:createBuilder</a></li>
 <li><a href="#questsload">quests:load</a></li>
 <li><a href="#questsunload">quests:unload</a></li>
 <li><a href="#questscache">quests:cache</a></li>
@@ -144,37 +138,12 @@
 <li><a href="#usage">Usage</a></li>
 </ul>
 </li>
-<li><a href="#questssimple">quests.simple</a><ul>
-<li><a href="#methods_1">Methods:</a><ul>
-<li><a href="#questssimplecreate">quests.simple:create</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li><a href="#simplequest-object">SimpleQuest Object</a><ul>
-<li><a href="#methods_2">Methods</a><ul>
-<li><a href="#setdescription">setDescription</a></li>
-<li><a href="#setrepeatable">setRepeatable</a></li>
-<li><a href="#setitemtocollect">setItemToCollect</a></li>
-<li><a href="#setxpreward">setXPReward</a></li>
-<li><a href="#setkarmareward">setKarmaReward</a></li>
-<li><a href="#setkarmaacceptreward">setKarmaAcceptReward</a></li>
-<li><a href="#setkarmarejectreward">setKarmaRejectReward</a></li>
-<li><a href="#additemreward">addItemReward</a></li>
-<li><a href="#addstatreward">addStatReward</a></li>
-<li><a href="#setverbosereward">setVerboseReward</a></li>
-<li><a href="#setreply">setReply</a></li>
-<li><a href="#setregion">setRegion</a></li>
-</ul>
-</li>
-</ul>
-</li>
 </ul>
 </li>
 </ul>
 </div>
 <h1 id="introduction">Introduction</h1>
-<p>Adds helper functions for creating &amp; manipulating quests &amp; exposes select public methods of the {@link games.stendhal.server.core.rp.StendhalQuestSystem} class.</p>
+<p>Adds helper functions for creating &amp; manipulating quests &amp; exposes select public methods of the <a href="../../../java/games/stendhal/server/core/rp/StendhalQuestSystem.html">StendhalQuestSystem</a> class.</p>
 <h1 id="quests">quests</h1>
 <h2 id="methods">Methods</h2>
 <hr />
@@ -187,7 +156,29 @@
 <li><strong><em>name:</em></strong> (optional) The human-readable name that can be shown in travel log.</li>
 </ul>
 </li>
-<li>Returns: New {@link games.stendhal.server.core.scripting.lua.LuaQuestHelper.LuaQuest LuaQuest} instance.</li>
+<li>Returns: New <a href="../../../java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a> instance.</li>
+</ul>
+<hr />
+<h3 id="questscreatemanuscript">quests:createManuscript</h3>
+<p><span style="color:green; font-weight:bold;">quests:createManuscript</span>(builder)</p>
+<ul>
+<li>Creates a new quest in manuscript format.</li>
+<li>Parameters:<ul>
+<li><strong><em>builder:</em></strong> A <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a> instance that defines quest.</li>
+</ul>
+</li>
+<li>Returns: New <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestManuscript.html">QuestManuscript</a> instance.</li>
+</ul>
+<hr />
+<h3 id="questscreatebuilder">quests:createBuilder</h3>
+<p><span style="color:green; font-weight:bold;">quests:createBuilder</span>(task)</p>
+<ul>
+<li>Creates a quest builder to pass to <code>quests:createManuscript</code>.</li>
+<li>Parameters:<ul>
+<li><strong><em>task:</em></strong> Task type identifier. Supported are "BringItemTask" &amp; "KillCreaturesTask".</li>
+</ul>
+</li>
+<li>Returns: New <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a> instance.</li>
 </ul>
 <hr />
 <h3 id="questsload">quests:load</h3>
@@ -195,7 +186,7 @@
 <ul>
 <li>Adds a quest to the world.</li>
 <li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> The {@link games.stendhal.server.maps.quests.IQuest IQuest} instance to be loaded.</li>
+<li><strong><em>quest:</em></strong> The <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to be loaded.</li>
 </ul>
 </li>
 </ul>
@@ -215,7 +206,7 @@
 <ul>
 <li>Caches a quest for loading at server startup.</li>
 <li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> {@link games.stendhal.server.maps.quests.IQuest IQuest} instance to be loaded.</li>
+<li><strong><em>quest:</em></strong> <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to be loaded.</li>
 </ul>
 </li>
 <li>Aliases:<ul>
@@ -229,7 +220,7 @@
 <ul>
 <li>Checks if a quest has been loaded.</li>
 <li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> {@link games.stendhal.server.maps.quests.IQuest IQuest} instance to check.</li>
+<li><strong><em>quest:</em></strong> <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to check.</li>
 </ul>
 </li>
 <li>Returns: <code>true</code> if the instance matches stored quests.</li>
@@ -261,7 +252,7 @@
 <h3 id="questsliststates">quests:listStates</h3>
 <p><span style="color:green; font-weight:bold;">quests:listStates</span>(player)</p>
 <ul>
-<li>Dumps the internal quest states for the specified player. This is used for the {@link games.stendhal.server.action.admin.InspectAction InspectAction}.</li>
+<li>Dumps the internal quest states for the specified player. This is used for the <a href="../../../java/games/stendhal/server/actions/admin/InspectAction.html">InspectAction</a>.</li>
 <li>Parameters:<ul>
 <li><strong><em>player:</em></strong> Player to create the report for.</li>
 </ul>
@@ -272,7 +263,7 @@
 <h3 id="questsgetquest">quests:getQuest</h3>
 <p><span style="color:green; font-weight:bold;">quests:getQuest</span>(questName)</p>
 <ul>
-<li>Retrieves the {@link games.stendhal.server.maps.quests.IQuest IQuest} object for a named quest.</li>
+<li>Retrieves the <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> object for a named quest.</li>
 <li>Parameters:<ul>
 <li><strong><em>questName:</em></strong> Name of quest.</li>
 </ul>
@@ -283,7 +274,7 @@
 <h3 id="questsgetquestfromslot">quests:getQuestFromSlot</h3>
 <p><span style="color:green; font-weight:bold;">quests:getQuestFromSlot</span>(questSlot)</p>
 <ul>
-<li>Retrieves the {@link games.stendhal.server.maps.quests.IQuest IQuest} object for a quest.</li>
+<li>Retrieves the <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> object for a quest.</li>
 <li>Parameters:<ul>
 <li><strong><em>questSlot:</em></strong> Quest identifier string.</li>
 </ul>
@@ -296,7 +287,7 @@
 <ul>
 <li>Retrieves a list of open quests from a player.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 </ul>
 </li>
 <li>Returns: List of string identifiers for open quests.</li>
@@ -307,7 +298,7 @@
 <ul>
 <li>Retrieves a list of completed quests from a player.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 </ul>
 </li>
 <li>Returns: List of string identifiers for completed quests.</li>
@@ -318,7 +309,7 @@
 <ul>
 <li>Retrieves a list of incomplete quests in a specified region.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>region:</em></strong> Region name/identifier.</li>
 </ul>
 </li>
@@ -330,7 +321,7 @@
 <ul>
 <li>Retrieves a list of quests a player has completed, and can now do again.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 </ul>
 </li>
 <li>Returns:</li>
@@ -341,11 +332,11 @@
 <ul>
 <li>Retrieves the description of a quest.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>questName:</em></strong> Name of the quest.</li>
 </ul>
 </li>
-<li>Returns: <code>{@link java.lang.String String}</code> description.</li>
+<li>Returns: String description.</li>
 </ul>
 <hr />
 <h3 id="questsgetlevelwarning">quests:getLevelWarning</h3>
@@ -353,11 +344,11 @@
 <ul>
 <li>If the quest is too dangerous, add a warning unless the player has already completed it.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>questName:</em></strong> Name of the quest.</li>
 </ul>
 </li>
-<li>Returns: <code>{@link java.lang.String String}</code></li>
+<li>Returns: String</li>
 </ul>
 <hr />
 <h3 id="questsgetprogressdetails">quests:getProgressDetails</h3>
@@ -365,11 +356,11 @@
 <ul>
 <li>Retrieves details on the progress of the quest.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>questName:</em></strong> Name of the quest.</li>
 </ul>
 </li>
-<li>Returns: <code>{@link java.util.List List}&lt;{@link java.lang.String String}&gt;</code></li>
+<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
 </ul>
 <hr />
 <h3 id="questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</h3>
@@ -377,11 +368,11 @@
 <ul>
 <li>Retrieves a list of the unique npc names for unstarted quests in a specified region.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>region:</em></strong> Region to check in.</li>
 </ul>
 </li>
-<li>Returns: <code>{@link java.util.List List}&lt;{@link java.lang.String String}&gt;</code></li>
+<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
 </ul>
 <hr />
 <h3 id="questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</h3>
@@ -389,215 +380,94 @@
 <ul>
 <li>Retrieves quest descriptions for unstarted quests in a specified region matching a specific NPC name.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> {@link games.stendhal.server.entity.player.Player Player} instance to be checked.</li>
+<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
 <li><strong><em>region:</em></strong> Region to check in.</li>
 <li><strong><em>name:</em></strong> Name of NPC.</li>
 </ul>
 </li>
-<li>Returns: <code>{@link java.util.List List}&lt;{@link java.lang.String String}&gt;</code></li>
+<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
 </ul>
 <h1 id="classes">Classes</h1>
 <h2 id="luaquest">LuaQuest</h2>
-<p>See: {@link games.stendhal.server.core.scripting.lua.LuaQuestHelper.LuaQuest LuaQuest}</p>
+<p>See: <a href="../../../java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a></p>
 <h3 id="public-members">Public Members</h3>
 <h4 id="luaquestinit">LuaQuest.init</h4>
 <p><span style="color:darkblue; font-weight:bold;">LuaQuest.init</span></p>
 <ul>
-<li>Called by {@link games.stendhal.server.maps.quests.IQuest#addToWorld}.</li>
+<li>Called by <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html#addToWorld()">IQuest.addToWorld</a>.</li>
 <li>Type: function</li>
 </ul>
 <h3 id="public-methods">Public Methods</h3>
 <h3 id="usage">Usage</h3>
+<p>Standard quest example:</p>
 <pre><code>local loadStep1 = function()
-    ...
+  ...
 end
 
 local loadStep2 = function()
-    ...
+  ...
 end
 
 local myQuest = quests:create(&quot;my_quest&quot;, &quot;My Quest&quot;)
 myQuest.init = function()
-    loadStep1()
-    loadStep2()
+  loadStep1()
+  loadStep2()
 end
 
 quests:register(myQuest)
 </code></pre>
-<h2 id="questssimple">quests.simple</h2>
-<p>A special class for creating a simple collect single item quest.</p>
-<h3 id="methods_1">Methods:</h3>
-<hr />
-<h4 id="questssimplecreate">quests.simple:create</span></h4>
-<p><span style="color:green; font-weight:bold;">quests.simple:create</span></span>(slotName, properName, npcName)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>slotName:</em></strong> <code>String</code> identifier to be used for quest.</li>
-<li><strong><em>properName:</em></strong> Human-readable name to be displayed in travel log.</li>
-<li><strong><em>npcName:</em></strong> The NPC associated with the quest.</li>
-</ul>
-</li>
-<li>Returns: {@link games.stendhal.server.maps.quests.SimpleQuestCreator} instance.</li>
-</ul>
-<h2 id="simplequest-object">SimpleQuest Object</h2>
-<p>{@link games.stendhal.server.maps.quests.SimpleQuestCreator.SimpleQuest}</p>
-<h3 id="methods_2">Methods</h3>
-<hr />
-<h4 id="setdescription">setDescription</h4>
-<p><span style="color:green; font-weight:bold;">setDescription</span>(descr)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>descr:</em></strong> (<code>String</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setrepeatable">setRepeatable</h4>
-<p><span style="color:green; font-weight:bold;">setRepeatable</span>(delay)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>delay:</em></strong> (<code>Integer</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setitemtocollect">setItemToCollect</h4>
-<p><span style="color:green; font-weight:bold;">setItemToCollect</span>(itemName, quantity)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>itemName:</em></strong> (<code>String</code>)</li>
-<li><strong><em>quantity:</em></strong> (<code>int</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setxpreward">setXPReward</h4>
-<p><span style="color:green; font-weight:bold;">setXPReward</span>(xp)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>xp:</em></strong> (<code>int</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setkarmareward">setKarmaReward</h4>
-<p><span style="color:green; font-weight:bold;">setKarmaReward</span>(karma)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>karma:</em></strong> (<code>double</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setkarmaacceptreward">setKarmaAcceptReward</h4>
-<p><span style="color:green; font-weight:bold;">setKarmaAcceptReward</span>(karma)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>karma:</em></strong> (<code>double</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setkarmarejectreward">setKarmaRejectReward</h4>
-<p><span style="color:green; font-weight:bold;">setKarmaRejectReward</span>(karma)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>karma:</em></strong> (<code>double</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="additemreward">addItemReward</h4>
-<p><span style="color:green; font-weight:bold;">addItemReward</span>(itemName, quantity)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>itemName:</em></strong> (<code>String</code>)</li>
-<li><strong><em>quantity:</em></strong> (<code>int</code>) (optional)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="addstatreward">addStatReward</h4>
-<p><span style="color:green; font-weight:bold;">addStatReward</span>(id, amount)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>id:</em></strong> (<code>String</code>) See IDs below.</li>
-<li><strong><em>amount:</em></strong> (<code>int</code>)</li>
-</ul>
-</li>
-<li>IDs:<ul>
-<li><strong><em>xp:</em></strong></li>
-<li><strong><em>def:</em></strong></li>
-<li><strong><em>atk:</em></strong></li>
-<li><strong><em>ratk:</em></strong></li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setverbosereward">setVerboseReward</h4>
-<p><span style="color:green; font-weight:bold;">setVerboseReward</span>(verbose)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>verbose:</em></strong> (<code>boolean</code>)</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h4 id="setreply">setReply</h4>
-<p><span style="color:green; font-weight:bold;">setReply</span>(id, reply)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>id:</em></strong> (<code>String</code>) See IDs below.</li>
-<li><strong><em>reply:</em></strong> (<code>String</code>)</li>
-</ul>
-</li>
-</ul>
-<p>:; ''IDs:''
-:: '''''request:'''''
-:: '''''accept:'''''
-:: '''''reject:'''''
-:: '''''reward:'''''
-:: '''''verbose_reward_prefix:'''''
-:: '''''already_active:'''''
-:: '''''missing:'''''
-:: '''''no_repeat:'''''
-:: '''''cooldown_prefix:'''''</p>
-<hr />
-<h4 id="setregion">setRegion</h4>
-<p><span style="color:green; font-weight:bold;">setRegion</span>(regionName)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>regionName:</em></strong> (<code>String</code>)</li>
-</ul>
-</li>
-</ul>
-<p>Also inherits methods from {@link games.stendhal.server.maps.quests.AbstractQuest}:</p>
-<p>Example:</p>
-<pre><code>-- create SimpleQuest instance
-local quest = simpleQuest:create(&quot;wood_for_lua&quot;, &quot;Wood for Lua&quot;, &quot;Lua&quot;)
+<p>Example of <a href="https://github.com/arianne/stendhal/blob/master/src/games/stendhal/server/maps/quests/CoalForHaunchy.java">CoalForHaunchy</a> quest manuscript converted to Lua:</p>
+<pre><code>local itemBuilder = quests:createBuilder(&quot;BringItemTask&quot;)
 
-quest:setDescription(&quot;Lua needs help gathering wood.&quot;)
-quest:setRequestReply(&quot;I need help gathering some wood. Will you help me?&quot;)
-quest:setAcceptReply(&quot;Great!&quot;)
-quest:setRewardReply(&quot;Thank a bunch!&quot;)
-quest:setRejectReply(&quot;Fine! I don't need your help anyway.&quot;)
-quest:setItemToCollect(&quot;wood&quot;, 5)
-quest:setRepeatable(true)
-quest:setRepeatDelay(10)
-quest:setXPReward(50)
-quest:setKarmaReward(5.0)
-quest:addItemReward(&quot;rose&quot;, 3)
-quest:addItemReward(&quot;money&quot;, 100)
-quest:setRegion(Region.SEMOS_CITY)
+itemBuilder:info()
+  :name(&quot;Coal for Haunchy&quot;)
+  :description(&quot;Haunchy Meatoch is afraid of his BBQ grillfire. Will his coal last till the steaks are ready or will he need some more?&quot;)
+  :internalName(&quot;coal_for_haunchy&quot;)
+  :repeatableAfterMinutes(2 * 24 * 60)
+  :minLevel(0)
+  :region(Region.ADOS_CITY)
+  :questGiverNpc(&quot;Haunchy Meatoch&quot;)
 
-quests:register(quest)
+itemBuilder:history()
+  :whenNpcWasMet(&quot;Haunchy Meatoch welcomed me to the Ados market.&quot;)
+  :whenQuestWasRejected(&quot;He asked me to fetch him some pieces of coal but I don't have time to collect some.&quot;)
+  :whenQuestWasAccepted(&quot;The BBQ grill-heat is low and I promised Haunchy to help him out with 25 pieces of coal.&quot;)
+  :whenTaskWasCompleted(&quot;I found 25 pieces of coal for the Haunchy and think he will be happy.&quot;)
+  :whenQuestWasCompleted(&quot;Haunchy Meatoch was really happy when I gave him the coal, he has enough for now. He gave me some of the best steaks which I ever ate!&quot;)
+  :whenQuestCanBeRepeated(&quot;But I'd bet his amount is low again and needs more. Maybe I'll get more grilled tasty steaks.&quot;)
+
+itemBuilder:offer()
+  :respondToRequest(&quot;I cannot use wood for this huge BBQ. To keep the heat I need some really old stone coal but there isn't much left. The problem is, that I can't fetch it myself because my steaks would burn then so I have to stay here. Can you bring me 25 pieces of #coal for my BBQ please?&quot;)
+  :respondToUnrepeatableRequest(&quot;The coal amount behind my counter is still high enough. I will not need more for some time.&quot;)
+  :respondToRepeatedRequest(&quot;The last coal you brought me is mostly gone again. Will you bring me some more?&quot;)
+  :respondToAccept(&quot;Thank you! I'll be sure to give you a nice and tasty reward.&quot;)
+  :respondTo({&quot;coal&quot;}):saying(&quot;Coal isn't easy to find. You normally can find it somewhere in the ground but perhaps you are lucky and find some in the old Semos Mine tunnels... Will you help me?&quot;)
+  :respondToReject(&quot;Oh, never mind. I thought you love BBQs like I do. Bye then.&quot;)
+  :rejectionKarmaPenalty(10.0)
+  :remind(&quot;Luckily my BBQ is still going. But please hurry up to bring me 25 coal as you promised.&quot;)
+
+entities:getNPC(&quot;Haunchy Meatoch&quot;):addReply(&quot;coal&quot;, &quot;Sometime you could do me a #favour ...&quot;)
+
+itemBuilder:task()
+  :requestItem(25, &quot;coal&quot;)
+
+itemBuilder:complete()
+  :greet(&quot;Ah, I see, you have enough coal to keep my BBQ on! Is it for me?&quot;)
+  :respondToReject(&quot;Well then, hopefully someone else will help me before my BBQ goes out.&quot;)
+  :respondToAccept(nil)
+  :rewardWith(actions:create(&quot;IncreaseXPAction&quot;, {200}))
+  :rewardWith(actions:create(&quot;IncreaseKarmaAction&quot;, {20}))
+  :rewardWith(actions:create(&quot;EquipRandomAmountOfItemAction&quot;, {&quot;grilled steak&quot;, 1, 4, 1,
+      &quot;Thank you! Take [this_these] [number_item] from my grill!&quot;}))
+
+quests:register(quests:createManuscript(itemBuilder))
 </code></pre></div>
             </div>
         </div>
 
         <footer class="col-md-12">
             <hr>
-                <p>Copyright © 2003-2022 Arianne</p>
+                <p>Copyright © 2003-2023 Stendhal</p>
             <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
         </footer>
         <script>

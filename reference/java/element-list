@@ -39,6 +39,7 @@ games.stendhal.client.sound.system
 games.stendhal.client.sound.system.processors
 games.stendhal.client.sprite
 games.stendhal.client.update
+games.stendhal.client.util
 games.stendhal.common
 games.stendhal.common.color
 games.stendhal.common.constants
@@ -126,6 +127,7 @@ games.stendhal.server.entity.npc.condition
 games.stendhal.server.entity.npc.fsm
 games.stendhal.server.entity.npc.interaction
 games.stendhal.server.entity.npc.quest
+games.stendhal.server.entity.npc.shop
 games.stendhal.server.entity.player
 games.stendhal.server.entity.slot
 games.stendhal.server.entity.spell
@@ -180,6 +182,7 @@ games.stendhal.server.maps.athor.ship
 games.stendhal.server.maps.atlantis.cityinside
 games.stendhal.server.maps.atlantis.cityoutside
 games.stendhal.server.maps.deathmatch
+games.stendhal.server.maps.deniran.cityinterior.accessoryshop
 games.stendhal.server.maps.deniran.cityinterior.bakery
 games.stendhal.server.maps.deniran.cityinterior.brelandhouse
 games.stendhal.server.maps.deniran.cityinterior.castle
@@ -352,4 +355,5 @@ marauroa.server.net.web
 marauroa.tools
 marauroa.tools.protocolanalyser
 utilities
+utilities.quest_runner
 utilities.RPClass
