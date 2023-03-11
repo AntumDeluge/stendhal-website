@@ -285,23 +285,16 @@ function parseShopsData($shopsdata) {
  * Loads registered shops from config.
  */
 function loadShops() {
-	//~ global $cache;
+	global $cache;
 	global $npcshops;
 
-	// FIXME: caching not working
-	$npcshops = [];
-	return;
-
-	//~ if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
-		//~ NPC::$shops = $cache->fetchAsArray("stendhal_shops");
-	//~ }
-	//~ if (is_array(NPC::$shops) && sizeof(NPC::$shops) > 0) {
-		//~ return;
-	//~ }
-
-	if (isset($npcsshops)) {
+	if (!isset(NPC::$shops) || sizeof(NPC::$shops) == 0) {
+		NPC::$shops = $cache->fetchAsArray("stendhal_shops");
+	}
+	if (is_array(NPC::$shops) && sizeof(NPC::$shops) > 0) {
 		return;
 	}
+
 
 	$content = file("data/conf/shops.xml");
 	$tmp = implode("", $content);
