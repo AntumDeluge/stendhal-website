@@ -114,7 +114,7 @@ function mergeAccount($oldUsername, $newUsername) {
 	}
 
 	DB::game()->exec("UPDATE account SET status='merged' WHERE id='".mysql_real_escape_string($oldAccountId)."'");
-	DB::game()->exec("UPDATE account SET username=concat('merged.', username) WHERE id='".mysql_real_escape_string($oldAccountId)."' AND (password='' OR password IS NULL)");
+	DB::game()->exec("UPDATE account SET username=concat('merged.".time().".', username) WHERE id='".mysql_real_escape_string($oldAccountId)."' AND (password='' OR password IS NULL)");
 	$sql = "SELECT charname FROM characters WHERE player_id='".mysql_real_escape_string($oldAccountId)."'";
 	$rows = DB::game()->query($sql);
 	$chars = array();
