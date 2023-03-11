@@ -172,6 +172,7 @@ function getItems() {
 		Item::$items = $cache->fetchAsArray('stendhal_items');
 		Item::$classes = $cache->fetchAsArray('stendhal_items_classes');
 	}
+
 	if ((is_array(Item::$items) && (sizeof(Item::$items) != 0))
 		&& (is_array(Item::$classes) && (sizeof(Item::$classes) != 0))) {
 		return Item::$items;
@@ -324,11 +325,13 @@ function getItems() {
  *     Array of NPC names.
  */
 function getItemMerchants($itemname) {
-	// FIXME: this should get cached
 	$npclist = [
 		"sellers" => [],
 		"buyers" => []
 	];
+
+	// FIXME: this should get cached
+	return;
 
 	foreach (getNPCShops() as $npcname=>$shopinfo) {
 		if (isset($shopinfo["sell"]) && isset($shopinfo["sell"][$itemname])) {
