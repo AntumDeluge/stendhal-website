@@ -41,8 +41,8 @@ class LoginPage extends Page {
 
 		// redirect to openid provider?
 		$this->openid = new OpenID();
-		if (isset($_POST['openid_identifier']) && ($_POST['openid_identifier'] != '')) {
-			$this->openid->doOpenidRedirectIfRequired($_POST['openid_identifier']);
+		if (isset($_REQUEST['openid_identifier']) && ($_REQUEST['openid_identifier'] != '')) {
+			$this->openid->doOpenidRedirectIfRequired($_REQUEST['openid_identifier']);
 			if ($this->openid->isAuth && !$this->openid->error) {
 				return false;
 			}
@@ -258,71 +258,35 @@ class LoginPage extends Page {
 		?>
 
 		<form action="" method="post">
-			<table>
+			<table class="loginform">
 				<tr><td><label for="user">Username:</label></td><td><input type="text" id="user" name="user" maxlength="30" <?php
 				if (isset($_REQUEST['username'])) {
 					echo ' value="'.htmlspecialchars($_REQUEST['username']).'" ';
 				}
 				?>></td></tr>
 				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="30"></td></tr>
-				<tr><td colspan="2" align="right"><input type="submit" name="sublogin" value="Login"></td></tr>
+				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
+			
+			<div>
+			<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
+			<img src="/images/thirdparty/steam.png">
+			</a>
+			</div>
+
 			<?php
 			if (isset($_REQUEST['url'])) {
 				echo '<input type="hidden" name="url" value="'.htmlspecialchars($_REQUEST['url']).'">';
 			}
 			?>
+			
 		</form>
-		<br>
+		<br class="clear">
 
-		<p style="text-align: center">New? <b><a href="<?php echo rewriteURL('/account/create-account.html')?>">Create account...</a></b></p>
+		<p>New? <b><a href="<?php echo rewriteURL('/account/create-account.html')?>">Create account...</a></b></p>
 		<br>
 		<?php
 		endBox();
-/*
-			echo '<br>';
-			startBox("<h2>External Account</h2>");
-			?>
-				<form id="openid_form" action="<?php echo STENDHAL_FOLDER;?>/?id=content/account/login" method="post">
-		<input id="oauth_version" name="oauth_version" type="hidden">
-		<input id="oauth_server" name="oauth_server" type="hidden">
-
-		<div id="openid_choice">
-			<p>Do you already have an account on one of these sites?</p>
-			<div id="openid_btns"></div>
-		</div>
-
-		<div>
-			<noscript>
-				<p>OpenID is a service that allows you to log on to many different websites using a single identity.</p>
-			</noscript>
-		</div>
-		<table id="openid-url-input">
-		<tbody><tr>
-			<td class="vt large">
-				<input id="openid_identifier" name="openid_identifier" class="openid-identifier" style="height: 28px" tabindex="100" type="text">
-			</td>
-
-			<td class="vt large">
-				<input id="submit-button" style="margin-left: 5px; height: 36px;" value="Log in" tabindex="101" type="submit">
-			</td>
-		</tr></tbody>
-		</table>
-		<?php
-		if (isset($_REQUEST['url'])) {
-			echo '<input type="hidden" name="url" value="'.htmlspecialchars($_REQUEST['url']).'">';
-		}
-
-		if (isset($this->openid->error)) {
-			echo '<div class="error">'.htmlspecialchars($this->openid->error).'</div>';
-		}
-
-		?>
-			</form>
-		<?php
-
-		endBox();
-*/
 	}
 }
 $page = new LoginPage();

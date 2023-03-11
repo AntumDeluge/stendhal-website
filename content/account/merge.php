@@ -34,14 +34,14 @@ class AccountMerge extends Page {
 			}
 		}
 
-		if (isset($_POST['merge'])) {
-			$_SESSION['merge'] = $_POST['merge'];
+		if (isset($_REQUEST['merge'])) {
+			$_SESSION['merge'] = $_REQUEST['merge'];
 		}
 
 		// redirect to openid provider?
 		$this->openid = new OpenID();
 		if (isset($_REQUEST['openid_identifier']) && ($_REQUEST['openid_identifier'] != '')) {
-			$this->openid->doOpenidRedirectIfRequired($_POST['openid_identifier']);
+			$this->openid->doOpenidRedirectIfRequired($_REQUEST['openid_identifier']);
 			if ($this->openid->isAuth && !$this->openid->error) {
 				return false;
 			}
@@ -195,56 +195,27 @@ class AccountMerge extends Page {
 
 		<form action="" method="post">
 			<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
-			<table>
+			<table class="loginform">
 				<tr><td><label for="user">Username:</label></td><td><input type="text" id="user" name="user" maxlength="30"></td></tr>
 				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="30"></td></tr>
 				<tr><td colspan="2" align="left"><input type="checkbox" id="confirm" name="confirm">
 				<label for="confirm">I really want to merge these accounts.</label></td></tr>
 				<tr><td colspan="2" align="right"><input type="submit" name="submerge" value="Merge"></td></tr>
 			</table>
+			<div>
+
+			<a href="/account/merge.html?openid_identifier=https://steamcommunity.com/openid/&merge=<?php echo urlencode($_SESSION['csrf'])?>">
+			<img src="/images/thirdparty/steam.png">
+			</a>
+			</div>
 		</form>
-
-		<?php endBox();
-/*
-			startBox("<h2>External Account</h2>");
-			?>
-				<form id="openid_form" action="<?php echo STENDHAL_FOLDER;?>/?id=content/account/merge" method="post">
-		<input id="oauth_version" name="oauth_version" type="hidden">
-		<input id="oauth_server" name="oauth_server" type="hidden">
-
-		<div id="openid_choice">
-			<p>You can add external identities to your account.</p>
-			<div id="openid_btns"></div>
-		</div>
-
-		<div>
-			<noscript>
-				<p>OpenID is a service that allows you to log on to many different websites using a single identity.</p>
-			</noscript>
-		</div>
-		<table id="openid-url-input">
-		<tbody><tr>
-			<td class="vt large">
-				<input id="openid_identifier" name="openid_identifier" class="openid-identifier" style="height: 28px; width: 450px;" tabindex="100" type="text">
-			</td>
-
-			<td class="vt large">
-				<input id="submit-button" style="margin-left: 5px; height: 36px;" value="Merge" tabindex="101" type="submit">
-			</td>
-		</tr>
-		</tbody>
-		</table>
-		<input type="hidden" id="merge" name="merge" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
-	</form>
-
-<?php
-
+		<br class="clear">
+		<?php
 		if (isset($this->openid->error)) {
 			echo '<div class="error">'.htmlspecialchars($this->openid->error).'</div>';
 		}
 
 		endBox();
-*/
 	}
 
 }

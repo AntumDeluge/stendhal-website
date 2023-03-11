@@ -92,7 +92,7 @@ class CreateAccountPage extends Page {
 <form id="createAccountForm" name="createAccountForm" action="" method="post"> <!-- onsubmit="return createAccountCheckForm()" -->
 <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
 
-<table>
+<table class="loginform">
 <tr>
 <td><label for="name">Name:<sup>*</sup> </label></td>
 <td><input id="name" name="name" value="<?php if (isset($_REQUEST['name'])) {echo htmlspecialchars($_REQUEST['name']);}?>" type="text" maxlength="20" ></td>
@@ -116,61 +116,27 @@ class CreateAccountPage extends Page {
 <td><input id="email" name="email" value="<?php if (isset($_REQUEST['email'])) {echo htmlspecialchars($_REQUEST['email']);}?>" type="email" maxlength="50"></td>
 <td><div id="emailwarn" class="warn"></div></td>
 </tr>
-</table>
 
+<td>&nbsp;</td>
+<td><input name="submit" style="margin-top: 2em" type="submit" value="Create Account"></td>
+<td>&nbsp;</td>
+
+</table>
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
-<input name="submit" style="margin-top: 2em" type="submit" value="Create Account">
+
+<div>
+<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
+<img src="/images/thirdparty/steam.png">
+</a>
+</div>
+
 </form>
 <?php
 
 endBox();
-
-echo '<br>';
-
-startBox("<h2>External Account</h2>");
-?>
-	<form id="openid_form" action="<?php echo STENDHAL_FOLDER;?>/?id=content/account/login" method="post">
-		<input id="oauth_version" name="oauth_version" type="hidden">
-		<input id="oauth_server" name="oauth_server" type="hidden">
-
-		<div id="openid_choice">
-			<p>Do you already have an account on one of these sites?</p>
-			<div id="openid_btns"></div>
-		</div>
-
-		<div>
-			<noscript>
-				<p>OpenID is a service that allows you to log on to many different websites using a single identity.</p>
-			</noscript>
-		</div>
-		<table id="openid-url-input">
-		<tbody><tr>
-			<td class="vt large">
-				<input id="openid_identifier" name="openid_identifier" class="openid-identifier" style="height: 28px" tabindex="100" type="text">
-			</td>
-
-			<td class="vt large">
-				<input id="submit-button" style="margin-left: 5px; height: 36px;" value="Log in" tabindex="101" type="submit">
-			</td>
-		</tr></tbody>
-		</table>
-		<?php
-		if (isset($_REQUEST['url'])) {
-			echo '<input type="hidden" name="url" value="'.htmlspecialchars($_REQUEST['url']).'">';
-		}
-
-		if (isset($this->openid->error)) {
-			echo '<div class="error">'.htmlspecialchars($this->openid->error).'</div>';
-		}
-
-?>
-	</form>
-<?php
-
-		endBox();
 ?>
 
-<br>
+<br class="clear">
 <?php startBox("<h2>Logging and privacy</h2>");?>
 <p>
 <font size="-1">On login information which identifies your computer on the internet will be
