@@ -54,7 +54,7 @@ class StendhalFrame extends PageFrame {
 		global $page, $protocol, $adminLevel;
 		$showFrame = !isset($_SERVER['HTTP_USER_AGENT']) || strpos($_SERVER['HTTP_USER_AGENT'], 'stendhal') === false;
 		echo '<body lang="en" '. $page->getBodyTagAttributes() . ' class="layout">';
-		
+
 ?>
 <div id="container">
 <?php if ($showFrame) { ?>
@@ -66,7 +66,7 @@ class StendhalFrame extends PageFrame {
 			echo '<input type="hidden" name="id" value="content/game/search">';
 		}
 		echo '<div>';
-		echo '<input id="headersearchforminput" name="q" id="q" type="search" placeholder="Search"><button><img src="https://stendhalgame.org/w/skins/Vector/images/search-ltr.png?303" alt="" width="12" height="13"></button>';
+		echo '<input id="headersearchforminput" name="q" id="q" type="search" placeholder="Search"><button><img src="/images/search.svg" alt="" width="13" height="13"></button>';
 		echo '</div>';
 
 		echo '<a href="'.STENDHAL_LOGIN_TARGET.'/account/mycharacters.html"><span class="block" id="playArea"></span></a>';
