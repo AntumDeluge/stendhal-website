@@ -257,7 +257,6 @@ body {
 		if (isset($_SESSION) && isset($_SESSION['account'])) {
 			startBox(t('Account'));
 			echo '<ul id="accountmenu" class="menu">';
-			echo '<li><a id="menuAcccountPageBalance" href="/?id=content/association/balance&amp;lang='.surlencode($lang).'">'.t('Balance').'</a></li>'."\n";
 			echo '<li><a id="menuAcccountDocuments" href="/?lang='.$lang.'&amp;id=content/association/documents">'.t('Documents').'</a></li>'."\n";
 			echo '<li><a id="menuAcccountRecentChanges" href="/?lang='.$lang.'&amp;id=content/association/history">'.t('Recent changes').'</a></li>'."\n";
 				if ($_REQUEST['id'] == '') {
