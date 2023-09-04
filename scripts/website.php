@@ -172,10 +172,10 @@ class Wiki {
 	private function get($page) {
 
 		// check file cache
-		$page = 'ns0:' . $page;
-		$md5 = md5($page);
+		$filename = 'ns0:' . $page;
+		$md5 = md5($filename);
 		$path = '/var/www/stendhal/w/images/cache/'.$md5[0].'/'.$md5[0].$md5[1]
-			.'/'.str_replace('/', '%2F', urlencode($page)).'.html';
+			.'/'.str_replace('/', '%2F', urlencode($filename)).'.html';
 		$content = @file_get_contents($path);
 
 		if ($content === false) {
