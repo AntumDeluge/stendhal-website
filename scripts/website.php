@@ -2,7 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2016  The Arianne Project
+ Copyright (C) 2008-2023  The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -174,7 +174,7 @@ class Wiki {
 		// check file cache
 		$md5 = md5($page);
 		$path = '/var/www/stendhal/w/images/cache/'.$md5[0].'/'.$md5[0].$md5[1]
-			.'/'.str_replace('/', '%2F', urlencode($page)).'.html';
+			.'/ns0%3A'.str_replace('/', '%2F', urlencode($page)).'.html';
 		$content = @file_get_contents($path);
 
 		if ($content === false) {
