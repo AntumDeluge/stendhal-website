@@ -1124,8 +1124,10 @@ function fixSessionPermission() {
 	$id = session_id();
 	if (preg_match('/^[a-zA-Z0-9]+$/', $id)) {
 		$filename = session_save_path().'/sess_'.$id;
-		touch($filename);
-		chmod($filename, 0640);
+		if (strpos($filename, ';') === false) {
+			touch($filename);
+			chmod($filename, 0640);
+		}
 	}
 }
 
