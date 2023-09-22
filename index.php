@@ -126,7 +126,6 @@ header('Content-Type: text/html; charset=utf-8')
 <html>
 	<head>
 	<link rel="stylesheet" type="text/css" href="<?php echo STENDHAL_FOLDER.'/css/style-'.STENDHAL_CACHE_BUSTER.'.css';?>">
-	<!--[if lt IE 8]><link rel="stylesheet" type="text/css" href="<?php echo STENDHAL_FOLDER.'/css/ie-'.STENDHAL_CACHE_BUSTER.'.css';?>"><![endif]-->
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 	<?php
 		/*
