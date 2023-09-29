@@ -232,7 +232,7 @@ class Shops {
 			return [];
 		}
 	
-		$query = "SELECT npcs.name, shopinventoryinfo.price, shopownerinfo.price_factor 
+		$query = "SELECT npcs.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
 			FROM iteminfo
 			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
 			JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
