@@ -221,4 +221,26 @@ class Shops {
 		return Shops::$shops;
 	}
 
+	/**
+	 * Which NPCs buy or sell a given item?
+	 *
+	 * @param $itemname name of item
+	 * @param $shoptype "buy" or "sell"
+	 */
+	function getNPCsForItem($itemname, $shoptype) {
+		if (STENDHAL_VERSION < '1.44') {
+			return [];
+		}
+	
+		$query = "SELECT npcs.name, shopinventoryinfo.price, shopownerinfo.price_factor 
+			FROM iteminfo
+			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
+			JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
+			JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
+			JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
+			WHERE iteminfo.name = :itemname AND shopinfo.shop_type = :shoptype;";
+		$stmt = DB::game()->prepare($query);
+		$stmt->execute(array(':itemname' => $itemname, ':shoptype' => $shoptype));
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
 }

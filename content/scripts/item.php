@@ -269,15 +269,16 @@ class ItemPage extends Page {
 
 				<?php
 				// NPC buyers & sellers
-				$merchants = getItemMerchants($m->name);
-				if (isset($merchants["sellers"]) && sizeof($merchants["sellers"]) > 0) {
+				$shops = new Shops();
+				$merchants = $shops->getNPCsForItem($m->name, 'sell');
+				if (sizeof($merchants) > 0) {
 					?>
 
 			<div class="table">
 				<div class="title">Sold by</div>
 				<div style="float:left; width:100%;">
 					<?php
-					$this->buildMerchantList($merchants["sellers"]);
+					$this->buildMerchantList($merchants);
 					?>
 
 				</div>
@@ -286,14 +287,15 @@ class ItemPage extends Page {
 
 					<?php
 				}
-				if (isset($merchants["buyers"]) && sizeof($merchants["buyers"]) > 0) {
+				$merchants = $shops->getNPCsForItem($m->name, 'buy');
+				if (sizeof($merchants) > 0) {
 					?>
 
 			<div class="table">
 				<div class="title">Bought by</div>
 				<div style="float:left; width:100%;">
 					<?php
-					$this->buildMerchantList($merchants["buyers"]);
+					$this->buildMerchantList($merchants);
 					?>
 
 				</div>
@@ -328,16 +330,16 @@ class ItemPage extends Page {
 	}
 
 	private function buildMerchantList($merchants) {
-		foreach ($merchants as $merchant=>$price) {
+		foreach ($merchants as $merchant) {
 			echo "<div class=\"row\">";
-			$npc = NPC::getNPC($merchant);
+			$npc = NPC::getNPC($merchant['name']);
 			if (isset($npc)) {
-				echo "<a href=\"".rewriteURL("/npc/".surlencode($merchant).".html")."\">";
+				echo "<a href=\"".rewriteURL("/npc/".surlencode($npc->name).".html")."\">";
 				echo $npc->getBorderedImage();
 				echo "</a>";
 			}
-			echo "<span class=\"block label\">".htmlspecialchars($merchant)."</span>";
-			echo "<div class=\"data\">".htmlspecialchars($price)."</div>";
+			echo "<span class=\"block label\">".htmlspecialchars($npc->name)."</span>";
+			echo "<div class=\"data\">".htmlspecialchars($merchant['price'])."</div>";
 			echo "<div style=\"clear:left;\"></div></div>";
 		}
 	}
