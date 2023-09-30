@@ -337,6 +337,13 @@ function rewriteURL($url, $force = false) {
 			return preg_replace('|^/achievement/(.*)\.html$|', $folder.'/?id=content/game/achievement&amp;name=$1&exact', $url);
 		}
 
+
+	// archive
+	} else if (preg_match('|^/archive.*|', $url)) {
+		if (preg_match('|^/archive/twitter.html$|', $url)) {
+			return preg_replace('|^/archive/twitter.html$|', $folder.'/?id=content/archive/twitter', $url);
+		}
+
 	// chat
 	} else if (preg_match('|^/chat.*|', $url)) {
 		if (preg_match('|^/chat/(.*)\.html$|', $url)) {
