@@ -11,6 +11,15 @@
 	<property name="datetime" value="${date} ${time}"/>
 
 
+	<target name="init">
+		<replaceregexp
+				match="&lt;span class=&quot;copyright&quot;&gt;&amp;copy; 1999-(.*?) "
+				replace="&lt;span class=&quot;copyright&quot;&gt;&amp;copy; 1999-${year} "
+				byline="true">
+			<fileset dir="content/frame" includes="default.php,stendhal.php"/>
+		</replaceregexp>
+	</target>
+
 	<target name="clean">
 		<delete dir="${basedir}/build" />
 	</target>
