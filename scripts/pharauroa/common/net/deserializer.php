@@ -22,7 +22,7 @@ class PharauroaDeserializer {
 	/**
 	 * gets the protocol version
 	 *
-	 * @return $protocolVersion version of protocol
+	 * @return int version of protocol
 	 */
 	public function getProtocolVersion() {
 		return $this->protocolVersion;
