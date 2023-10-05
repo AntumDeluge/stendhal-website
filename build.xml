@@ -1,6 +1,16 @@
 <?xml version="1.0"?>
 
 <project name="Stendhal Website Job" default="build">
+
+	<!-- time & date -->
+	<tstamp>
+		<format property="year" pattern="yyyy"/>
+		<format property="date" pattern="yyyy-MM-dd"/>
+		<format property="time" pattern="HH:mm:ss"/>
+	</tstamp>
+	<property name="datetime" value="${date} ${time}"/>
+
+
 	<target name="clean">
 		<delete dir="${basedir}/build" />
 	</target>
