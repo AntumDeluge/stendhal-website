@@ -20,16 +20,19 @@
 		</replaceregexp>
 	</target>
 
+
 	<target name="clean">
-		<delete dir="${basedir}/build" />
+		<delete dir="${basedir}/build"/>
 	</target>
 
+
 	<target name="prepare">
-		<mkdir dir="${basedir}/build" />
-		<mkdir dir="${basedir}/build/coverage" />
-		<mkdir dir="${basedir}/build/docs" />
-		<mkdir dir="${basedir}/build/logs" />
+		<mkdir dir="${basedir}/build"/>
+		<mkdir dir="${basedir}/build/coverage"/>
+		<mkdir dir="${basedir}/build/docs"/>
+		<mkdir dir="${basedir}/build/logs"/>
 	</target>
+
 
 	<target name="phpdoc">
 		<exec dir="${basedir}" executable="phpdoc" failonerror="true">
@@ -39,38 +42,43 @@
 					--parseprivate on
 					--undocumentedelements on
 					--output HTML:Smarty:PHP
-					-i lib/*" />
+					-i lib/*"/>
 		</exec>
 	</target>
 
-		<target name="phpcpd">
-			<exec dir="${basedir}" executable="phpcpd" failonerror="true">
-				<arg line="--log-pmd build/logs/pmd.xml ." />
-			</exec>
-		</target>
 
-		<target name="pdepend">
-			<exec dir="${basedir}" executable="pdepend" failonerror="true">
-				<arg line="--jdepend-xml=build/logs/jdepend.xml ." />
-			</exec>
-		</target>
+	<target name="phpcpd">
+		<exec dir="${basedir}" executable="phpcpd" failonerror="true">
+			<arg line="--log-pmd build/logs/pmd.xml ."/>
+		</exec>
+	</target>
 
-		<target name="phpcs">
-	<!--
-			<exec dir="${basedir}" executable="phpcs" output="${basedir}/build/logs/checkstyle.xml" failonerror="false">
-				<arg line="- -report=checkstyle - -tab-width=4 content mediawiki *.php scripts tests" />
-			</exec>
-	-->
-		</target>
+
+	<target name="pdepend">
+		<exec dir="${basedir}" executable="pdepend" failonerror="true">
+			<arg line="--jdepend-xml=build/logs/jdepend.xml ."/>
+		</exec>
+	</target>
+
+
+	<target name="phpcs">
+		<!--
+		<exec dir="${basedir}" executable="phpcs" output="${basedir}/build/logs/checkstyle.xml" failonerror="false">
+			<arg line="- -report=checkstyle - -tab-width=4 content mediawiki *.php scripts tests" />
+		</exec>
+		-->
+	</target>
+
 
 	<target name="phpunit">
 		<exec dir="${basedir}" executable="phpunit" failonerror="false">
 			<arg line="--log-junit build/logs/junit.xml
 					--coverage-clover build/logs/clover.xml
 					--coverage-html build/coverage
-					tests/allTests.php" />
+					tests/allTests.php"/>
 		</exec>
 	</target>
+
 
 	<target name="jscompile">
 		<concat destfile="css/script.js">
@@ -81,13 +89,15 @@
 		<replaceregexp file="css/script.js"
 			match="goog\..*?\)"
 			replace=""
-			byline="true" />
-	<!--
+			byline="true"/>
+		<!--
 		<exec executable="java" failonerror="true">
-			<arg line="-jar lib/closure/compiler.jar - -compilation_level ADVANCED_OPTIMIZATIONS - -js src/js/all.js - -js src/js/jquery-1.8.2.min.js - -js src/js/jquery.tooltip-merged.min.js - -js src/js/leaflet-src.js - -js src/js/openid.js - -js src/js/atlas.js - -js src/js/misc.js  - -js_output_file css/script.js" />
+			<arg line="-jar lib/closure/compiler.jar - -compilation_level ADVANCED_OPTIMIZATIONS - -js src/js/all.js - -js src/js/jquery-1.8.2.min.js - -js src/js/jquery.tooltip-merged.min.js - -js src/js/leaflet-src.js - -js src/js/openid.js - -js src/js/atlas.js - -js src/js/misc.js  - -js_output_file css/script.js"/>
 		</exec>
-	-->
+		-->
 	</target>
 
-	<target name="build" depends="clean,prepare, phpdoc, pdepend, phpunit, phpcs" />
+
+	<target name="build" depends="clean,prepare,phpdoc,pdepend,phpunit,phpcs"/>
+
 </project>
