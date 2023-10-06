@@ -36,13 +36,12 @@
 
 	<target name="phpdoc" description="Generate HTML documentation with phpDocumentor." depends="prepare">
 		<exec dir="${basedir}" executable="phpdoc" failonerror="true">
-			<arg line="-t build/docs/
+			<arg line="run
 					--directory .
-					-ti 'Stendhal Website PHPDoc'
-					--parseprivate on
-					--undocumentedelements on
-					--output HTML:Smarty:PHP
-					-i lib/*"/>
+					--target build/docs/
+					--title 'Stendhal Website PHP Documentation'
+					--parseprivate
+					--ignore lib/"/>
 		</exec>
 	</target>
 
