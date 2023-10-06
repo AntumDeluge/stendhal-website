@@ -1,497 +1,1291 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://stendhalgame.org/reference/lua/objects/quests/">
-        <link rel="shortcut icon" href="../../../img/favicon.ico">
-        <title>Quests - Stendhal Reference Documentation</title>
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
 
-        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../../..">Stendhal Reference Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="../../.." class="nav-link">Readme</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../java/" class="nav-link">Java</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../" class="nav-link">Lua</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="https://stendhalgame.org/" class="nav-link">Stendhal Homepage</a>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun, friendly, & free multiplayer online adventure game.">
+    
+    <link rel="canonical" href="https://stendhalgame.org/lua/objects/quests/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#introduction" class="nav-link">Introduction</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#quests" class="nav-link">quests</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#classes" class="nav-link">Classes</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#luaquest" class="nav-link">LuaQuest</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <title>Quests - Stendhal 1.44 Reference Documentation</title>
+    
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../css/objects.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../..">Stendhal 1.44 Reference Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="/reference/">Index</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/lua/">Lua</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/">Home</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#contents">Contents</a></li>
+        <li class="first-level "><a href="#introduction">Introduction</a></li>
+            <li class="second-level"><a href="#description">Description</a></li>
+                
+        <li class="first-level "><a href="#methods">Methods</a></li>
+            <li class="second-level"><a href="#questscache">quests:cache</a></li>
+                
+            <li class="second-level"><a href="#questscreate">quests:create</a></li>
+                
+            <li class="second-level"><a href="#questscreatebuilder">quests:createBuilder</a></li>
+                
+            <li class="second-level"><a href="#questscreatemanuscript">quests:createManuscript</a></li>
+                
+            <li class="second-level"><a href="#questsgetcompleted">quests:getCompleted</a></li>
+                
+            <li class="second-level"><a href="#questsgetdescription">quests:getDescription</a></li>
+                
+            <li class="second-level"><a href="#questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</a></li>
+                
+            <li class="second-level"><a href="#questsgetincomplete">quests:getIncomplete</a></li>
+                
+            <li class="second-level"><a href="#questsgetlevelwarning">quests:getLevelWarning</a></li>
+                
+            <li class="second-level"><a href="#questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</a></li>
+                
+            <li class="second-level"><a href="#questsgetopen">quests:getOpen</a></li>
+                
+            <li class="second-level"><a href="#questsgetprogressdetails">quests:getProgressDetails</a></li>
+                
+            <li class="second-level"><a href="#questsgetquest">quests:getQuest</a></li>
+                
+            <li class="second-level"><a href="#questsgetquestfromslot">quests:getQuestFromSlot</a></li>
+                
+            <li class="second-level"><a href="#questsgetrepeatable">quests:getRepeatable</a></li>
+                
+            <li class="second-level"><a href="#questsisloaded">quests:isLoaded</a></li>
+                
+            <li class="second-level"><a href="#questslist">quests:list</a></li>
+                
+            <li class="second-level"><a href="#questslistall">quests:listAll</a></li>
+                
+            <li class="second-level"><a href="#questsliststates">quests:listStates</a></li>
+                
+            <li class="second-level"><a href="#questsload">quests:load</a></li>
+                
+            <li class="second-level"><a href="#questsregister">quests:register</a></li>
+                
+            <li class="second-level"><a href="#questsunload">quests:unload</a></li>
+                
+        <li class="first-level "><a href="#classes">Classes</a></li>
+            <li class="second-level"><a href="#luaquest">LuaQuest</a></li>
+                
+                <li class="third-level"><a href="#public-members">Public Members</a></li>
+                <li class="third-level"><a href="#public-methods">Public Methods</a></li>
+        <li class="first-level "><a href="#usage-examples">Usage Examples</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<hr />
+<h1 id="contents">Contents</h1>
 <div class="toc">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
-<li><a href="#quests">quests</a><ul>
-<li><a href="#methods">Methods</a><ul>
-<li><a href="#questscreate">quests:create</a></li>
-<li><a href="#questscreatemanuscript">quests:createManuscript</a></li>
-<li><a href="#questscreatebuilder">quests:createBuilder</a></li>
-<li><a href="#questsload">quests:load</a></li>
-<li><a href="#questsunload">quests:unload</a></li>
-<li><a href="#questscache">quests:cache</a></li>
-<li><a href="#questsisloaded">quests:isLoaded</a></li>
-<li><a href="#questslistall">quests:listAll</a></li>
-<li><a href="#questslist">quests:list</a></li>
-<li><a href="#questsliststates">quests:listStates</a></li>
-<li><a href="#questsgetquest">quests:getQuest</a></li>
-<li><a href="#questsgetquestfromslot">quests:getQuestFromSlot</a></li>
-<li><a href="#questsgetopen">quests:getOpen</a></li>
-<li><a href="#questsgetcompleted">quests:getCompleted</a></li>
-<li><a href="#questsgetincomplete">quests:getIncomplete</a></li>
-<li><a href="#questsgetrepeatable">quests:getRepeatable</a></li>
-<li><a href="#questsgetdescription">quests:getDescription</a></li>
-<li><a href="#questsgetlevelwarning">quests:getLevelWarning</a></li>
-<li><a href="#questsgetprogressdetails">quests:getProgressDetails</a></li>
-<li><a href="#questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</a></li>
-<li><a href="#questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</a></li>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#description">Description</a></li>
 </ul>
 </li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#questscache">quests:cache</a></li>
+<li><a href="#questscreate">quests:create</a></li>
+<li><a href="#questscreatebuilder">quests:createBuilder</a></li>
+<li><a href="#questscreatemanuscript">quests:createManuscript</a></li>
+<li><a href="#questsgetcompleted">quests:getCompleted</a></li>
+<li><a href="#questsgetdescription">quests:getDescription</a></li>
+<li><a href="#questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</a></li>
+<li><a href="#questsgetincomplete">quests:getIncomplete</a></li>
+<li><a href="#questsgetlevelwarning">quests:getLevelWarning</a></li>
+<li><a href="#questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</a></li>
+<li><a href="#questsgetopen">quests:getOpen</a></li>
+<li><a href="#questsgetprogressdetails">quests:getProgressDetails</a></li>
+<li><a href="#questsgetquest">quests:getQuest</a></li>
+<li><a href="#questsgetquestfromslot">quests:getQuestFromSlot</a></li>
+<li><a href="#questsgetrepeatable">quests:getRepeatable</a></li>
+<li><a href="#questsisloaded">quests:isLoaded</a></li>
+<li><a href="#questslist">quests:list</a></li>
+<li><a href="#questslistall">quests:listAll</a></li>
+<li><a href="#questsliststates">quests:listStates</a></li>
+<li><a href="#questsload">quests:load</a></li>
+<li><a href="#questsregister">quests:register</a></li>
+<li><a href="#questsunload">quests:unload</a></li>
 </ul>
 </li>
 <li><a href="#classes">Classes</a><ul>
 <li><a href="#luaquest">LuaQuest</a><ul>
 <li><a href="#public-members">Public Members</a><ul>
+<li><a href="#luaquestcompletedcheck">LuaQuest.completedCheck</a></li>
+<li><a href="#luaquestformattedhistory">LuaQuest.formattedHistory</a></li>
+<li><a href="#luaquesthistory">LuaQuest.history</a></li>
 <li><a href="#luaquestinit">LuaQuest.init</a></li>
+<li><a href="#luaquestremove">LuaQuest.remove</a></li>
+<li><a href="#luaquestrepeatablecheck">LuaQuest.repeatableCheck</a></li>
+<li><a href="#luaqueststartedcheck">LuaQuest.startedCheck</a></li>
 </ul>
 </li>
-<li><a href="#public-methods">Public Methods</a></li>
-<li><a href="#usage">Usage</a></li>
+<li><a href="#public-methods">Public Methods</a><ul>
+<li><a href="#luaquestaddtoworld">LuaQuest:addToWorld</a></li>
+<li><a href="#luaquestgetformattedhistory">LuaQuest:getFormattedHistory</a></li>
+<li><a href="#luaquestgethistory">LuaQuest:getHistory</a></li>
+<li><a href="#luaquestgetminlevel">LuaQuest:getMinLevel</a></li>
+<li><a href="#luaquestgetnpcname">LuaQuest:getNPCName</a></li>
+<li><a href="#luaquestgetname">LuaQuest:getName</a></li>
+<li><a href="#luaquestgetoriginalname">LuaQuest:getOriginalName</a></li>
+<li><a href="#luaquestgetregion">LuaQuest:getRegion</a></li>
+<li><a href="#luaquestgetslotname">LuaQuest:getSlotName</a></li>
+<li><a href="#luaquestiscompleted">LuaQuest:isCompleted</a></li>
+<li><a href="#luaquestisrepeatable">LuaQuest:isRepeatable</a></li>
+<li><a href="#luaquestisstarted">LuaQuest:isStarted</a></li>
+<li><a href="#luaquestisvisibleonqueststatus">LuaQuest:isVisibleOnQuestStatus</a></li>
+<li><a href="#luaquestregister">LuaQuest:register</a></li>
+<li><a href="#luaquestremovefromworld">LuaQuest:removeFromWorld</a></li>
+<li><a href="#luaquestsetaddfunction">LuaQuest:setAddFunction</a></li>
+<li><a href="#luaquestsetcompletedcheckfunction">LuaQuest:setCompletedCheckFunction</a></li>
+<li><a href="#luaquestsetdescription">LuaQuest:setDescription</a></li>
+<li><a href="#luaquestsetformattedhistoryfunction">LuaQuest:setFormattedHistoryFunction</a></li>
+<li><a href="#luaquestsethistoryfunction">LuaQuest:setHistoryFunction</a></li>
+<li><a href="#luaquestsetminlevel">LuaQuest:setMinLevel</a></li>
+<li><a href="#luaquestsetnpcname">LuaQuest:setNPCName</a></li>
+<li><a href="#luaquestsetname">LuaQuest:setName</a></li>
+<li><a href="#luaquestsetregion">LuaQuest:setRegion</a></li>
+<li><a href="#luaquestsetremovefunction">LuaQuest:setRemoveFunction</a></li>
+<li><a href="#luaquestsetrepeatable">LuaQuest:setRepeatable</a></li>
+<li><a href="#luaquestsetrepeatablecheckfunction">LuaQuest:setRepeatableCheckFunction</a></li>
+<li><a href="#luaquestsetslotname">LuaQuest:setSlotName</a></li>
+<li><a href="#luaquestsetstartedcheckfunction">LuaQuest:setStartedCheckFunction</a></li>
+<li><a href="#luaquestsetvisibleonqueststatus">LuaQuest:setVisibleOnQuestStatus</a></li>
 </ul>
 </li>
 </ul>
 </li>
+</ul>
+</li>
+<li><a href="#usage-examples">Usage Examples</a></li>
 </ul>
 </div>
-<h1 id="introduction">Introduction</h1>
-<p>Adds helper functions for creating &amp; manipulating quests &amp; exposes select public methods of the <a href="../../../java/games/stendhal/server/core/rp/StendhalQuestSystem.html">StendhalQuestSystem</a> class.</p>
-<h1 id="quests">quests</h1>
-<h2 id="methods">Methods</h2>
 <hr />
-<h3 id="questscreate">quests:create</h3>
-<p><span style="color:green; font-weight:bold;">quests:create</span>(slotName, name)</p>
+<h1 id="introduction">Introduction</h1>
+<p>Object instance: <code>quests</code></p>
+<hr />
+<h2 id="description">Description</h2>
+<p>Adds helper functions for creating &amp; manipulating quests &amp; exposes select public methods of
+the <a href="/reference/java/games/stendhal/server/core/rp/StendhalQuestSystem.html">StendhalQuestSystem</a> class.</p>
+<h1 id="methods">Methods</h1>
+<hr />
+<h2 id="questscache">quests:cache</h2>
+<div class="function">
+    quests:cache <span class="paramlist">quest</span>
+</div>
+
+<ul>
+<li><span class="deprecated">Call <code>register</code> directly from the quest instance.</span></li>
+<li>Caches a quest for loading at server startup.</li>
+<li>Parameters:<ul>
+<li><span class="param">quest</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  Quest instance to be cached.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questscreate">quests:create</h2>
+<div class="function">
+    quests:create <span class="paramlist"></span>
+</div>
+<div class="function">
+    quests:create <span class="paramlist">slotName</span>
+</div>
+<div class="function">
+    quests:create <span class="paramlist">slotName, name</span>
+</div>
+<div class="function">
+    quests:create <span class="paramlist">slotName, name, desc</span>
+</div>
+
 <ul>
 <li>Creates a new quest.</li>
 <li>Parameters:<ul>
-<li><strong><em>slotName:</em></strong> (optional) The string identifier for the quest.</li>
-<li><strong><em>name:</em></strong> (optional) The human-readable name that can be shown in travel log.</li>
+<li><span class="param">slotName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest slot identifier.</li>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  The reader friendly name that can be shown in travel log.</li>
+<li><span class="param">desc</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest description.</li>
 </ul>
 </li>
-<li>Returns: New <a href="../../../java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a> instance.</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a></span>
+  New quest instance.</li>
 </ul>
 <hr />
-<h3 id="questscreatemanuscript">quests:createManuscript</h3>
-<p><span style="color:green; font-weight:bold;">quests:createManuscript</span>(builder)</p>
-<ul>
-<li>Creates a new quest in manuscript format.</li>
-<li>Parameters:<ul>
-<li><strong><em>builder:</em></strong> A <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a> instance that defines quest.</li>
-</ul>
-</li>
-<li>Returns: New <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestManuscript.html">QuestManuscript</a> instance.</li>
-</ul>
-<hr />
-<h3 id="questscreatebuilder">quests:createBuilder</h3>
-<p><span style="color:green; font-weight:bold;">quests:createBuilder</span>(task)</p>
+<h2 id="questscreatebuilder">quests:createBuilder</h2>
+<div class="function">
+    quests:createBuilder <span class="paramlist">task</span>
+</div>
+
 <ul>
 <li>Creates a quest builder to pass to <code>quests:createManuscript</code>.</li>
 <li>Parameters:<ul>
-<li><strong><em>task:</em></strong> Task type identifier. Supported are "BringItemTask" &amp; "KillCreaturesTask".</li>
+<li><span class="param">task</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest task type. Supported are "BringItemTask" &amp; "KillCreaturesTask".</li>
 </ul>
 </li>
-<li>Returns: New <a href="../../../java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a> instance.</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a></span>
+  New quest builder instance.</li>
 </ul>
 <hr />
-<h3 id="questsload">quests:load</h3>
-<p><span style="color:green; font-weight:bold;">quests:load</span>(quest)</p>
+<h2 id="questscreatemanuscript">quests:createManuscript</h2>
+<div class="function">
+    quests:createManuscript <span class="paramlist">builder</span>
+</div>
+
 <ul>
-<li>Adds a quest to the world.</li>
+<li>Creates a new quest in manuscript format.</li>
 <li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> The <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to be loaded.</li>
+<li><span class="param">builder</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/quest/QuestBuilder.html">QuestBuilder</a></span>
+  A quest builder instance that defines quest.</li>
 </ul>
 </li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/quest/QuestManuscript.html">QuestManuscript</a></span>
+  New quest instance.</li>
 </ul>
 <hr />
-<h3 id="questsunload">quests:unload</h3>
-<p><span style="color:green; font-weight:bold;">quests:unload</span>(questName)</p>
-<ul>
-<li>Removes a quest from the world.</li>
-<li>Parameters:<ul>
-<li><strong><em>questName:</em></strong> String name of the quest to be removed.</li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="questscache">quests:cache</h3>
-<p><span style="color:green; font-weight:bold;">quests:cache</span>(quest)</p>
-<ul>
-<li>Caches a quest for loading at server startup.</li>
-<li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to be loaded.</li>
-</ul>
-</li>
-<li>Aliases:<ul>
-<li><span style="color:green; font-style:italic;">quests:register</span></li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="questsisloaded">quests:isLoaded</h3>
-<p><span style="color:green; font-weight:bold;">quests:isLoaded</span>(quest)</p>
-<ul>
-<li>Checks if a quest has been loaded.</li>
-<li>Parameters:<ul>
-<li><strong><em>quest:</em></strong> <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> instance to check.</li>
-</ul>
-</li>
-<li>Returns: <code>true</code> if the instance matches stored quests.</li>
-</ul>
-<hr />
-<h3 id="questslistall">quests:listAll</h3>
-<p><span style="color:green; font-weight:bold;">quests:listAll</span>(player)</p>
-<ul>
-<li>List all quests the player knows about.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> Player to create the report for.</li>
-</ul>
-</li>
-<li>Returns: String report.</li>
-</ul>
-<hr />
-<h3 id="questslist">quests:list</h3>
-<p><span style="color:green; font-weight:bold;">quests:list</span>(player, questName)j</p>
-<ul>
-<li>Creates a report on a specified quest for a player.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> Player to create the report for.</li>
-<li><strong><em>questName:</em></strong> Name of quest to be reported.</li>
-</ul>
-</li>
-<li>Returns: String report.</li>
-</ul>
-<hr />
-<h3 id="questsliststates">quests:listStates</h3>
-<p><span style="color:green; font-weight:bold;">quests:listStates</span>(player)</p>
-<ul>
-<li>Dumps the internal quest states for the specified player. This is used for the <a href="../../../java/games/stendhal/server/actions/admin/InspectAction.html">InspectAction</a>.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> Player to create the report for.</li>
-</ul>
-</li>
-<li>Returns: String report.</li>
-</ul>
-<hr />
-<h3 id="questsgetquest">quests:getQuest</h3>
-<p><span style="color:green; font-weight:bold;">quests:getQuest</span>(questName)</p>
-<ul>
-<li>Retrieves the <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> object for a named quest.</li>
-<li>Parameters:<ul>
-<li><strong><em>questName:</em></strong> Name of quest.</li>
-</ul>
-</li>
-<li>Returns: <code>IQuest</code> or <code>null</code> if doesn't exist.</li>
-</ul>
-<hr />
-<h3 id="questsgetquestfromslot">quests:getQuestFromSlot</h3>
-<p><span style="color:green; font-weight:bold;">quests:getQuestFromSlot</span>(questSlot)</p>
-<ul>
-<li>Retrieves the <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> object for a quest.</li>
-<li>Parameters:<ul>
-<li><strong><em>questSlot:</em></strong> Quest identifier string.</li>
-</ul>
-</li>
-<li>Returns: <code>IQuest</code> or <code>null</code> if doesn't exist.</li>
-</ul>
-<hr />
-<h3 id="questsgetopen">quests:getOpen</h3>
-<p><span style="color:green; font-weight:bold;">quests:getOpen</span>(player)</p>
-<ul>
-<li>Retrieves a list of open quests from a player.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-</ul>
-</li>
-<li>Returns: List of string identifiers for open quests.</li>
-</ul>
-<hr />
-<h3 id="questsgetcompleted">quests:getCompleted</h3>
-<p><span style="color:green; font-weight:bold;">quests:getCompleted</span>(player)</p>
+<h2 id="questsgetcompleted">quests:getCompleted</h2>
+<div class="function">
+    quests:getCompleted <span class="paramlist">player</span>
+</div>
+
 <ul>
 <li>Retrieves a list of completed quests from a player.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
 </ul>
 </li>
-<li>Returns: List of string identifiers for completed quests.</li>
-</ul>
-<hr />
-<h3 id="questsgetincomplete">quests:getIncomplete</h3>
-<p><span style="color:green; font-weight:bold;">quests:getIncomplete</span>(player, region)</p>
-<ul>
-<li>Retrieves a list of incomplete quests in a specified region.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>region:</em></strong> Region name/identifier.</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">String</a>&gt;</span>
+  List of string identifiers for completed quests.</li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
 </ul>
 </li>
-<li>Returns: List of string identifiers of incomplete quests in region.</li>
 </ul>
 <hr />
-<h3 id="questsgetrepeatable">quests:getRepeatable</h3>
-<p><span style="color:green; font-weight:bold;">quests:getRepeatable</span>(player)</p>
-<ul>
-<li>Retrieves a list of quests a player has completed, and can now do again.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-</ul>
-</li>
-<li>Returns:</li>
-</ul>
-<hr />
-<h3 id="questsgetdescription">quests:getDescription</h3>
-<p><span style="color:green; font-weight:bold;">quests:getDescription</span>(player, questName)</p>
+<h2 id="questsgetdescription">quests:getDescription</h2>
+<div class="function">
+    quests:getDescription <span class="paramlist">player, questName</span>
+</div>
+
 <ul>
 <li>Retrieves the description of a quest.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>questName:</em></strong> Name of the quest.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the quest.</li>
 </ul>
 </li>
-<li>Returns: String description.</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Description.</li>
 </ul>
 <hr />
-<h3 id="questsgetlevelwarning">quests:getLevelWarning</h3>
-<p><span style="color:green; font-weight:bold;">quests:getLevelWarning</span>(player, questName)</p>
+<h2 id="questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</h2>
+<div class="function">
+    quests:getDescriptionForUnstartedInRegionFromNPCName <span class="paramlist">player, region,
+    name</span>
+</div>
+
+<ul>
+<li>Retrieves quest descriptions for unstarted quests in a specified region matching a specific NPC
+  name.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">region</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Region to check in.</li>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of NPC.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&gt;</span></li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsgetincomplete">quests:getIncomplete</h2>
+<div class="function">
+    quests:getIncomplete <span class="paramlist">player, region</span>
+</div>
+
+<ul>
+<li>Retrieves a list of incomplete quests in a specified region.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">region</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Region name/identifier.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&gt;</span>
+  List of string identifiers of incomplete quests in <strong><em>region</em></strong>.</li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsgetlevelwarning">quests:getLevelWarning</h2>
+<div class="function">
+    quests:getLevelWarning <span class="paramlist">player, questName</span>
+</div>
+
 <ul>
 <li>If the quest is too dangerous, add a warning unless the player has already completed it.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>questName:</em></strong> Name of the quest.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the quest.</li>
 </ul>
 </li>
-<li>Returns: String</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span></li>
 </ul>
 <hr />
-<h3 id="questsgetprogressdetails">quests:getProgressDetails</h3>
-<p><span style="color:green; font-weight:bold;">quests:getProgressDetails</span>(player, questeName)</p>
-<ul>
-<li>Retrieves details on the progress of the quest.</li>
-<li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>questName:</em></strong> Name of the quest.</li>
-</ul>
-</li>
-<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
-</ul>
-<hr />
-<h3 id="questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</h3>
-<p><span style="color:green; font-weight:bold;">quests:getNPCNamesForUnstartedInRegionForLevel</span>(player, region)</p>
+<h2 id="questsgetnpcnamesforunstartedinregionforlevel">quests:getNPCNamesForUnstartedInRegionForLevel</h2>
+<div class="function">
+    quests:getNPCNamesForUnstartedInRegionForLevel <span class="paramlist">player, region</span>
+</div>
+
 <ul>
 <li>Retrieves a list of the unique npc names for unstarted quests in a specified region.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>region:</em></strong> Region to check in.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">region</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Region to check in.</li>
 </ul>
 </li>
-<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&gt;</span></li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
+</ul>
+</li>
 </ul>
 <hr />
-<h3 id="questsgetdescriptionforunstartedinregionfromnpcname">quests:getDescriptionForUnstartedInRegionFromNPCName</h3>
-<p><span style="color:green; font-weight:bold;">quests:getDescriptionForUnstartedInRegionFromNPCName</span>(player, region, name)</p>
+<h2 id="questsgetopen">quests:getOpen</h2>
+<div class="function">
+    quests:getOpen <span class="paramlist">player</span>
+</div>
+
 <ul>
-<li>Retrieves quest descriptions for unstarted quests in a specified region matching a specific NPC name.</li>
+<li>Retrieves a list of open quests from a player.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> <a href="../../../java/games/stendhal/server/entity/player/Player.html">Player</a> instance to be checked.</li>
-<li><strong><em>region:</em></strong> Region to check in.</li>
-<li><strong><em>name:</em></strong> Name of NPC.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
 </ul>
 </li>
-<li>Returns: <a href="https://docs.oracle.com/javase/8/docs/api/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/javase/8/docs/api/java/lang/String.html">java.lang.String</a>&gt;</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&gt;</span>
+  List of string identifiers for open quests.</li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
 </ul>
-<h1 id="classes">Classes</h1>
-<h2 id="luaquest">LuaQuest</h2>
-<p>See: <a href="../../../java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a></p>
-<h3 id="public-members">Public Members</h3>
-<h4 id="luaquestinit">LuaQuest.init</h4>
-<p><span style="color:darkblue; font-weight:bold;">LuaQuest.init</span></p>
+</li>
+</ul>
+<hr />
+<h2 id="questsgetprogressdetails">quests:getProgressDetails</h2>
+<div class="function">
+    quests:getProgressDetails <span class="paramlist">player, questeName</span>
+</div>
+
 <ul>
-<li>Called by <a href="../../../java/games/stendhal/server/maps/quests/IQuest.html#addToWorld()">IQuest.addToWorld</a>.</li>
-<li>Type: function</li>
+<li>Retrieves details on the progress of the quest.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the quest.</li>
 </ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&gt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&lt;</span></li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsgetquest">quests:getQuest</h2>
+<div class="function">
+    quests:getQuest <span class="paramlist">questName</span>
+</div>
+
+<ul>
+<li>Retrieves the <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a> object for a named quest.</li>
+<li>Parameters:<ul>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of quest.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  Quest instance or <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html"><code>nil</code></a> if doesn't exist.</li>
+</ul>
+<hr />
+<h2 id="questsgetquestfromslot">quests:getQuestFromSlot</h2>
+<div class="function">
+    quests:getQuestFromSlot <span class="paramlist">questSlot</span>
+</div>
+
+<ul>
+<li>Retrieves the <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html"><code>IQuest</code></a> object for a quest.</li>
+<li>Parameters:<ul>
+<li><span class="param">questSlot</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest identifier string.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  Quest instance or <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html"><code>nil</code></a> if doesn't exist.</li>
+</ul>
+<hr />
+<h2 id="questsgetrepeatable">quests:getRepeatable</h2>
+<div class="function">
+    quests:getRepeatable <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>Retrieves a list of quests a player has completed, and can now do again.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player instance to be checked.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">java.util.List</a>&gt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">java.lang.String</a>&lt;</span></li>
+<li>TODO:<ul>
+<li>Return <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> instead of Java list.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsisloaded">quests:isLoaded</h2>
+<div class="function">
+    quests:isLoaded <span class="paramlist">quest</span>
+</div>
+
+<ul>
+<li>Checks if a quest has been loaded.</li>
+<li>Parameters:<ul>
+<li><span class="param">quest</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  Quest instance to check.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  <code>true</code> if the instance matches stored quests.</li>
+</ul>
+<hr />
+<h2 id="questslist">quests:list</h2>
+<div class="function">
+    quests:list <span class="paramlist">player, questName</span>
+</div>
+
+<ul>
+<li>Creates a report on a specified quest for a player.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player to create the report for.</li>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of quest to be reported.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Report.</li>
+</ul>
+<hr />
+<h2 id="questslistall">quests:listAll</h2>
+<div class="function">
+    quests:listAll <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>List all quests the player knows about.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player to create the report for.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Report.</li>
+</ul>
+<hr />
+<h2 id="questsliststates">quests:listStates</h2>
+<div class="function">
+    quests:listStates <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>Dumps the internal quest states for the specified player. This is used for the <a href="/reference/java/games/stendhal/server/actions/admin/InspectAction.html">InspectAction</a>.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player to create the report for.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Report.</li>
+</ul>
+<hr />
+<h2 id="questsload">quests:load</h2>
+<div class="function">
+    quests:load <span class="paramlist">quest</span>
+</div>
+
+<ul>
+<li>Adds a quest to the world.</li>
+<li>Parameters:<ul>
+<li><span class="param">quest</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  The quest instance to be loaded.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsregister">quests:register</h2>
+<div class="function">
+    quests:register <span class="paramlist">quest</span>
+</div>
+
+<ul>
+<li><em><strong>DEPRECATED:</strong> Call <code>register</code> directly from the quest instance.</em></li>
+<li>Caches a quest for loading at startup. Alias for <code>quests:cache</code>.</li>
+<li>Parameters:<ul>
+<li><span class="param">quest</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html">IQuest</a></span>
+  Quest instance to be cached.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="questsunload">quests:unload</h2>
+<div class="function">
+    quests:unload <span class="paramlist">questName</span>
+</div>
+
+<ul>
+<li>Removes a quest from the world.</li>
+<li>Parameters:<ul>
+<li><span class="param">questName</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the quest to be removed.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1 id="classes">Classes</h1>
+<hr />
+<h2 id="luaquest">LuaQuest</h2>
+<p>See: <a href="/reference/java/games/stendhal/server/core/scripting/lua/LuaQuestHelper.LuaQuest.html">LuaQuest</a></p>
+<hr />
+<h3 id="public-members">Public Members</h3>
+<hr />
+<h4 id="luaquestcompletedcheck">LuaQuest.completedCheck</h4>
+<div class="member">
+    LuaQuest.completedCheck
+</div>
+
+<ul>
+<li>Called by <code>LuaQuest.isCompleted</code>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaquestformattedhistory">LuaQuest.formattedHistory</h4>
+<div class="member">
+    LuaQuest.formattedHistory
+</div>
+
+<ul>
+<li>Called by <code>LuaQuest.getFormattedHistory</code>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaquesthistory">LuaQuest.history</h4>
+<div class="member">
+    LuaQuest.history
+</div>
+
+<ul>
+<li>Called by <code>LuaQuest.getHistory</code>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaquestinit">LuaQuest.init</h4>
+<div class="member">
+    LuaQuest.init
+</div>
+
+<ul>
+<li>Called by <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#addToWorld()">IQuest.addToWorld</a>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaquestremove">LuaQuest.remove</h4>
+<div class="member">
+    LuaQuest.remove
+</div>
+
+<ul>
+<li>Called by <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#removeFromWorld()">IQuest.removeFromWorld</a>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaquestrepeatablecheck">LuaQuest.repeatableCheck</h4>
+<div class="member">
+    LuaQuest.repeatableCheck
+</div>
+
+<ul>
+<li>Called by <code>LuaQuest.isRepeatable</code>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
+<h4 id="luaqueststartedcheck">LuaQuest.startedCheck</h4>
+<div class="member">
+    LuaQuest.startedCheck
+</div>
+
+<ul>
+<li>Called by <code>LuaQuest.isStarted</code>.</li>
+<li>Type: <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></li>
+</ul>
+<hr />
 <h3 id="public-methods">Public Methods</h3>
-<h3 id="usage">Usage</h3>
+<hr />
+<h4 id="luaquestaddtoworld">LuaQuest:addToWorld</h4>
+<div class="method">
+    LuaQuest:addToWorld <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#addToWorld()">IQuest.addToWorld</a>.</li>
+</ul>
+<hr />
+<h4 id="luaquestgetformattedhistory">LuaQuest:getFormattedHistory</h4>
+<div class="method">
+    LuaQuest:getFormattedHistory <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getFormattedHistory(games.stendhal.server.entity.player.Player)">IQuest.getFormattedHistory</a>.</li>
+</ul>
+<hr />
+<h4 id="luaquestgethistory">LuaQuest:getHistory</h4>
+<div class="method">
+    LuaQuest:getHistory <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getHistory(games.stendhal.server.entity.player.Player)">IQuest.getHistory</a></li>
+</ul>
+<hr />
+<h4 id="luaquestgetminlevel">LuaQuest:getMinLevel</h4>
+<div class="method">
+    LuaQuest:getMinLevel <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getMinLevel()">IQuest.getMinLevel</a></li>
+</ul>
+<hr />
+<h4 id="luaquestgetnpcname">LuaQuest:getNPCName</h4>
+<div class="method">
+    LuaQuest:getNPCName <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getNPCName()">IQuest.getNPCName</a></li>
+</ul>
+<hr />
+<h4 id="luaquestgetname">LuaQuest:getName</h4>
+<div class="method">
+    LuaQuest:getName <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getName()">IQuest.getName</a></li>
+</ul>
+<hr />
+<h4 id="luaquestgetoriginalname">LuaQuest:getOriginalName</h4>
+<div class="method">
+    LuaQuest:getOriginalName <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>Retrieves unformatted quest name.</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Unmodified quest name string.</li>
+</ul>
+<hr />
+<h4 id="luaquestgetregion">LuaQuest:getRegion</h4>
+<div class="method">
+    LuaQuest:getRegion <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getRegion()">IQuest.getRegion</a></li>
+</ul>
+<hr />
+<h4 id="luaquestgetslotname">LuaQuest:getSlotName</h4>
+<div class="method">
+    LuaQuest:getSlotName <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#getSlotName()">IQuest.getSlotName</a></li>
+</ul>
+<hr />
+<h4 id="luaquestiscompleted">LuaQuest:isCompleted</h4>
+<div class="method">
+    LuaQuest:isCompleted <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#isCompleted(games.stendhal.server.entity.player.Player)">IQuest.isCompleted</a></li>
+</ul>
+<hr />
+<h4 id="luaquestisrepeatable">LuaQuest:isRepeatable</h4>
+<div class="method">
+    LuaQuest:isRepeatable <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#isRepeatable(games.stendhal.server.entity.player.Player)">IQuest.isRepeatable</a></li>
+</ul>
+<hr />
+<h4 id="luaquestisstarted">LuaQuest:isStarted</h4>
+<div class="method">
+    LuaQuest:isStarted <span class="paramlist">player</span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#isStarted(games.stendhal.server.entity.player.Player)">IQuest.isStarted</a></li>
+</ul>
+<hr />
+<h4 id="luaquestisvisibleonqueststatus">LuaQuest:isVisibleOnQuestStatus</h4>
+<div class="method">
+    LuaQuest:isVisibleOnQuestStatus <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#isVisibleOnQuestStatus()">IQuest.isVisibleOnQuestStatus</a></li>
+</ul>
+<hr />
+<h4 id="luaquestregister">LuaQuest:register</h4>
+<div class="method">
+    LuaQuest:register <span class="paramlist"></span>
+</div>
+<div class="method">
+    LuaQuest:register <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Registers quest to be added to world at server startup. If called without parameters
+<code>LuaQuest.init</code> must be set first.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to execute when <code>quests:loadQuest</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestremovefromworld">LuaQuest:removeFromWorld</h4>
+<div class="method">
+    LuaQuest:removeFromWorld <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>See <a href="/reference/java/games/stendhal/server/maps/quests/IQuest.html#removeFromWorld()">IQuest.removeFromWorld</a></li>
+</ul>
+<hr />
+<h4 id="luaquestsetaddfunction">LuaQuest:setAddFunction</h4>
+<div class="method">
+    LuaQuest:setAddFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li><em><strong>DEPRECATED:</strong> Set <code>LuaQuest.init</code> directly.</em></li>
+<li>Sets the function for adding the quest to the game.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.addToWorld</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetcompletedcheckfunction">LuaQuest:setCompletedCheckFunction</h4>
+<div class="method">
+    LuaQuest:setCompletedCheckFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Sets the function for checking if the quest is started.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.isCompleted</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetdescription">LuaQuest:setDescription</h4>
+<div class="method">
+    LuaQuest:setDescription <span class="paramlist">desc</span>
+</div>
+
+<ul>
+<li>Sets the quest description string.</li>
+<li>Parameters:<ul>
+<li><span class="param">desc</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest description string.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetformattedhistoryfunction">LuaQuest:setFormattedHistoryFunction</h4>
+<div class="method">
+    LuaQuest:setFormattedHistoryFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Sets the function for retrieving formatted history of quest state.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.getFormattedHistory</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsethistoryfunction">LuaQuest:setHistoryFunction</h4>
+<div class="method">
+    LuaQuest:setHistoryFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Sets the function for retrieving history of quest state.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.getHistory</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetminlevel">LuaQuest:setMinLevel</h4>
+<div class="method">
+    LuaQuest:setMinLevel <span class="paramlist">level</span>
+</div>
+
+<ul>
+<li>Sets the recommended minimum level.</li>
+<li>Parameters:<ul>
+<li><span class="param">level</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaInteger.html">int</a></span>
+  Level to return when <code>LuaQuest.getMinLevel</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetnpcname">LuaQuest:setNPCName</h4>
+<div class="method">
+    LuaQuest:setNPCName <span class="paramlist">name</span>
+</div>
+
+<ul>
+<li>Sets the NPC name.</li>
+<li>Parameters:<ul>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  NPC name to return when <code>LuaQuest.getNPCName</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetname">LuaQuest:setName</h4>
+<div class="method">
+    LuaQuest:setName <span class="paramlist">name</span>
+</div>
+
+<ul>
+<li>Sets the quest name string.</li>
+<li>Parameters:<ul>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Quest name string to be returned when <code>LuaQuest.getName</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetregion">LuaQuest:setRegion</h4>
+<div class="method">
+    LuaQuest:setRegion <span class="paramlist">region</span>
+</div>
+
+<ul>
+<li>Sets the quest region.</li>
+<li>Parameters:<ul>
+<li><span class="param">region</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Region string to be returned when <code>LuaQuest.getRegion</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetremovefunction">LuaQuest:setRemoveFunction</h4>
+<div class="method">
+    LuaQuest:setRemoveFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li><em><strong>DEPRECATED:</strong> Set <code>LuaQuest.remove</code> directly.</em></li>
+<li>Sets the function for removing the quest from the game.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.removeFromWorld</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetrepeatable">LuaQuest:setRepeatable</h4>
+<div class="method">
+    LuaQuest:setRepeatable <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>Sets the repeatable status of the quest (overrides <code>LuaQuest.setCompletedCheckFunction</code>).</li>
+<li>Parameters:<ul>
+<li><span class="param">repeatable</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  If <code>true</code>, the quest is repeatable.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetrepeatablecheckfunction">LuaQuest:setRepeatableCheckFunction</h4>
+<div class="method">
+    LuaQuest:setRepeatableCheckFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Sets the function for checking if the quest is repeatable.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.isRepeatable</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetslotname">LuaQuest:setSlotName</h4>
+<div class="method">
+    LuaQuest:setSlotName <span class="paramlist">slot</span>
+</div>
+
+<ul>
+<li>Sets the quest identifier string.</li>
+<li>Parameters:<ul>
+<li><span class="param">slot</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Slot identifier string to be returned when <code>LuaQuest.getSlotName</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetstartedcheckfunction">LuaQuest:setStartedCheckFunction</h4>
+<div class="method">
+    LuaQuest:setStartedCheckFunction <span class="paramlist">func</span>
+</div>
+
+<ul>
+<li>Sets the function for checking if the quest is started.</li>
+<li>Parameters:<ul>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to invoke when <code>LuaQuest.isStarted</code> is called.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h4 id="luaquestsetvisibleonqueststatus">LuaQuest:setVisibleOnQuestStatus</h4>
+<div class="method">
+    LuaQuest:setVisibleOnQuestStatus <span class="paramlist">visible</span>
+</div>
+
+<ul>
+<li>Sets whether or not the quest should be shown in the travel log.</li>
+<li>Parameters:<ul>
+<li><span class="param">visible</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  If <code>true</code>, quest will be displayed in travel log.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h1 id="usage-examples">Usage Examples</h1>
 <p>Standard quest example:</p>
-<pre><code>local loadStep1 = function()
-  ...
+<pre><code class="language-lua">local loadStep1 = function()
+    ...
 end
 
 local loadStep2 = function()
-  ...
+    ...
 end
 
 local myQuest = quests:create(&quot;my_quest&quot;, &quot;My Quest&quot;)
-myQuest.init = function()
-  loadStep1()
-  loadStep2()
-end
-
-quests:register(myQuest)
+myQuest:register(function()
+    loadStep1()
+    loadStep2()
+end)
 </code></pre>
 <p>Example of <a href="https://github.com/arianne/stendhal/blob/master/src/games/stendhal/server/maps/quests/CoalForHaunchy.java">CoalForHaunchy</a> quest manuscript converted to Lua:</p>
-<pre><code>local itemBuilder = quests:createBuilder(&quot;BringItemTask&quot;)
+<pre><code class="language-lua">local itemBuilder = quests:createBuilder(&quot;BringItemTask&quot;)
 
 itemBuilder:info()
-  :name(&quot;Coal for Haunchy&quot;)
-  :description(&quot;Haunchy Meatoch is afraid of his BBQ grillfire. Will his coal last till the steaks are ready or will he need some more?&quot;)
-  :internalName(&quot;coal_for_haunchy&quot;)
-  :repeatableAfterMinutes(2 * 24 * 60)
-  :minLevel(0)
-  :region(Region.ADOS_CITY)
-  :questGiverNpc(&quot;Haunchy Meatoch&quot;)
+    :name(&quot;Coal for Haunchy&quot;)
+    :description(&quot;Haunchy Meatoch is afraid of his BBQ grillfire. Will his coal last till the steaks are ready or will he need some more?&quot;)
+    :internalName(&quot;coal_for_haunchy&quot;)
+    :repeatableAfterMinutes(2 * 24 * 60)
+    :minLevel(0)
+    :region(Region.ADOS_CITY)
+    :questGiverNpc(&quot;Haunchy Meatoch&quot;)
 
 itemBuilder:history()
-  :whenNpcWasMet(&quot;Haunchy Meatoch welcomed me to the Ados market.&quot;)
-  :whenQuestWasRejected(&quot;He asked me to fetch him some pieces of coal but I don't have time to collect some.&quot;)
-  :whenQuestWasAccepted(&quot;The BBQ grill-heat is low and I promised Haunchy to help him out with 25 pieces of coal.&quot;)
-  :whenTaskWasCompleted(&quot;I found 25 pieces of coal for the Haunchy and think he will be happy.&quot;)
-  :whenQuestWasCompleted(&quot;Haunchy Meatoch was really happy when I gave him the coal, he has enough for now. He gave me some of the best steaks which I ever ate!&quot;)
-  :whenQuestCanBeRepeated(&quot;But I'd bet his amount is low again and needs more. Maybe I'll get more grilled tasty steaks.&quot;)
+    :whenNpcWasMet(&quot;Haunchy Meatoch welcomed me to the Ados market.&quot;)
+    :whenQuestWasRejected(&quot;He asked me to fetch him some pieces of coal but I don't have time to collect some.&quot;)
+    :whenQuestWasAccepted(&quot;The BBQ grill-heat is low and I promised Haunchy to help him out with 25 pieces of coal.&quot;)
+    :whenTaskWasCompleted(&quot;I found 25 pieces of coal for the Haunchy and think he will be happy.&quot;)
+    :whenQuestWasCompleted(&quot;Haunchy Meatoch was really happy when I gave him the coal, he has enough for now. He gave me some of the best steaks which I ever ate!&quot;)
+    :whenQuestCanBeRepeated(&quot;But I'd bet his amount is low again and needs more. Maybe I'll get more grilled tasty steaks.&quot;)
 
 itemBuilder:offer()
-  :respondToRequest(&quot;I cannot use wood for this huge BBQ. To keep the heat I need some really old stone coal but there isn't much left. The problem is, that I can't fetch it myself because my steaks would burn then so I have to stay here. Can you bring me 25 pieces of #coal for my BBQ please?&quot;)
-  :respondToUnrepeatableRequest(&quot;The coal amount behind my counter is still high enough. I will not need more for some time.&quot;)
-  :respondToRepeatedRequest(&quot;The last coal you brought me is mostly gone again. Will you bring me some more?&quot;)
-  :respondToAccept(&quot;Thank you! I'll be sure to give you a nice and tasty reward.&quot;)
-  :respondTo({&quot;coal&quot;}):saying(&quot;Coal isn't easy to find. You normally can find it somewhere in the ground but perhaps you are lucky and find some in the old Semos Mine tunnels... Will you help me?&quot;)
-  :respondToReject(&quot;Oh, never mind. I thought you love BBQs like I do. Bye then.&quot;)
-  :rejectionKarmaPenalty(10.0)
-  :remind(&quot;Luckily my BBQ is still going. But please hurry up to bring me 25 coal as you promised.&quot;)
+    :respondToRequest(&quot;I cannot use wood for this huge BBQ. To keep the heat I need some really old stone coal but there isn't much left. The problem is, that I can't fetch it myself because my steaks would burn then so I have to stay here. Can you bring me 25 pieces of #coal for my BBQ please?&quot;)
+    :respondToUnrepeatableRequest(&quot;The coal amount behind my counter is still high enough. I will not need more for some time.&quot;)
+    :respondToRepeatedRequest(&quot;The last coal you brought me is mostly gone again. Will you bring me some more?&quot;)
+    :respondToAccept(&quot;Thank you! I'll be sure to give you a nice and tasty reward.&quot;)
+    :respondTo({&quot;coal&quot;}):saying(&quot;Coal isn't easy to find. You normally can find it somewhere in the ground but perhaps you are lucky and find some in the old Semos Mine tunnels... Will you help me?&quot;)
+    :respondToReject(&quot;Oh, never mind. I thought you love BBQs like I do. Bye then.&quot;)
+    :rejectionKarmaPenalty(10.0)
+    :remind(&quot;Luckily my BBQ is still going. But please hurry up to bring me 25 coal as you promised.&quot;)
 
 entities:getNPC(&quot;Haunchy Meatoch&quot;):addReply(&quot;coal&quot;, &quot;Sometime you could do me a #favour ...&quot;)
 
 itemBuilder:task()
-  :requestItem(25, &quot;coal&quot;)
+    :requestItem(25, &quot;coal&quot;)
 
 itemBuilder:complete()
-  :greet(&quot;Ah, I see, you have enough coal to keep my BBQ on! Is it for me?&quot;)
-  :respondToReject(&quot;Well then, hopefully someone else will help me before my BBQ goes out.&quot;)
-  :respondToAccept(nil)
-  :rewardWith(actions:create(&quot;IncreaseXPAction&quot;, {200}))
-  :rewardWith(actions:create(&quot;IncreaseKarmaAction&quot;, {20}))
-  :rewardWith(actions:create(&quot;EquipRandomAmountOfItemAction&quot;, {&quot;grilled steak&quot;, 1, 4, 1,
-      &quot;Thank you! Take [this_these] [number_item] from my grill!&quot;}))
+    :greet(&quot;Ah, I see, you have enough coal to keep my BBQ on! Is it for me?&quot;)
+    :respondToReject(&quot;Well then, hopefully someone else will help me before my BBQ goes out.&quot;)
+    :respondToAccept(nil)
+    :rewardWith(actions:create(&quot;IncreaseXPAction&quot;, {200}))
+    :rewardWith(actions:create(&quot;IncreaseKarmaAction&quot;, {20}))
+    :rewardWith(actions:create(&quot;EquipRandomAmountOfItemAction&quot;, {&quot;grilled steak&quot;, 1, 4, 1,
+        &quot;Thank you! Take [this_these] [number_item] from my grill!&quot;}))
 
 quests:register(quests:createManuscript(itemBuilder))
 </code></pre></div>
-            </div>
-        </div>
+        
+        
+    </div>
 
-        <footer class="col-md-12">
+    
+      <footer class="col-md-12 text-center">
+          
+          
             <hr>
-                <p>Copyright © 2003-2023 Stendhal</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../../js/base.js" defer></script>
-        <script src="../../../search/main.js" defer></script>
+            <p>
+            <small>Copyright © 2003-2023 Stendhal</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../.."</script>
+    
+    <script src="../../../js/base.js"></script>
+    <script src="../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
                 <form>
                     <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+                <div id="mkdocs-search-results"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -537,6 +1331,6 @@ quests:register(quests:createManuscript(itemBuilder))
         </div>
     </div>
 </div>
-
     </body>
+
 </html>

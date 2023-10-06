@@ -1,329 +1,635 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://stendhalgame.org/reference/lua/objects/game/">
-        <link rel="shortcut icon" href="../../../img/favicon.ico">
-        <title>Game - Stendhal Reference Documentation</title>
-        <link href="../../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
 
-        <script src="../../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../../..">Stendhal Reference Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="../../.." class="nav-link">Readme</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../../java/" class="nav-link">Java</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../" class="nav-link">Lua</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="https://stendhalgame.org/" class="nav-link">Stendhal Homepage</a>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun, friendly, & free multiplayer online adventure game.">
+    
+    <link rel="canonical" href="https://stendhalgame.org/lua/objects/game/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="2"><a href="#introduction" class="nav-link">Introduction</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="2"><a href="#methods" class="nav-link">Methods</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <title>Game - Stendhal 1.44 Reference Documentation</title>
+    
 
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../css/objects.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../..">Stendhal 1.44 Reference Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="/reference/">Index</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/lua/">Lua</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/">Home</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#contents">Contents</a></li>
+        <li class="first-level "><a href="#introduction">Introduction</a></li>
+            <li class="second-level"><a href="#description">Description</a></li>
+                
+        <li class="first-level "><a href="#methods">Methods</a></li>
+            <li class="second-level"><a href="#gameadd">game:add</a></li>
+                
+            <li class="second-level"><a href="#gameaddgameevent">game:addGameEvent</a></li>
+                
+            <li class="second-level"><a href="#gamecreateevent">game:createEvent</a></li>
+                
+            <li class="second-level"><a href="#gamegetcreature">game:getCreature</a></li>
+                
+            <li class="second-level"><a href="#gamegetcreatures">game:getCreatures</a></li>
+                
+            <li class="second-level"><a href="#gamegetitem">game:getItem</a></li>
+                
+            <li class="second-level"><a href="#gamegetitems">game:getItems</a></li>
+                
+            <li class="second-level"><a href="#gamegetmessage">game:getMessage</a></li>
+                
+            <li class="second-level"><a href="#gamegetzone">game:getZone</a></li>
+                
+            <li class="second-level"><a href="#gamemodify">game:modify</a></li>
+                
+            <li class="second-level"><a href="#gameplayerisinzone">game:playerIsInZone</a></li>
+                
+            <li class="second-level"><a href="#gameprivatetext">game:privateText</a></li>
+                
+            <li class="second-level"><a href="#gameraiseevent">game:raiseEvent</a></li>
+                
+            <li class="second-level"><a href="#gameremove">game:remove</a></li>
+                
+            <li class="second-level"><a href="#gamerunafter">game:runAfter</a></li>
+                
+            <li class="second-level"><a href="#gamesetmusic">game:setMusic</a></li>
+                
+            <li class="second-level"><a href="#gamesetzone">game:setZone</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<hr />
+<h1 id="contents">Contents</h1>
 <div class="toc">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#introduction">Introduction</a><ul>
+<li><a href="#description">Description</a></li>
+</ul>
+</li>
 <li><a href="#methods">Methods</a><ul>
 <li><a href="#gameadd">game:add</a></li>
-<li><a href="#gameremove">game:remove</a></li>
 <li><a href="#gameaddgameevent">game:addGameEvent</a></li>
-<li><a href="#gamesetzone">game:setZone</a></li>
-<li><a href="#gamegetzone">game:getZone</a></li>
-<li><a href="#gamesetmusic">game:setMusic</a></li>
-<li><a href="#gameplayerisinzone">game:playerIsInZone</a></li>
-<li><a href="#gamegetcreatures">game:getCreatures</a></li>
+<li><a href="#gamecreateevent">game:createEvent</a></li>
 <li><a href="#gamegetcreature">game:getCreature</a></li>
-<li><a href="#gamegetitems">game:getItems</a></li>
+<li><a href="#gamegetcreatures">game:getCreatures</a></li>
 <li><a href="#gamegetitem">game:getItem</a></li>
-<li><a href="#gamemodify">game:modify</a></li>
-<li><a href="#gameprivatetext">game:privateText</a></li>
+<li><a href="#gamegetitems">game:getItems</a></li>
 <li><a href="#gamegetmessage">game:getMessage</a></li>
+<li><a href="#gamegetzone">game:getZone</a></li>
+<li><a href="#gamemodify">game:modify</a></li>
+<li><a href="#gameplayerisinzone">game:playerIsInZone</a></li>
+<li><a href="#gameprivatetext">game:privateText</a></li>
+<li><a href="#gameraiseevent">game:raiseEvent</a></li>
+<li><a href="#gameremove">game:remove</a></li>
+<li><a href="#gamerunafter">game:runAfter</a></li>
+<li><a href="#gamesetmusic">game:setMusic</a></li>
+<li><a href="#gamesetzone">game:setZone</a></li>
 </ul>
 </li>
 </ul>
 </div>
-<h2 id="introduction">Introduction</h2>
+<hr />
+<h1 id="introduction">Introduction</h1>
+<p>Object instance: <code>game</code></p>
+<hr />
+<h2 id="description">Description</h2>
 <p>The main object that handles setting zone &amp; adding entities to game.</p>
-<h2 id="methods">Methods</h2>
 <hr />
-<h3 id="gameadd">game:add</h3>
-<p><span style="color:green; font-weight:bold;">game:add</span>(object)</p>
-<ul>
-<li>Adds an <a href="../../../java/marauroa/common/game/RPObject.html">RPObject</a> instance to the current zone.</li>
-<li>Parameters:<ul>
-<li><strong><em>object:</em></strong> Object to add.</li>
-</ul>
-</li>
-</ul>
-<p><span style="color:green; font-weight:bold;">game:add</span>(npc)</p>
-<ul>
-<li>Adds an <a href="../../../java/games/stendhal/server/entity/npc/NPC.html">NPC</a> instance to the current zone.</li>
-<li>Parameters:<ul>
-<li><strong><em>npc:</em></strong> NPC to add.</li>
-</ul>
-</li>
-</ul>
-<p><span style="color:green; font-weight:bold;">game:add</span>(creature, x, y)</p>
-<ul>
-<li>Adds a <a href="../../../java/games/stendhal/server/entity/creature/Creature.html">Creature</a> instance to the current zone.</li>
-<li>Parameters:<ul>
-<li><strong><em>creature:</em></strong> Creature to add.</li>
-<li><strong><em>x:</em></strong> Horizontal position of where to add creature.</li>
-<li><strong><em>y:</em></strong> Vertical position of where to add creature.</li>
-</ul>
-</li>
-</ul>
+<h1 id="methods">Methods</h1>
 <hr />
-<h3 id="gameremove">game:remove</h3>
-<p><span style="color:green; font-weight:bold;">game:remove</span>(object)</p>
+<h2 id="gameadd">game:add</h2>
+<div class="function">
+    game:add <span class="paramlist">obj</span>
+</div>
+<div class="function">
+    game:add <span class="paramlist">obj, expire</span>
+</div>
+<div class="function">
+    game:add <span class="paramlist">npc</span>
+</div>
+<div class="function">
+    game:add <span class="paramlist">creature, x, y</span>
+</div>
+
 <ul>
+<li>Adds an object or entity instance to the current zone.</li>
 <li>Parameters:<ul>
-<li><strong><em>object:</em></strong></li>
+<li><span class="param">obj</span>
+  <span class="datatype"><a href="/reference/java/marauroa/common/game/RPObject.html">RPObject</a></span>
+  Object to add.</li>
+<li><span class="param">expire</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  <code>true</code> if the item should expire according to its normal behavior, <code>false</code> otherwise.</li>
+<li><span class="param">npc</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/NPC.html">NPC</a></span>
+  NPC to add.</li>
+<li><span class="param">creature</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/creature/Creature.html">Creature</a></span>
+  Creature to add.</li>
+<li><span class="param">x</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaInteger.html">int</a></span>
+  Horizontal position of where to add creature.</li>
+<li><span class="param">y</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaInteger.html">int</a></span>
+  Vertical position of where to add creature.</li>
 </ul>
 </li>
-</ul>
-<p><span style="color:green; font-weight:bold;">game:remove</span>(npc)</p>
-<ul>
-<li>Parameters:<ul>
-<li><strong><em>npc:</em></strong></li>
-</ul>
-</li>
-</ul>
-<hr />
-<h3 id="gameaddgameevent">game:addGameEvent</h3>
-<p><span style="color:green; font-weight:bold;">game:addGameEvent</span>(source, event, params)</p>
-<ul>
-<li>Adds a new <a href="../../../java/games/stendhal/server/core/engine/GameEvent.html">GameEvent</a>.</li>
-<li>Parameters:<ul>
-<li><strong><em>source:</em></strong></li>
-<li><strong><em>event:</em></strong></li>
-<li><strong><em>params:</em></strong></li>
-</ul>
-</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/creature/Creature.html">Creature</a></span>
+  <em>(<code>game:add(creature)</code> only)</em></li>
 </ul>
 <hr />
-<h3 id="gamesetzone">game:setZone</h3>
-<p><span style="color:green; font-weight:bold;">game:setZone</span>(name)</p>
+<h2 id="gameaddgameevent">game:addGameEvent</h2>
+<div class="function">
+    game:addGameEvent <span class="paramlist">source, event, params</span>
+</div>
+
 <ul>
-<li>Sets the current zone.</li>
+<li>Raises a new <a href="/reference/java/games/stendhal/server/core/engine/GameEvent.html">game event</a>. Same function as <a href="#gameraiseevent">game:raiseEvent</a>.</li>
 <li>Parameters:<ul>
-<li><strong><em>name:</em></strong> String identifier for zone to be set as current zone.</li>
+<li><span class="param">source</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Source of the event, usually a character.</li>
+<li><span class="param">event</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of event.</li>
+<li><span class="param">params:</span>
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html">List</a>&lt;<a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/String.html">String</a>&gt;</span>
+  Event parameters.</li>
 </ul>
 </li>
-<li>Returns: <code>true</code> if zone was successfully set.</li>
-</ul>
-<p><span style="color:green; font-weight:bold;">game:setZone</span>(zone)</p>
-<ul>
-<li>Sets the current zone.</li>
-<li>Parameters:<ul>
-<li><strong><em>zone:</em></strong> <a href="../../../java/games/stendhal/server/core/engine/StendhalRPZone.html">StendhalRPZone</a> instance to set as current zone.</li>
-</ul>
-</li>
-<li>Returns: <code>true</code> if zone was successfully set.</li>
+<li>See: <a href="/reference/java/games/stendhal/server/core/scripting/ScriptingSandbox.html#addGameEvent(java.lang.String,java.lang.String,java.util.List)">ScriptingSandbox.addGameEvent</a></li>
 </ul>
 <hr />
-<h3 id="gamegetzone">game:getZone</h3>
-<p><span style="color:green; font-weight:bold;">game:getZone</span>(object)</p>
+<h2 id="gamecreateevent">game:createEvent</h2>
+<div class="function">
+    game:createEvent <span class="paramlist">source, event, param, ...</span>
+</div>
+<div class="function">
+    game:createEvent <span class="paramlist">source, event, params</span>
+</div>
+
 <ul>
-<li>Retrieves the zone where <code>object</code> is located.</li>
+<li>Creates a new game event.</li>
 <li>Parameters:<ul>
-<li><strong><em>object:</em></strong> The <a href="../../../java/marauroa/common/game/RPObject.html">RPObject</a> from which the zone should be retrieved.</li>
+<li><span class="param">source</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Source of the event, usually a character.</li>
+<li><span class="param">event</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Name of event.</li>
+<li><span class="param">param</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Event parameter.</li>
+<li><span class="param">params</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html"><code>table&lt;string&gt;</code></a></span>
+  List of event parameters.</li>
 </ul>
 </li>
-<li>Returns: <a href="../../../java/games/stendhal/server/core/engine/StendhalRPZone.html">StendhalRPZone</a> or <code>null</code> if it doesn't exists</li>
-</ul>
-<p><span style="color:green; font-weight:bold;">game:getZone</span>(name)</p>
-<ul>
-<li>Retrieves a zone by string ID.<ul>
-<li><strong><em>zoneName:</em></strong> Name of zone to retrieve.</li>
-</ul>
-</li>
-<li>Returns: <a href="../../../java/games/stendhal/server/core/engine/StendhalRPZone.html">StendhalRPZone</a> or <code>null</code> if it doesn't exist.</li>
-</ul>
-<hr />
-<h3 id="gamesetmusic">game:setMusic</h3>
-<p><span style="color:green; font-weight:bold;">game:setMusic</span>(filename, args)</p>
-<ul>
-<li>Sets the music for the currently selected zone.</li>
-<li>Parameters:<ul>
-<li><strong><em>filename:</em></strong> File basename excluding .ogg extension.</li>
-<li><strong><em>args:</em></strong> Lua table of key=value integer values.<ul>
-<li>Valid keys:<ul>
-<li><span style="color:darkblue; font-style:italic;">volume:</span> Volume level (default: 100).</li>
-<li><span style="color:darkblue; font-style:italic;">x:</span> The X coordinate of the sound source (default: 1).</li>
-<li><span style="color:darkblue; font-style:italic;">y:</span> The Y coordinate of the sound source (default: 1).</li>
-<li><span style="color:darkblue; font-style:italic;">radius:</span> The radius from which the music can be heard (default: 10000).</li>
-</ul>
-</li>
-</ul>
-</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/core/engine/GameEvent.html">GameEvent</a></span>
+  New game event instance.</li>
+<li>See also:<ul>
+<li><a href="#gameraiseevent">game:raiseEvent</a></li>
 </ul>
 </li>
 </ul>
 <hr />
-<h3 id="gameplayerisinzone">game:playerIsInZone</h3>
-<p><span style="color:green; font-weight:bold;">game:playerIsInZone</span>(player, zoneName)</p>
+<h2 id="gamegetcreature">game:getCreature</h2>
+<div class="function">
+    game:getCreature <span class="paramlist">clazz</span>
+</div>
+
 <ul>
+<li>Retrieves a registered creature.<ul>
+<li><span class="param">clazz</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the creature.</li>
+</ul>
+</li>
+<li>Returns: <a href="/reference/java/games/stendhal/server/entity/creature/Creature.html">Creature</a> or <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html">nil</a> if not registered.</li>
+<li>See: <a href="/reference/java/games/stendhal/server/core/scripting/ScriptingSandbox.html#getCreature(java.lang.String)">ScriptingSandbox.getCreature</a></li>
+</ul>
+<hr />
+<h2 id="gamegetcreatures">game:getCreatures</h2>
+<div class="function">
+    game:getCreatures <span class="paramlist"></span>
+</div>
+
+<ul>
+<li>Retrieves all registered creatures.</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Arrays.html">Creature[]</a></span>
+  An array of all available creatures.</li>
+<li>See: <a href="/reference/java/games/stendhal/server/core/scripting/ScriptingSandbox.html#getCreatures()">ScriptingSandbox.getCreatures</a></li>
+<li>TODO:<ul>
+<li><span class="fixme">should return Lua table</span></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="gamegetitem">game:getItem</h2>
+<div class="function">
+    game:getItem <span class="paramlist">name</span>
+</div>
+
+<ul>
+<li>Retrieves a registered item.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong></li>
-<li><strong><em>zoneName:</em></strong></li>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of the item.</li>
 </ul>
 </li>
-<li>Returns: <code>boolean</code></li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/item/Item.html">Item</a></span>
+  Item or <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html">nil</a> if not registered.</li>
 </ul>
 <hr />
-<h3 id="gamegetcreatures">game:getCreatures</h3>
-<p><span style="color:green; font-weight:bold;">game:getCreatures</span>()</p>
+<h2 id="gamegetitems">game:getItems</h2>
+<div class="function">
+    game:getItems <span class="paramlist"></span>
+</div>
+
 <ul>
-<li>Returns: An array of all available creatures.</li>
+<li>Retrieves all registered items.</li>
+<li>Returns:
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/Arrays.html">Item[]</a></span>
+  An array of all available items.</li>
 </ul>
 <hr />
-<h3 id="gamegetcreature">game:getCreature</h3>
-<p><span style="color:green; font-weight:bold;">game:getCreature</span>(clazz)</p>
+<h2 id="gamegetmessage">game:getMessage</h2>
+<div class="function">
+    game:getMessage <span class="paramlist"></span>
+</div>
+
 <ul>
-<li>Retrieves a <a href="../../../java/games/stendhal/server/entity/creature/Creature.html">Creature</a> instance.<ul>
-<li><strong><em>clazz:</em></strong> String name of the creature.</li>
-</ul>
-</li>
-<li>Returns: Creature or <code>null</code> if doesn't exist.</li>
-</ul>
-<hr />
-<h3 id="gamegetitems">game:getItems</h3>
-<p><span style="color:green; font-weight:bold;">game:getItems</span>()</p>
-<ul>
-<li>Returns: Array list of available items.</li>
+<li>Retrieves exception message set by script.</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span></li>
 </ul>
 <hr />
-<h3 id="gamegetitem">game:getItem</h3>
-<p><span style="color:green; font-weight:bold;">game:getItem</span>(name)</p>
+<h2 id="gamegetzone">game:getZone</h2>
+<div class="function">
+    game:getZone <span class="paramlist">name</span>
+</div>
+<div class="function">
+    game:getZone <span class="paramlist">obj</span>
+</div>
+
 <ul>
+<li>Retrieves a registered zone.</li>
 <li>Parameters:<ul>
-<li><strong><em>name:</em></strong></li>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Retrieve zone by name.</li>
+<li><span class="param">obj</span>
+  <span class="datatype"><a href="/reference/java/marauroa/common/game/RPObject.html">RPObject</a></span>
+  Retreive zone where <strong><em>obj</em></strong> is located.</li>
 </ul>
 </li>
-<li>Returns: Item instance or <code>null</code> if doesn't exist.</li>
+<li>Returns:
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/core/engine/StendhalRPZone.html">StendhalRPZone</a></span>
+  Zone or <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html">nil</a> if not registered.</li>
 </ul>
 <hr />
-<h3 id="gamemodify">game:modify</h3>
-<p><span style="color:green; font-weight:bold;">game:modify</span>(entity)</p>
+<h2 id="gamemodify">game:modify</h2>
+<div class="function">
+    game:modify <span class="paramlist">entity</span>
+</div>
+
 <ul>
+<li>Notifies the <a href="/reference/java/games/stendhal/server/core/engine/StendhalRPWorld.html">StendhalRPWorld</a> that this entity's attributes have changed.</li>
 <li>Parameters:<ul>
-<li><strong><em>entity:</em></strong></li>
+<li><span class="param">entity</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/RPEntity.html">RPEntity</a></span>
+  Entity being modified.</li>
 </ul>
 </li>
 </ul>
 <hr />
-<h3 id="gameprivatetext">game:privateText</h3>
-<p><span style="color:green; font-weight:bold;">game:privateText</span>(player, text)</p>
+<h2 id="gameplayerisinzone">game:playerIsInZone</h2>
+<div class="function">
+    game:playerIsInZone <span class="paramlist">player, zone</span>
+</div>
+
+<ul>
+<li>Checks if a player is in a specific zone.</li>
+<li>Parameters:<ul>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player to check.</li>
+<li><span class="param">zone</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Name of zone.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  <code>true</code> if player's zone matches <strong><em>zone</em></strong>.</li>
+</ul>
+<hr />
+<h2 id="gameprivatetext">game:privateText</h2>
+<div class="function">
+    game:privateText <span class="paramlist">player, text</span>
+</div>
+
 <ul>
 <li>Sends a private text to a player.</li>
 <li>Parameters:<ul>
-<li><strong><em>player:</em></strong> Player to receive the message.</li>
-<li><strong><em>text:</em></strong> Message text to send to player.</li>
+<li><span class="param">player</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/player/Player.html">Player</a></span>
+  Player to receive the message.</li>
+<li><span class="param">text</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Message text to send to player.</li>
 </ul>
 </li>
 </ul>
 <hr />
-<h3 id="gamegetmessage">game:getMessage</h3>
-<p><span style="color:green; font-weight:bold;">game:getMessage</span>()</p>
+<h2 id="gameraiseevent">game:raiseEvent</h2>
+<div class="function">
+    game:raiseEvent <span class="paramlist">source, event, param, ...</span>
+</div>
+<div class="function">
+    game:raiseEvent <span class="paramlist">source, event, params</span>
+</div>
+
 <ul>
-<li>Returns: <code>String</code></li>
+<li>Raises a new <a href="/reference/java/games/stendhal/server/core/engine/GameEvent.html">game event</a>.</li>
+<li>Parameters:<ul>
+<li><span class="param">source</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Source of the event, usually a character.</li>
+<li><span class="param">event</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Name of event.</li>
+<li><span class="param">param</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html"><code>string</code></a></span>
+  Event parameter.</li>
+<li><span class="param">params</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html"><code>table&lt;string&gt;</code></a></span>
+  List of event parameters.</li>
+</ul>
+</li>
+<li>See also:<ul>
+<li><a href="#gamecreateevent">game:createEvent</a></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="gameremove">game:remove</h2>
+<div class="function">
+    game:remove <span class="paramlist">object</span>
+</div>
+<div class="function">
+    game:remove <span class="paramlist">npc</span>
+</div>
+
+<ul>
+<li>Removes an object or entity from world.</li>
+<li>Parameters:<ul>
+<li><span class="param">object</span>
+  <span class="datatype"><a href="/reference/java/marauroa/common/game/RPObject.html">RPObject</a></span>
+  Object to remove.</li>
+<li><span class="param">npc</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/NPC.html">NPC</a></span>
+  NPC to remove.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="gamerunafter">game:runAfter</h2>
+<div class="function">
+    game:runAfter <span class="paramlist">turns, func</span>
+</div>
+
+<ul>
+<li>Executes a function after a specified number of turns.</li>
+<li>Parameters:<ul>
+<li><span class="param">turns</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaInteger.html">int</a></span>
+  Number of turns to wait.</li>
+<li><span class="param">func</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaFunction.html">function</a></span>
+  Function to be executed.</li>
+</ul>
+</li>
+<li>TODO:<ul>
+<li><span class="fixme">how to invoke with parameters?</span></li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="gamesetmusic">game:setMusic</h2>
+<div class="function">
+    game:setMusic <span class="paramlist">filename</span>
+</div>
+<div class="function">
+    game:setMusic <span class="paramlist">filename, args</span>
+</div>
+
+<ul>
+<li>Sets the background music for the current zone.</li>
+<li>Parameters:<ul>
+<li><span class="param">filename</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  File basename excluding .ogg extension.</li>
+<li><span class="param">args</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Table of key=value integer values.<ul>
+<li>Keys:<ul>
+<li><span class="table-attr">volume</span>
+  Volume level (default: 100).</li>
+<li><span class="table-attr">x</span>
+  The X coordinate of the sound source (default: 1).</li>
+<li><span class="table-attr">y</span>
+  The Y coordinate of the sound source (default: 1).</li>
+<li><span class="table-attr">radius</span>
+  The radius from which the music can be heard (default: 10000).</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="gamesetzone">game:setZone</h2>
+<div class="function">
+    game:setZone <span class="paramlist">name</span>
+</div>
+<div class="function">
+    game:setZone <span class="paramlist">zone</span>
+</div>
+
+<ul>
+<li>Selects the zone to be configured.</li>
+<li>Parameters:<ul>
+<li><span class="param">name</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  String name identifier.</li>
+<li><span class="param">zone</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/core/engine/StendhalRPZone.html">StendhalRPZone</a></span>
+  Zone instance.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  <code>true</code> if zone was successfully set.</li>
 </ul></div>
-            </div>
-        </div>
+        
+        
+    </div>
 
-        <footer class="col-md-12">
+    
+      <footer class="col-md-12 text-center">
+          
+          
             <hr>
-                <p>Copyright © 2003-2023 Stendhal</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../../js/base.js" defer></script>
-        <script src="../../../search/main.js" defer></script>
+            <p>
+            <small>Copyright © 2003-2023 Stendhal</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../.."</script>
+    
+    <script src="../../../js/base.js"></script>
+    <script src="../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
                 <form>
                     <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+                <div id="mkdocs-search-results"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -369,6 +675,6 @@
         </div>
     </div>
 </div>
-
     </body>
+
 </html>

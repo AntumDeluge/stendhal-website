@@ -1,161 +1,190 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://stendhalgame.org/reference/lua/exposed_classes/">
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Index - Stendhal Reference Documentation</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
 
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../..">Stendhal Reference Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="../.." class="nav-link">Readme</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../java/" class="nav-link">Java</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../" class="nav-link">Lua</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="https://stendhalgame.org/" class="nav-link">Stendhal Homepage</a>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun, friendly, & free multiplayer online adventure game.">
+    
+    <link rel="canonical" href="https://stendhalgame.org/lua/exposed_classes/">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#static-classes-enumerations" class="nav-link">Static Classes &amp; Enumerations</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#conversationstates" class="nav-link">ConversationStates</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#conversationphrases" class="nav-link">ConversationPhrases</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#collisionaction" class="nav-link">CollisionAction</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#skincolor" class="nav-link">SkinColor</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#direction" class="nav-link">Direction</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#daylightphase" class="nav-link">DaylightPhase</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#region" class="nav-link">Region</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#mathhelper" class="nav-link">MathHelper</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#color" class="nav-link">Color</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#singletonrepository" class="nav-link">SingletonRepository</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#clonemanager" class="nav-link">CloneManager</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#rand" class="nav-link">Rand</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <title>Index - Stendhal 1.44 Reference Documentation</title>
+    
 
-<h1 id="static-classes-enumerations">Static Classes &amp; Enumerations</h1>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../css/objects.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Stendhal 1.44 Reference Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="/reference/">Index</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/lua/">Lua</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/">Home</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#contents">Contents</a></li>
+        <li class="first-level "><a href="#clonemanager">CloneManager</a></li>
+        <li class="first-level "><a href="#collisionaction">CollisionAction</a></li>
+        <li class="first-level "><a href="#color">Color</a></li>
+        <li class="first-level "><a href="#conversationstates">ConversationStates</a></li>
+        <li class="first-level "><a href="#conversationphrases">ConversationPhrases</a></li>
+        <li class="first-level "><a href="#daylightphase">DaylightPhase</a></li>
+        <li class="first-level "><a href="#direction">Direction</a></li>
+        <li class="first-level "><a href="#grammar">Grammar</a></li>
+        <li class="first-level "><a href="#mathhelper">MathHelper</a></li>
+        <li class="first-level "><a href="#rand">Rand</a></li>
+        <li class="first-level "><a href="#region">Region</a></li>
+        <li class="first-level "><a href="#shoptype">ShopType</a></li>
+        <li class="first-level "><a href="#singletonrepository">SingletonRepository</a></li>
+        <li class="first-level "><a href="#skincolor">SkinColor</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1>Static Classes &amp; Enumerations</h1>
+
+<hr />
+<h1 id="contents">Contents</h1>
 <div class="toc">
 <ul>
-<li><a href="#static-classes-enumerations">Static Classes &amp; Enumerations</a><ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#clonemanager">CloneManager</a></li>
+<li><a href="#collisionaction">CollisionAction</a></li>
+<li><a href="#color">Color</a></li>
 <li><a href="#conversationstates">ConversationStates</a></li>
 <li><a href="#conversationphrases">ConversationPhrases</a></li>
-<li><a href="#collisionaction">CollisionAction</a></li>
-<li><a href="#skincolor">SkinColor</a></li>
-<li><a href="#direction">Direction</a></li>
 <li><a href="#daylightphase">DaylightPhase</a></li>
-<li><a href="#region">Region</a></li>
+<li><a href="#direction">Direction</a></li>
+<li><a href="#grammar">Grammar</a></li>
 <li><a href="#mathhelper">MathHelper</a></li>
-<li><a href="#color">Color</a></li>
-<li><a href="#singletonrepository">SingletonRepository</a></li>
-<li><a href="#clonemanager">CloneManager</a></li>
 <li><a href="#rand">Rand</a></li>
-</ul>
-</li>
+<li><a href="#region">Region</a></li>
+<li><a href="#shoptype">ShopType</a></li>
+<li><a href="#singletonrepository">SingletonRepository</a></li>
+<li><a href="#skincolor">SkinColor</a></li>
 </ul>
 </div>
-<h2 id="conversationstates">ConversationStates</h2>
-<p>The <a href="../../java/games/stendhal/server/entity/npc/ConversationStates.html">ConversationStates</a> enum.</p>
+<hr />
+<h1 id="clonemanager">CloneManager</h1>
+<p>The <a href="/reference/java/games/stendhal/server/entity/npc/CloneManager.html">CloneManager</a> static instance.</p>
+<p>Implemented as <code>clones</code> object.</p>
+<p>Example usage:</p>
+<pre><code>local myClone = clones:clone(orig)
+</code></pre>
+<hr />
+<h1 id="collisionaction">CollisionAction</h1>
+<p>The <a href="/reference/java/games/stendhal/server/entity/CollisionAction.html">CollisionAction</a> enum.</p>
+<p>Example usage:</p>
+<pre><code>local npc = entities:createSilentNPC()
+npc:setCollisionAction(CollisionAction.STOP)
+</code></pre>
+<hr />
+<h1 id="color">Color</h1>
+<p>The <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html">java.awt.Color</a> class.</p>
+<p>Example usage:</p>
+<pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
+npc:setOutfit(&quot;body=0,head=0,hair=3,dress=5&quot;)
+npc:setOutfitColor(&quot;dress&quot;, Color.BLUE)
+</code></pre>
+<hr />
+<h1 id="conversationstates">ConversationStates</h1>
+<p>The <a href="/reference/java/games/stendhal/server/entity/npc/ConversationStates.html">ConversationStates</a> enum.</p>
 <p>Example usage:</p>
 <pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
 npc:setCurrentState(ConversationStates.IDLE)
 </code></pre>
-<h2 id="conversationphrases">ConversationPhrases</h2>
-<p>The <a href="../../java/games/stendhal/server/entity/npc/ConversationPhrases.html">ConversationPhrases</a> class.</p>
+<hr />
+<h1 id="conversationphrases">ConversationPhrases</h1>
+<p>The <a href="/reference/java/games/stendhal/server/entity/npc/ConversationPhrases.html">ConversationPhrases</a> class.</p>
 <p>Example usage:</p>
 <pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
 npc:add(ConversationStates.IDLE,
@@ -165,80 +194,99 @@ npc:add(ConversationStates.IDLE,
     &quot;Hello! How can I help you.&quot;,
     nil)
 </code></pre>
-<h2 id="collisionaction">CollisionAction</h2>
-<p>The <a href="../../java/games/stendhal/server/entity/CollisionAction.html">CollisionAction</a> enum.</p>
-<p>Example usage:</p>
-<pre><code>local npc = entities:createSilentNPC()
-npc:setCollisionAction(CollisionAction.STOP)
-</code></pre>
-<h2 id="skincolor">SkinColor</h2>
-<p>The <a href="../../java/games/stendhal/common/constants/SkinColor.html">SkinColor</a> enum.</p>
-<p>Example usage:</p>
-<pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
-npc:setOutfit(&quot;body=0,head=0,hair=3,dress=5&quot;)
-npc:setOutfitColor(&quot;skin&quot;, SkinColor.DARK)
-</code></pre>
-<h2 id="direction">Direction</h2>
-<p>The <a href="../../java/games/stendhal/common/Direction.html">Direction</a> enum.</p>
+<hr />
+<h1 id="daylightphase">DaylightPhase</h1>
+<p>The <a href="/reference/java/games/stendhal/server/core/rp/DaylightPhase.html">DaylightPhase</a> enum.</p>
+<hr />
+<h1 id="direction">Direction</h1>
+<p>The <a href="/reference/java/games/stendhal/common/Direction.html">Direction</a> enum.</p>
 <p>Example usage:</p>
 <pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
 npc:setDirection(Direction.DOWN)
 </code></pre>
-<h2 id="daylightphase">DaylightPhase</h2>
-<p>The <a href="../../java/games/stendhal/server/core/rp/DaylightPhase.html">DaylightPhase</a> enum.</p>
-<h2 id="region">Region</h2>
-<p>The <a href="../../java/games/stendhal/server/maps/Region.html">Region</a> class.</p>
-<h2 id="mathhelper">MathHelper</h2>
-<p>The <a href="../../java/games/stendhal/common/MathHelper.html">MathHelper</a> class.</p>
-<h2 id="color">Color</h2>
-<p>The <a href="https://docs.oracle.com/javase/8/docs/api/java/awt/Color.html">java.awt.Color</a> class.</p>
+<hr />
+<h1 id="grammar">Grammar</h1>
+<p>The <a href="/reference/java/games/stendhal/common/grammar/Grammar.html">Grammar</a> class.</p>
+<hr />
+<h1 id="mathhelper">MathHelper</h1>
+<p>The <a href="/reference/java/games/stendhal/common/MathHelper.html">MathHelper</a> class.</p>
+<hr />
+<h1 id="rand">Rand</h1>
+<p>The <a href="/reference/java/games/stendhal/common/Rand.html">Rand</a> random number generator.</p>
+<p>Implemented as <code>random</code> object.</p>
+<hr />
+<h1 id="region">Region</h1>
+<p>The <a href="/reference/java/games/stendhal/server/maps/Region.html">Region</a> class.</p>
+<hr />
+<h1 id="shoptype">ShopType</h1>
+<p>The <a href="/reference/java/games/stendhal/server/entity/npc/shop/ShopType.html">ShopType</a> enum.</p>
+<hr />
+<h1 id="singletonrepository">SingletonRepository</h1>
+<p>The <a href="/reference/java/games/stendhal/server/core/engine/SingletonRepository.html">SingletonRepository</a> static instance.</p>
+<p>Implemented as <code>singletons</code> object.</p>
+<hr />
+<h1 id="skincolor">SkinColor</h1>
+<p>The <a href="/reference/java/games/stendhal/common/constants/SkinColor.html">SkinColor</a> enum.</p>
 <p>Example usage:</p>
 <pre><code>local npc = entities:createSpeakerNPC(&quot;foo&quot;)
 npc:setOutfit(&quot;body=0,head=0,hair=3,dress=5&quot;)
-npc:setOutfitColor(&quot;dress&quot;, Color.BLUE)
-</code></pre>
-<h2 id="singletonrepository">SingletonRepository</h2>
-<p>The <a href="../../java/games/stendhal/server/core/engine/SingletonRepository.html">SingletonRepository</a> static instance.</p>
-<p>Implemented as <code>singletons</code> object.</p>
-<h2 id="clonemanager">CloneManager</h2>
-<p>The <a href="../../java/games/stendhal/server/entity/npc/CloneManager.html">CloneManager</a> static instance.</p>
-<p>Implemented as <code>clones</code> object.</p>
-<p>Example usage:</p>
-<pre><code>local myClone = clones:clone(orig)
-</code></pre>
-<h2 id="rand">Rand</h2>
-<p>The <a href="../../java/games/stendhal/common/Rand.html">Rand</a> random number generator.</p>
-<p>Implemented as <code>random</code> object.</p></div>
-            </div>
-        </div>
+npc:setOutfitColor(&quot;skin&quot;, SkinColor.DARK)
+</code></pre></div>
+        
+        
+    </div>
 
-        <footer class="col-md-12">
+    
+      <footer class="col-md-12 text-center">
+          
+          
             <hr>
-                <p>Copyright © 2003-2023 Stendhal</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
+            <p>
+            <small>Copyright © 2003-2023 Stendhal</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
                 <form>
                     <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+                <div id="mkdocs-search-results"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -284,6 +332,6 @@ npc:setOutfitColor(&quot;dress&quot;, Color.BLUE)
         </div>
     </div>
 </div>
-
     </body>
+
 </html>

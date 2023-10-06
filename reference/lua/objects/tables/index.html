@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun, friendly, & free multiplayer online adventure game.">
+    
+    <link rel="canonical" href="https://stendhalgame.org/lua/objects/tables/">
+    <link rel="shortcut icon" href="../../../img/favicon.ico">
+
+    
+    <title>Tables - Stendhal 1.44 Reference Documentation</title>
+    
+
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../../css/base.min.css" rel="stylesheet">
+    <link href="../../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../../css/objects.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../../..">Stendhal 1.44 Reference Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="/reference/">Index</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/lua/">Lua</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/">Home</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#contents">Contents</a></li>
+        <li class="first-level "><a href="#table-manipulation">Table Manipulation</a></li>
+            <li class="second-level"><a href="#description">Description</a></li>
+                
+        <li class="first-level "><a href="#methods">Methods</a></li>
+            <li class="second-level"><a href="#tableclean">table.clean</a></li>
+                
+            <li class="second-level"><a href="#tableconcat">table.concat</a></li>
+                
+            <li class="second-level"><a href="#tablecontains">table.contains</a></li>
+                
+            <li class="second-level"><a href="#tablejoin">table.join</a></li>
+                
+            <li class="second-level"><a href="#tabletolist">table.toList</a></li>
+                
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<hr />
+<h1 id="contents">Contents</h1>
+<div class="toc">
+<ul>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#table-manipulation">Table Manipulation</a><ul>
+<li><a href="#description">Description</a></li>
+</ul>
+</li>
+<li><a href="#methods">Methods</a><ul>
+<li><a href="#tableclean">table.clean</a></li>
+<li><a href="#tableconcat">table.concat</a></li>
+<li><a href="#tablecontains">table.contains</a></li>
+<li><a href="#tablejoin">table.join</a></li>
+<li><a href="#tabletolist">table.toList</a></li>
+</ul>
+</li>
+</ul>
+</div>
+<hr />
+<h1 id="table-manipulation">Table Manipulation</h1>
+<p>Global table variable: <code>table</code></p>
+<hr />
+<h2 id="description">Description</h2>
+<p>The following methods have been added to the built-in Lua
+<a href="https://www.lua.org/manual/5.3/manual.html#6.6"><code>table</code> table</a>.</p>
+<hr />
+<h1 id="methods">Methods</h1>
+<hr />
+<h2 id="tableclean">table.clean</h2>
+<div class="function">
+    table.clean <span class="paramlist">tbl</span>
+</div>
+
+<ul>
+<li>Removes <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaNil.html"><code>nil</code></a> values from a table.</li>
+<li>Parameters:<ul>
+<li><span class="param">tbl</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  The table to be cleaned.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Copy of <strong><em>tbl</em></strong> with <code>nil</code> values removed.</li>
+</ul>
+<hr />
+<h2 id="tableconcat">table.concat</h2>
+<div class="function">
+    table.concat <span class="paramlist">tbl1, tbl2</span>
+</div>
+
+<ul>
+<li>Merges the contents of one table into another.</li>
+<li>Parameters:<ul>
+<li><span class="param">tbl1</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  The table receiving the new content.</li>
+<li><span class="param">tbl2</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  The table containing the content to be copied.</li>
+</ul>
+</li>
+</ul>
+<hr />
+<h2 id="tablecontains">table.contains</h2>
+<div class="function">
+    table.contains <span class="paramlist">tbl, o</span>
+</div>
+
+<ul>
+<li>Checks if a table contains a value.</li>
+<li>Parameters:<ul>
+<li><span class="param">tbl</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Table to be checked.</li>
+<li><span class="param">obj</span>
+  <span class="datatype"><a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/lang/Object.html">Object</a></span>
+  The object to check for.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaBoolean.html">bool</a></span>
+  <code>true</code> if <strong><em>obj</em></strong> is in <strong><em>table</em></strong>.</li>
+</ul>
+<hr />
+<h2 id="tablejoin">table.join</h2>
+<div class="function">
+    table.join <span class="paramlist">tbl</span>
+</div>
+<div class="function">
+    table.join <span class="paramlist">tbl, delim</span>
+</div>
+
+<ul>
+<li>Converts a list of strings into a string.</li>
+<li>Parameters:<ul>
+<li><span class="param">tbl</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Table to be joined.</li>
+<li><span class="param">delim</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  Character(s) to be used as separator.</li>
+</ul>
+</li>
+<li>Returns:
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaString.html">string</a></span>
+  The resulting string.</li>
+</ul>
+<hr />
+<h2 id="tabletolist">table.toList</h2>
+<div class="function">
+    table.toList <span class="paramlist">tbl</span>
+</div>
+
+<ul>
+<li>Converts an indexed <a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a> to Java <a href="https://docs.oracle.com/en/java/javase/11/docs/api/java.base/java/util/List.html"><code>List</code></a>.</li>
+<li>Parameters:<ul>
+<li><span class="param">tbl</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Table with contents to be transferred to new list.</li>
+</ul>
+</li>
+<li>Returns: New <code>List</code> instance.</li>
+<li>Aliases:<ul>
+<li><span class="alias">table.tolist</span></li>
+</ul>
+</li>
+</ul></div>
+        
+        
+    </div>
+
+    
+      <footer class="col-md-12 text-center">
+          
+          
+            <hr>
+            <p>
+            <small>Copyright © 2003-2023 Stendhal</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
+
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../../.."</script>
+    
+    <script src="../../../js/base.js"></script>
+    <script src="../../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
+                <h4 class="modal-title" id="searchModalLabel">Search</h4>
+            </div>
+            <div class="modal-body">
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
+                <form>
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                    </div>
+                </form>
+                <div id="mkdocs-search-results"></div>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div><div class="modal" id="mkdocs_keyboard_modal" tabindex="-1" role="dialog" aria-labelledby="keyboardModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="keyboardModalLabel">Keyboard Shortcuts</h4>
+                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+            </div>
+            <div class="modal-body">
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th style="width: 20%;">Keys</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td class="help shortcut"><kbd>?</kbd></td>
+                    <td>Open this help</td>
+                  </tr>
+                  <tr>
+                    <td class="next shortcut"><kbd>n</kbd></td>
+                    <td>Next page</td>
+                  </tr>
+                  <tr>
+                    <td class="prev shortcut"><kbd>p</kbd></td>
+                    <td>Previous page</td>
+                  </tr>
+                  <tr>
+                    <td class="search shortcut"><kbd>s</kbd></td>
+                    <td>Search</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+            <div class="modal-footer">
+            </div>
+        </div>
+    </div>
+</div>
+    </body>
+
+</html>

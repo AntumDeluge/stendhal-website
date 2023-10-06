@@ -1,131 +1,160 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        
-        
-        <link rel="canonical" href="https://stendhalgame.org/reference/lua/intro/">
-        <link rel="shortcut icon" href="../../img/favicon.ico">
-        <title>Intro - Stendhal Reference Documentation</title>
-        <link href="../../css/bootstrap.min.css" rel="stylesheet">
-        <link href="../../css/font-awesome.min.css" rel="stylesheet">
-        <link href="../../css/base.css" rel="stylesheet">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css">
 
-        <script src="../../js/jquery-1.10.2.min.js" defer></script>
-        <script src="../../js/bootstrap.min.js" defer></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-        <script>hljs.initHighlightingOnLoad();</script> 
-    </head>
-
-    <body>
-        <div class="navbar fixed-top navbar-expand-lg navbar-dark bg-primary">
-            <div class="container">
-                <a class="navbar-brand" href="../..">Stendhal Reference Documentation</a>
-                <!-- Expander button -->
-                <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#navbar-collapse">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <!-- Expanded navigation -->
-                <div id="navbar-collapse" class="navbar-collapse collapse">
-                        <!-- Main navigation -->
-                        <ul class="nav navbar-nav">
-                            <li class="navitem">
-                                <a href="../.." class="nav-link">Readme</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../../java/" class="nav-link">Java</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="../" class="nav-link">Lua</a>
-                            </li>
-                            <li class="navitem">
-                                <a href="https://stendhalgame.org/" class="nav-link">Stendhal Homepage</a>
-                            </li>
-                        </ul>
-
-                    <ul class="nav navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link" data-toggle="modal" data-target="#mkdocs_search_modal">
-                                <i class="fa fa-search"></i> Search
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-
-        <div class="container">
-            <div class="row">
-                    <div class="col-md-3"><div class="navbar-light navbar-expand-md bs-sidebar hidden-print affix" role="complementary">
-    <div class="navbar-header">
-        <button type="button" class="navbar-toggler collapsed" data-toggle="collapse" data-target="#toc-collapse" title="Table of Contents">
-            <span class="fa fa-angle-down"></span>
-        </button>
-    </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A fun, friendly, & free multiplayer online adventure game.">
+    
+    <link rel="canonical" href="https://stendhalgame.org/lua/intro/">
+    <link rel="shortcut icon" href="../../img/favicon.ico">
 
     
-    <div id="toc-collapse" class="navbar-collapse collapse card bg-secondary">
-        <ul class="nav flex-column">
-            
-            <li class="nav-item" data-level="1"><a href="#introduction" class="nav-link">Introduction</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#lua-basics" class="nav-link">Lua Basics</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#comments" class="nav-link">Comments</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#variables" class="nav-link">Variables</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#data-types" class="nav-link">Data Types</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#comparison-operators" class="nav-link">Comparison Operators</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-            
-            <li class="nav-item" data-level="1"><a href="#stendhal-application" class="nav-link">Stendhal Application</a>
-              <ul class="nav flex-column">
-            <li class="nav-item" data-level="2"><a href="#zones" class="nav-link">Zones</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#adding-entities" class="nav-link">Adding Entities</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#system-properties" class="nav-link">System Properties</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-            <li class="nav-item" data-level="2"><a href="#misc" class="nav-link">Misc</a>
-              <ul class="nav flex-column">
-              </ul>
-            </li>
-              </ul>
-            </li>
-        </ul>
-    </div>
-</div></div>
-                    <div class="col-md-9" role="main">
+    <title>Intro - Stendhal 1.44 Reference Documentation</title>
+    
 
-<h1 id="introduction">Introduction</h1>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/v4-shims.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/hack-font@3.3.0/build/web/hack.min.css">
+    <link href='//rsms.me/inter/inter.css' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,700italic,400,300,600,700&subset=latin-ext,latin' rel='stylesheet' type='text/css'>
+    <link href="../../css/bootstrap-custom.min.css" rel="stylesheet">
+    <link href="../../css/base.min.css" rel="stylesheet">
+    <link href="../../css/cinder.min.css" rel="stylesheet">
+
+    
+        
+        <link rel="stylesheet" href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/styles/github.min.css">
+        
+    
+    <link href="../../css/objects.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+            <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+            <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+        <![endif]-->
+
+    
+
+     
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="container">
+
+        <!-- Collapsed navigation -->
+        <div class="navbar-header">
+            <!-- Expander button -->
+            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            
+
+            <!-- Main title -->
+
+            
+              <a class="navbar-brand" href="../..">Stendhal 1.44 Reference Documentation</a>
+            
+        </div>
+
+        <!-- Expanded navigation -->
+        <div class="navbar-collapse collapse">
+                <!-- Main navigation -->
+                <ul class="nav navbar-nav">
+                
+                
+                    <li >
+                        <a href="/reference/">Index</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/lua/">Lua</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/">Home</a>
+                    </li>
+                
+                
+                </ul>
+
+            <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#" data-toggle="modal" data-target="#mkdocs_search_modal">
+                            <i class="fas fa-search"></i> Search
+                        </a>
+                    </li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+    <div class="container">
+        
+        
+        <div class="col-md-3"><div class="bs-sidebar hidden-print affix well" role="complementary">
+    <ul class="nav bs-sidenav">
+        <li class="first-level active"><a href="#contents">Contents</a></li>
+        <li class="first-level "><a href="#about">About</a></li>
+        <li class="first-level "><a href="#lua-basics">Lua Basics</a></li>
+            <li class="second-level"><a href="#comments">Comments</a></li>
+                
+            <li class="second-level"><a href="#variables">Variables</a></li>
+                
+            <li class="second-level"><a href="#data-types">Data Types</a></li>
+                
+                <li class="third-level"><a href="#strings">Strings</a></li>
+                <li class="third-level"><a href="#tables">Tables</a></li>
+                <li class="third-level"><a href="#functions">Functions</a></li>
+                <li class="third-level"><a href="#userdata">Userdata</a></li>
+            <li class="second-level"><a href="#comparison-operators">Comparison Operators</a></li>
+                
+                <li class="third-level"><a href="#logical-operators">Logical Operators</a></li>
+                <li class="third-level"><a href="#relational-operators">Relational Operators</a></li>
+        <li class="first-level "><a href="#stendhal-application">Stendhal Application</a></li>
+            <li class="second-level"><a href="#zones">Zones</a></li>
+                
+                <li class="third-level"><a href="#setting-zone">Setting Zone</a></li>
+                <li class="third-level"><a href="#create-new-zone">Create New Zone</a></li>
+                <li class="third-level"><a href="#add-zone-music">Add Zone Music</a></li>
+            <li class="second-level"><a href="#adding-entities">Adding Entities</a></li>
+                
+                <li class="third-level"><a href="#adding-signs">Adding Signs</a></li>
+                <li class="third-level"><a href="#adding-npcs">Adding NPCs</a></li>
+            <li class="second-level"><a href="#system-properties">System Properties</a></li>
+                
+            <li class="second-level"><a href="#misc">Misc</a></li>
+                
+                <li class="third-level"><a href="#typecasting">Typecasting</a></li>
+    </ul>
+</div></div>
+        <div class="col-md-9" role="main">
+
+<h1>Introduction to Lua</h1>
+
+<hr />
+<h1 id="contents">Contents</h1>
 <div class="toc">
 <ul>
-<li><a href="#introduction">Introduction</a></li>
+<li><a href="#contents">Contents</a></li>
+<li><a href="#about">About</a></li>
 <li><a href="#lua-basics">Lua Basics</a><ul>
 <li><a href="#comments">Comments</a></li>
 <li><a href="#variables">Variables</a></li>
@@ -141,6 +170,7 @@
 </ul>
 </li>
 <li><a href="#functions">Functions</a></li>
+<li><a href="#userdata">Userdata</a></li>
 </ul>
 </li>
 <li><a href="#comparison-operators">Comparison Operators</a><ul>
@@ -158,8 +188,8 @@
 </ul>
 </li>
 <li><a href="#adding-entities">Adding Entities</a><ul>
-<li><a href="#signs">Signs</a></li>
-<li><a href="#npcs">NPCs</a><ul>
+<li><a href="#adding-signs">Adding Signs</a></li>
+<li><a href="#adding-npcs">Adding NPCs</a><ul>
 <li><a href="#adding-transitions">Adding Transitions</a></li>
 <li><a href="#adding-merchant-behavior">Adding Merchant Behavior</a></li>
 </ul>
@@ -175,70 +205,97 @@
 </li>
 </ul>
 </div>
+<hr />
+<h1 id="about">About</h1>
 <p><span style="color: red; font-style: italic;">this page is a work-in progress</span></p>
-<p>Stendhal supports <a href="https://www.lua.org/">Lua scripting</a> via the <a href="https://sourceforge.net/projects/luaj/">LuaJ library</a>.</p>
-<p>Lua scripts end in the <code>.lua</code> extension &amp; are stored in the <code>data/script</code> directory.</p>
+<p>Stendhal supports <a href="https://www.lua.org/">Lua scripting</a> via the
+<a href="https://sourceforge.net/projects/luaj/">LuaJ library</a>.</p>
+<p>Lua scripts end with the <code>.lua</code> extension &amp; are stored in the <code>data/script</code> directory.</p>
+<hr />
 <h1 id="lua-basics">Lua Basics</h1>
 <p>For more detailed information, see the <a href="https://www.lua.org/docs.html">Lua reference manual</a>.</p>
 <h2 id="comments">Comments</h2>
-<p>Lua uses double dashes (<code>--</code>) for single line comments &amp; double dashes followed by double square brackets (<code>[[</code>) &amp; closed with double square brackets (<code>]]</code>) for multi-line comments:</p>
-<pre><code>-- a single line comment
+<p>Lua uses double dashes (<code>--</code>) for single line comments &amp; double dashes followed by double square
+brackets (<code>--[[</code>) &amp; closed with double square brackets (<code>]]</code>) for multi-line comments:</p>
+<pre><code class="language-lua">-- a single line comment
 
 --[[
 a multi-line comment
 ]]
 </code></pre>
 <h2 id="variables">Variables</h2>
-<p>By default, Lua variables are set in <a href="https://en.wikipedia.org/wiki/Global_variable"><strong>global</strong> scope</a> (meaning it is exposed to the entire Lua engine). To create a variable in <a href="https://en.wikipedia.org/wiki/Local_variable"><strong>local</strong> scope</a>, the <code>local</code> keyword must be used:</p>
-<pre><code>-- a global variable
+<p>By default, variables are set in <a href="https://en.wikipedia.org/wiki/Global_variable"><strong>global</strong> scope</a>
+(meaning it is exposed to the entire Lua engine). To create a variable in
+<a href="https://en.wikipedia.org/wiki/Local_variable"><strong>local</strong> scope</a>, the <code>local</code> keyword must be used:</p>
+<pre><code class="language-lua">-- a global variable
 var1 = &quot;Hello world!&quot;
 
 -- a local variable
 local var2 = &quot;Hello world!&quot;
 </code></pre>
 <h2 id="data-types">Data Types</h2>
-<p>Some common data types in Lua are <em>string</em>, <em>integer</em>, <em>boolean</em>, &amp; <em>table</em>. Type names do not need to be declared when setting variables.</p>
+<p>Some of the common data types are <a href="https://www.lua.org/pil/2.1.html"><code>nil</code></a>, <a href="https://www.lua.org/pil/2.4.html"><code>string</code></a>, <a href="https://www.lua.org/pil/2.3.html"><code>number</code></a>,
+<a href="https://www.lua.org/pil/2.2.html"><code>boolean</code></a>, &amp; <a href="https://www.lua.org/pil/2.5.html"><code>table</code></a>. Lua is a dynamically typed language, so
+declaring the type is not required when setting variables.</p>
 <p>Examples:</p>
-<pre><code>-- string variable
-local var1 = &quot;Hello world!&quot;
+<pre><code class="language-lua">-- string variable
+local var_s = &quot;Hello world!&quot;
 
--- integer variable
-local var2 = 11
+-- number variable
+local var_n = 11
+
+-- the number type also encompasses floating-point or double-precision values
+local var_f = 5.112
 
 -- boolean variable
-local var3 = true
+local var_b = true
 
 -- table variable
-local var4 = {}
+local var_t = {}
+</code></pre>
+<p>By default all variables are <code>nil</code>. This means that a variable can be accessed before it is declared
+without throwing an error.</p>
+<pre><code class="language-lua">-- print value of undeclared variable
+print(foo) -- output: nil
+
+-- print value of declared variable without value
+foo = nil
+print(foo) -- output: nil
+
+-- print value of declared variable with value
+foo = &quot;bar&quot;
+print(foo) -- output: bar
 </code></pre>
 <h3 id="strings">Strings</h3>
 <h4 id="string-concatenation">String Concatenation</h4>
-<p>String concatenation is simple, much like Java uses a plus operator (<code>+</code>) to join strings, Lua uses two periods (<code>..</code>).</p>
+<p>String concatenation is simple, much like Java uses a plus operator (<code>+</code>) to join strings, Lua uses
+two periods (<code>..</code>).</p>
 <p>Example:</p>
-<pre><code>-- create a string variable
+<pre><code class="language-lua">-- create a string variable
 local var = &quot;Hello&quot;
 
 -- append another string
 var = var .. &quot; world!&quot;
 
-print(var) -- prints &quot;Hello world!&quot;
+print(var) -- output: &quot;Hello world!&quot;
 </code></pre>
 <h3 id="tables">Tables</h3>
-<p>A Lua table is a data type similar to a Java list or map. Tables can be indexed or use key=value pairs.</p>
-<p>(<span style="color:red; font-style:italic;">IMPORTANT NOTE: Lua table indexes begin at 1, not 0</span>)</p>
+<p>A Lua <a href="https://www.lua.org/pil/2.5.html">table</a> is a data type similar to a Java list or map. Tables can be indexed or use
+key=value pairs.</p>
+<p><span class="important">Lua table indexes begin at 1, not 0</span></p>
 <h4 id="creating-tables">Creating Tables</h4>
 <p>An empty table is initialized with a pair of curly braces (<code>{}</code>):</p>
-<pre><code>local mytable = {}
+<pre><code class="language-lua">local mytable = {}
 </code></pre>
 <p>You can add values to indexed tables at initialization or with the <code>table.insert</code> method:</p>
-<pre><code>-- create a table with values
+<pre><code class="language-lua">-- create a table with values
 local mytable = {&quot;foo&quot;}
 
 -- add value
 table.insert(mytable, &quot;bar&quot;)
 </code></pre>
 <p>To create a key=value table, any of the following methods can be used to add values:</p>
-<pre><code>-- all of these do the same thing, that is, assigning &quot;bar&quot; to mytable.foo
+<pre><code class="language-lua">-- all of these do the same thing, that is, assigning &quot;bar&quot; to mytable.foo
 local mytable {
     foo = &quot;bar&quot;,
     [&quot;foo&quot;] = &quot;bar&quot;,
@@ -247,24 +304,27 @@ mytable.foo = &quot;bar&quot;
 mytable[&quot;foo&quot;] = &quot;bar&quot;
 </code></pre>
 <h4 id="accessing-table-values">Accessing Table Values</h4>
-<p>Square brackets (<code>[]</code>) enclosing an index number are used to access values in indexed tables (<em>remember that Lua table indexes start at "1" not "0"</em>):</p>
-<pre><code>local mytable = {&quot;foo&quot;, &quot;bar&quot;}
+<p>Square brackets (<code>[]</code>) enclosing an index number are used to access values in indexed tables
+(<em>remember that Lua table indexes start at "1" not "0"</em>):</p>
+<pre><code class="language-lua">local mytable = {&quot;foo&quot;, &quot;bar&quot;}
 
-print(mytable[1]) -- prints &quot;foo&quot;
-print(mytable[2]) -- prints &quot;bar&quot;
+print(mytable[1]) -- output: &quot;foo&quot;
+print(mytable[2]) -- output: &quot;bar&quot;
 </code></pre>
-<p>In a key=value table, values can be accessed by either enclosing the key string in square brackets or concatenating the key member using a <code>.</code>:</p>
-<pre><code>local mytable = {foo=&quot;bar&quot;}
+<p>In a key=value table, values can be accessed by either enclosing the key string in square brackets
+or concatenating the key member using a dot (.):</p>
+<pre><code class="language-lua">local mytable = {foo=&quot;bar&quot;}
 
 -- using square brackets
-print(mytable[&quot;foo&quot;]) -- prints &quot;bar&quot;
+print(mytable[&quot;foo&quot;]) -- output: &quot;bar&quot;
 
 -- using concatenated member
-print(mytable.foo) -- prints &quot;bar&quot;
+print(mytable.foo) -- output: &quot;bar&quot;
 </code></pre>
 <h4 id="iterating-tables">Iterating Tables</h4>
-<p>Tables can be iterated in a <code>for</code> loop using the <code>pairs</code> or <code>ipairs</code> iterators. Loops are terminated with the <code>end</code> keyword:</p>
-<pre><code>local mytable = {&quot;foo&quot;, &quot;bar&quot;}
+<p>Tables can be iterated in a <code>for</code> loop using the <code>pairs</code> or <code>ipairs</code> iterators. Loops are terminated
+with the <code>end</code> keyword:</p>
+<pre><code class="language-lua">local mytable = {&quot;foo&quot;, &quot;bar&quot;}
 
 print(&quot;indexes:&quot;)
 for idx in pairs(mytable) do
@@ -277,7 +337,7 @@ for idx, value in pairs(mytable) do
 end
 </code></pre>
 <p>Output:</p>
-<pre><code>indexes:
+<pre><code class="language-lua">indexes:
 1
 2
 
@@ -286,7 +346,7 @@ foo
 bar
 </code></pre>
 <p>Using a key=value table:</p>
-<pre><code>local mytable = {
+<pre><code class="language-lua">local mytable = {
     [&quot;foo&quot;] = &quot;hello&quot;,
     [&quot;bar&quot;] = &quot; world!&quot;,
 }
@@ -302,7 +362,7 @@ for key, value in pairs(mytable) do
 end
 </code></pre>
 <p>Output:</p>
-<pre><code>keys:
+<pre><code class="language-lua">keys:
 foo
 bar
 
@@ -312,31 +372,32 @@ hello
 </code></pre>
 <p>See also: <a href="http://lua-users.org/wiki/TablesTutorial">Lua Tables Tutorial</a></p>
 <h3 id="functions">Functions</h3>
-<p>Like normal variables, functions can be declared as <strong>global</strong> or <strong>local</strong> &amp; must be terminated with the <code>end</code> keyword.</p>
+<p>Like normal variables, functions can be declared as <strong>global</strong> or <strong>local</strong> &amp; must be terminated
+with the <code>end</code> keyword.</p>
 <p>There are two ways to define functions with the <code>function</code> keyword:</p>
-<pre><code>local function myFunction()
+<pre><code class="language-lua">local function myFunction()
     print(&quot;Hello world!&quot;)
 end
 </code></pre>
 <p>or</p>
-<pre><code>local myFunction = function()
+<pre><code class="language-lua">local myFunction = function()
     print(&quot;Hello world!&quot;)
 end
 </code></pre>
 <p>Functions can also be members of a table:</p>
-<pre><code>local myTable = {}
+<pre><code class="language-lua">local myTable = {}
 function myTable.myFunction()
     print(&quot;Hello world!&quot;)
 end
 </code></pre>
 <p>or</p>
-<pre><code>local myTable = {}
+<pre><code class="language-lua">local myTable = {}
 myTable.myFunction = function()
     print(&quot;Hello world!&quot;)
 end
 </code></pre>
 <p>or</p>
-<pre><code>local myTable = {
+<pre><code class="language-lua">local myTable = {
     myFunction = function()
         print(&quot;Hello world!&quot;)
     end,
@@ -345,6 +406,17 @@ end
 -- execute with
 myTable.myFunction()
 </code></pre>
+<h3 id="userdata">Userdata</h3>
+<p><a href="https://www.lua.org/pil/2.7.html"><code>Userdata</code></a> is a special type that allows Java data to be stored in Lua variables.
+This allows access to Java objects &amp; methods. Userdata methods are accessed using a colon (:).
+One example is Stendhal's <a href="/reference/java/games/stendhal/common/grammar/Grammar.html">grammar parser class</a>. It is exposed to Lua as the <code>grammar</code>
+global variable.</p>
+<pre><code class="language-lua">print(type(grammar)) -- ouput: &quot;userdata&quot;
+print(grammar:itthem(5)) -- output: &quot;them&quot;
+</code></pre>
+<p>A dot (.) can be used just like accessing table values, but the userdata object itself must then be
+passed as the first argument. In other words <code>grammar:itthem(5)</code> is the same as
+<code>grammar.itthem(grammar, 5)</code>.</p>
 <h2 id="comparison-operators">Comparison Operators</h2>
 <h3 id="logical-operators">Logical Operators</h3>
 <table>
@@ -415,71 +487,71 @@ myTable.myFunction()
 </tr>
 </tbody>
 </table>
+<hr />
 <h1 id="stendhal-application">Stendhal Application</h1>
 <h2 id="zones">Zones</h2>
 <h3 id="setting-zone">Setting Zone</h3>
-<p>To set the zone to work with, use the <code>game</code> object:</p>
-<pre><code>game:setZone(&quot;0_semos_city&quot;)
+<p>To set a zone to work with, use the <a href="http://stendhal.localhost/reference/lua/objects/game/#gamesetzone">game:setZone</a> method:</p>
+<pre><code class="language-lua">game:setZone(&quot;0_semos_city&quot;)
 </code></pre>
 <h3 id="create-new-zone">Create New Zone</h3>
-<p>It is recommended to create new zones in the XML configurations in <a href="https://github.com/arianne/stendhal/blob/master/data/conf/zones">data/conf/zones</a>.</p>
+<p>For creating a permanent zone it is recommended to use the XML configurations in
+<a href="https://github.com/arianne/stendhal/blob/master/data/conf/zones">data/conf/zones</a>.</p>
 <p>Currently creating new zones via Lua is not supported.</p>
 <h3 id="add-zone-music">Add Zone Music</h3>
-<p>Music can be added to zones with the <code>game:setMusic</code> function. It supports the following arguments:
-* <span style="color:darkgreen; font-style:italic;">filename:</span> Basename of the OGG audio file to use stored in <a href="https://github.com/arianne/stendhal/blob/master/data/music">data/music</a>.
-* <span style="color:darkgreen; font-style:italic;">args:</span> A table of key=value integers.
-* Valid keys:
-  * <span style="color:darkblue; font-style:italic;">volume:</span> Volume level (default: 100).
-  * <span style="color:darkblue; font-style:italic;">x:</span> The horizontal point for the source of the music (default: 1).
-  * <span style="color:darkblue; font-style:italic;">y:</span> The vertical point for the source of the music (default: 1).
-  * <span style="color:darkblue; font-style:italic;">radius:</span> The radial range at which the music can be heard (default: 10000).</p>
+<p>Music can be added to zones with the <a href="http://stendhal.localhost/reference/lua/objects/game/#gamesetmusic">game:setMusic</a> method.</p>
 <p>Example:</p>
-<pre><code>if game:setZone(&quot;0_semos_plains_n&quot;) then
+<pre><code class="language-lua">if game:setZone(&quot;0_semos_plains_n&quot;) then
     game:setMusic(&quot;pleasant_creek_loop&quot;, {volume=85, radius=100})
 end
 </code></pre>
 <h2 id="adding-entities">Adding Entities</h2>
-<h3 id="signs">Signs</h3>
-<p>Signs can be created with <code>entities:createSign</code> and <code>entities:createShopSign</code>:</p>
-<pre><code>local zone = &quot;0_semos_city&quot;
+<p>Entities can be added to the game using the <a href="/reference/lua/objects/entities/">entities</a> object.</p>
+<h3 id="adding-signs">Adding Signs</h3>
+<p>Signs can be created with the "Sign", "Reader", &amp; "ShopSign" types:</p>
+<pre><code class="language-lua">local zone = &quot;0_semos_city&quot;
 if game:setZone(zone) then
     -- create the sign instance
-    local sign = entities:createSign()
-    sign:setEntityClass(&quot;signpost&quot;)
-    sign:setPosition(12, 55)
-    sign:setText(&quot;Meet Lua!&quot;)
+    local sign = entities:create({
+        type = &quot;Sign&quot;,
+        class = &quot;signpost&quot;,
+        pos = {12, 55},
+        text = &quot;Meet Lua!&quot;
+    })
 
-    -- Add it to the world
+    -- add to the world
     game:add(sign)
 else
     logger:error(&quot;Could not set zone: &quot; .. zone)
 end
 </code></pre>
-<h3 id="npcs">NPCs</h3>
-<p>Use the <code>entities:createSpeakerNPC</code> method to create an interactive NPC:</p>
-<pre><code>local zone = &quot;0_semos_city&quot;
+<h3 id="adding-npcs">Adding NPCs</h3>
+<p>Use the "SpeakerNPC" type to create an interactive NPC:</p>
+<pre><code class="language-lua">local zone = &quot;0_semos_city&quot;
 if game:setZone(zone) then
-    -- Use helper object to create a new NPC
-    local npc = entities:createSpeakerNPC(&quot;Lua&quot;)
-    npc:setEntityClass(&quot;littlegirlnpc&quot;)
-    npc:setPosition(10, 55)
-    npc:setBaseSpeed(0.1)
-    npc:setCollisionAction(CollisionAction.STOP)
+    -- create the NPC instance
+    local npc = entities:create({
+        type = &quot;SpeakerNPC&quot;,
+        name = &quot;Lua&quot;,
+        class = &quot;littlegirlnpc&quot;,
+        pos = {10, 55},
+        path = {
+            nodes = {
+                {10, 55},
+                {11, 55},
+                {11, 56},
+                {10, 56},
+            },
+            collisionAction = CollisionAction.STOP
+        },
+        speed = 0.1
+    })
 
-    local nodes = {
-        {10, 55},
-        {11, 55},
-        {11, 56},
-        {10, 56},
-    }
-
-    npc:setPath(nodes)
-
-    -- Dialogue
+    -- dialogue
     npc:addJob(&quot;Actually, I am jobless.&quot;)
     npc:addGoodbye();
 
-    -- Add to the world
+    -- add to the world
     game:add(npc)
 else
     logger:error(&quot;Could not set zone: &quot; .. zone)
@@ -487,7 +559,11 @@ end
 </code></pre>
 <h4 id="adding-transitions">Adding Transitions</h4>
 <p>A simple example of adding a chat transition can be done without any special functionality:</p>
-<pre><code>local frank = entities:createSpeakerNPC(&quot;Frank&quot;)
+<pre><code class="language-lua">local frank = entities:create({
+    type = &quot;SpeakerNPC&quot;,
+    name = &quot;Frank&quot;
+})
+
 frank:add(ConversationStates.IDLE,
     ConversationPhrases.GREETING_MESSAGES,
     nil,
@@ -495,32 +571,41 @@ frank:add(ConversationStates.IDLE,
     &quot;Hello.&quot;,
     nil)
 </code></pre>
-<p>This simply adds a response to saying "hello" &amp; sets the NPC to attend to the player (equivalent of <code>frank:addGreeting("Hello")</code>).</p>
-<p>For more complicated behavior, we need to use some helper methods. If we want to check a condition we use the <code>conditions:create</code> method. The first parameter is the string name of the ChatCondition we want to instantiate. The second parameter is a table that contains the values that should be passed to the ChatCondition constructor.</p>
+<p>This simply adds a response to saying "hello" &amp; sets the NPC to attend to the player (equivalent
+of <code>frank:addGreeting("Hello")</code>).</p>
+<p>For more advanced behavior, we need to use some helper methods. If we want to check a condition
+we use the <a href="/reference/lua/objects/conditions/#conditionscreate">conditions:create</a> method. The first parameter is the string name of the <a href="/reference/java/games/stendhal/server/entity/npc/ChatCondition.html">ChatCondition</a>
+we want to instantiate. The second parameter is a table that contains the values that should be
+passed to the ChatCondition constructor.</p>
 <p>Example:</p>
-<pre><code>frank:add(ConversationStates.IDLE,
+<pre><code class="language-lua">frank:add(ConversationStates.IDLE,
     ConversationPhrases.GREETING_MESSAGES,
     conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;}),
     ConversationStates.ATTENDING,
     &quot;Hello.&quot;,
     nil)
 </code></pre>
-<p>In this scenario, the NPC will only respond if the player is carrying <a href="https://stendhalgame.org/item/money/money.html">money</a>.</p>
-<p>A NotCondition instance can be created with the <code>actions:notCondition</code> method:</p>
+<p>In this scenario, the NPC will only respond if the player is carrying
+<a href="https://stendhalgame.org/item/money/money.html">money</a>.</p>
+<p>A <a href="/reference/java/games/stendhal/server/entity/npc/condition/NotCondition.html">NotCondition</a> instance can be created with the <a href="/reference/lua/objects/actions/#actionsnotcondition">actions:notCondition</a> method:</p>
 <p>Example usage:</p>
-<pre><code>local condition = conditions.notCondition(conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;})
+<pre><code class="language-lua">local condition = conditions.notCondition(conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;})
 </code></pre>
-<p>To add a ChatAction, we use the <code>actions:create</code> method. Its usage is identical to <code>conditions:create</code>.</p>
+<p>To add a <a href="/reference/java/games/stendhal/server/entity/npc/ChatAction.html">ChatAction</a>, we use the <a href="/reference/lua/objects/actions/#actionscreate">actions:create</a> method. Its usage is identical to
+<a href="/reference/lua/objects/conditions/#conditionscreate">conditions:create</a>.</p>
 <p>Example:</p>
-<pre><code>frank:add(ConversationStates.IDLE,
+<pre><code class="language-lua">frank:add(ConversationStates.IDLE,
     ConversationPhrases.GREETING_MESSAGES,
     conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;}),
     ConversationStates.ATTENDING,
     &quot;Hello.&quot;,
     actions:create(&quot;NPCEmoteAction&quot;, {&quot;looks greedily at your pouch of money.&quot;, false}))
 </code></pre>
-<p>Lua tables can be used to add multiple conditions or actions:</p>
-<pre><code>frank:add(ConversationStates.IDLE,
+<p>Lua tables can be used to add multiple conditions or actions (<span class="note">this only works for
+NPCs created from Lua or instances of <a href="/reference/lua/objects/entities/#luaspeakernpc">LuaSpeakerNPC</a></span>):</p>
+<p><span class="fixme">add global helper methods for managing <a href="/reference/java/games/stendhal/server/entity/npc/SpeakerNPC.html">SpeakerNPC</a> instances not created in
+Lua</span></p>
+<pre><code class="language-lua">frank:add(ConversationStates.IDLE,
     ConversationPhrases.GREETING_MESSAGES,
     {
         conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;}),
@@ -535,7 +620,7 @@ frank:add(ConversationStates.IDLE,
 </code></pre>
 <p>In this scenario, the NPC will respond if the player has money &amp; is not naked.</p>
 <p>Nested tables are supported as well:</p>
-<pre><code>local conditions = {
+<pre><code class="language-lua">local conditions = {
     conditions:create(&quot;PlayerHasItemWithHimCondition&quot;, {&quot;money&quot;}),
     {
         conditions:notCondition(conditions:create(&quot;NakedCondition&quot;)),
@@ -553,29 +638,28 @@ frank:add(ConversationStates.IDLE,
     })
 </code></pre>
 <h4 id="adding-merchant-behavior">Adding Merchant Behavior</h4>
-<p>The <code>merchants</code> object is used for adding merchant behavior (buying/selling) to an NPC.</p>
+<p>The <a href="/reference/lua/objects/merchants/">merchants</a> object is used for adding merchant behavior (buying/selling) to an NPC.</p>
+<p><span class="fixme">should use <code>ShopType</code> enum</span></p>
 <p>Example of adding seller behavior to an NPC:</p>
-<pre><code>if game:setZone(&quot;0_semos_city&quot;) then
-    local frank = entities.createSpeakerNPC(&quot;Frank&quot;)
+<pre><code class="language-lua">if game:setZone(&quot;0_semos_city&quot;) then
+    local frank = entities.create({
+        type = &quot;SpeakerNPC&quot;,
+        name = &quot;Frank&quot;
+    })
     merchants:addSeller(frank, merchants.shops:get(&quot;shopname&quot;), true)
 
     game:add(frank)
 end
 </code></pre>
-<p>To create a custom shop list, you can use a Lua table (there are multiple ways to add elements to a Lua table):</p>
-<p>Method 1:</p>
-<pre><code>local priceList = {
+<p>To create a custom shop list, you can use a Lua table:</p>
+<pre><code class="language-lua">local priceList = {
     meat = 50,
-    [&quot;ham&quot;] = 70,
+    ham = 70,
 }
 </code></pre>
-<p>Method 2:</p>
-<pre><code>local priceList = {}
-priceList.meat = 50
-priceList[&quot;ham&quot;] = 70
-</code></pre>
-<p>The helper methods have special handling for underscore characters as well (the following are all the same):</p>
-<pre><code>local priceList = {
+<p>The helper methods have special handling for underscore characters as well (the following are all
+the same):</p>
+<pre><code class="language-lua">local priceList = {
     smoked_ham = 100,
     [&quot;smoked ham&quot;] = 100,
 }
@@ -583,12 +667,12 @@ priceList.smoked_ham = 100
 priceList[&quot;smoked ham&quot;] = 100
 </code></pre>
 <p>Then add the seller behavior using the custom list:</p>
-<pre><code>merchants:addSeller(frank, priceList, true)
+<pre><code class="language-lua">merchants:addSeller(frank, priceList, true)
 </code></pre>
 <h2 id="system-properties">System Properties</h2>
-<p>Java's system properties are exposed to Lua with the <code>properties</code> object.</p>
+<p>Java's system properties are exposed to Lua with the <a href="/reference/lua/objects/properties/">properties</a> object.</p>
 <p>Examples:</p>
-<pre><code>-- property state
+<pre><code class="language-lua">-- property state
 if properties:enabled(&quot;stendhal.testserver&quot;) then
     print(&quot;Test server enabled&quot;)
     if properties:equals(&quot;stendhal.testserver&quot;, &quot;junk&quot;) then
@@ -615,44 +699,71 @@ end
 </code></pre>
 <h2 id="misc">Misc</h2>
 <h3 id="typecasting">Typecasting</h3>
-<p>Lua does not support typecasting (as far as I know), but if the class you want to cast to has a copy constructor, achieving the same functionality is quite simple.</p>
-<pre><code>-- &quot;entities:getItem&quot; returns an instance of Item
+<p>Lua does not support typecasting (as far as I know), but if the class you want to cast to has a copy
+constructor, achieving the same functionality possible.</p>
+<pre><code class="language-lua">-- &quot;entities:getItem&quot; returns an instance of Item
 local bestiary = entities:getItem(&quot;bestiary&quot;)
 
--- in order to use the bestiary's &quot;setOwner&quot; method, we must convert it to an &quot;OwnedItem&quot; instance by calling its copy constructor
+-- in order to use the bestiary's &quot;setOwner&quot; method, we must convert it to an &quot;OwnedItem&quot; instance
+-- by calling its copy constructor
 bestiary = luajava.newInstance(&quot;games.stendhal.server.entity.item.OwnedItem&quot;, bestiary)
 bestiary:setOwner(&quot;Ted&quot;)
 </code></pre></div>
-            </div>
-        </div>
+        
+        
+    </div>
 
-        <footer class="col-md-12">
+    
+      <footer class="col-md-12 text-center">
+          
+          
             <hr>
-                <p>Copyright © 2003-2023 Stendhal</p>
-            <p>Documentation built with <a href="https://www.mkdocs.org/">MkDocs</a>.</p>
-        </footer>
-        <script>
-            var base_url = "../..",
-                shortcuts = {"help": 191, "next": 78, "previous": 80, "search": 83};
-        </script>
-        <script src="../../js/base.js" defer></script>
-        <script src="../../search/main.js" defer></script>
+            <p>
+            <small>Copyright © 2003-2023 Stendhal</small><br>
+            
+            <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
+            </p>
+          
 
-        <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
+          
+          
+      </footer>
+    
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="../../js/bootstrap-3.0.3.min.js"></script>
+
+    
+    <script src="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.18.0/build/highlight.min.js"></script>
+        
+    <script>hljs.initHighlightingOnLoad();</script>
+    
+
+    <script>var base_url = "../.."</script>
+    
+    <script src="../../js/base.js"></script>
+    <script src="../../search/main.js"></script>
+
+    <div class="modal" id="mkdocs_search_modal" tabindex="-1" role="dialog" aria-labelledby="searchModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">
+                    <span aria-hidden="true">&times;</span>
+                    <span class="sr-only">Close</span>
+                </button>
                 <h4 class="modal-title" id="searchModalLabel">Search</h4>
-                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
             </div>
             <div class="modal-body">
-                <p>From here you can search these documents. Enter your search terms below.</p>
+                <p>
+                    From here you can search these documents. Enter
+                    your search terms below.
+                </p>
                 <form>
                     <div class="form-group">
-                        <input type="search" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
+                        <input type="text" class="form-control" placeholder="Search..." id="mkdocs-search-query" title="Type search term here">
                     </div>
                 </form>
-                <div id="mkdocs-search-results" data-no-results-text="No results found"></div>
+                <div id="mkdocs-search-results"></div>
             </div>
             <div class="modal-footer">
             </div>
@@ -698,6 +809,6 @@ bestiary:setOwner(&quot;Ted&quot;)
         </div>
     </div>
 </div>
-
     </body>
+
 </html>
