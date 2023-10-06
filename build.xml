@@ -61,11 +61,19 @@
 	</target>
 
 
-		<!--
+	<target name="phpcs" description="Check code with PHP_CodeSniffer." depends="prepare">
+		<!-- parse top-level & nested PHP sources -->
+		<pathconvert property="filelist" pathsep=" ">
+			<fileset dir="${basedir}" includes="*.php"/>
+			<fileset dir="${basedir}/content" includes="**/*.php"/>
+			<fileset dir="${basedir}/mediawiki" includes="**/*.php"/>
+			<fileset dir="${basedir}/scripts" includes="**/*.php"/>
+			<fileset dir="${basedir}/tests" includes="**/*.php"/>
+		</pathconvert>
+
 		<exec dir="${basedir}" executable="phpcs" output="${basedir}/build/logs/checkstyle.xml" failonerror="false">
-			<arg line="- -report=checkstyle - -tab-width=4 content mediawiki *.php scripts tests" />
+			<arg line="--report=checkstyle --tab-width=4 ${filelist}"/>
 		</exec>
-		-->
 	</target>
 
 
