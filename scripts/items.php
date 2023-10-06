@@ -206,7 +206,7 @@ function getItems() {
 				}
 				$name=$items[$i.' attr']['name'];
 
-				$unattainable = isset($items[$i]['unattainable']) && $items[$i]['unattainable'][0] === 'true';
+				$unattainable = isset($items[$i]['unattainable']);
 
 				if (isset($items[$i]['description'])) {
 					$description=$items[$i]['description']['0'];
@@ -296,7 +296,7 @@ function getItems() {
 					$attributes['atk'] = $attributes['atk'].' ('.$items[$i]['damage']['0 attr']['type'].')';
 				}
 
-				if (!isset($attributes['unattainable']) || $attributes['unattainable'] === false) {
+				if (!isset($attributes['unattainable'])) {
 					$list[] = new Item($name, $description, $class, $gfx, $attributes,
 							$susceptibilities, null, $unattainable);
 				}
