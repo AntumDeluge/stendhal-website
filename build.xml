@@ -71,7 +71,7 @@
 		</pathconvert>
 
 		<exec dir="${basedir}" executable="phpcs" output="${basedir}/build/logs/checkstyle.xml" failonerror="false">
-			<arg line="--report=checkstyle --tab-width=4 ${filelist}"/>
+			<arg line="${filelist}"/>
 		</exec>
 	</target>
 
