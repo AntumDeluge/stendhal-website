@@ -102,12 +102,9 @@ class NPCPage extends Page {
 			<div class="shops">
 			<?php
 			foreach ($npc_shops as $stype => $sinv) {
-				$itemshop = in_array($stype, ["sell", "buy"]);
-				$slabel = "Sells/Loans outfits";
-				if ($itemshop) {
-					$slabel = ucwords($stype) . "s";
-				}
-				$this->buildShop($slabel, $sinv, $itemshop);
+				$sid = $shops->getId($npc->name, $stype);
+				$snotes = $shops->getNotes($sid);
+				$this->buildShop($sinv, $stype, $snotes);
 			}
 			?>
 			</div>
@@ -135,34 +132,36 @@ class NPCPage extends Page {
 	/**
 	 * Creates a shop list.
 	 *
-	 * // TODO: draw outfits
-	 *
-	 * @param slabel
-	 *     Header to show type of shop (Sells or Buys).
-	 * @param slist
-	 *     Shop inventory information.
-	 * @param itemshop
-	 *     `true` for item shop, `false` for outfit shop.
+	 * @param $sinv
+	 *   Shop inventory information.
+	 * @param $stype
+	 *   "buy", "sell", or "outfit".
+	 * @param $snotes
+	 *   Notes about merchants & items.
 	 */
-	private function buildShop($slabel, $slist, $itemshop=true) {
-		$shopnote = null;
-		if (isset($slist["__shopnote__"])) {
-			$shopnote = $slist["__shopnote__"];
-			unset($slist["__shopnote__"]);
+	private function buildShop($sinv, $stype, $snotes=[]) {
+		$npcname = $this->name;
+		$itemshop = in_array($stype, ["sell", "buy"]);
+		$slabel = "Sells/Loans outfits";
+		if ($itemshop) {
+			$slabel = ucwords($stype) . "s";
 		}
+
+		$merchant_note = isset($snotes["merchants"][$npcname]) ? $snotes["merchants"][$npcname] : null;
+		$items_notes = isset($snotes["items"]) ? $snotes["items"] : [];
 		?>
 
 		<div class="shoplist">
 		<div class="title"><?php echo htmlspecialchars($slabel);
-		if (isset($shopnote)) {
+		if (isset($merchant_note)) {
 			?>
-			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo htmlspecialchars($shopnote); ?>)</span>
+			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo htmlspecialchars($merchant_note); ?>)</span>
 			<?php
 		}
 		?></div>
 		<?php
 
-		foreach ($slist as $invitem) {
+		foreach ($sinv as $invitem) {
 			$iname = $invitem["name"];
 			?>
 			<div class="row">
@@ -184,9 +183,9 @@ class NPCPage extends Page {
 			}
 			?>
 			<span class="block label"><?php echo htmlspecialchars($iname);
-			if (isset($invitem["note"])) {
+			if (isset($items_notes[$iname])) {
 				?>
-				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo htmlspecialchars($invitem["note"]); ?>)</span><?php
+				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo htmlspecialchars($items_notes[$iname]); ?>)</span><?php
 			}
 			?></span>
 			<div class="data">Price: <?php echo htmlspecialchars($invitem["price"]); ?></div>

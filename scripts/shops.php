@@ -20,6 +20,62 @@
 
 
 class Shops {
+
+	// TODO: dump notes configured in .xml to database
+	private static $notes = [
+		"adosmasks" => [
+			"merchants" => [
+				"Fidorea" => "selected mask is random"
+			]
+		],
+		"animalsanctuary" => [
+			"merchants" => [
+				"Dr. Feelgood" => "after Zoo Food quest"
+			]
+		],
+		"athorswimsuits" => [
+			"merchants" => [
+				"Pam" => "selected swimsuit is random"
+			]
+		],
+		"athorswimtrunks" => [
+			"merchants" => [
+			 "David" => "selected trunks is random"
+			]
+		],
+		"bestiary" => [
+			"merchants" => [
+				"Rengard" => "after Collect Enemy Data quest"
+			]
+		],
+		"buyblack" => [
+			"merchants" => [
+				"Balduin" => "after Ultimate Collector quest"
+			]
+		],
+		"deniran_accessories" => [
+			"merchants" => [
+				"Gwen" => "do not expire"
+			]
+		],
+		"karl" => [
+			"items" => [
+				"horse hair" => "after Bows for Ouchit quest"
+			]
+		],
+		"sellrevivalweeks" => [
+			"merchants" => [
+				"Caroline" => "during Minetown Weeks"
+			]
+		],
+		"twohandswords" => [
+			"merchants" => [
+				"Balduin" => "after Ultimate Collector quest"
+			]
+		]
+	];
+
+	// @deprecated
 	public static $shops=array();
 
 	/**
@@ -277,5 +333,41 @@ class Shops {
 		$stmt = DB::game()->prepare($query);
 		$stmt->execute(array(':npcname' => $npcname, ':shoptype' => $shoptype));
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * Retrieves string identifier for a shop.
+	 *
+	 * @param $npcname Name of NPC.
+	 * @param $shoptype "buy", "sell", or "outfit".
+	 * @return Identifier or `null`.
+	 */
+	function getId($npcname, $shoptype) {
+		$query = "SELECT shopinfo.name FROM shopinfo
+			JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
+			JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
+			WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
+		$stmt = DB::game()->prepare($query);
+		$stmt->execute(array(':npcname' => $npcname, ':shoptype' => $shoptype));
+		$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+		$sid = null;
+		if (sizeof($res) > 0) {
+			$sid = $res[0]["name"];
+		}
+		return $sid;
+	}
+
+	/**
+	 * Retrieves any specified notes for a shop.
+	 *
+	 * @param $sid Shop string identifier.
+	 */
+	function getNotes($sid) {
+		$notes = [];
+		if (isset($sid) && isset(Shops::$notes[$sid])) {
+			$notes = Shops::$notes[$sid];
+		}
+		return $notes;
 	}
 }
