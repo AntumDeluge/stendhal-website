@@ -258,14 +258,22 @@ class Shops {
 	 * @param $shoptype "buy", "sell", or "outfit".
 	 */
 	function getItemsForNPC($npcname, $shoptype) {
-		// FIXME: result is empty array for "outfit" shop type
-		$query = "SELECT iteminfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
-			FROM iteminfo
-			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
-			JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
-			JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
-			JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
-			WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
+		if ($shoptype === "outfit") {
+			$query = "SELECT shopinventoryinfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price, shopinventoryinfo.outfit
+				FROM shopinventoryinfo
+				JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
+				JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
+				JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
+				WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
+		} else {
+			$query = "SELECT iteminfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
+				FROM iteminfo
+				JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
+				JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
+				JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
+				JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
+				WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
+		}
 		$stmt = DB::game()->prepare($query);
 		$stmt->execute(array(':npcname' => $npcname, ':shoptype' => $shoptype));
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);

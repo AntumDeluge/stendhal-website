@@ -173,8 +173,10 @@ class NPCPage extends Page {
 					echo $item->generateImageWithPopup();
 				}
 			} else {
+				// FIXME: "-0" is appended to each layer as we currently can't handle layer colors
+				$outfit = str_replace(["=", ","], ["-", "-0_"], $invitem["outfit"]) . "-0";
 				// FIXME: "rear" detail layer not displayed
-				$outfitimage = "/images/outfit/".surlencode($invitem["outfit"], 0).".png";
+				$outfitimage = "/images/outfit/".surlencode($outfit, 0).".png";
 				?>
 				<div style="clear:left;">
 				<img class="creature" src="<?php echo $outfitimage;?>">
