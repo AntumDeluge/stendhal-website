@@ -16,12 +16,15 @@
  You should have received a copy of the GNU Affero General Public License
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
- 
+
 
 
 class Shops {
 	public static $shops=array();
 
+	/**
+	 * @deprecated
+	 */
 	function parseAddRequire($reqdata) {
 		$required;
 		if (!is_array($reqdata)) {
@@ -48,25 +51,27 @@ class Shops {
 		return $required;
 	}
 
-	
+
 	/**
 	 * Parses shop info from xml data.
+	 *
+	 * @deprecated
 	 *
 	 * @param shopsdata
 	 *     XML data containing shops information.
 	 */
 	function parseShopsData($shopsdata) {
 		$npcshops = [];
-	
+
 		if (sizeof($shopsdata) < 2) {
 			return;
 		}
-	
+
 		for ($idx = 0; $idx < sizeof($shopsdata) / 2; $idx++) {
 			if (!isset($shopsdata[$idx]["merchant"])) {
 				continue;
 			}
-	
+
 			$attr = [];
 			if (isset($shopsdata[$idx." attr"])) {
 				$attr = $shopsdata[$idx." attr"];
@@ -78,7 +83,7 @@ class Shops {
 			if ($shoptype === "trade") {
 				$shoptype = "sell";
 			}
-	
+
 			$merchants = [];
 			$tmp = $shopsdata[$idx]["merchant"];
 			for ($m = 0; $m < sizeof($tmp) / 2; $m++) {
@@ -90,7 +95,7 @@ class Shops {
 					$merchants[$merchant["name"]] = isset($merchant["note"]) ? $merchant["note"] : null;
 				}
 			}
-	
+
 			$itemlist = [];
 			$contents = null;
 			if ($shoptype === "outfit") {
@@ -107,14 +112,14 @@ class Shops {
 					if (!isset($contents[$i." attr"])) {
 						continue;
 					}
-	
+
 					$item = $contents[$i." attr"];
 					$requirealso = null;
 					if (isset($item["name"])) {
 						if (isset($contents[$i]["for"])) {
 							$requirealso = $this->parseAddRequire($contents[$i]["for"]);
 						}
-	
+
 						$price = isset($item["price"]) ? $item["price"] : "";
 						if (strlen($price) > 0 && isset($item["pricemax"])) {
 							$price .= "-".$item["pricemax"];
@@ -137,7 +142,7 @@ class Shops {
 					}
 				}
 			}
-	
+
 			foreach ($merchants as $npcname=>$shopnote) {
 				// allow merchants configured for multiple shops
 				if (isset($npcshops[$npcname][$shoptype])) {
@@ -151,10 +156,12 @@ class Shops {
 		}
 		return $npcshops;
 	}
-	
-	
+
+
 	/**
 	 * Loads registered shops from config.
+	 *
+	 * @deprecated
 	 */
 	function loadShops() {
 		global $cache;
@@ -165,15 +172,15 @@ class Shops {
 		if (is_array(Shops::$shops) && sizeof(Shops::$shops) > 0) {
 			return;
 		}
-	
+
 		$content = file("data/conf/shops.xml");
 		$tmp = implode("", $content);
 		$groot = XML_unserialize($tmp);
-	
+
 		if (!isset($groot["groups"][0]["group"])) {
 			return;
 		}
-	
+
 		$tmp = $groot["groups"][0]["group"];
 		$groups = [];
 		for ($idx = 0; $idx < sizeof($tmp) / 2; $idx++) {
@@ -195,9 +202,11 @@ class Shops {
 		Shops::$shops = $npcshops;
 		$cache->store("stendhal_shops", new ArrayObject($npcshops));
 	}
-	
+
 	/**
 	 * Retrieves shop lists for an NPC.
+	 *
+	 * @deprecated
 	 *
 	 * @param npcname
 	 *     Name of NPC for which shop is associated.
@@ -212,9 +221,11 @@ class Shops {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Retrieves all NPC shops.
+	 *
+	 * @deprecated
 	 */
 	function getNPCShops() {
 		$this->loadShops();
@@ -228,10 +239,6 @@ class Shops {
 	 * @param $shoptype "buy" or "sell"
 	 */
 	function getNPCsForItem($itemname, $shoptype) {
-		if (STENDHAL_VERSION < '1.44') {
-			return [];
-		}
-	
 		$query = "SELECT npcs.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
 			FROM iteminfo
 			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
@@ -241,6 +248,26 @@ class Shops {
 			WHERE iteminfo.name = :itemname AND shopinfo.shop_type = :shoptype;";
 		$stmt = DB::game()->prepare($query);
 		$stmt->execute(array(':itemname' => $itemname, ':shoptype' => $shoptype));
+		return $stmt->fetchAll(PDO::FETCH_ASSOC);
+	}
+
+	/**
+	 * Which items are bought or sold by a given NPC?
+	 *
+	 * @param $npcname Name of NPC.
+	 * @param $shoptype "buy", "sell", or "outfit".
+	 */
+	function getItemsForNPC($npcname, $shoptype) {
+		// FIXME: result is empty array for "outfit" shop type
+		$query = "SELECT iteminfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
+			FROM iteminfo
+			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
+			JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
+			JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
+			JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
+			WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
+		$stmt = DB::game()->prepare($query);
+		$stmt->execute(array(':npcname' => $npcname, ':shoptype' => $shoptype));
 		return $stmt->fetchAll(PDO::FETCH_ASSOC);
 	}
 }

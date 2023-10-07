@@ -86,21 +86,28 @@ class NPCPage extends Page {
 		endBox();
 
 		// shop lists
-		$shop = $npc->getShop();
-		if (isset($shop)) {
+		$shops = new Shops();
+		$npc_shops = [];
+		foreach (["buy", "sell", "outfit"] as $stype) {
+			$sinv = $shops->getItemsForNPC($npc->name, $stype);
+			if (sizeof($sinv) > 0) {
+				$npc_shops[$stype] = $sinv;
+			}
+		}
+
+		if (sizeof($npc_shops) > 0) {
 			startBox("Shops");
 			?>
 			<div class="table">
 			<div class="shops">
 			<?php
-			if (isset($shop["sell"])) {
-				$this->buildShop("Sells", $shop["sell"]);
-			}
-			if (isset($shop["buy"])) {
-				$this->buildShop("Buys", $shop["buy"]);
-			}
-			if (isset($shop["outfit"])) {
-				$this->buildShop("Sells/Loans outfits", $shop["outfit"], false);
+			foreach ($npc_shops as $stype => $sinv) {
+				$itemshop = in_array($stype, ["sell", "buy"]);
+				$label = "Sells/Loans outfits";
+				if ($itemshop) {
+					$label = ucwords($stype) . "s";
+				}
+				$this->buildShop($label, $sinv, $itemshop);
 			}
 			?>
 			</div>
@@ -155,7 +162,8 @@ class NPCPage extends Page {
 		?></div>
 		<?php
 
-		foreach($slist as $iname=>$invitem) {
+		foreach ($slist as $invitem) {
+			$iname = $invitem["name"];
 			?>
 			<div class="row">
 			<?php
@@ -166,7 +174,7 @@ class NPCPage extends Page {
 				}
 			} else {
 				// FIXME: "rear" detail layer not displayed
-				$outfitimage = "/images/outfit/".surlencode($invitem["layers"], 0).".png";
+				$outfitimage = "/images/outfit/".surlencode($invitem["outfit"], 0).".png";
 				?>
 				<div style="clear:left;">
 				<img class="creature" src="<?php echo $outfitimage;?>">

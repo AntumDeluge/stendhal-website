@@ -130,6 +130,9 @@ class NPC extends Entity {
 		return $list;
 	}
 
+	/**
+	 * @deprecated
+	 */
 	function getShop() {
 		$shops = new Shops();
 		return $shops->getNPCShop($this->name);
