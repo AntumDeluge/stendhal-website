@@ -103,11 +103,11 @@ class NPCPage extends Page {
 			<?php
 			foreach ($npc_shops as $stype => $sinv) {
 				$itemshop = in_array($stype, ["sell", "buy"]);
-				$label = "Sells/Loans outfits";
+				$slabel = "Sells/Loans outfits";
 				if ($itemshop) {
-					$label = ucwords($stype) . "s";
+					$slabel = ucwords($stype) . "s";
 				}
-				$this->buildShop($label, $sinv, $itemshop);
+				$this->buildShop($slabel, $sinv, $itemshop);
 			}
 			?>
 			</div>
@@ -137,14 +137,14 @@ class NPCPage extends Page {
 	 *
 	 * // TODO: draw outfits
 	 *
-	 * @param stitle
+	 * @param slabel
 	 *     Header to show type of shop (Sells or Buys).
 	 * @param slist
 	 *     Shop inventory information.
 	 * @param itemshop
 	 *     `true` for item shop, `false` for outfit shop.
 	 */
-	private function buildShop($stitle, $slist, $itemshop=true) {
+	private function buildShop($slabel, $slist, $itemshop=true) {
 		$shopnote = null;
 		if (isset($slist["__shopnote__"])) {
 			$shopnote = $slist["__shopnote__"];
@@ -153,7 +153,7 @@ class NPCPage extends Page {
 		?>
 
 		<div class="shoplist">
-		<div class="title"><?php echo htmlspecialchars($stitle);
+		<div class="title"><?php echo htmlspecialchars($slabel);
 		if (isset($shopnote)) {
 			?>
 			<span class="shopnote" style="font-weight:normal; font-size:small;">(<?php echo htmlspecialchars($shopnote); ?>)</span>
