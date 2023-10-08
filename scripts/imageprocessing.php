@@ -122,15 +122,31 @@ class OutfitDrawer {
 	function load_part($part_name, $index, $offset, $suffix='') {
 		global $OUTFITS_BASE;
 
+		$rear = false;
+		if ($part_name === 'detail_rear') {
+			$rear = true;
+			$part_name = 'detail';
+			$suffix_rear = '-rear';
+			$suffix = $suffix_rear . $suffix;
+		}
+
 		$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . $suffix . '.png';
 		if (!file_exists($location)) {
-			$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '.png';
-
-			// there are some heads with non existing numbers (e. g. 984)
-			if (!file_exists($location)) {
-				$location = $OUTFITS_BASE . '/' . $part_name . '/000' . $suffix . '.png';
+			if ($rear) {
+				$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . $suffix_rear . '.png';
 				if (!file_exists($location)) {
-					$location = $OUTFITS_BASE . '/' . $part_name . '/000.png';
+					// no extra checking for rear layers
+					return 0;
+				}
+			} else {
+				$location = $OUTFITS_BASE . '/' . $part_name . '/' . $index . '.png';
+
+				// there are some heads with non existing numbers (e. g. 984)
+				if (!file_exists($location)) {
+					$location = $OUTFITS_BASE . '/' . $part_name . '/000' . $suffix . '.png';
+					if (!file_exists($location)) {
+						$location = $OUTFITS_BASE . '/' . $part_name . '/000.png';
+					}
 				}
 			}
 		}
@@ -245,6 +261,23 @@ class OutfitDrawer {
 	}
 
 	/**
+	 * Retrieves index & coloring info for a layer.
+	 *
+	 * @param $lname Layer name.
+	 * @param $layers Outfit layers information.
+	 */
+	private function getLayerInfo($lname, $layers) {
+		foreach ($layers as $layer) {
+			$tmp = explode('-', $layer);
+			if ($tmp[0] === $lname) {
+				[, $code, $color] = $tmp;
+				return [$code, $color];
+			}
+		}
+		return [];
+	}
+
+	/**
 	 * Create an outfit image.
 	 */
 	function create_outfit($layers, $offset) {
@@ -253,6 +286,13 @@ class OutfitDrawer {
 
 		$outfit = new Imagick();
 		$outfit->newImage(48, 64, 'transparent', 'png');
+
+		// get layer info for rear detail
+		$detail_layer = $this->getLayerInfo('detail', $layers);
+		if ($detail_layer) {
+			// rear detail layer is drawn first
+			array_unshift($layers, 'detail_rear-'.implode('-', $detail_layer));
+		}
 
 		foreach ($layers as $layer) {
 			$l = explode('-', $layer);
