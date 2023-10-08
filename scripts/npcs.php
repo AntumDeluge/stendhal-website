@@ -87,6 +87,7 @@ class NPC extends Entity {
 
 
 	static private function _getNPCs($query) {
+		// FIXME: deprecated, "hidezone" attribute now set in database
 		$NO_ZONE = array(
 			'Azazel', 'Cherubiel', 'Gabriel', 'Ophaniel', 'Raphael', 'Uriel', 'Zophiel',
 			'Ben', 'Goran', 'Mary', 'Zak',
@@ -105,7 +106,7 @@ class NPC extends Entity {
 			}
 			$zone = $row['zone'];
 			$pos = 'at ' . $row['x'] . ', ' . $row['y'];
-			if (in_array($row['name'], $NO_ZONE)) {
+			if (isset($row['hidezone']) && $row['hidezone'] > 0 || in_array($row['name'], $NO_ZONE)) {
 				$zone = 'unknown';
 				$pos = '';
 			}
