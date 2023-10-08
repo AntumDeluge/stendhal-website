@@ -93,7 +93,8 @@ class NPC extends Entity {
 			'Easter Bunny', 'Rose Leigh', 'Santa',
 			'Amber', 'Skye',
 			'Red Crystal', 'Purple Crystal', 'Yellow Crystal', 'Pink Crystal', 'Blue Crystal',
-			'Rengard', 'Mizuno', 'Niall Breland');
+			'Rengard', 'Mizuno', 'Niall Breland',
+			'Avalon', 'Cody', 'Mariel', 'Opal');
 
 		$result = DB::game()->query($query);
 		$list = array();
