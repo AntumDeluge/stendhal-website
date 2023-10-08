@@ -75,6 +75,25 @@ class Shops {
 		]
 	];
 
+	// layers to be added to outfit previews
+	public static $outfits_add_layers = [
+		"adosmasks" => "body=0,head=0,eyes=0",
+		"athorswimsuits" => "body=1,head=0,eyes=0",
+		"athorswimtrunks" => "body=0,head=0,eyes=0",
+		"deniran_accessories" => "body=0,head=0,eyes=0",
+		"deniranoutfits" => "body=0,head=0,eyes=0",
+		"magicoutfitsliliana" => [
+			"layers" => "body=0,head=0,eyes=0",
+			"apply" => ["jumpsuit", "dungarees", "green dress", "gown", "orange", "jester"]
+		],
+		"magicoutfitssaski" => [
+			"layers" => "body=0",
+			"apply" => ["goblin face", "thing face"]
+		],
+		"weddinggown" => "body=1,head=0,eyes=0",
+		"weddingsuit" => "body=0,head=0,eyes=0"
+	];
+
 	// @deprecated
 	public static $shops=array();
 

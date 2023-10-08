@@ -104,7 +104,11 @@ class NPCPage extends Page {
 			foreach ($npc_shops as $stype => $sinv) {
 				$sid = $shops->getId($npc->name, $stype);
 				$snotes = $shops->getNotes($sid);
-				$this->buildShop($sinv, $stype, $snotes);
+				$add_layers = null;
+				if ($stype === "outfit" && isset(Shops::$outfits_add_layers[$sid])) {
+					$add_layers = Shops::$outfits_add_layers[$sid];
+				}
+				$this->buildShop($sinv, $stype, $snotes, $add_layers);
 			}
 			?>
 			</div>
@@ -138,8 +142,10 @@ class NPCPage extends Page {
 	 *   "buy", "sell", or "outfit".
 	 * @param $snotes
 	 *   Notes about merchants & items.
+	 * @param add_layers
+	 *   Layers to be added to each outfit preview.
 	 */
-	private function buildShop($sinv, $stype, $snotes=[]) {
+	private function buildShop($sinv, $stype, $snotes=[], $add_layers="") {
 		$npcname = $this->name;
 		$itemshop = in_array($stype, ["sell", "buy"]);
 		$slabel = "Sells/Loans outfits";
@@ -161,6 +167,18 @@ class NPCPage extends Page {
 		?></div>
 		<?php
 
+		$outfit_layers_order = explode(",", "body,dress,head,mouth,eyes,mask,hair,hat,detail");
+		$apply_outfits = [];
+		if ($add_layers) {
+			if (gettype($add_layers) === "array") {
+				if (isset($add_layers["apply"])) {
+					$apply_outfits = $add_layers["apply"];
+				}
+				$add_layers = $add_layers["layers"];
+			}
+			$add_layers = explode(",", $add_layers);
+		}
+
 		foreach ($sinv as $invitem) {
 			$iname = $invitem["name"];
 			?>
@@ -172,8 +190,34 @@ class NPCPage extends Page {
 					echo $item->generateImageWithPopup();
 				}
 			} else {
+				$original_layers = explode(",", $invitem["outfit"]);
+				$actual_layers = [];
+				if (!$add_layers) {
+					$actual_layers = $original_layers;
+				} else {
+					foreach ($outfit_layers_order as $lname) {
+						$ltmp = "";
+						foreach ($original_layers as $linfo) {
+							if (explode("=", $linfo)[0] === $lname) {
+								$ltmp = $linfo;
+								break;
+							}
+						}
+						if (!$ltmp && (!$apply_outfits || in_array($iname, $apply_outfits))) {
+							foreach ($add_layers as $linfo) {
+								if (explode("=", $linfo)[0] === $lname) {
+									$ltmp = $linfo;
+									break;
+								}
+							}
+						}
+						if ($ltmp) {
+							$actual_layers[] = $ltmp;
+						}
+					}
+				}
 				// FIXME: "-0" is appended to each layer as we currently can't handle layer colors
-				$outfit = str_replace(["=", ","], ["-", "-0_"], $invitem["outfit"]) . "-0";
+				$outfit = str_replace(["=", ","], ["-", "-0_"], implode(",", $actual_layers)) . "-0";
 				$outfitimage = "/images/outfit/".surlencode($outfit, 0).".png";
 				?>
 				<div style="clear:left;">
