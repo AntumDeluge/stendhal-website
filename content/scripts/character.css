@@ -35,3 +35,9 @@
 	 margin-bottom: 10px;
 	 border: 1px solid black;
 }
+
+.hspacer {
+	visibility: hidden;
+	font-size: 0;
+	height: 10px;
+}

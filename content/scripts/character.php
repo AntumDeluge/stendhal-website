@@ -29,32 +29,35 @@ class CharacterPage extends Page {
 	}
 
 	function writeContent() {
-
-
-if(sizeof($this->players)==0) {
-	startBox("No such player");
-	?>
-	There is no such player at Stendhal.<br>
-	Please make sure you spelled it correctly.
-	<?php
-	endBox();
-	return;
-}
-$choosen=$this->players[0];
-$account=$choosen->getAccountInfo();
+		if(sizeof($this->players)==0) {
+			startBox("No such player");
 ?>
+There is no such player at Stendhal.<br>
+Please make sure you spelled it correctly.
+<?php
+			endBox();
+			return;
+		}
 
-<?php startBox('<h1>'.htmlspecialchars($choosen->name).'</h1>'); ?>
+		$choosen=$this->players[0];
+		$account=$choosen->getAccountInfo();
+		$account_active = $account["status"] == 'active' && $account["charstatus"] == 'active';
+
+		startBox('<h1>'.htmlspecialchars($choosen->name).'</h1>');
+?>
 <div class="table">
 	<div class="title">Details</div>
 	<div style="float: right">
-		<?php if (($account["status"] == 'active') && ($account["charstatus"] == 'active')) {?>
+		<?php if ($account_active) {?>
 		<img class="bordered_image" src="<?php echo rewriteURL('/images/outfit/'.surlencode($choosen->outfit).'.png')?>" alt="Player outfit"/>
 		<?php }?>
 	</div>
 	<div><span class="statslabel">Name:</span><span class="data"><?php echo htmlspecialchars($choosen->name); ?></span></div>
 	<div><span class="statslabel">Age:</span><span class="data"><?php echo htmlspecialchars(printAge($choosen->age)); ?> hours</span></div>
 	<div><span class="statslabel">Level:</span><span class="data"><?php echo htmlspecialchars($choosen->level); ?></span></div>
+	<?php if ($account_active) { ?>
+	<div class="hspacer"></div> <!-- workaround to prevent character image extending outside table border -->
+	<?php } ?>
 	<div class="married">
 		<?php if(!empty($choosen->married)) {
 			echo htmlspecialchars($choosen->name) . ' is married to <a href="';
@@ -62,7 +65,7 @@ $account=$choosen->getAccountInfo();
 			echo '">'.htmlspecialchars($choosen->married).'</a>';
 		} ?>
 	</div>
-	<?php if ($account["status"] == "active" && $account["charstatus"] == 'active' && $choosen->sentence != '') {
+	<?php if ($account_active && $choosen->sentence != '') {
 		echo '<div class="sentence">' . htmlspecialchars($choosen->sentence). '</div>';
 	}?>
 </div>
