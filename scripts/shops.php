@@ -341,9 +341,8 @@ class Shops {
 				JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
 				WHERE npcs.name = :npcname AND shopinfo.shop_type = :shoptype;";
 		} else {
-			$query = "SELECT iteminfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
-				FROM iteminfo
-				JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
+			$query = "SELECT shopinventoryinfo.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
+				FROM shopinventoryinfo
 				JOIN shopinfo ON shopinfo.id = shopinventoryinfo.shopinfo_id
 				JOIN shopownerinfo ON shopownerinfo.shopinfo_id = shopinfo.id
 				JOIN npcs ON shopownerinfo.npcinfo_id = npcs.id
