@@ -314,6 +314,17 @@ class Shops {
 	 * @param $shoptype "buy" or "sell"
 	 */
 	function getNPCsForItem($itemname, $shoptype) {
+		// special case items
+		if ($itemname == "seed" || $itemname == "bulb") {
+			if ($shoptype == "sell") {
+				// FIXME: hack to show seed & bulb sellers (this info is not available from database)
+				return [[
+					"name" => "Jenny",
+					"price" => "varies"
+				]];
+			}
+		}
+
 		$query = "SELECT npcs.name, shopinventoryinfo.price * shopownerinfo.price_factor as price
 			FROM iteminfo
 			JOIN shopinventoryinfo ON shopinventoryinfo.iteminfo_id = iteminfo.id
