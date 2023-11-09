@@ -271,6 +271,10 @@ class ItemPage extends Page {
 				// NPC buyers & sellers
 				$shops = new Shops();
 				$merchants = $shops->getNPCsForItem($m->name, 'sell');
+				// include traders
+				foreach ($shops->getNPCsForItem($m->name, 'trade') as $trader) {
+					$merchants[] = $trader;
+				}
 				if (sizeof($merchants) > 0) {
 					?>
 
@@ -295,7 +299,7 @@ class ItemPage extends Page {
 				<div class="title">Bought by</div>
 				<div style="float:left; width:100%;">
 					<?php
-					$this->buildMerchantList($merchants);
+					$this->buildMerchantList($merchants, "Value");
 					?>
 
 				</div>
@@ -329,8 +333,39 @@ class ItemPage extends Page {
 			);
 	}
 
-	private function buildMerchantList($merchants) {
+	private function buildMerchantList($merchants, $value_label="Price") {
 		foreach ($merchants as $merchant) {
+			$iprice = $merchant['price'];
+			if ($iprice == 0) {
+				unset($iprice);
+			}
+			if (isset($merchant['trade_for'])) {
+				$trade_for = "";
+				foreach (explode(",", $merchant['trade_for']) as $trade_item) {
+					if (!empty($trade_for)) {
+						$trade_for .= ", ";
+					}
+					$trade_item = explode(":", $trade_item);
+					$titem = getItem($trade_item[0]);
+					if (isset($titem)) {
+						$trade_item[0] = $titem->createNameLink();
+					}
+					$trade_for .= $trade_item[1] . " " . $trade_item[0];
+				}
+
+				if (!empty($trade_for)) {
+					if (!isset($iprice)) {
+						$iprice = $trade_for;
+					} else {
+						$iprice .= " ".getItem("money")->createNameLink().", ".$trade_for;
+					}
+				}
+			}
+
+			if (!isset($iprice)) {
+				return;
+			}
+
 			echo "<div class=\"row\">";
 			$npc = NPC::getNPC($merchant['name']);
 			if (isset($npc)) {
@@ -338,8 +373,9 @@ class ItemPage extends Page {
 				echo $npc->getBorderedImage();
 				echo "</a>";
 			}
+
 			echo "<span class=\"block label\">".htmlspecialchars($npc->name)."</span>";
-			echo "<div class=\"data\">".htmlspecialchars($merchant['price'])."</div>";
+			echo "<div class=\"data\">".$value_label.": <span>".$iprice."</span></div>";
 			echo "<div style=\"clear:left;\"></div></div>";
 		}
 	}

@@ -88,7 +88,7 @@ class NPCPage extends Page {
 		// shop lists
 		$shops = new Shops();
 		$npc_shops = [];
-		foreach (["buy", "sell", "outfit"] as $stype) {
+		foreach (["buy", "sell", "trade", "outfit"] as $stype) {
 			$sinv = $shops->getItemsForNPC($npc->name, $stype);
 			if (sizeof($sinv) > 0) {
 				$npc_shops[$stype] = $sinv;
@@ -108,7 +108,11 @@ class NPCPage extends Page {
 				if ($stype === "outfit" && isset(Shops::$outfits_add_layers[$sid])) {
 					$add_layers = Shops::$outfits_add_layers[$sid];
 				}
-				$this->buildShop($sinv, $stype, $snotes, $add_layers);
+				$value_label = "Price";
+				if ($stype === "buy") {
+					$value_label = "Value";
+				}
+				$this->buildShop($sinv, $stype, $value_label, $snotes, $add_layers);
 			}
 			?>
 			</div>
@@ -140,14 +144,16 @@ class NPCPage extends Page {
 	 *   Shop inventory information.
 	 * @param $stype
 	 *   "buy", "sell", or "outfit".
+	 * @param $value_label
+	 *   Label to show for item price.
 	 * @param $snotes
 	 *   Notes about merchants & items.
 	 * @param add_layers
 	 *   Layers to be added to each outfit preview.
 	 */
-	private function buildShop($sinv, $stype, $snotes=[], $add_layers="") {
+	private function buildShop($sinv, $stype, $value_label, $snotes=[], $add_layers="") {
 		$npcname = $this->name;
-		$itemshop = in_array($stype, ["sell", "buy"]);
+		$itemshop = in_array($stype, ["sell", "buy", "trade"]);
 		$slabel = "Sells/Loans outfits";
 		if ($itemshop) {
 			$slabel = ucwords($stype) . "s";
@@ -232,9 +238,43 @@ class NPCPage extends Page {
 				<span class="itemnote" style="font-weight:normal; font-style:italic; font-size:small;">(<?php echo htmlspecialchars($items_notes[$iname]); ?>)</span><?php
 			}
 			?></span>
-			<div class="data">Price: <?php echo htmlspecialchars($invitem["price"]); ?></div>
+			<?php
+			$iprice = $invitem["price"];
+			if ($iprice == 0) {
+				unset($iprice);
+			}
+
+			if (isset($invitem["trade_for"])) {
+				$trade_for = "";
+				foreach (explode(",", $invitem["trade_for"]) as $trade_item) {
+					if (!empty($trade_for)) {
+						$trade_for .= ", ";
+					}
+					$trade_item = explode(":", $trade_item);
+					$titem = getItem($trade_item[0]);
+					if (isset($titem)) {
+						$trade_item[0] = $titem->createNameLink();
+					}
+					$trade_for .= $trade_item[1] . " " . $trade_item[0];
+				}
+
+				if (!empty($trade_for)) {
+					if (!isset($iprice)) {
+						$iprice = $trade_for;
+					} else {
+						$iprice .= " ".getItem("money")->createNameLink().", ".$trade_for;
+					}
+				}
+			}
+
+			if (isset($iprice)) {
+			?>
+			<div class="data"><?php echo $value_label.": ".$iprice; ?></div>
 			</div>
 			<?php
+			} else {
+				echo("<div style=\"clear:left;\"/>");
+			}
 		}
 		?>
 
