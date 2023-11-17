@@ -44,7 +44,9 @@ class CreateAccountPage extends Page {
 		}
 
 
-		if ((strlen($_POST['pw']) > 100) || (strlen($_POST['name']) > 20) || (strlen($_POST['email']) > 50)) {
+		// Note: For the password field, we do want an error message, if it is too long.
+		// Therefore the maxlength-attribute is one character larger than the error.
+		if ((strlen($_POST['pw']) >= 100) || (strlen($_POST['name']) > 20) || (strlen($_POST['email']) > 50)) {
 			$this->error = 'At least one of the fields is too long.';
 			return true;
 		}
