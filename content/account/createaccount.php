@@ -43,6 +43,12 @@ class CreateAccountPage extends Page {
 			return true;
 		}
 
+
+		if ((strlen($_POST['pw']) > 100) || (strlen($_POST['name']) > 20) || (strlen($_POST['email']) > 50)) {
+			$this->error = 'At least one of the fields is too long.';
+			return true;
+		}
+
 		$user = strtolower($_POST['name']);
 		require_once('scripts/pharauroa/pharauroa.php');
 		$clientFramework = new PharauroaClientFramework(STENDHAL_MARAUROA_SERVER, STENDHAL_MARAUROA_PORT, STENDHAL_MARAUROA_CREDENTIALS);
@@ -101,13 +107,13 @@ class CreateAccountPage extends Page {
 
 <tr>
 <td><label for="pw">Password:<sup>*</sup> </label></td>
-<td><input id="pw" name="pw" type="password"></td>
+<td><input id="pw" name="pw" type="password" maxlength="100"></td>
 <td><div id="pwwarn" class="warn"></div></td>
 </tr>
 
 <tr>
 <td><label for="pr">Password Repeat:<sup>*</sup> </label></td>
-<td><input id="pr" name="pr" type="password"></td>
+<td><input id="pr" name="pr" type="password" maxlength="100"></td>
 <td><div id="prwarn" class="warn"></div></td>
 </tr>
 

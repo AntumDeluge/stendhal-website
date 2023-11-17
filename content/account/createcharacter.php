@@ -58,7 +58,6 @@ class CreateCharacterPage extends Page {
 	}
 
 	function process() {
-		global $protocol;
 		if (! isset($_POST['name']) || !isset($_REQUEST['outfitcode'])) {
 			return false;
 		}
@@ -68,6 +67,10 @@ class CreateCharacterPage extends Page {
 		}
 
 		$user = strtolower($_POST['name']);
+		if (strlen($user) > 20 || strlen($_REQUEST['outfitcode'] > 300)) {
+			return false;
+		}
+
 		require_once('scripts/pharauroa/pharauroa.php');
 		$clientFramework = new PharauroaClientFramework(STENDHAL_MARAUROA_SERVER, STENDHAL_MARAUROA_PORT, STENDHAL_MARAUROA_CREDENTIALS);
 		$template = new PharauroaRPObject();

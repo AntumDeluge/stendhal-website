@@ -87,6 +87,10 @@ class LoginPage extends Page {
 
 		$username = trim($_POST['user']);
 		$password = trim($_POST['pass']);
+		if ((strlen($username) > 30) || (strlen($password) > 1000)) {
+			$this->error = "A field is too long.";
+			return false;
+		}
 		$result = Account::tryLogin("password", $username, $password);
 		if (! ($result instanceof Account)) {
 			$this->error = $result;
@@ -264,7 +268,7 @@ class LoginPage extends Page {
 					echo ' value="'.htmlspecialchars($_REQUEST['username']).'" ';
 				}
 				?>></td></tr>
-				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="30"></td></tr>
+				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="100"></td></tr>
 				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
 			
