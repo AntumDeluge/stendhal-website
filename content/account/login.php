@@ -87,7 +87,9 @@ class LoginPage extends Page {
 
 		$username = trim($_POST['user']);
 		$password = trim($_POST['pass']);
-		if ((strlen($username) > 30) || (strlen($password) > 1000)) {
+		// Note: For the password field, we do want an error message, if it is too long
+		// Therefore the maxlength-attribute is one character larger than the error.
+		if ((strlen($username) > 30) || (strlen($password) >= 1000)) {
 			$this->error = "A field is too long.";
 			return false;
 		}
@@ -268,7 +270,7 @@ class LoginPage extends Page {
 					echo ' value="'.htmlspecialchars($_REQUEST['username']).'" ';
 				}
 				?>></td></tr>
-				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="100"></td></tr>
+				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="1000"></td></tr>
 				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
 			
