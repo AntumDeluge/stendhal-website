@@ -88,7 +88,7 @@ class AtlasPage extends Page {
 				}
 			} else if (count($coordinates) === 2) {
 				$focusX = $coordinates[0];
-				$focusY = $coordinates[0];
+				$focusY = $coordinates[1];
 			} else if (count($coordinates) === 3) {
 				$zone = $zones[$coordinates[0]];
 				if (isset($zone) && isset($zone->x)) {
