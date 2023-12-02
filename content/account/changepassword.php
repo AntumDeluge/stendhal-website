@@ -25,7 +25,7 @@ function validateParameters() {
 		return 'You cannot use your username as password.';
 	}
 
-	if($_POST['newpass']!=$_POST['newpass_retype']) {
+	if($_POST['newpass'] != $_POST['newpass_retype']) {
 		return 'Password incorrectly typed.';
 	}
 
@@ -42,6 +42,10 @@ function validateParameters() {
 		return 'The old password was wrong.';
 	}
 
+	if ($_POST['pass'] == $_POST['newpass']) {
+		return 'The new password is the same as the old password.';
+	}
+
 	return "";
 }
 
@@ -51,11 +55,7 @@ function changePassword() {
 	/* Verify that user is in database */
 	$md5newpass = strtoupper(md5($_POST['newpass']));
 	$q = "update account set password='".mysql_real_escape_string(Account::sha512crypt($md5newpass))."' where username = '".mysql_real_escape_string($username)."'";
-	$result = DB::game()->exec($q);
-
-	if ($result != 1) {
-		die('Problem updating database');
-	}
+	DB::game()->exec($q);
 
 	// reread the accoutn form the database, so that it is not flagged as passwordless account anymore.
 	$_SESSION['account'] = Account::readAccountByName($_SESSION['account']->username);
