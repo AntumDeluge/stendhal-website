@@ -2,7 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2016 The Arianne Project
+ Copyright (C) 2008-2023 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -18,53 +18,53 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 /**
-  * A class that represent a player, what it is and what it equips.
-  */
+	* A class that represent a player, what it is and what it equips.
+	*/
 class Player {
-  /* Name of the player */
-  public $name;
-  /* Sentence that the player wrote using /sentence */
-  public $sentence;
-  /* Level of the player */
-  public $level;
-  /* An outfit representing the player look in game. */
-  public $outfit;
-  /* The colors of the outfit. */
-  public $age;
-  /* XP of the player. It is a special attribute. */
-  public $xp;
-  /* adminlevel */
-  public $adminlevel;
-  /* Attributes the player has as a array key=>value */
-  public $attributes;
-  /* Money the player has. */
-  public $money;
-  /* Equipment the player has in slots in a array slot=>item */
-  public $equipment;
+	/* Name of the player */
+	public $name;
+	/* Sentence that the player wrote using /sentence */
+	public $sentence;
+	/* Level of the player */
+	public $level;
+	/* An outfit representing the player look in game. */
+	public $outfit;
+	/* The colors of the outfit. */
+	public $age;
+	/* XP of the player. It is a special attribute. */
+	public $xp;
+	/* adminlevel */
+	public $adminlevel;
+	/* Attributes the player has as a array key=>value */
+	public $attributes;
+	/* Money the player has. */
+	public $money;
+	/* Equipment the player has in slots in a array slot=>item */
+	public $equipment;
 
-  /* When was this player last seen */
-  public $lastseen;
+	/* When was this player last seen */
+	public $lastseen;
 
-  function __construct($name, $sentence, $age, $level, $xp, $married, $outfit, $outfitColors, $outfitLayers, $money, $adminlevel, $attributes, $equipment, $lastseen) {
-    $this->name=$name;
-    $this->sentence=$sentence;
-    $this->age=$age;
-    $this->level=$level;
-    $this->outfit=$outfit;
-    if (isset($outfitColors) && strlen($outfitColors) > 0) {
-        $this->outfit=$outfit.'_'.$outfitColors;
-    }
-    if (isset($outfitLayers) && strlen($outfitLayers) > 0) {
-        $this->outfit = $outfitLayers;
-    }
-    $this->xp=$xp;
-    $this->married=$married;
-    $this->attributes=$attributes;
-    $this->adminlevel=$adminlevel;
-    $this->money=$money;
-    $this->equipment=$equipment;
-    $this->lastseen=$lastseen;
-  }
+	function __construct($name, $sentence, $age, $level, $xp, $married, $outfit, $outfitColors, $outfitLayers, $money, $adminlevel, $attributes, $equipment, $lastseen) {
+		$this->name=$name;
+		$this->sentence=$sentence;
+		$this->age=$age;
+		$this->level=$level;
+		$this->outfit=$outfit;
+		if (isset($outfitColors) && strlen($outfitColors) > 0) {
+				$this->outfit=$outfit.'_'.$outfitColors;
+		}
+		if (isset($outfitLayers) && strlen($outfitLayers) > 0) {
+				$this->outfit = $outfitLayers;
+		}
+		$this->xp=$xp;
+		$this->married=$married;
+		$this->attributes=$attributes;
+		$this->adminlevel=$adminlevel;
+		$this->money=$money;
+		$this->equipment=$equipment;
+		$this->lastseen=$lastseen;
+	}
 
 	function show() {
 		echo '<div class="playerBox">';
@@ -99,43 +99,43 @@ class Player {
 		echo '</div>';
 	}
 
-  function getDeaths() {
-    $sql = "
-    select
-      timedate,
-      source
-    from gameEvents
-    where
-      event='killed' and
-      param1='".mysql_real_escape_string($this->name)."' and
-      datediff(now(),timedate)<=7*52 and
-      (param2 = 'C P' or param2 = 'E P' or param2 = 'P P')
-    order by timedate desc
-    limit 4";
+	function getDeaths() {
+		$sql = "
+		select
+			timedate,
+			source
+		from gameEvents
+		where
+			event='killed' and
+			param1='".mysql_real_escape_string($this->name)."' and
+			datediff(now(),timedate)<=7*52 and
+			(param2 = 'C P' or param2 = 'E P' or param2 = 'P P')
+		order by timedate desc
+		limit 4";
 
-    $kills = array();
+		$kills = array();
 
-    // TODO: Refactor to use the new table.
-    $rows = DB::game()->query($sql);
-    foreach($rows as $row) {
+		// TODO: Refactor to use the new table.
+		$rows = DB::game()->query($sql);
+		foreach($rows as $row) {
 		$kills[$row['timedate']]=$row['source'];
-    }
-    return $kills;
-  }
+		}
+		return $kills;
+	}
 
-  function getAccountInfo() {
+	function getAccountInfo() {
 	$sql = "select characters.timedate, account.status, characters.status As charstatus from account, characters where account.id=characters.player_id AND charname='".mysql_real_escape_string($this->name)."'";
 	$account=array();
 	$stmt = DB::game()->query($sql);
 	$row = $stmt->fetch(PDO::FETCH_ASSOC);
 	$stmt->closeCursor();
 
-    $account["register"]=$row["timedate"];
-    $account["status"]=$row["status"];
-    $account["charstatus"]=$row["charstatus"];
+		$account["register"]=$row["timedate"];
+		$account["status"]=$row["status"];
+		$account["charstatus"]=$row["charstatus"];
 
-    return $account;
-  }
+		return $account;
+	}
 
 	function getHallOfFameScore($fametype) {
 		$tableSuffix = 'alltimes';
@@ -152,9 +152,9 @@ class Player {
 }
 
 /**
-  * Returns a list of players online and offline that meet the given condition.
-  * Note: Parameters must be sql escaped.
-  */
+	* Returns a list of players online and offline that meet the given condition.
+	* Note: Parameters must be sql escaped.
+	*/
 function getPlayers($where='', $sortby='name', $cond='limit 2') {
 	return _getPlayers('select distinct character_stats.* from character_stats '.$where.' order by '.$sortby.' '.$cond);
 }
@@ -184,9 +184,9 @@ function getBestPlayer($tableSuffix, $where='') {
 
 
 /**
-  * Returns a list of players online and offline that meet the given condition from HOF
-  * Note: Parameters must be sql escaped.
-  */
+	* Returns a list of players online and offline that meet the given condition from HOF
+	* Note: Parameters must be sql escaped.
+	*/
 function getHOFPlayers($tableSuffix, $where='', $fametype = '', $cond='limit 2') {
 	$query = "SELECT distinct halloffame_archive_".$tableSuffix.".charname, halloffame_archive_".$tableSuffix.".rank, halloffame_archive_".$tableSuffix.".points, character_stats.outfit, character_stats.outfit_colors, character_stats.outfit_layers
 			FROM halloffame_archive_".$tableSuffix." join character_stats on (charname=name) "
@@ -198,8 +198,8 @@ function getHOFPlayers($tableSuffix, $where='', $fametype = '', $cond='limit 2')
 }
 
 /**
-  * Returns a list of players that are online right now.
-  */
+	* Returns a list of players that are online right now.
+	*/
 function getOnlinePlayers() {
 	return _getPlayers('select character_stats.* from character_stats where online=1 order by name');
 }
@@ -215,46 +215,46 @@ function getCharactersForUsername($username) {
 	return _getPlayers('SELECT character_stats.* FROM character_stats, characters, account '
 		.'WHERE account.username=\''.mysql_real_escape_string($username).'\' AND '
 		.'characters.player_id=account.id AND character_stats.name=characters.charname '
-	    ."AND account.status='active' AND characters.status='active' "
+			."AND account.status='active' AND characters.status='active' "
 		.'ORDER BY character_stats.name');
 }
 
 function _getPlayers($query) {
-    $list = array();
-    $rows = DB::game()->query($query);
-    foreach($rows as $row) {
-      $attributes=array();
-      $attributes['atk']=$row['atk'];
-      $attributes['def']=$row['def'];
-      $attributes['hp']=$row['hp'];
-      $attributes['karma']=$row['karma'];
+		$list = array();
+		$rows = DB::game()->query($query);
+		foreach($rows as $row) {
+			$attributes=array();
+			$attributes['atk']=$row['atk'];
+			$attributes['def']=$row['def'];
+			$attributes['hp']=$row['hp'];
+			$attributes['karma']=$row['karma'];
 
-      $equipment=array();
-      $equipment['head']=$row['head'];
-      $equipment['lhand']=$row['lhand'];
-      $equipment['armor']=$row['armor'];
-      $equipment['rhand']=$row['rhand'];
-      $equipment['legs']=$row['legs'];
-      $equipment['feet']=$row['feet'];
-      $equipment['cloak']=$row['cloak'];
-      $equipment['finger']=$row['finger'];
+			$equipment=array();
+			$equipment['head']=$row['head'];
+			$equipment['lhand']=$row['lhand'];
+			$equipment['armor']=$row['armor'];
+			$equipment['rhand']=$row['rhand'];
+			$equipment['legs']=$row['legs'];
+			$equipment['feet']=$row['feet'];
+			$equipment['cloak']=$row['cloak'];
+			$equipment['finger']=$row['finger'];
 
-      $list[]=new Player($row['name'],
-                     $row['sentence'],
-                     $row['age'],
-                     $row['level'],
-                     $row['xp'],
-                     $row['married'],
-                     $row['outfit'],
-                     $row['outfit_colors'],
-                     $row['outfit_layers'],
-                     $row['money'],
-                     $row['admin'],
-                     $attributes,
-                     $equipment,
-                     $row['lastseen']);
-    }
-    return $list;
+			$list[]=new Player($row['name'],
+										 $row['sentence'],
+										 $row['age'],
+										 $row['level'],
+										 $row['xp'],
+										 $row['married'],
+										 $row['outfit'],
+										 $row['outfit_colors'],
+										 $row['outfit_layers'],
+										 $row['money'],
+										 $row['admin'],
+										 $attributes,
+										 $equipment,
+										 $row['lastseen']);
+		}
+		return $list;
 }
 
 /**
