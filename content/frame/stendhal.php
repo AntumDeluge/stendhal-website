@@ -53,7 +53,7 @@ class StendhalFrame extends PageFrame {
 	 */
 	function renderFrame() {
 		global $page, $protocol, $adminLevel;
-		$showFrame = !isset($_SERVER['HTTP_USER_AGENT']) || strpos($_SERVER['HTTP_USER_AGENT'], 'stendhal') === false;
+		$showFrame = !isset($_SERVER['HTTP_USER_AGENT']) || strpos($_SERVER['HTTP_USER_AGENT'], 'Stendhal') === false;
 		echo '<body lang="en" '. $page->getBodyTagAttributes() . ' class="layout">';
 
 ?>
