@@ -129,14 +129,14 @@ class LoginPage extends Page {
 	}
 
 	public function verifyLoginBySteamAuthTicket() {
-		if (!isset($_GET['steam_auth_ticket'])) {
+		if (!isset($_REQUEST['steam_auth_ticket'])) {
 			return false;
 		}
 
 		$url = 'https://partner.steam-api.com/ISteamUserAuth/AuthenticateUserTicket/v1/'
 			.'?appid='.STENDHAL_STEAM_APP_ID
 			.'&key='.STENDHAL_STEAM_PARTNER_KEY
-			.'&ticket='.urlencode($_GET['steam_auth_ticket']);
+			.'&ticket='.urlencode($_REQUEST['steam_auth_ticket']);
 		$response = requestJson($url);
 		if ($response['response']['params']['result'] !== 'OK') {
 			var_dump($response);
