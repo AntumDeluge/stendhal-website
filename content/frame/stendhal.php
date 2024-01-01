@@ -94,7 +94,7 @@ class StendhalFrame extends PageFrame {
 <?php if ($showFrame) { ?>
 
 	<div id="footerArea">
-		<span class="copyright">&copy; 1999-2023 <a href="https://arianne-project.org">Arianne Project</a></span>
+		<span class="copyright">&copy; 1999-2024 <a href="https://arianne-project.org">Arianne Project</a></span>
 	</div>
 
 	<div class="time">
