@@ -68,18 +68,6 @@ class MainPage extends Page {
 		echo '</div>';
 		echo '<div style="width: 35%; float: right">';
 
-/*
-		// login form
-		startBox('<h1>Login</h1>');
-		echo '<form method="post" action="/account/login.html">';
-		echo '<input id="user" name="user" maxlength="30" type="text" placeholder="Username">';
-		echo '<input id="pass" name="pass" maxlength="30" type="password" placeholder="Password">';
-		echo '<p><input name="sublogin" type="submit" value="Login">';
-		echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="/account/create-account.html">Create account...</a></p>';
-		echo '</form>';
-		endBox();
-*/
-
 		// login form
 		startBox('<h1>Register</h1>');
 		echo '<p>Stendhal is completely free and open source.</p>';
@@ -99,8 +87,8 @@ class MainPage extends Page {
 
 		// screenshots and videos
 		startBox('<h1>Media</h1>');
-		echo '<p><a href="/media/screenshots.html"><img src="/images/screenshot.jpg" width="120" height="87"></a> ';
-		echo '<a href="/media/videos.html"><img src="/images/video.jpeg" width="120" height="87"></a> ';
+		echo '<p><a href="/media/screenshots.html"><img alt="A screenshot showing a tower" src="/images/screenshot.jpg" width="120" height="87"></a> ';
+		echo '<a href="/media/videos.html"><img alt="A screenshot from a video showing a bank" src="/images/video.jpeg" width="120" height="87"></a> ';
 		echo '<p><a href="/media/screenshots.html">More images...</a> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a href="/media/videos.html">More videos...</a>';
 		endBox();
 

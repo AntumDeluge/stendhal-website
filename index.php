@@ -123,7 +123,7 @@ if ($page->writeHttpHeader()) {
 header('Content-Type: text/html; charset=utf-8')
 ?>
 <!DOCTYPE html>
-<html>
+<html lang="en">
 	<head>
 	<link rel="stylesheet" type="text/css" href="<?php echo STENDHAL_FOLDER.'/css/style-'.STENDHAL_CACHE_BUSTER.'.css';?>">
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
