@@ -2,7 +2,6 @@ data
 configuration.php
 .classpath
 buro
-src
 ga.js
 urchin.js
 feature
