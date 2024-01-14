@@ -160,8 +160,7 @@ Furthermore all events and actions that happen within the game-world
 
 <p><font size="-1">
 Stendhal is a non-commercial spare time project. We do NOT use your
-data for advertisment nor market research. We do NOT make your data available
-to third parties.</font></p>
+data for advertisment. We do NOT make it available to third parties.</font></p>
 <?php
 		endBox();
 	}
