@@ -159,7 +159,7 @@ Furthermore all events and actions that happen within the game-world
  used to analyse bugs and in rare cases for abuse handling.</font></p>
 
 <p><font size="-1">
-Stendhal is a strict non-comercial spare time project. We do NOT use your
+Stendhal is a non-commercial spare time project. We do NOT use your
 data for advertisment nor market research. We do NOT make your data available
 to third parties.</font></p>
 <?php
