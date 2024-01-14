@@ -157,6 +157,11 @@ endBox();
 Furthermore all events and actions that happen within the game-world
  (like solving quests, attacking monsters) are logged. This information is
  used to analyse bugs and in rare cases for abuse handling.</font></p>
+
+<p><font size="-1">
+Stendhal is a strict non-comercial spare time project. We do NOT use your
+data for advertisment nor market research. We do NOT make your data available
+to third parties.</font></p>
 <?php
 		endBox();
 	}
