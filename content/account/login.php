@@ -17,6 +17,10 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
+require_once('vendor/autoload.php');
+use Jumbojett\OpenIDConnectClient;
+
+
 require_once('scripts/account.php');
 require_once('content/account/openid.php');
 require_once('content/account/fb.php');
@@ -48,13 +52,26 @@ class LoginPage extends Page {
 			}
 		}
 		// redirect to the oauth provider
-		$this->fb = new Facebook();
+		/*$this->fb = new Facebook();
 		if (isset($_REQUEST['oauth_version']) && ($_REQUEST['oauth_version'] != '')) {
 			$this->fb->doRedirect();
 			if ($this->fb->isAuth) {
 				return false;
 			}
+		}*/
+		/*
+		$auth = STENDHAL_EXTERNAL_AUTH['google'];
+		$oidc = new OpenIDConnectClient($auth['url'], $auth['client_id'], $auth['client_secret']);
+		$oidc->addScope(['openid']);
+		$oidc->addScope(['email']);
+		$oidc->addScope(['profile']);
+		$oidc->authenticate();
+		echo '<pre>';
+		foreach (array('iss', 'sub', 'email', 'email_verified', 'given_name', 'family_name', 'name', 'picture', 'locale') as $attr) {
+			echo $attr . ': ' . htmlspecialchars($oidc->getVerifiedClaims($attr))."\n";
 		}
+		echo '</pre>';
+		*/
 
 		if ($this->verifyLoginByPassword()) {
 			return false;

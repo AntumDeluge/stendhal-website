@@ -108,5 +108,14 @@
 
 @define('STENDHAL_CACHE_BUSTER', '00000001');
 
+@define('STENDHAL_EXTERNAL_AUTH', [
+	'google' => [
+		'url' => 'https://accounts.google.com',
+		'client_id' => '',
+		'client_secret' => ''
+	]
+]);
+
 // @define('STENDHAL_MOUSE_FLOATING_IMAGE_ON_TOP_OF_BOXES', '/images/game/pumpkin_halloween.png');
 // @define('STENDHAL_MOUSE_FLOATING_IMAGE_ON_TOP_OF_BOXES_OFFSET', '25');
+
