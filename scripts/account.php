@@ -906,11 +906,12 @@ class AccountLink {
 	public $nickname;
 	public $email;
 	public $secret;
+	public $emailVerified;
 
 	/**
 	 * creates a new AccountLink
 	 */
-	public function __construct($id, $playerId, $type, $username, $nickname, $email, $secret) {
+	public function __construct($id, $playerId, $type, $username, $nickname, $email, $secret, $emailVerified) {
 		$this->id = $id;
 		$this->playerId = $playerId;
 		$this->type = $type;
@@ -918,6 +919,7 @@ class AccountLink {
 		$this->nickname = $nickname;
 		$this->email = $email;
 		$this->secret = $secret;
+		$this->emailVerified = $emailVerified;
 	}
 
 	public static function getAccountLinks($playerId) {
@@ -1007,9 +1009,9 @@ class AccountLink {
 				$dot = strpos($this->username, '.');
 				$res[] = Account::convertToValidUsername(substr($this->username, $lastSlash + 1, $dot - $lastSlash - 1));
 			}
+		} else {
+			$res[] = Account::convertToValidUsername($this->username);
 		}
-		$res[] = Account::convertToValidUsername($this->username);
-		$res[] = $this->username;
 		return $res;
 	}
 
@@ -1070,6 +1072,22 @@ class AccountLink {
 	}
 
 	public function createAccount() {
+		// links verifiedEmail
+		if ($this->emailVerified && isset($this->email) && strlen($this->email) > 3) {
+			$sql = "SELECT account.id FROM email, account WHERE email.email='"
+				.mysql_real_escape_string($this->email)
+				."' AND email.confirmed IS NOT NULL AND email.player_id=account.id AND account.status='active' "
+				."ORDER BY player_id DESC LIMIT 1";
+			$stmt = DB::game()->query($sql);
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			if ($row) {
+				$this->playerId = $row['id'];
+				$this->insert();
+				return $account = Account::tryLogin($this->type, $this->username, null);
+			}
+		}
+
 		// suggest usernames
 		$proposedUsernames = $this->proposeUsernames();
 
@@ -1078,11 +1096,8 @@ class AccountLink {
 
 		$username = $this->pickNewUsername($proposedUsernames);
 
-		// trust google email addresses
-		$trusted = ($this->type==='openid' && strpos($this->username, 'https://www.google.com/') === 0) && (strpos($this->email, '@') !== false);
-
 		// insert new account
-		$account = new Account(-1, $username, null, $this->email, $trusted, date("Y-m-d").' '.date("H:i:s"), 'active');
+		$account = new Account(-1, $username, null, $this->email, $this->emailVerified, date("Y-m-d").' '.date("H:i:s"), 'active');
 		$account->insert();
 		$this->playerId = $account->id;
 		$this->insert();
