@@ -33,7 +33,7 @@ I am assuming you have php installed. I am assuming your apache server knows how
 to deal with php. You might not have php5-mysql installed, you need that too.
 You can install them by writing:
   
-  apt-get install apache2 php5 php5-mysql mysql-server mysql php5-gd php5-imagick
+  apt-get install apache2 php php-mysql mysql-server mysql php-gd php-imagick
 
 Apache must be configured to allow .htaccess files to rewrite urls.
 
