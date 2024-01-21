@@ -147,6 +147,7 @@ endBox();
 ?>
 
 <br class="clear">
+<p>&nbsp;</p>
 <?php startBox("<h2>Logging and privacy</h2>");?>
 <p>
 <font size="-1">On login information which identifies your computer on the internet will be
@@ -157,6 +158,12 @@ endBox();
 Furthermore all events and actions that happen within the game-world
  (like solving quests, attacking monsters) are logged. This information is
  used to analyse bugs and in rare cases for abuse handling.</font></p>
+
+<p><font size="-1"> If you use an external service for authentication,
+a local account is generated automatically based on your name. The unique
+identifier and email address returned by the authentication provider
+is stored with your local account. This information is only used during future
+logins in order to link your external account to your local account.</font></p>
 
 <p><font size="-1">
 Stendhal is a non-commercial spare time project. We do NOT use your
