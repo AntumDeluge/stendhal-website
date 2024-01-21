@@ -835,7 +835,7 @@ class Account {
 	 * @param string $token
 	 * @return boolean
 	 */
-	function verifyEMail($token) {
+	public static function verifyEMail($token) {
 		$sql = "SELECT count(*) FROM email WHERE token='".mysql_real_escape_string($token)."'";
 		$temp = queryFirstCell($sql, DB::game());
 		if ($temp == 0) {
