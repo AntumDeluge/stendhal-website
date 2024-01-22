@@ -21,11 +21,10 @@ if (!isset($_SERVER['SERVER_NAME'])) {
 
 function sendRegistrationMail($playerId, $username, $token, $email) {
 	$subject = "Stendhal account ".$username." registration";
-	$body = "Hello ".$username."!\r\n";
+	$body = "Hello ".$username.", welcome to Stendhal.";
 	$body .= "\r\n";
-	$body .= "Please confirm your email-address by clicking on this link:\r\n";
+	$body .= "Please verify your email address by clicking on this link:\r\n";
 	$body .= STENDHAL_LOGIN_TARGET."/account/confirm/".urlencode($token)."\r\n";
-	$body .= "\r\n";
 	$body .= "\r\n";
 	$body .= "Your email address will be used for account recovery, if you forget \r\n";
 	$body .= "your password or if there are indications for an account hack.\r\n";
@@ -33,8 +32,6 @@ function sendRegistrationMail($playerId, $username, $token, $email) {
 	$body .= "If you did not create a Stendhal account, please ignore this email.\r\n";
 	$body .= "\r\n";
 	$body .= "Any questions? Please see https://stendhalgame.org/wiki/AskForHelp\r\n";
-	$body .= "\r\n";
-	$body .= "Best regards from the Stendhal team\r\n";
 	$body .= "\r\n";
 	mail($email, $subject, $body, "From: ".STENDHAL_NOREPLY_EMAIL, '-f '.STENDHAL_NOREPLY_ADDRESS);
 }
