@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008-2023 The Arianne Project
+ Copyright (C) 2008-2024 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -42,7 +42,7 @@ class StendhalFrame extends PageFrame {
 	 * this method can write additional html headers.
 	 */
 	function writeHtmlHeader() {
-		echo '<link rel="icon" type="image/x-icon" href="'.STENDHAL_FOLDER.'/favicon.ico">';
+		echo '<link rel="icon" type="image/png" href="'.STENDHAL_FOLDER.'/StendhalIcon.png">';
 		echo '<meta name="viewport" content="width=device-width, initial-scale=1" />';
 		echo '<link rel="manifest" href="/manifest.json">';
 		echo '<link rel="me" href="https://mastodon.social/@stendhalgame">';
