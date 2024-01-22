@@ -163,7 +163,8 @@ Furthermore all events and actions that happen within the game-world
 a local account is generated automatically based on your name. The unique
 identifier and email address returned by the authentication provider
 is stored with your local account. This information is only used during future
-logins in order to link your external account to your local account.</font></p>
+logins or account recovery in order to link your external account to your
+ local account.</font></p>
 
 <p><font size="-1">
 Stendhal is a non-commercial spare time project. We do NOT use your
