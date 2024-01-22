@@ -49,17 +49,17 @@ class OAuth {
 	 */
 	public function createAccountLink($providerName) {
 		$oidc = $this->authenticate($providerName);
+/*
+		echo '<pre>';
+		foreach (array('iss', 'sub', 'email', 'email_verified', 'given_name', 'family_name', 'name', 'picture', 'locale', 'preferred_username', 'website') as $attr) {
+			echo $attr . ': ' . htmlspecialchars($oidc->getVerifiedClaims($attr))."\n";
+		}
+*/
 		$authConfig = STENDHAL_EXTERNAL_AUTH[$providerName];
 		if ($authConfig['iss'] != $oidc->getVerifiedClaims('iss')) {
 			echo 'Invalid ISS';
 			return false;
 		}
-/*
-		echo '<pre>';
-		foreach (array('iss', 'sub', 'email', 'email_verified', 'given_name', 'family_name', 'name', 'picture', 'locale') as $attr) {
-			echo $attr . ': ' . htmlspecialchars($oidc->getVerifiedClaims($attr))."\n";
-		}
-*/
 		$username = $oidc->getVerifiedClaims('iss') . '/' . $oidc->getVerifiedClaims('sub');
 		$email = $oidc->getVerifiedClaims('email');
 		$emailVerified = $oidc->getVerifiedClaims('email_verified');
