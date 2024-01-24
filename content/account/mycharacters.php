@@ -36,6 +36,12 @@ class MyCharactersPage extends Page {
 			return false;
 		}
 
+		$players = getCharactersForUsername($_SESSION['account']->username);
+		if(sizeof($players)==0) {
+			header('Location: '.rewriteURL('/account/create-character.html'));
+			return false;
+		}
+
 		return true;
 	}
 
