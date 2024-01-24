@@ -195,7 +195,7 @@ if (isset($_REQUEST['outfitcode'])) {
 $players = getCharactersForUsername($_SESSION['account']->username);
 if(sizeof($players)==0) {
 ?>
-<p>Already have an account? <b><a href="<?php echo rewriteURL('/account/merge.html')?>">Merge accounts...</a></b></p>
+<p>Already have an account? <b><a href="<?php echo rewriteURL('/account/merge.html')?>">Link accounts...</a></b></p>
 <?php
 }
 ?>
