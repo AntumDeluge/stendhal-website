@@ -132,22 +132,29 @@ class CreateAccountPage extends Page {
 </table>
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
 
-<!-- DISABLED STEAM
-<div>
-<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
-<img src="/images/thirdparty/steam.png">
-</a>
-</div>
--->
-
 </form>
+<br class="clear">
 <?php
 
 endBox();
+
+startBox('<h2>External Account</h2>');
+?>
+Alternatively, you can login with any of these services without creating an account.
+<div>
+<br>
+<a href="/account/login.html?oauth_provider=google"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
+&nbsp;
+<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
+</div>
+
+<?php
+
+endBox();
+
 ?>
 
 <br class="clear">
-<p>&nbsp;</p>
 <?php startBox("<h2>Logging and privacy</h2>");?>
 <p>
 <font size="-1">On login information which identifies your computer on the internet will be
