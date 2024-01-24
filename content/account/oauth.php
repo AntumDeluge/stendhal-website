@@ -77,26 +77,5 @@ class OAuth {
 		return $accountLink;
 	}
 
-	/**
-	 * handles an requested account merge
- 	 *
-	 * @param AccountLink $accountLink the account link created for the login
-	 */
-/* TODO
-	public function merge($accountLink) {
-		$oldAccount = $_SESSION['account'];
-		$newAccount = Account::readAccountByLink('facebook', $accountLink->username, null);
-
-		if (!$newAccount || is_string($newAccount)) {
-			$accountLink->playerId = $oldAccount->id;
-			$accountLink->insert();
-		} else {
-			if ($oldAccount->username != $newAccount->username) {
-				mergeAccount($newAccount->username, $oldAccount->username);
-			}
-		}
-	}
-*/
-
 
 }

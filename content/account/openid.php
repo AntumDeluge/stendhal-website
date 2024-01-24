@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008-2010 The Arianne Project
+ Copyright (C) 2008-2024 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -69,9 +69,9 @@ class OpenID {
 		}
 		$steamPrefix = 'https://steamcommunity.com/openid/id/';
 		if (strpos($openid->identity, $steamPrefix) === 0) {
-			$accountLink = new AccountLink(null, null, 'steam', substr($openid->identity, strlen($steamPrefix)), $friendly, $email, null);
+			$accountLink = new AccountLink(null, null, 'steam', substr($openid->identity, strlen($steamPrefix)), $friendly, $email, null, false);
 		} else {
-			$accountLink = new AccountLink(null, null, 'openid', $openid->identity, $friendly, $email, null);
+			$accountLink = new AccountLink(null, null, 'openid', $openid->identity, $friendly, $email, null, false);
 		}
 		return $accountLink;
 	}
@@ -90,25 +90,6 @@ class OpenID {
 			return false;
 		}
 		return substr($identifier, 27);
-	}
-
-	/**
-	 * handles a succesful openid authentication
-	 *
-	 * @param AccountLink $accountLink the account link created for the login
-	 */
-	public function merge($accountLink) {
-		$oldAccount = $_SESSION['account'];
-		$newAccount = Account::readAccountByLink($accountLink->type, $accountLink->username, null);
-
-		if (!$newAccount || is_string($newAccount)) {
-			$accountLink->playerId = $oldAccount->id;
-			$accountLink->insert();
-		} else {
-			if ($oldAccount->username != $newAccount->username) {
-				mergeAccount($newAccount->username, $oldAccount->username);
-			}
-		}
 	}
 
 	public function succesfulOpenidAuthWhileNotLoggedIn($accountLink) {
