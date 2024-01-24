@@ -209,7 +209,7 @@ $page->writeAfterJS();
 			echo '<li><a id="menuAccountHistory" href="/account/history.html">Login History</a>';
 			echo '<li><a id="menuAccountEMail" href="/account/email.html">Mail address</a>';
 			echo '<li><a id="menuAccountPassword" href="/account/change-password.html">New Password</a>';
-			echo '<li><a id="menuAccountMerge" href="/account/merge.html">Merge Accounts</a>';
+			echo '<li><a id="menuAccountMerge" href="/account/merge.html">Link Accounts</a>';
 			echo '<li><a id="menuAccountLogout" href="/account/logout.html">Logout</a></ul>';
 		} else {
 			echo '<li><a href="'.STENDHAL_LOGIN_TARGET.'/account/login.html">Login</a></li>';

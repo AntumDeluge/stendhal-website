@@ -1,7 +1,7 @@
 <?php
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
- Copyright (C) 2008-2010 The Arianne Project
+ Copyright (C) 2008-2024 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -19,7 +19,7 @@
 
 require_once('scripts/account.php');
 require_once('content/account/openid.php');
-require_once('content/account/fb.php');
+require_once('content/account/oauth.php');
 
 class AccountMerge extends Page {
 	private $error;
@@ -48,12 +48,10 @@ class AccountMerge extends Page {
 		}
 
 		// redirect to the oauth provider
-		$this->fb = new Facebook();
-		if (isset($_REQUEST['oauth_version']) && ($_REQUEST['oauth_version'] != '')) {
-			$this->fb->doRedirectWithCSRFToken($_SESSION['csrf']);
-			if ($this->fb->isAuth) {
-				return false;
-			}
+		$this->oauth = new OAuth();
+		if (isset($_REQUEST['oauth_provider']) && ($_REQUEST['oauth_provider'] != '')) {
+			$this->oauth->doRedirect($_REQUEST['oauth_provider']);
+			return false;
 		}
 
 		if ($this->processMerge()) {
@@ -78,13 +76,13 @@ class AccountMerge extends Page {
 				return false;
 			}
 
-			if (strtolower($_SESSION['account']->username) == strtolower(trim($_POST['user']))) {
-				$this->error = 'You need to enter the username and password of another account you own.';
+			if (isset($_SESSION['account']->password)) {
+				$this->error = 'You cannot link two local accounts.';
 				return false;
 			}
 
-			if (!isset($_POST['confirm'])) {
-				$this->error = 'You need to tick the confirm-checkbox.';
+			if (strtolower($_SESSION['account']->username) == strtolower(trim($_POST['user']))) {
+				$this->error = 'You need to enter the username and password of another account you own.';
 				return false;
 			}
 
@@ -110,38 +108,46 @@ class AccountMerge extends Page {
 			}
 
 			return true;
+		}
 
-		} else if (isset($_GET['openid_mode'])) {
-
-			if($_GET['openid_mode'] == 'cancel') {
-				$this->error = 'OpenID-Authentication was canceled.';
-				return false;
-			}
-
+		if (isset($_GET['openid_mode']) || (isset($_REQUEST['code']))) {
 			if ($_SESSION['merge'] != $_SESSION['csrf']) {
 				$this->error = 'Session information was lost.';
 				return false;
 			}
 			unset($_SESSION['merge']);
 
-			$accountLink = $this->openid->createAccountLink();
-			if (!$accountLink) {
-				$this->error = $this->openid->error;
+			if($_GET['openid_mode'] == 'cancel') {
+				$this->error = 'Authentication was canceled.';
 				return false;
 			}
 
-			$this->openid->merge($accountLink);
-			return true;
+			if (isset($_GET['openid_mode'])) {
+				$accountLink = $this->openid->createAccountLink();
+			} else if (isset($_REQUEST['code'])) {
+				$accountLink = $this->oauth->createAccountLink($_SESSION['stendhal_oauth_provider']);
+			}
 
-		} else if (isset($_REQUEST['code'])) {
-
-			$accountLink = $this->fb->createAccountLink();
 			if (!$accountLink) {
-				$this->fb = 'Facebook login failed.';
+				$this->error = 'Authentication failed.';
 				return false;
 			}
 
-			$this->fb->merge($accountLink);
+			$oldAccount = $_SESSION['account'];
+			$newAccount = Account::readAccountByLink($accountLink->type, $accountLink->username, null);
+			if (isset($newAccount->password) && $newAccount->password != '') {
+				$this->error = 'External account cannot be linked because it is already linked with another account';
+				return false;
+			}
+
+			if (!$newAccount || is_string($newAccount)) {
+				$accountLink->playerId = $oldAccount->id;
+				$accountLink->insert();
+			} else {
+				if ($oldAccount->username != $newAccount->username) {
+					mergeAccount($newAccount->username, $oldAccount->username);
+				}
+			}
 			return true;
 		}
 
@@ -156,8 +162,8 @@ class AccountMerge extends Page {
 
 	function writeContent() {
 		if (!isset($_SESSION['account'])) {
-			startBox("<h1>Account Merging</h1>");
-			echo '<p>Please <a href="'.STENDHAL_LOGIN_TARGET.'/index.php?id=content/account/login&amp;url=/account/merge.html">login</a> first to merge accounts.</p>';
+			startBox("<h1>AccountLink </h1>");
+			echo '<p>Please <a href="'.STENDHAL_LOGIN_TARGET.'/index.php?id=content/account/login&amp;url=/account/merge.html">login</a> first to any account in order to link another account.</p>';
 			endBox();
 		} else {
 			$this->process();
@@ -165,19 +171,8 @@ class AccountMerge extends Page {
 	}
 
 	function process() {
-		$this->displayHelp();
 		$this->displayMergeError();
 		$this->displayForm();
-	}
-
-	function displayHelp() {
-		startBox("<h2>Account Merging</h2>");?>
-		<p>With the form below you can merge your other accounts. &nbsp;&nbsp;&ndash;&nbsp;&nbsp;
-		(<a href="https://stendhalgame.org/wiki/Stendhal_Account_Merging">Help</a>)</p>
-		<p>This means that all characters previously associated with the other
-		account will be available in this account.</p>
-		<p class="warn">Merging accounts cannot be undone.</p>
-		<?php endBox();
 	}
 
 	function displayMergeError() {
@@ -190,31 +185,39 @@ class AccountMerge extends Page {
 
 
 	function displayForm() {
-		startBox("<h2>Account to merge</h2>"); ?>
-		<p>You are currently logged into the account <b><?php echo htmlspecialchars($_SESSION['account']->username) ?></b>.</p>
+		startBox("<h2>Link Account</h2>");
+		if (isset($_SESSION['account']->password)) {
+			?>
+			<p>You are currently logged into the account <b><?php echo htmlspecialchars($_SESSION['account']->username) ?></b>.</p>
+			
+			<p>You can link the following external accounts:</p>
 
-		<form action="" method="post">
-			<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
-			<table class="loginform">
-				<tr><td><label for="user">Username:</label></td><td><input type="text" id="user" name="user" maxlength="30"></td></tr>
-				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="30"></td></tr>
-				<tr><td colspan="2" align="left"><input type="checkbox" id="confirm" name="confirm">
-				<label for="confirm">I really want to merge these accounts.</label></td></tr>
-				<tr><td colspan="2" align="right"><input type="submit" name="submerge" value="Merge"></td></tr>
-			</table>
-
-			<!-- DISABLED STEAM
 			<div>
-			<a href="/account/merge.html?openid_identifier=https://steamcommunity.com/openid/&merge=<?php echo urlencode($_SESSION['csrf'])?>">
-			<img src="/images/thirdparty/steam.png">
-			</a>
+			<a href="/account/merge.html?oauth_provider=google&merge=<?php echo urlencode($_SESSION['csrf'])?>"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
+			&nbsp;
+			<a href="/account/merge.html?openid_identifier=https://steamcommunity.com/openid/&merge=<?php echo urlencode($_SESSION['csrf'])?>"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
 			</div>
-			-->
-		</form>
-		<br class="clear">
-		<?php
-		if (isset($this->openid->error)) {
-			echo '<div class="error">'.htmlspecialchars($this->openid->error).'</div>';
+
+			<?php
+			// TODO: Only offer account providers which are not already linked
+			if (isset($this->openid->error)) {
+				echo '<div class="error">'.htmlspecialchars($this->openid->error).'</div>';
+			}
+
+		} else {
+			?>
+			<p>You are currently logged in with an external account. You can link a Stendhal account.</p>
+
+			<form action="" method="post">
+				<input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
+				<table class="loginform">
+					<tr><td><label for="user">Username:</label></td><td><input type="text" id="user" name="user" maxlength="30"></td></tr>
+					<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="30"></td></tr>
+					<tr><td colspan="2" align="right"><input type="submit" name="submerge" value="Link Accounts"></td></tr>
+				</table>
+			</form>
+			<br class="clear">
+			<?php
 		}
 
 		endBox();

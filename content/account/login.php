@@ -28,6 +28,7 @@ class LoginPage extends Page {
 	private $oauth;
 
 	public function writeHttpHeader() {
+		unset($_SESSION['merge']);
 		if ($this->handleRedirectIfAlreadyLoggedIn()) {
 			return false;
 		}
@@ -262,6 +263,11 @@ class LoginPage extends Page {
 		}
 		?>
 
+		<div style="float:right">
+		<a href="/account/login.html?oauth_provider=google"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
+		&nbsp;
+		<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
+		</div>
 		<form action="" method="post">
 			<table class="loginform">
 				<tr><td><label for="user">Username:</label></td><td><input type="text" id="user" name="user" maxlength="30" <?php
@@ -272,14 +278,7 @@ class LoginPage extends Page {
 				<tr><td><label for="pass">Password:</label></td><td><input type="password" id="pass" name="pass" maxlength="1000"></td></tr>
 				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
-			
-			<!-- DISABLED STEAM
-			<div>
-			<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/">
-			<img src="/images/thirdparty/steam.png">
-			</a>
-			</div>
-			-->
+			<br style="clear:both">
 
 			<?php
 			if (isset($_REQUEST['url'])) {
