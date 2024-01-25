@@ -67,7 +67,7 @@ class CreateCharacterPage extends Page {
 		}
 
 		$user = strtolower($_POST['name']);
-		if (strlen($user) > 20 || strlen($_REQUEST['outfitcode'] > 300)) {
+		if (strlen($user) > 20 || strlen($_REQUEST['outfitcode']) > 300) {
 			return false;
 		}
 
