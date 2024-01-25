@@ -45,6 +45,7 @@ class CreateAccountPage extends Page {
 
 		if (isset($_POST['realname']) && ($_POST['realname'] != '')) {
 			$this->error = 'Internal error, please let us know: https://sourceforge.net/p/arianne/support-requests/new/';
+			error_log('realname bot trap triggered.');
 			return true;
 		}
 
