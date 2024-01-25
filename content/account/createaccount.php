@@ -43,6 +43,11 @@ class CreateAccountPage extends Page {
 			return true;
 		}
 
+		if (isset($_POST['realname']) && ($_POST['realname'] != '')) {
+			$this->error = 'Internal error, please let us know: https://sourceforge.net/p/arianne/support-requests/new/';
+			return true;
+		}
+
 
 		// Note: For the password field, we do want an error message, if it is too long.
 		// Therefore the maxlength-attribute is one character larger than the error.
@@ -125,9 +130,17 @@ class CreateAccountPage extends Page {
 <td><div id="emailwarn" class="warn"></div></td>
 </tr>
 
+<tr style="display:none">
+<td><label for="realname">Name: </label></td>
+<td><input id="realname" name="realname" value="" type="text" maxlength="50"></td>
+<td><div id="realname" class="warn"></div></td>
+</tr>
+
+<tr>
 <td>&nbsp;</td>
 <td><input name="submit" style="margin-top: 2em" type="submit" value="Create Account"></td>
 <td>&nbsp;</td>
+</tr>
 
 </table>
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
