@@ -49,6 +49,13 @@ class CreateAccountPage extends Page {
 			return true;
 		}
 
+		if (!isset($_SERVER['HTTP_REFERER']) || (
+			strpos(strtolower($_SERVER['HTTP_REFERER']), 'stendhalgame.org') === false
+			&& strpos(strtolower($_SERVER['HTTP_REFERER']), 'localhost') === false)) {
+			$this->error = 'Internal error, please let us know: https://sourceforge.net/p/arianne/support-requests/new/';
+			error_log('referer bot trap triggered.');
+			return true;
+		}
 
 		// Note: For the password field, we do want an error message, if it is too long.
 		// Therefore the maxlength-attribute is one character larger than the error.
