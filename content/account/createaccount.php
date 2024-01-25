@@ -43,6 +43,12 @@ class CreateAccountPage extends Page {
 			return true;
 		}
 
+		if (!isset($_SESSION['images_loaded'])) {
+			$this->error = 'Internal error, please let us know: https://sourceforge.net/p/arianne/support-requests/new/';
+			error_log('image bot trap triggered.');
+			return true;
+		}
+
 		if (isset($_POST['realname']) && ($_POST['realname'] != '')) {
 			$this->error = 'Internal error, please let us know: https://sourceforge.net/p/arianne/support-requests/new/';
 			error_log('realname bot trap triggered.');
@@ -112,8 +118,14 @@ class CreateAccountPage extends Page {
 
 <form id="createAccountForm" name="createAccountForm" action="" method="post"> <!-- onsubmit="return createAccountCheckForm()" -->
 <input type="hidden" name="csrf" value="<?php echo htmlspecialchars($_SESSION['csrf'])?>">
-
+<img src="/content/account/img.php" alt="" width="1px" height="1px">
 <table class="loginform">
+<tr style="display:none">
+<td><label for="realname">Name: </label></td>
+<td><input id="realname" name="realname" value="" type="text" maxlength="50"></td>
+<td><div id="realname" class="warn"></div></td>
+</tr>
+
 <tr>
 <td><label for="name">Name:<sup>*</sup> </label></td>
 <td><input id="name" name="name" value="<?php if (isset($_REQUEST['name'])) {echo htmlspecialchars($_REQUEST['name']);}?>" type="text" maxlength="20" ></td>
@@ -136,12 +148,6 @@ class CreateAccountPage extends Page {
 <td><label for="email">E-Mail: </label></td>
 <td><input id="email" name="email" value="<?php if (isset($_REQUEST['email'])) {echo htmlspecialchars($_REQUEST['email']);}?>" type="email" maxlength="50"></td>
 <td><div id="emailwarn" class="warn"></div></td>
-</tr>
-
-<tr style="display:none">
-<td><label for="realname">Name: </label></td>
-<td><input id="realname" name="realname" value="" type="text" maxlength="50"></td>
-<td><div id="realname" class="warn"></div></td>
 </tr>
 
 <tr>
