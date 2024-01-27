@@ -20,7 +20,7 @@ class DownloadPage extends Page {
 		echo '<p>&nbsp;</p>';
 		endBox();
 
-		startBox('<h2>For developers</h2>');
+		startBox('<h2><a name="development"></a>For developers</h2>');
 		echo '<p>If you are a developer, you may be interested in these files. Please have a look at the <a href="/development.html">development corner</a>.</p>';
 		echo '<ul>';
 		echo '<li><a href="https://arianne-project.org/download/stendhal-server.zip">stendhal-server.zip</a><br>This file contains the stendhal server files. It is not needed to play Stendhal.</li>';
@@ -29,7 +29,7 @@ class DownloadPage extends Page {
 		echo '<p>We use <a href="http://www.mapeditor.org/download.html">Tiled</a> to edit Stendhal maps.</p>';
 		endBox();
 
-		startBox('<h2>Pre-release testing</h2>', 'testing');
+		startBox('<h2><a name="pre-release"></a>Pre-release testing</h2>', 'testing');
 		echo '<p>Please see <a href="http://stendhalgame.org/wiki/Stendhal_Testing">Stendhal Testing</a>, if you want to help us test the next release.</p>';
 		echo '<p>Use this beta version with care as it will contain bugs. Please note: It will not update itself.</p>';
 
