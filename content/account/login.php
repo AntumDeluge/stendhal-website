@@ -104,7 +104,7 @@ class LoginPage extends Page {
 		$_SESSION['marauroa_authenticated_username'] = $result->username;
 		$_SESSION['csrf'] = createRandomString();
 		fixSessionPermission();
-		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
+		$this->redirectToTargetUrl();
 		return true;
 	}
 
@@ -124,7 +124,7 @@ class LoginPage extends Page {
 			return false;
 		}
 		Account::loginOrCreateByAccountLink($accountLink);
-		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
+		$this->redirectToTargetUrl();
 		return true;
 	}
 
@@ -145,7 +145,7 @@ class LoginPage extends Page {
 		
 		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null);
 		Account::loginOrCreateByAccountLink($accountLink);
-		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
+		$this->redirectToTargetUrl();
 		return true;
 	}
 
@@ -159,7 +159,7 @@ class LoginPage extends Page {
 			return false;
 		}
 		Account::loginOrCreateByAccountLink($accountLink);
-		header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
+		$this->redirectToTargetUrl();
 		return true;
 	}
 
@@ -174,16 +174,12 @@ class LoginPage extends Page {
 
 	function handleRedirectIfAlreadyLoggedIn() {
 		if ($this->checkLogin()) {
-			if (isset($_REQUEST['url'])) {
-				if ($_REQUEST['url'] == 'close') {
-					echo '<!DOCTYPE html><html><head><title>Close</title>';
-					echo '<script type="text/javascript">window.close();</script>';
-					echo '</head><body>Authentication successful.</body></html>';
-				} else {
-					header('Location: '.STENDHAL_LOGIN_TARGET.$this->getUrl());
-				}
+			if (isset($_REQUEST['url']) && ($_REQUEST['url'] == 'close')) {
+				echo '<!DOCTYPE html><html><head><title>Close</title>';
+				echo '<script type="text/javascript">window.close();</script>';
+				echo '</head><body>Authentication successful.</body></html>';
 			} else {
-				header('Location: '.STENDHAL_LOGIN_TARGET.rewriteURL('/account/mycharacters.html'));
+				$this->redirectToTargetUrl();
 			}
 			return true;
 		}
@@ -208,7 +204,7 @@ class LoginPage extends Page {
 		return true;
 	}
 
-	function getUrl() {
+	function redirectToTargetUrl() {
 		if (isset($_REQUEST['url'])) {
 			$url = $_REQUEST['url'];
 		} else {
@@ -225,7 +221,7 @@ class LoginPage extends Page {
 		if (strpos($url, '\r') || strpos($url, '\n')) {
 			$url = '/';
 		}
-		return $url;
+		header('Location: '.STENDHAL_LOGIN_TARGET.$url);
 	}
 
 	function displayLoginForm() {
