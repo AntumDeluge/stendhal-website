@@ -149,6 +149,27 @@ function profilePoint($name) {
 	}
 }
 
+function buildUrlWithParams($urlPrefix, $keys, $map) {
+	$url = $urlPrefix;
+	if (strpos($url, '?') === false) {
+		$url = $url . '?';
+	} else {
+		$url = $url . '&';
+	}
+	$first = true;
+	foreach ($keys as $key) {
+		if (array_key_exists($key, $map)) {
+			if ($first) {
+				$first = false;
+			} else {
+				$url = $url . '&';
+			}
+			$url = $url.$key.'='.urlencode($map[$key]);
+		}
+	}
+	return $url;
+}
+
 
 /**
  * read pages from the Stendal wiki to embed them into the Stendhal Website.

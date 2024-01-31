@@ -32,7 +32,10 @@ class MyCharactersPage extends Page {
 			}
 		}
 		if (!isset($_SESSION['account'])) {
-			header('Location: '.STENDHAL_LOGIN_TARGET.'/index.php?id=content/account/login&url='.rewriteURL('/account/mycharacters.html'));
+			$url = buildUrlWithParams(
+				STENDHAL_LOGIN_TARGET.'/index.php?id=content/account/login&url='.rewriteURL('/account/mycharacters.html'), 
+				['build', 'state', 'seed'], $_REQUEST);
+			header('Location: '.$url);
 			return false;
 		}
 

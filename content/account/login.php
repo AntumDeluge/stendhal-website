@@ -257,12 +257,13 @@ class LoginPage extends Page {
 				echo '<br>';
 			}
 		}
+
 		?>
 
 		<div style="float:right">
-		<a href="/account/login.html?oauth_provider=google"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
+		<a href="<?php echo htmlspecialchars(buildUrlWithParams('/account/login.html?oauth_provider=google', ['url', 'build', 'state', 'seed'], $_REQUEST))?>"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
 		&nbsp;
-		<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
+		<a href="<?php echo htmlspecialchars(buildUrlWithParams('/account/login.html?openid_identifier=https://steamcommunity.com/openid/', ['url', 'build', 'state', 'seed'], $_REQUEST))?>"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
 		</div>
 		<form action="" method="post">
 			<table class="loginform">
@@ -277,8 +278,10 @@ class LoginPage extends Page {
 			<br style="clear:both">
 
 			<?php
-			if (isset($_REQUEST['url'])) {
-				echo '<input type="hidden" name="url" value="'.htmlspecialchars($_REQUEST['url']).'">';
+			foreach (['url', 'build', 'state', 'seed'] as $key) {
+				if (isset($_REQUEST[$key])) {
+					echo '<input type="hidden" name="'.$key.'" value="'.htmlspecialchars($_REQUEST[$key]).'">';
+				}
 			}
 			?>
 			
