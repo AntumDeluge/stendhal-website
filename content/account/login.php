@@ -221,7 +221,30 @@ class LoginPage extends Page {
 		if (strpos($url, '\r') || strpos($url, '\n')) {
 			$url = '/';
 		}
-		header('Location: '.STENDHAL_LOGIN_TARGET.$url);
+		$url = STENDHAL_LOGIN_TARGET.$url;
+
+		if (isset($_REQUEST['build'])) {
+			$url = $this->rewriteTargetUrlForAndroid($url);
+		}
+		header('Location: '.$url);
+	}
+
+	function rewriteTargetUrlForAndroid($url) {
+		$build = $_REQUEST['build'];
+		if ($build === 'debug') {
+			$schema = 'stendhaldebug8gps5y99pu';
+		} else {
+			$schema = 'stendhalprod8gps5y99pu';
+		}
+		$loginseed = createRandomString(32);
+		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$_REQUEST['seed'], 1);
+		if (strpos($url, '?') === false) {
+			$url = $url . '?';
+		} else {
+			$url = $url . '&';
+		}
+		$url = $url.'loginseed='.urlencode($loginseed);
+		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&url='.urlencode($url);
 	}
 
 	function displayLoginForm() {
