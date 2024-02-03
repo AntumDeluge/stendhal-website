@@ -75,11 +75,7 @@ class StarterPage extends Page {
 	 * creates and stores a seed.
 	 */
 	private function createSeed() {
-		$characters = '0123456789abcdefghijklmnopqrstuvwxyz';
-		$this->seed = '';
-		for ($i = 0; $i < 16; $i++) {
-			$this->seed .= $characters[mt_rand(0, strlen($characters) - 1)];
-		}
+		$this->seed = createRandomString(16);
 		storeSeed($this->username, $_SERVER['REMOTE_ADDR'], $this->seed, 1);
 	}
 
