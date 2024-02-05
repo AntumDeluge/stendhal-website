@@ -17,7 +17,6 @@
  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
 
-
 require_once('scripts/account.php');
 require_once('content/account/oauth.php');
 require_once('content/account/openid.php');
@@ -28,7 +27,7 @@ class LoginPage extends Page {
 	private $oauth;
 
 	public function writeHttpHeader() {
-		unset($_SESSION['merge']);
+	    		unset($_SESSION['merge']);
 		if ($this->handleRedirectIfAlreadyLoggedIn()) {
 			return false;
 		}
@@ -72,9 +71,10 @@ class LoginPage extends Page {
 			return false;
 		}
 
+		/*
 		if ($this->verifyLoginByLoginSeed()) {
 			return false;
-		}
+		}*/
 
 		return true;
 	}
