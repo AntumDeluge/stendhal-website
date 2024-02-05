@@ -385,7 +385,7 @@ class Account {
 		$this->status = $status;
 	}
 
-	public static function tryLogin($type, $username, $password) {
+	public static function tryLogin($type, $username, $password, $accountLink) {
 		if (!Account::checkIpBan()) {
 			return "Your IP Address has been banned.";
 		}
@@ -414,11 +414,10 @@ class Account {
 			}
 		} else {
 			$account = Account::readAccountByLink($type, $username, $password);
-			if (isset($account)) {
-				$success = 1;
-			} else {
-				$success = 0;
+			if (!$account || is_string($account)) {
+				$account = $accountLink->createAccount();
 			}
+			$success = 1;
 		}
 
 		$usedAccountLink = null;
@@ -429,11 +428,12 @@ class Account {
 
 			$username = $account->username;
 			$passhash = $account->password;
+			// accountLink-parameter might not have an id
 			$usedAccountLink = $account->usedAccountLink;
 		}
 		// Log loginEvent or passwordChange
 		if ($type != 'passwordchange') {
-			PlayerLoginEntry::logUserLogin($username, $_SERVER['REMOTE_ADDR'], $usedAccountLink, $success);
+		    PlayerLoginEntry::logUserLogin($username, $_SERVER['REMOTE_ADDR'], $usedAccountLink, $success);
 		} else {
 			PlayerLoginEntry::logUserPasswordChange($username, $_SERVER['REMOTE_ADDR'], $passhash, $success);
 		}
@@ -819,11 +819,7 @@ class Account {
 	 */
 	public static function loginOrCreateByAccountLink($accountLink) {
 		unset($_SESSION['account']);
-		$account = Account::tryLogin($accountLink->type, $accountLink->username, null);
-
-		if (!$account || is_string($account)) {
-			$account = $accountLink->createAccount();
-		}
+		$account = Account::tryLogin($accountLink->type, $accountLink->username, null, $accountLink);
 		$_SESSION['account'] = $account;
 		$_SESSION['csrf'] = createRandomString();
 		$_SESSION['marauroa_authenticated_username'] = $account->username;
@@ -1084,7 +1080,8 @@ class AccountLink {
 			if ($row) {
 				$this->playerId = $row['id'];
 				$this->insert();
-				return $account = Account::tryLogin($this->type, $this->username, null);
+				$account = Account::tryLogin($this->type, $this->username, null, null);
+				return $account;
 			}
 		}
 

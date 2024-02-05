@@ -92,7 +92,7 @@ class APIPage extends Page {
 			echo 'FAILED';
 			return;
 		}
-		$result = Account::tryLogin("password", $username, $password);
+		$result = Account::tryLogin("password", $username, $password, null);
 		if (! ($result instanceof Account)) {
 			echo htmlspecialchars($result);
 		}

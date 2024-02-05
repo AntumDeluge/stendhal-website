@@ -37,7 +37,7 @@ function validateParameters() {
 		return '';
 	}
 
-	$result = Account::tryLogin("passwordchange", $username, $_POST['pass']);
+	$result = Account::tryLogin("passwordchange", $username, $_POST['pass'], null);
 	if (! ($result instanceof Account)) {
 		return 'The old password was wrong.';
 	}

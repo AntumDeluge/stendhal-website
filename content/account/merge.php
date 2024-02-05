@@ -91,7 +91,7 @@ class AccountMerge extends Page {
 				return false;
 			}
 
-			$result = Account::tryLogin("password", $_POST['user'], $_POST['pass']);
+			$result = Account::tryLogin("password", $_POST['user'], $_POST['pass'], null);
 
 			if (! ($result instanceof Account)) {
 				$this->error = htmlspecialchars($result);

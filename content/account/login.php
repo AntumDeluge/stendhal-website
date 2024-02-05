@@ -72,6 +72,10 @@ class LoginPage extends Page {
 			return false;
 		}
 
+		if ($this->verifyLoginByLoginSeed()) {
+			return false;
+		}
+
 		return true;
 	}
 
@@ -93,7 +97,7 @@ class LoginPage extends Page {
 			$this->error = "A field is too long.";
 			return false;
 		}
-		$result = Account::tryLogin("password", $username, $password);
+		$result = Account::tryLogin("password", $username, $password, null);
 		if (! ($result instanceof Account)) {
 			$this->error = $result;
 			return false;
@@ -146,6 +150,29 @@ class LoginPage extends Page {
 		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null);
 		Account::loginOrCreateByAccountLink($accountLink);
 		$this->redirectToTargetUrl();
+		return true;
+	}
+
+	public function verifyLoginByLoginSeed() {
+		/*
+		if (!isset($_REQUEST['loginseed'])) {
+			return false;
+		}
+		
+		// TODO//
+		$result = Account::tryLogin("loginseed", null, $_REQUEST['loginseed'], null);
+		if (! ($result instanceof Account)) {
+			$this->error = $result;
+			return false;
+		}
+
+		// Username and password correct, register session variables
+		$_SESSION['account'] = $result;
+		$_SESSION['marauroa_authenticated_username'] = $result->username;
+		$_SESSION['csrf'] = createRandomString();
+		fixSessionPermission();
+		$this->redirectToTargetUrl();
+		*/
 		return true;
 	}
 
