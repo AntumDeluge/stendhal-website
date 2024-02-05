@@ -92,16 +92,4 @@ class OpenID {
 		return substr($identifier, 27);
 	}
 
-	public function succesfulOpenidAuthWhileNotLoggedIn($accountLink) {
-		unset($_SESSION['account']);
-		$account = Account::tryLogin('openid', $accountLink->username, null);
-
-		if (!$account || is_string($account)) {
-			$account = $accountLink->createAccount();
-		}
-		$_SESSION['account'] = $account;
-		$_SESSION['csrf'] = createRandomString();
-		$_SESSION['marauroa_authenticated_username'] = $account->username;
-		fixSessionPermission();
-	}
 }
