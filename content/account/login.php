@@ -40,7 +40,7 @@ class LoginPage extends Page {
 			}
 		}
 
-		// redirect to openid provider?
+		// redirect to openid provider?  
 		$this->openid = new OpenID();
 		if (isset($_REQUEST['openid_identifier']) && ($_REQUEST['openid_identifier'] != '')) {
 			$this->openid->doOpenidRedirectIfRequired($_REQUEST['openid_identifier']);
@@ -71,10 +71,9 @@ class LoginPage extends Page {
 			return false;
 		}
 
-		/*
 		if ($this->verifyLoginByLoginSeed()) {
 			return false;
-		}*/
+		}
 
 		return true;
 	}
@@ -102,16 +101,18 @@ class LoginPage extends Page {
 			$this->error = $result;
 			return false;
 		}
-
-		/* Username and password correct, register session variables */
-		$_SESSION['account'] = $result;
-		$_SESSION['marauroa_authenticated_username'] = $result->username;
-		$_SESSION['csrf'] = createRandomString();
-		fixSessionPermission();
-		$this->redirectToTargetUrl();
+		$this->completeLogin($result);
 		return true;
 	}
 
+	private function completeLogin($account) {
+		$_SESSION['account'] = $account;
+		$_SESSION['marauroa_authenticated_username'] = $account->username;
+		$_SESSION['csrf'] = createRandomString();
+		fixSessionPermission();
+		$this->redirectToTargetUrl();
+	}
+	
 	public function verifyLoginByOpenid() {
 		if (!isset($_GET['openid_mode'])) {
 			return false;
@@ -154,25 +155,15 @@ class LoginPage extends Page {
 	}
 
 	public function verifyLoginByLoginSeed() {
-		/*
 		if (!isset($_REQUEST['loginseed'])) {
 			return false;
 		}
-		
-		// TODO//
 		$result = Account::tryLogin("loginseed", null, $_REQUEST['loginseed'], null);
 		if (! ($result instanceof Account)) {
 			$this->error = $result;
 			return false;
 		}
-
-		// Username and password correct, register session variables
-		$_SESSION['account'] = $result;
-		$_SESSION['marauroa_authenticated_username'] = $result->username;
-		$_SESSION['csrf'] = createRandomString();
-		fixSessionPermission();
-		$this->redirectToTargetUrl();
-		*/
+		$this->completeLogin($result);
 		return true;
 	}
 
@@ -264,14 +255,18 @@ class LoginPage extends Page {
 			$schema = 'stendhalprod8gps5y99pu';
 		}
 		$loginseed = createRandomString(32);
-		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$_REQUEST['seed'], 1);
+		$seed = $_REQUEST['seed'];
+		if (!isset($seed) || strlen($seed) < 10) {
+			echo 'Invalid seed';
+			exit(1);
+		}
+		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$seed, 1);
 		if (strpos($url, '?') === false) {
 			$url = $url . '?';
 		} else {
 			$url = $url . '&';
 		}
-		$url = $url.'loginseed='.urlencode($loginseed);
-		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&url='.urlencode($url);
+		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&loginseed='.urlencode($loginseed).'&url='.urlencode($url);
 	}
 
 	function displayLoginForm() {

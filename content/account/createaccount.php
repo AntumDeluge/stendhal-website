@@ -83,7 +83,7 @@ class CreateAccountPage extends Page {
 			header('HTTP/1.0 301 Moved permanently.');
 			header("Location: ".$protocol."://".$_SERVER['HTTP_HOST'].preg_replace("/&amp;/", "&", rewriteURL('/account/create-character.html')));
 			$_SESSION['account'] = Account::readAccountByName($user);
-			PlayerLoginEntry::logUserLogin($_POST['name'], $_SERVER['REMOTE_ADDR'], null, true);
+			PlayerLoginEntry::logUserLogin('website', $_POST['name'], $_SERVER['REMOTE_ADDR'], null, true);
 			$_SESSION['marauroa_authenticated_username'] = $_SESSION['account']->username;
 			$_SESSION['csrf'] = createRandomString();
 			return false;

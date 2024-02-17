@@ -2,7 +2,7 @@
 /*
  Stendhal website - a website to manage and ease playing of Stendhal game
  Copyright (C) 2008  Miguel Angel Blanch Lardin
- Copyright (C) 2008-2010 The Arianne Project
+ Copyright (C) 2008-2024 The Arianne Project
 
  This program is free software: you can redistribute it and/or modify
  it under the terms of the GNU Affero General Public License as published by
@@ -229,7 +229,7 @@ class PlayerLoginEntry {
 	 * log logins for user from ip
 	 * returns boolean successfully logged
 	 */
-	public static function logUserLogin($user, $ip, $accountLink, $success) {
+	public static function logUserLogin($service, $user, $ip, $accountLink, $success) {
 		$userid = getUserID($user);
 
 		if ( $userid === false ) {
@@ -240,7 +240,8 @@ class PlayerLoginEntry {
 		if ($accountLink) {
 			$q = $q .', account_link_id';
 		}
-		$q = $q . ") values (".$userid.", '".mysql_real_escape_string(trim($ip))." ',".intval($success).", 'website'";
+		$q = $q . ") values (".$userid.", '".mysql_real_escape_string(trim($ip))." ',".intval($success).", '"
+			. mysql_real_escape_string($service)."'";
 		if ($accountLink) {
 			$q = $q . ", '".mysql_real_escape_string($accountLink)."'";
 		}
@@ -374,7 +375,8 @@ class Account {
 	public $banExpire;
 	public $links;
 	public $usedAccountLink;
-
+	public $usedLoginseed;
+	
 	public function __construct($id, $username, $password, $email, $emailTrusted, $timedate, $status) {
 		$this->id = $id;
 		$this->username = $username;
@@ -386,6 +388,8 @@ class Account {
 	}
 
 	public static function tryLogin($type, $username, $password, $accountLink) {
+		$service = 'website';
+
 		if (!Account::checkIpBan()) {
 			return "Your IP Address has been banned.";
 		}
@@ -412,6 +416,12 @@ class Account {
 					$banMessage = "Invalid username or password";
 				}
 			}
+		} else if ($type === 'loginseed') {
+			$account = Account::readAccountByLoginseed($password);
+			if ($account) {
+				$success = 1;
+			}
+			$service = 'Stendhal App';
 		} else {
 			$account = Account::readAccountByLink($type, $username, $password);
 			if (!$account || is_string($account)) {
@@ -432,8 +442,9 @@ class Account {
 			$usedAccountLink = $account->usedAccountLink;
 		}
 		// Log loginEvent or passwordChange
+		$service = 'website';
 		if ($type != 'passwordchange') {
-		    PlayerLoginEntry::logUserLogin($username, $_SERVER['REMOTE_ADDR'], $usedAccountLink, $success);
+		    PlayerLoginEntry::logUserLogin($service, $username, $_SERVER['REMOTE_ADDR'], $usedAccountLink, $success);
 		} else {
 			PlayerLoginEntry::logUserPasswordChange($username, $_SERVER['REMOTE_ADDR'], $passhash, $success);
 		}
@@ -520,6 +531,45 @@ class Account {
 		return $res;
 	}
 
+	/**
+	 * reads an account object from the database based on a loginseed.
+	 *
+	 * @param string $loginseed loginseed
+	 */
+	public static function readAccountByLoginseed($loginseed) {
+		$sql = "SELECT account.id As id, account.username As username, "
+			. " account.password As password, email.email As email, "
+			. " account.timedate As timedate, account.status As status, "
+			. " loginseed.id As usedLoginseed"
+			. " FROM loginseed INNER JOIN account ON (account.id = loginseed.player_id) "
+			. " LEFT JOIN email ON (account.id = email.player_id) "
+			. " WHERE loginseed.seed='".mysql_real_escape_string($loginseed)."'"
+			. " AND loginseed.used=0"
+			. " AND loginseed.timestamp > date_sub(current_timestamp, interval 1 day)";
+
+			$stmt = DB::game()->query($sql);
+			$row = $stmt->fetch(PDO::FETCH_ASSOC);
+			$stmt->closeCursor();
+			$res = NULL;
+			if ($row) {
+				$res = new Account($row['id'], $row['username'], $row['password'], $row['email'], false, $row['timedate'], $row['status']);
+				$res->usedAccountLink = -1;
+				$res->usedLoginseed = $row['usedLoginseed'];
+			}
+			return $res;
+	}
+
+	/**
+	 * marks an loginseed as used
+	 * 
+	 * @param string $loginseedId id of loginseed
+	 */
+	public static function useUpLoginseed($loginseedId) {
+		$sql = "UPDATE loginseed SET used = used+1"
+			. " WHERE loginseed.seed=".int($loginseedId);
+		DB::game()->exec($sql);
+	}
+	
 
 	/**
 	 * checks that the password is correct
