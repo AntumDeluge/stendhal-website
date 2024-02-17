@@ -389,6 +389,7 @@ class Account {
 
 	public static function tryLogin($type, $username, $password, $accountLink) {
 		$service = 'website';
+		$usedAccountLink = null;
 
 		if (!Account::checkIpBan()) {
 			return "Your IP Address has been banned.";
@@ -419,8 +420,10 @@ class Account {
 		} else if ($type === 'loginseed') {
 			$account = Account::readAccountByLoginseed($password);
 			if ($account) {
+				Account::useUpLoginseed($account->usedLoginseed);
 				$success = 1;
 			}
+			$usedAccountLink = -1;
 			$service = 'Stendhal App';
 		} else {
 			$account = Account::readAccountByLink($type, $username, $password);
@@ -430,7 +433,6 @@ class Account {
 			$success = 1;
 		}
 
-		$usedAccountLink = null;
 		if ($success == 1) {
 			$account->readAccountBan();
 			$banMessage = $account->getAccountStatusMessage();
@@ -442,7 +444,6 @@ class Account {
 			$usedAccountLink = $account->usedAccountLink;
 		}
 		// Log loginEvent or passwordChange
-		$service = 'website';
 		if ($type != 'passwordchange') {
 		    PlayerLoginEntry::logUserLogin($service, $username, $_SERVER['REMOTE_ADDR'], $usedAccountLink, $success);
 		} else {
@@ -545,7 +546,7 @@ class Account {
 			. " LEFT JOIN email ON (account.id = email.player_id) "
 			. " WHERE loginseed.seed='".mysql_real_escape_string($loginseed)."'"
 			. " AND loginseed.used=0"
-			. " AND loginseed.timestamp > date_sub(current_timestamp, interval 1 day)";
+			. " AND loginseed.timedate > date_sub(current_timestamp, interval 1 day)";
 
 			$stmt = DB::game()->query($sql);
 			$row = $stmt->fetch(PDO::FETCH_ASSOC);
@@ -566,7 +567,7 @@ class Account {
 	 */
 	public static function useUpLoginseed($loginseedId) {
 		$sql = "UPDATE loginseed SET used = used+1"
-			. " WHERE loginseed.seed=".int($loginseedId);
+			. " WHERE loginseed.id=".intval($loginseedId);
 		DB::game()->exec($sql);
 	}
 	
