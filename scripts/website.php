@@ -219,12 +219,12 @@ class Wiki {
 
 	public function findPage() {
 		if (defined("STENDHAL_WIKI_CONNECTION") && constant("STENDHAL_WIKI_CONNECTION")) {
-			$sql = "SELECT page_id, page_title As title, p2.pp_value As displaytitle FROM a1111_wiki.page, a1111_wiki.page_props as p1, a1111_wiki.page_props as p2 "
+			$sql = "SELECT page_id, page_title As title, p2.pp_value As displaytitle FROM page, page_props as p1, page_props as p2 "
 			." WHERE p1.pp_propname='externalcanonical' AND p1.pp_value = :url"
 			." AND page.page_namespace=0 AND page.page_id=p1.pp_page"
 			." AND p2.pp_propname='externaltitle' AND page.page_id=p2.pp_page";
 
-			$stmt = DB::game()->prepare($sql);
+			$stmt = DB::wiki()->prepare($sql);
 			$stmt->execute(array(':url' => $this->url));
 			$res = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			if (count($res) > 0) {
