@@ -147,8 +147,7 @@ class LoginPage extends Page {
 			var_dump($response);
 			return false;
 		}
-		
-		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null);
+		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null, false);
 		Account::loginOrCreateByAccountLink($accountLink);
 		$this->redirectToTargetUrl();
 		return true;

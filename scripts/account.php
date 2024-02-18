@@ -978,7 +978,7 @@ class AccountLink {
 		foreach($rows as $row) {
 			$links[] = new AccountLink($row['id'], $row['player_id'],
 			$row['type'], $row['username'], $row['nickname'],
-			$row['email'], $row['secret']);
+			$row['email'], $row['secret'], false);
 		}
 		return $links;
 	}
@@ -994,7 +994,7 @@ class AccountLink {
 		foreach($rows as $row) {
 			$links[] = new AccountLink($row['id'], $row['player_id'],
 					$row['type'], $row['username'], $row['nickname'],
-					$row['email'], $row['secret']);
+					$row['email'], $row['secret'], false);
 		}
 		return $links;
 	}
@@ -1008,7 +1008,7 @@ class AccountLink {
 		foreach($rows as $row) {
 			$links[] = new AccountLink($row['id'], $row['player_id'],
 				$row['type'], $row['username'], $row['nickname'],
-				$row['email'], $row['secret']);
+				$row['email'], $row['secret'], false);
 		}
 		return $links;
 	}
