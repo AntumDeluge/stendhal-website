@@ -260,7 +260,7 @@ class LoginPage extends Page {
 			exit(1);
 		}
 		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$seed, 1);
-		$url = 'STENDHAL_LOGIN_TARGET'.'/account/login.html?url='.urlencode($url);
+		$url = STENDHAL_LOGIN_TARGET.'/account/login.html?url='.urlencode($url);
 		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&loginseed='.urlencode($loginseed).'&url='.urlencode($url);
 	}
 
