@@ -238,10 +238,11 @@ class LoginPage extends Page {
 		if (strpos($url, '\r') || strpos($url, '\n')) {
 			$url = '/';
 		}
-		$url = STENDHAL_LOGIN_TARGET.$url;
 
 		if (isset($_REQUEST['build'])) {
 			$url = $this->rewriteTargetUrlForAndroid($url);
+		} else {
+			$url = STENDHAL_LOGIN_TARGET.$url;
 		}
 		header('Location: '.$url);
 	}
