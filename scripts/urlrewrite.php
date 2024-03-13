@@ -386,6 +386,8 @@ function rewriteURL($url, $force = false) {
 			return preg_replace('|^/development/feature\.html$|', $folder.'/?id=content/game/feature', $url);
 		} else if (preg_match('|^/development/patch\.html$|', $url)) {
 			return preg_replace('|^/development/patch\.html$|', $folder.'/?id=content/game/patch', $url);
+		} else if (preg_match('|^/development/about\.html$|', $url)) {
+			return preg_replace('|^/development/about\.html$|', $folder.'/?id=content/development/about', $url);
 		}
 	} else if (preg_match('|^/download\.html$|', $url)) {
 		return preg_replace('|^/download\.html$|', $folder.'/?id=content/game/download', $url);
