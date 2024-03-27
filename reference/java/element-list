@@ -62,6 +62,7 @@ games.stendhal.server.actions.query
 games.stendhal.server.actions.spell
 games.stendhal.server.actions.validator
 games.stendhal.server.constants
+games.stendhal.server.core
 games.stendhal.server.core.account
 games.stendhal.server.core.config
 games.stendhal.server.core.config.annotations
@@ -138,6 +139,7 @@ games.stendhal.server.entity.trade
 games.stendhal.server.events
 games.stendhal.server.extension
 games.stendhal.server.maps
+games.stendhal.server.maps.ados
 games.stendhal.server.maps.ados.abandonedkeep
 games.stendhal.server.maps.ados.animal_sanctuary
 games.stendhal.server.maps.ados.bakery
@@ -182,6 +184,7 @@ games.stendhal.server.maps.athor.ship
 games.stendhal.server.maps.atlantis.cityinside
 games.stendhal.server.maps.atlantis.cityoutside
 games.stendhal.server.maps.deathmatch
+games.stendhal.server.maps.deniran
 games.stendhal.server.maps.deniran.cityinterior.accessoryshop
 games.stendhal.server.maps.deniran.cityinterior.bakery
 games.stendhal.server.maps.deniran.cityinterior.brelandhouse
@@ -326,6 +329,7 @@ games.stendhal.tools.statistics
 games.stendhal.tools.test
 games.stendhal.tools.updateprop
 games.stendhal.tools.xml
+marauroa
 marauroa.client
 marauroa.client.net
 marauroa.common

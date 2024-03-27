@@ -11,7 +11,7 @@
     <link rel="shortcut icon" href="../../../img/favicon.ico">
 
     
-    <title>Entities - Stendhal 1.45 Reference Documentation</title>
+    <title>Entities - Stendhal 1.46 Reference Documentation</title>
     
 
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.12.0/css/all.css">
@@ -60,7 +60,7 @@
             <!-- Main title -->
 
             
-              <a class="navbar-brand" href="../../..">Stendhal 1.45 Reference Documentation</a>
+              <a class="navbar-brand" href="../../..">Stendhal 1.46 Reference Documentation</a>
             
         </div>
 
@@ -78,6 +78,12 @@
                 
                     <li >
                         <a href="/reference/java/">Java</a>
+                    </li>
+                
+                
+                
+                    <li >
+                        <a href="/reference/typescript/">TypeScript</a>
                     </li>
                 
                 
@@ -118,6 +124,8 @@
             <li class="second-level"><a href="#see-also">See Also</a></li>
                 
         <li class="first-level "><a href="#methods">Methods</a></li>
+            <li class="second-level"><a href="#entitiesaddknownchatoptions">entities:addKnownChatOptions</a></li>
+                
             <li class="second-level"><a href="#entitiescreate">entities:create</a></li>
                 
             <li class="second-level"><a href="#entitiescreateitemspawner">entities:createItemSpawner</a></li>
@@ -205,6 +213,7 @@
 </ul>
 </li>
 <li><a href="#methods">Methods</a><ul>
+<li><a href="#entitiesaddknownchatoptions">entities:addKnownChatOptions</a></li>
 <li><a href="#entitiescreate">entities:create</a></li>
 <li><a href="#entitiescreateitemspawner">entities:createItemSpawner</a></li>
 <li><a href="#entitiescreateshopsign">entities:createShopSign</a></li>
@@ -280,6 +289,24 @@
 </ul>
 <hr />
 <h1 id="methods">Methods</h1>
+<hr />
+<h2 id="entitiesaddknownchatoptions">entities:addKnownChatOptions</h2>
+<div class="function">
+    entities:addKnownChatOptions <span class="paramlist">npc, keywords</span>
+</div>
+
+<ul>
+<li>Helper function as <a href="/reference/java/games/stendhal/server/entity/npc/SpeakerNPC.html#addKnownChatOptions(java.lang.String...)">SpeakerNPC.addKnownChatOptions</a> cannot seem to handle array of LuaString.</li>
+<li>Parameters:<ul>
+<li><span class="param">npc</span>
+  <span class="datatype"><a href="/reference/java/games/stendhal/server/entity/npc/SpeakerNPC.html">SpeakerNPC</a></span>
+  NPC to which options should be added.</li>
+<li><span class="param">keywords</span>
+  <span class="datatype"><a href="http://luaj.org/luaj/3.0/api/org/luaj/vm2/LuaTable.html">table</a></span>
+  Keyword(s) to be added.</li>
+</ul>
+</li>
+</ul>
 <hr />
 <h2 id="entitiescreate">entities:create</h2>
 <div class="function">
@@ -1243,7 +1270,7 @@ npc:setPathAndPosition(nodes)
           
             <hr>
             <p>
-            <small>Copyright © 2003-2023 Stendhal</small><br>
+            <small>Copyright © 2003-2024 Stendhal</small><br>
             
             <small>Documentation built with <a href="http://www.mkdocs.org/">MkDocs</a>.</small>
             </p>
