@@ -98,6 +98,7 @@ class CreateAccountPage extends Page {
 		if ($this->result->wasSuccessful()) {
 			// on success: login and redirect to character creation
 			header('HTTP/1.0 301 Moved permanently.');
+			fixSessionPermission();
 			AppLogin::redirectToTargetUrl();
 			$_SESSION['account'] = Account::readAccountByName($user);
 			PlayerLoginEntry::logUserLogin('website', $_POST['name'], $_SERVER['REMOTE_ADDR'], null, true);
