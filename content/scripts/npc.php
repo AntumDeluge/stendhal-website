@@ -140,13 +140,13 @@ class NPCPage extends Page {
 	/**
 	 * Creates a shop list.
 	 *
-	 * @param $sinv
+	 * @param $sinv array
 	 *   Shop inventory information.
-	 * @param $stype
+	 * @param $stype string
 	 *   "buy", "sell", or "outfit".
-	 * @param $value_label
+	 * @param $value_label string
 	 *   Label to show for item price.
-	 * @param $snotes
+	 * @param $snotes array
 	 *   Notes about merchants & items.
 	 * @param add_layers
 	 *   Layers to be added to each outfit preview.
