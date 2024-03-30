@@ -99,11 +99,11 @@ class CreateAccountPage extends Page {
 			// on success: login and redirect to character creation
 			header('HTTP/1.0 301 Moved permanently.');
 			fixSessionPermission();
-			AppLogin::redirectToTargetUrl();
 			$_SESSION['account'] = Account::readAccountByName($user);
 			PlayerLoginEntry::logUserLogin('website', $_POST['name'], $_SERVER['REMOTE_ADDR'], null, true);
 			$_SESSION['marauroa_authenticated_username'] = $_SESSION['account']->username;
 			$_SESSION['csrf'] = createRandomString();
+			AppLogin::redirectToTargetUrl();
 			return false;
 		} else {
 			return true;
