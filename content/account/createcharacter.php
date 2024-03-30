@@ -192,8 +192,9 @@ if (isset($_REQUEST['outfitcode'])) {
 <br>
 <br>
 <?php 
+$android = isset($_SERVER['HTTP_USER_AGENT']) && strpos($_SERVER['HTTP_USER_AGENT'], '; wv') !== false;
 $players = getCharactersForUsername($_SESSION['account']->username);
-if(sizeof($players)==0) {
+if (!$android && sizeof($players)==0) {
 ?>
 <p>Already have an account? <b><a href="<?php echo rewriteURL('/account/merge.html')?>">Link accounts...</a></b></p>
 <?php
