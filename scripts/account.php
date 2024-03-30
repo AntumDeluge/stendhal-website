@@ -259,6 +259,59 @@ class PlayerLoginEntry {
 	}
 }
 
+class AppLogin {
+	public static function addHiddenFormFields() {
+		foreach (['url', 'build', 'state', 'seed'] as $key) {
+			if (isset($_REQUEST[$key])) {
+				echo '<input type="hidden" name="'.$key.'" value="'.htmlspecialchars($_REQUEST[$key]).'">';
+			}
+		}
+	}
+
+	public static function redirectToTargetUrl() {
+		if (isset($_REQUEST['url'])) {
+			$url = $_REQUEST['url'];
+		} else {
+			$url = rewriteURL('/account/mycharacters.html');
+			$players = getCharactersForUsername($_SESSION['account']->username);
+			if(sizeof($players)==0) {
+				$url = rewriteURL('/account/create-character.html');
+			}
+		}
+		if (strpos($url, '/') !== 0) {
+			$url = '/'.$url;
+		}
+		// prevent header splitting
+		if (strpos($url, '\r') || strpos($url, '\n')) {
+			$url = '/';
+		}
+		
+		if (isset($_REQUEST['build'])) {
+			$url = AppLogin::rewriteTargetUrlForAndroid($url);
+		} else {
+			$url = STENDHAL_LOGIN_TARGET.$url;
+		}
+		header('Location: '.$url);
+	}
+	
+	private static function rewriteTargetUrlForAndroid($url) {
+		$build = $_REQUEST['build'];
+		if ($build === 'debug') {
+			$schema = 'stendhaldebug8gps5y99pu';
+		} else {
+			$schema = 'stendhalprod8gps5y99pu';
+		}
+		$loginseed = createRandomString(32);
+		$seed = $_REQUEST['seed'];
+		if (!isset($seed) || strlen($seed) < 10) {
+			echo 'Invalid seed';
+			exit(1);
+		}
+		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$seed, 1);
+		$url = STENDHAL_LOGIN_TARGET.'/account/login.html?url='.urlencode($url);
+		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&loginseed='.urlencode($loginseed).'&url='.urlencode($url);
+	}
+}
 
 /**
  * A class that represents a StoredMessage

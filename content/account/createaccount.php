@@ -1,4 +1,21 @@
 <?php
+/*
+ Stendhal website - a website to manage and ease playing of Stendhal game
+ Copyright (C) 2008-2024 The Arianne Project
+ 
+ This program is free software: you can redistribute it and/or modify
+ it under the terms of the GNU Affero General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ 
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU Affero General Public License for more details.
+ 
+ You should have received a copy of the GNU Affero General Public License
+ along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ */
 class CreateAccountPage extends Page {
 	private $result;
 	private $error;
@@ -81,7 +98,7 @@ class CreateAccountPage extends Page {
 		if ($this->result->wasSuccessful()) {
 			// on success: login and redirect to character creation
 			header('HTTP/1.0 301 Moved permanently.');
-			header("Location: ".$protocol."://".$_SERVER['HTTP_HOST'].preg_replace("/&amp;/", "&", rewriteURL('/account/create-character.html')));
+			AppLogin::redirectToTargetUrl();
 			$_SESSION['account'] = Account::readAccountByName($user);
 			PlayerLoginEntry::logUserLogin('website', $_POST['name'], $_SERVER['REMOTE_ADDR'], null, true);
 			$_SESSION['marauroa_authenticated_username'] = $_SESSION['account']->username;
@@ -158,7 +175,7 @@ class CreateAccountPage extends Page {
 
 </table>
 <input id="serverpath" name="serverpath" type="hidden" value="<?php echo STENDHAL_FOLDER;?>">
-
+<?php AppLogin::addHiddenFormFields(); ?>
 </form>
 <br class="clear">
 <?php

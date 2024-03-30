@@ -110,7 +110,7 @@ class LoginPage extends Page {
 		$_SESSION['marauroa_authenticated_username'] = $account->username;
 		$_SESSION['csrf'] = createRandomString();
 		fixSessionPermission();
-		$this->redirectToTargetUrl();
+		AppLogin::redirectToTargetUrl();
 	}
 	
 	public function verifyLoginByOpenid() {
@@ -129,7 +129,7 @@ class LoginPage extends Page {
 			return false;
 		}
 		Account::loginOrCreateByAccountLink($accountLink);
-		$this->redirectToTargetUrl();
+		AppLogin::redirectToTargetUrl();
 		return true;
 	}
 
@@ -149,7 +149,7 @@ class LoginPage extends Page {
 		}
 		$accountLink = new AccountLink(null, null, 'steam', $response['response']['params']['steamid'], null, null, null, false);
 		Account::loginOrCreateByAccountLink($accountLink);
-		$this->redirectToTargetUrl();
+		AppLogin::redirectToTargetUrl();
 		return true;
 	}
 
@@ -176,7 +176,7 @@ class LoginPage extends Page {
 			return false;
 		}
 		Account::loginOrCreateByAccountLink($accountLink);
-		$this->redirectToTargetUrl();
+		AppLogin::redirectToTargetUrl();
 		return true;
 	}
 
@@ -196,7 +196,7 @@ class LoginPage extends Page {
 				echo '<script type="text/javascript">window.close();</script>';
 				echo '</head><body>Authentication successful.</body></html>';
 			} else {
-				$this->redirectToTargetUrl();
+				AppLogin::redirectToTargetUrl();
 			}
 			return true;
 		}
@@ -221,49 +221,6 @@ class LoginPage extends Page {
 		return true;
 	}
 
-	function redirectToTargetUrl() {
-		if (isset($_REQUEST['url'])) {
-			$url = $_REQUEST['url'];
-		} else {
-			$url = rewriteURL('/account/mycharacters.html');
-			$players = getCharactersForUsername($_SESSION['account']->username);
-			if(sizeof($players)==0) {
-				$url = rewriteURL('/account/create-character.html');
-			}
-		}
-		if (strpos($url, '/') !== 0) {
-			$url = '/'.$url;
-		}
-		// prevent header splitting
-		if (strpos($url, '\r') || strpos($url, '\n')) {
-			$url = '/';
-		}
-
-		if (isset($_REQUEST['build'])) {
-			$url = $this->rewriteTargetUrlForAndroid($url);
-		} else {
-			$url = STENDHAL_LOGIN_TARGET.$url;
-		}
-		header('Location: '.$url);
-	}
-
-	function rewriteTargetUrlForAndroid($url) {
-		$build = $_REQUEST['build'];
-		if ($build === 'debug') {
-			$schema = 'stendhaldebug8gps5y99pu';
-		} else {
-			$schema = 'stendhalprod8gps5y99pu';
-		}
-		$loginseed = createRandomString(32);
-		$seed = $_REQUEST['seed'];
-		if (!isset($seed) || strlen($seed) < 10) {
-			echo 'Invalid seed';
-			exit(1);
-		}
-		storeSeed($_SESSION['account']->username, $_SERVER['REMOTE_ADDR'], $loginseed.$seed, 1);
-		$url = STENDHAL_LOGIN_TARGET.'/account/login.html?url='.urlencode($url);
-		return $schema.'://callback?state='.urlencode($_REQUEST['state']).'&loginseed='.urlencode($loginseed).'&url='.urlencode($url);
-	}
 
 	function displayLoginForm() {
 		startBox("<h1>Login</h1>");
@@ -317,19 +274,11 @@ class LoginPage extends Page {
 				<tr><td>&nbsp;</td><td><input type="submit" name="sublogin" value="Login"></td></tr>
 			</table>
 			<br style="clear:both">
-
-			<?php
-			foreach (['url', 'build', 'state', 'seed'] as $key) {
-				if (isset($_REQUEST[$key])) {
-					echo '<input type="hidden" name="'.$key.'" value="'.htmlspecialchars($_REQUEST[$key]).'">';
-				}
-			}
-			?>
-			
+			<?php AppLogin::addHiddenFormFields(); ?>
 		</form>
 		<br class="clear">
 
-		<p>New? <b><a href="<?php echo rewriteURL('/account/create-account.html')?>">Create account...</a></b></p>
+		<p>New? <b><a href="<?php echo htmlspecialchars(buildUrlWithParams(rewriteURL('/account/create-account.html'), ['url', 'build', 'state', 'seed'], $_REQUEST))?>">Create account...</a></b></p>
 		<br>
 		<?php
 		endBox();
