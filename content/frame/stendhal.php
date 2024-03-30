@@ -46,6 +46,11 @@ class StendhalFrame extends PageFrame {
 		echo '<meta name="viewport" content="width=device-width, initial-scale=1" />';
 		echo '<link rel="manifest" href="/manifest.json">';
 		echo '<link rel="me" href="https://mastodon.social/@stendhalgame">';
+		session_start();
+		if (isset($_SESSION) && isset($_SESSION['stendhal_meta_refresh'])) {
+			echo '<meta http-equiv="refresh" content="0; URL='.htmlspecialchars($_SESSION['stendhal_meta_refresh']).'">';
+			unset($_SESSION['stendhal_meta_refresh']);
+		}
 	}
 
 	/**

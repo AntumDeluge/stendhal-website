@@ -287,7 +287,8 @@ class AppLogin {
 		}
 		
 		if (isset($_REQUEST['build'])) {
-			$url = AppLogin::rewriteTargetUrlForAndroid($url);
+			$_SESSION['stendhal_meta_refresh'] = AppLogin::rewriteTargetUrlForAndroid($url);
+			$url = STENDHAL_LOGIN_TARGET;
 		} else {
 			$url = STENDHAL_LOGIN_TARGET.$url;
 		}
