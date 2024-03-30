@@ -86,7 +86,7 @@ class StendhalFrame extends PageFrame {
 		$this->breadcrubs($page);
 	?>
 	</div>
-<?php } else if (parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) != '/account/mycharacters.html') { ?>
+<?php } else if (checkLogin() && parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH) != '/account/mycharacters.html') { ?>
 	<div>
 	<?php echo '		<a id="mychars-button" href="'.STENDHAL_LOGIN_TARGET.'/account/mycharacters.html" class="noselect" draggable="false">My Characters</a>'; ?>
 
