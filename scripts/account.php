@@ -260,6 +260,17 @@ class PlayerLoginEntry {
 }
 
 class AppLogin {
+
+	public static function isApp() {
+		return (
+			isset($_SERVER['HTTP_USER_AGENT']) && (
+				(strpos($_SERVER['HTTP_USER_AGENT'], 'Stendhal') !== false)
+				|| (strpos($_SERVER['HTTP_USER_AGENT'], '; wv') !== false)
+			)
+		)
+		|| isset($_REQUEST['build']);
+	}
+
 	public static function addHiddenFormFields() {
 		foreach (['url', 'build', 'state', 'seed'] as $key) {
 			if (isset($_REQUEST[$key])) {

@@ -17,12 +17,16 @@ class LogoutPage extends Page {
 	public function writeHtmlHeader() {
 		echo '<title>Logout'.STENDHAL_TITLE.'</title>';
 		echo '<meta name="robots" content="noindex">'."\n";
-		echo '<meta http-equiv="Refresh" content="0;url=/">';
+		$url = '/';
+		if (AppLogin::isApp()) {
+			$url = rewriteURL("/account/login.html");
+		}
+		echo '<meta http-equiv="Refresh" content="0;url='.htmlspecialchars($url).'">';
 	}
 
 	function writeContent() {
 		startBox("<h1>Logging Out</h1>");
-		echo 'You have successfully <b>logged out</b>.<p>Back to <a href="/">start page</a>';
+		echo 'You have successfully <b>logged out</b>.';
 		endBox();
 	}
 }
