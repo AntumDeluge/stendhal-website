@@ -12,11 +12,17 @@ class DownloadPage extends Page {
 		endBox();
 
 		startBox('<h2>For players</h2>');
-		echo '<p>You most likely want this download:</p>';
+		echo '<p>You most likely want one of these downloads:</p>';
 		echo '<ul>';
-		echo '<li><b><a href="https://arianne-project.org/download/stendhal.zip">stendhal.zip</a></b> <img src="/images/buttons/star.png"><br>Download this file to play.</li>';
+		echo '<li>Classic Java client.</li>';
+		echo '<ul>';
+		echo '<li><b><a href="https://arianne-project.org/download/stendhal.zip">stendhal.zip</a></b> <img src="/images/buttons/star.png"><br>Download this file to play on desktop.</li>';
 		echo '</ul>';
-		echo '<p>Stendhal works on Windows, Mac and Linux. It requires a <a href="https://java.com">Java runtime</a>.</p>';
+		echo '<li>Android client.</li>';
+		echo '<ul>';
+		echo '<li><b><a href="https://arianne-project.org/download/org.stendhalgame.client.apk">org.stendhalgame.client.apk</a></b> <img src="/images/buttons/star.png"><br>Download this file to play on Android mobile devices.</li>';
+		echo '</ul></ul>';
+		echo '<p>The Stendhal desktop client works on Windows, Mac and Linux. It requires a <a href="https://java.com">Java runtime</a>.</p>';
 		echo '<p>&nbsp;</p>';
 		endBox();
 
