@@ -20,7 +20,8 @@ class DownloadPage extends Page {
 		echo '</ul>';
 		echo '<li>Android client.</li>';
 		echo '<ul>';
-		echo '<li><b><a href="https://arianne-project.org/download/org.stendhalgame.client.apk">org.stendhalgame.client.apk</a></b> <img src="/images/buttons/star.png"><br>Download this file to play on Android mobile devices.</li>';
+		echo '<li><b><a href="https://arianne-project.org/download/org.stendhalgame.client.apk">org.stendhalgame.client.apk</a></b> <img src="/images/buttons/star.png"><br>Download this file to play on Android mobile devices or ...</li>';
+		echo '<li><a href="https://f-droid.org/packages/org.stendhalgame.client/"><img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" height="64"></a></li>';
 		echo '</ul></ul>';
 		echo '<p>The Stendhal desktop client works on Windows, Mac and Linux. It requires a <a href="https://java.com">Java runtime</a>.</p>';
 		echo '<p>&nbsp;</p>';
