@@ -100,13 +100,15 @@ We have a Discord server and channels on the Libera IRC network. Both services a
 						'!(http|https)://(|www\.)(faiumoni.de|stendhalgame.org|arianne.sf.net|arianne-project.org|arianne.sourceforge.net|sourceforge.net|sf.net|download.oracle.com|libregamewiki.org|freesound.org|opengameart.org|openclipart.org|github.io|github.com|arianne.github.io|postsai.github.io|media.discordapp.net/attachments/735075745545846874)(/[^ ]*)?!',
 						'<a href="$1://$2$3$4$5">$1://$2$3$4$5</a>', $line);
 
+				$timestamp = htmlspecialchars($time);
+				$anchor = 'timestamp_'.$timestamp;
 				if ($line != '') {
 					$p1 = '<div class="chatrow '.$class.'"';
 					if ($class == "irctext") {
-						$p1 .= ' id="timestamp_'.$time.'"';
+						$p1 .= ' id="'.$anchor.'"';
 					}
 					echo $p1.'><span class="chatcell c1">'
-						.htmlspecialchars($time).'</span><span class="chatcell c2">'
+						.'<a href="#'.$anchor.'">'.$timestamp.'</a></span><span class="chatcell c2">'
 						.htmlspecialchars($nick).'</span><span class="chatcell c3">'
 						.$line.'</span></div>'."\n";
 				}
