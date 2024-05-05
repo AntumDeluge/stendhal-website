@@ -101,7 +101,11 @@ We have a Discord server and channels on the Libera IRC network. Both services a
 						'<a href="$1://$2$3$4$5">$1://$2$3$4$5</a>', $line);
 
 				if ($line != '') {
-					echo '<div class="chatrow '.$class.'"><span class="chatcell c1">'
+					$p1 = '<div class="chatrow '.$class.'"';
+					if ($class == "irctext") {
+						$p1 .= ' id="timestamp_'.$time.'"';
+					}
+					echo $p1.'><span class="chatcell c1">'
 						.htmlspecialchars($time).'</span><span class="chatcell c2">'
 						.htmlspecialchars($nick).'</span><span class="chatcell c3">'
 						.$line.'</span></div>'."\n";
