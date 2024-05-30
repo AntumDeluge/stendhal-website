@@ -161,6 +161,7 @@ $page->writeAfterJS();
 			echo '<li><a id="menuDungeons" href="/dungeon.html">Dungeons</a>';
 			echo '<li><a id="menuNPCs" href="/npc/">NPCs</a>';
 			echo '<li><a id="menuQuests" href="/quest.html">Quests</a>';
+			echo '<li><a id="menuGames" href="/game.html">Games</a></li>';
 			echo '<li><a id="menuAchievements" href="/achievement.html">Achievements</a>';
 			echo '<li><a id="menuCreatures" href="/creature/">Creatures</a>';
 			echo '<li><a id="menuItems" href="/item/">Items</a></ul>';
