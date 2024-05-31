@@ -43,6 +43,7 @@ class LoginPage extends Page {
 		// redirect to openid provider?  
 		$this->openid = new OpenID();
 		if (isset($_REQUEST['openid_identifier']) && ($_REQUEST['openid_identifier'] != '')) {
+			AppLogin::storeToSession();
 			$this->openid->doOpenidRedirectIfRequired($_REQUEST['openid_identifier']);
 			if ($this->openid->isAuth && !$this->openid->error) {
 				return false;
@@ -51,10 +52,11 @@ class LoginPage extends Page {
 		// redirect to the oauth provider
 		$this->oauth = new OAuth();
 		if (isset($_REQUEST['oauth_provider']) && ($_REQUEST['oauth_provider'] != '')) {
+			AppLogin::storeToSession();
 			$this->oauth->doRedirect($_REQUEST['oauth_provider']);
 			return false;
 		}
-
+		
 		if ($this->verifyLoginByPassword()) {
 			return false;
 		}

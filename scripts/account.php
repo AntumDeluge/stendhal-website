@@ -279,7 +279,31 @@ class AppLogin {
 		}
 	}
 
+	public static function storeToSession() {
+		if (isset($_REQUEST['build'])) {
+			$_SESSION['stendhal_app_login'] = [];
+			foreach (['url', 'build', 'state', 'seed'] as $key) {
+				if (isset($_REQUEST[$key])) {
+					$_SESSION['stendhal_app_login'][$key] = $_REQUEST[$key];
+				}
+			}
+			fixSessionPermission();
+		}
+	}
+	
+	public static function loadFromSession() {
+		if (!isset($_REQUEST['build']) && isset($_SESSION['stendhal_app_login'])) {
+			foreach (['url', 'build', 'state', 'seed'] as $key) {
+				if (isset($_SESSION['stendhal_app_login'][$key])) {
+					$_REQUEST[$key] = $_SESSION['stendhal_app_login'][$key];
+				}
+			}
+			unset($_SESSION['stendhal_app_login']);
+		}
+	}
+	
 	public static function redirectToTargetUrl() {
+		AppLogin::loadFromSession();
 		if (isset($_REQUEST['url'])) {
 			$url = $_REQUEST['url'];
 		} else {

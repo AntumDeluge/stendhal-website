@@ -188,9 +188,9 @@ startBox('<h2>External Account</h2>');
 Alternatively, you can login with any of these services without creating an account.
 <div>
 <br>
-<a href="/account/login.html?oauth_provider=google"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
+<a href="<?php echo htmlspecialchars(buildUrlWithParams('/account/login.html?oauth_provider=google', ['url', 'build', 'state', 'seed'], $_REQUEST))?>"><img src="/images/thirdparty/google.svg" alt="Login with Google"></a>
 &nbsp;
-<a href="/account/login.html?openid_identifier=https://steamcommunity.com/openid/"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
+<a href="<?php echo htmlspecialchars(buildUrlWithParams('/account/login.html?openid_identifier=https://steamcommunity.com/openid/', ['url', 'build', 'state', 'seed'], $_REQUEST))?>"><img src="/images/thirdparty/steam.png" alt="Login with Steam"></a>
 </div>
 
 <?php
