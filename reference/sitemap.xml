@@ -2,87 +2,87 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://stendhalgame.org/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/intro/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/exposed_classes/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/actions/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/arrays/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/conditions/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/entities/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/game/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/logger/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/luajava/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/merchants/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/properties/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/quests/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/strings/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://stendhalgame.org/lua/objects/tables/</loc>
-         <lastmod>2024-03-27</lastmod>
+         <lastmod>2024-05-31</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
