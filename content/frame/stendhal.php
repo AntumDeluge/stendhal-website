@@ -78,7 +78,7 @@ class StendhalFrame extends PageFrame {
 		echo '</div>';
 
 		echo '<a href="'.STENDHAL_LOGIN_TARGET.'/account/mycharacters.html"><span class="block" id="playArea"></span></a>';
-		echo '<a href="https://arianne-project.org/download/stendhal.zip"><span class="block" id="downloadArea"></span></a>';
+		echo '<a href="'.STENDHAL_LOGIN_TARGET.'/download.html"><span class="block" id="downloadArea"></span></a>';
 		echo '</form>';
 		?>
  		</div>
