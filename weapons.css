@@ -1,0 +1,60 @@
+
+p#debug {
+	font-style: italic;
+}
+
+.table {
+	display: inline-block;
+	margin-top: 1em;
+	border: 2px solid black;
+	clear: left;
+/*
+	padding: 5px;
+*/
+}
+
+.column-header {
+	background-color: lightblue
+}
+
+.sortable:hover {
+	cursor: ns-resize;
+}
+
+.column {
+	float: left;
+}
+
+.cell {
+	min-width: 5em;
+	min-height: 32px;
+}
+
+.cell + .cell {
+	border-top: 2px solid black;
+}
+
+.left-cell {
+	padding-left: 5px;
+}
+
+.right-cell {
+	padding-right: 5px;
+}
+
+.odd-cell {
+	background-color: lightgreen;
+}
+
+.icon-container {
+	width: 32px;
+	height: 32px;
+	overflow: hidden;
+}
+
+.icon-container img {
+	width: auto;
+	height: auto;
+	max-width: none;
+	max-height: none;
+}

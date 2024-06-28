@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+
+<html>
+<head>
+	<title>Stendhal Weapons Effectiveness</title>
+	<link rel="stylesheet" type="text/css" href="weapons.css">
+</head>
+
+<body>
+	<h2 id="title">Stendhal</h2>
+
+	<p>This page details the effectiveness of weapons in Stendhal. "DPT" refers to
+	<a href="https://en.wikipedia.org/wiki/Glossary_of_video_game_terms#Damage_per_second">damage per
+	turn</a>. It is calculated by a weapon's ATK divided by its rate.</p>
+
+	<!-- error/warn/debug info -->
+	<p id="debug"></p>
+
+	<label for="classes">Weapon Classes:</label>
+	<select id="classes">
+		<option value="all">all</option>
+	</select>
+
+	<br>
+
+	<div id="weapons-list" class="table">
+		<div id="image" class="column">
+			<div class="cell left-cell column-header">Image</div>
+		</div>
+		<div id="name" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;Name</div>
+		</div>
+		<div id="class" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;Class</div>
+		</div>
+		<div id="level" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;Min Level</div>
+		</div>
+		<div id="rate" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;Rate</div>
+		</div>
+		<div id="atk" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;ATK</div>
+		</div>
+		<div id="dpt" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;DPT</div>
+		</div>
+		<!-- defense is shown under "special" since it is not standard for weapons
+		<div id="def" class="column">
+			<div class="cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;DEF</div>
+		</div>
+		-->
+		<div id="special" class="column">
+			<div class="cell right-cell column-header">&nbsp;&nbsp;&nbsp;&nbsp;Special</div>
+		</div>
+	</div>
+
+	<script type="text/javascript" src="weapons.js"></script>
+</body>
+</html>
