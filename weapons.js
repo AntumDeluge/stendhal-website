@@ -11,7 +11,9 @@ const main = {
 
 	odd: false,
 
-	// FIXME: need to wait for all item categories to load before sorting
+	// FIXME:
+	//   - need to wait for all item categories to load before sorting
+	//   - need to exclude unavailable items
 	getSorted: function() {
 		const sortBy = this.data["sort"] || "name";
 		const data = this.data["weapons"];
