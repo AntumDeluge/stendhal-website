@@ -44,6 +44,7 @@ const main = {
 		const weapons = this.getSorted();
 
 		for (const properties of weapons) {
+			const link = "https://stendhalgame.org/item/" + properties["class"] + "/" + properties["name"].replaceAll(" ", "_") + ".html";
 			const classList = ["cell"];
 			if (this.odd) {
 				classList.push("odd-cell");
@@ -75,6 +76,8 @@ const main = {
 				element.classList.add(...classList);
 				if (prop === "special") {
 					element.classList.add("right-cell");
+				} else if (prop === "name") {
+					value = "<a href=\"" + link + "\" target=\"_blank\">" + value + "</a>";
 				}
 				if (value.length === 0) {
 					element.innerHTML = "&nbsp;";
