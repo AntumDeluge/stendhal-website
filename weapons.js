@@ -313,7 +313,7 @@ function parseVersion(content) {
 			}
 			versionString += v;
 		}
-		document.getElementById("title").innerText = "Stendhal " + versionString;
+		document.getElementById("title").innerText = "Stendhal " + versionString + " Weapons";
 	}
 }
 
