@@ -54,7 +54,6 @@ if (defined('STENDHAL_SECRET') && ($_GET['h'] != hash_hmac('sha256', $i.'_'.$com
 
 header('Content-Type: image/png');
 
-$image = imagecreatefrompng();
 $image = new Imagick('../../images/photos/'.$params[$i][0].'.png');
 
 $offset = $params[$i][1];
