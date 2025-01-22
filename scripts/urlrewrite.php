@@ -338,12 +338,6 @@ function rewriteURL($url, $force = false) {
 		}
 
 
-	// archive
-	} else if (preg_match('|^/archive.*|', $url)) {
-		if (preg_match('|^/archive/twitter.html$|', $url)) {
-			return preg_replace('|^/archive/twitter.html$|', $folder.'/?id=content/archive/twitter', $url);
-		}
-
 	// chat
 	} else if (preg_match('|^/chat.*|', $url)) {
 		if (preg_match('|^/chat/(.*)\.html$|', $url)) {
