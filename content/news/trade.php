@@ -101,7 +101,7 @@ class TradePage extends Page {
 		$res .= '<img class="newsIcons" src="/images/outfit/body-1-0_dress-34-0_head-1-0_mouth-0-0_eyes-0-0_mask-0-0_hair-5-0_hat-0-0_detail-0-0.png">';
 		$res .= '<p>I am Harold and I have my little shop in Semos Tavern. On this page, I announce new trade offers by other players. Please note that I won\'t take offers down once the items are sold.</p>';
 
-		$res .= '<span class="newsIcons"> <a href="/trade.atom"><img src="/images/buttons/feed-icon-28x28.png"></a><a href="https://twitter.com/stendhaltrade"><img src="/images/buttons/twitter_button.png"></a></span>';
+		$res .= '<span class="newsIcons"> <a href="/trade.atom"><img src="/images/buttons/feed-icon-28x28.png"></a><a href="https://mastodon.social/@stendhaltrade/"><img src="/images/thirdparty/mastodon.svg" alt="m" title="Stendhal Trade on Mastodon" height="28px" width="28px"></a></span>';
 		$res .= '<p>I suggest that you use a feed reader to access this page. For reference, the current server time is '.date('G:i') . '.</p>';
 		if (sizeof($entries)==0) {
 			$res .= '<p>There are no new trade offers.</p>';
