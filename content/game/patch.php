@@ -10,9 +10,11 @@ class PatchPage extends Page {
 		startBox("<h1>Patches</h1>"); ?>
 Patches can be submitted via the following methods:
 <ul>
+	<li><a href="https://codeberg.org/arianne/stendhal/issues/new/choose">Codeberg issue tracker</a> (prefered)
 	<li><a href="https://github.com/arianne/stendhal/issues/new?labels=type%3A+patch">GitHub issues tracker</a></li>
 	<li><a href="https://sourceforge.net/p/arianne/patches/new/">SourceForge patch tracker</a></li>
 	<li>Fork Stendhal's Git repository at
+	<a href="https://codeberg.org/arianne/stendhal">Codeberg</a> (prefered),
 	<a href="https://github.com/arianne/stendhal">GitHub</a> or
 	<a href="https://sourceforge.net/p/arianne/stendhal/ci/master/tree/">SourceForge</a>
 	and submit a merge/pull request:</li>

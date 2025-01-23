@@ -19,18 +19,16 @@ class SourceLogPage extends Page {
 	function writeContent() {
 startBox("<h1>Source Code</h1>"); ?>
 <p>The Arianne project is hosted on
+<a href="https://codeberg.org/arianne/">Codeberg</a>. We have mirrors at
 <a href="https://github.com/arianne/">GitHub</a> and
-<a href="https://sourceforge.net/projects/arianne/">Sourceforge</a> and
-uses Git to manage changes to our source code.</p>
+<a href="https://sourceforge.net/projects/arianne/">Sourceforge</a>.</p>
 
 <p>You can use a Git client to download our Stendhal (a multiplayer online adventures game) or Marauroa (our game engine) source
 code.</p>
 
 <ul>
-	<li><a href="https://github.com/arianne/stendhal/">Stendhal source on GitHub</a></li>
-	<li><a href="https://sourceforge.net/p/arianne/stendhal/ci/master/tree/">Stendhal source on SourceForge</a></li><br>
-	<li><a href="https://github.com/arianne/marauroa/">Marauroa source on GitHub</a></li>
-	<li><a href="https://sourceforge.net/p/arianne/marauroa/ci/master/tree/">Marauroa source on SourceForge</a></li>
+	<li><a href="https://codeberg.org/arianne/stendhal/">Stendhal source</a></li>
+	<li><a href="https://codeberg.org/arianne/marauroa/">Marauroa source</a></li>
 </ul>
 
 <p>For more information check out the <a href="/wiki/Arianne_Source_Code_Repositories">Source Code Repositories wiki page</a>.</p>

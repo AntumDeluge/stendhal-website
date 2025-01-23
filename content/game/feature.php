@@ -8,11 +8,10 @@ class FeaturePage extends Page {
 
 	function writeContent() {
 		startBox("<h1>Feature Requests</h1>"); ?>
-You can submit new feature requests with the following links:
-<ul>
-	<li><a href="https://github.com/arianne/stendhal/issues/new?labels=type%3A+feature+request&template=feature_request.md">Open feature request on GitHub</a></li>
-	<li><a href="https://sourceforge.net/p/arianne/feature-requests/new/">Open feature request on SourceForge</a></li>
-</ul>
+<p>You can submit a new feature request in our Codeberg project: <a href="https://codeberg.org/arianne/stendhal/issues/new/choose">Open feature request</a>.
+<p>Or browse the <a href="https://codeberg.org/arianne/stendhal/issues">issue tracker</a>.
+Or the old trackers at <a href="https://github.com/arianne/stendhal/issues">GitHub</a> or <a href="https://sourceforge.net/p/arianne/feature-requests/">SourceForge</a>
+
 		<?php endBox();
 	}
 }

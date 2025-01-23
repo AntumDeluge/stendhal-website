@@ -12,16 +12,10 @@ Reporting bugs is very important so that we can keep Stendhal running smoothly. 
 
 <p>We have made this page to help you with the process of submitting a bug report, because we find them so helpful.
 
-<!--<p> You can submit a new report <a href="http://sourceforge.net/tracker/?func=add&amp;group_id=1111&amp;atid=101111">here</a>, or browse the <a href="http://sourceforge.net/tracker/?group_id=1111&amp;atid=101111">bugs tracker</a>, you may wish to select Category <b>Open</b> and then click <b>Filter</b> if you only wish to see the Open bug reports.-->
-<p>You can submit a new report with the following links:</p>
+<p>You can submit a new report in our Codeberg project: <a href="https://codeberg.org/arianne/stendhal/issues/new/choose">Open bug report</a>
 
-<ul>
-	<li><a href="https://github.com/arianne/stendhal/issues/new?assignees=&labels=type%3A+bug&template=bug_report.md&title=">Open bug report on GitHub</a></li>
-	<li><a href="https://sourceforge.net/p/arianne/bugs/new/">Open bug report on SourceForge</a></li>
-</ul>
-
-<p>Or browse the bug and issue trackers on
-<a href="https://github.com/arianne/stendhal/issues?q=is%3Aissue+is%3Aopen+label%3A%22type%3A+bug%22">GitHub</a>
+<p>Or browse the <a href="https://codeberg.org/arianne/stendhal/issues">issue tracker</a>.
+Or the old trackers at <a href="https://github.com/arianne/stendhal/issues">GitHub</a>
 or <a href="https://sourceforge.net/p/arianne/bugs/">SourceForge</a>.</p>
 
 <p>We are more than happy to close reports that are not really bugs, and would prefer you to submit a bug report and us close it, than not submit it and we never find out about it. Having said that, before submitting a bug you should scan over the previously posted bugs summaries so that you don't report an already known bug.
