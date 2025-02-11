@@ -230,7 +230,7 @@ body {
 		<ul id="resourcemenu" class="menu">
 			<?php
 			echo '<li><a id="menuResourceConcept" href="'.rewriteURL('/'.$lang.'/concept.html').'">'.t('Concept').'</a></li>'."\n";
-			echo '<li><a id="menuResourceProjects" href="'.rewriteURL('/'.$lang.'/projects/2017.html').'">'.t('Projects').'</a></li>'."\n";
+			echo '<li><a id="menuResourceProjects" href="'.rewriteURL('/'.$lang.'/projects/index.html').'">'.t('Projects').'</a></li>'."\n";
 			echo '<li><a id="menuResourceMaterial" href="'.rewriteURL('/'.$lang.'/material.html').'">'.t('Material').'</a></li>'."\n";
 			echo '<li><a id="menuResourceChat" href="'.rewriteURL('/'.$lang.'/chat.html').'">'.t('Chat').'</a></li>'."\n";
 			echo '<li><a id="menuResourceEvents" href="'.rewriteURL('/'.$lang.'/meetings.html').'">'.t('Meetings').'</a></li>'."\n";
