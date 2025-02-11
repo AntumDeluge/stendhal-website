@@ -36,7 +36,7 @@ class MainPage extends Page {
 		if ($this->cmsPage == null) {
 			header('HTTP/1.1 404 Not Found');
 		}
-		if ((strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') !== 0) && ($_REQUEST['title'] == 'start') && ($lang == 'en')) {
+		if ((strpos($_SERVER['HTTP_ACCEPT_LANGUAGE'], 'de') !== 0) && (isset($_REQUEST['title']) && $_REQUEST['title'] == 'start') && ($lang == 'en')) {
 			header("Location: ".$protocol."://".$_SERVER['HTTP_HOST']);
 			return false;
 		}
@@ -46,7 +46,7 @@ class MainPage extends Page {
 	public function writeHtmlHeader() {
 		global $lang;
 		echo '<title>'.htmlspecialchars($this->title).STENDHAL_TITLE.'</title>'."\n";
-		if (($_REQUEST['title'] == 'start') && ($lang == 'en')) {
+		if (isset($_REQUEST['title']) && ($_REQUEST['title'] == 'start') && ($lang == 'en')) {
 			echo '<meta name="robots" content="noindex">'."\n";
 		}
 		// TODO: echo '<link rel="alternate" type="application/rss+xml" title="Stendhal News" href="'.rewriteURL('/rss/news.rss').'" >'."\n";
