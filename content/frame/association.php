@@ -193,7 +193,7 @@ body {
 		$page->writeContent();
 	?>
 	<div id="footerArea">
-		<span>&copy; 2011-2018 Faiumoni e. V.</span>
+		<span>&copy; 2011-2025 Faiumoni e. V.</span>
 	</div>
 </div>
 <div id="bodycontainer">
