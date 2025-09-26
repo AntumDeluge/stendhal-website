@@ -33,11 +33,13 @@ function hideFishes($resource) {
     '/arctic_char.png',
     '/clown-fish.png',
     '/cod.png',
+    '/cod_smoked.png',
     '/mackerel.png',
     '/perch.png',
     '/roach.png',
     '/surgeonfish.png',
     '/trout.png',
+    '/trout_smoked.png',
   );
 
   foreach($listOfFishes as $fish) {
