@@ -115,7 +115,7 @@ $csp = "default-src 'self' https://stendhalgame.org; "
 	. "script-src https://apis.google.com https://platform.twitter.com 'self'; "
 	. "frame-src https://www.facebook.com https://plusone.google.com https://apis.google.com https://platform.twitter.com https://platform.twitter.com https://www.youtube.com https://www.youtube-nocookie.com 'self'; "
 	. "style-src 'self' 'unsafe-inline'; "
-	. "frame-ancestors 'self' http://localhost:*; ";
+	. "frame-ancestors 'none'";
 
 header("Content-Security-Policy: ". $csp);
 
